@@ -1,16 +1,21 @@
-# 首次接入
+# 草稿阶段首次接入
 
-安装 skill 后运行其 scripts/manage.mjs sync，进入返回的 workspace。需要 Node.js 20+ 和 Git，不需要统一 npm install，也不需要访问私有代码仓库。
+产品经理/UI只需提供业务材料并与 agent 对话，不需要手动执行本页命令。这些步骤由 agent 完成。
 
-本地验证：
+1. 安装 skill，运行其 scripts/manage.mjs sync，进入返回的 workspace；查看版本更新说明。
+2. 检查 Node.js 20+ 与 Git。不需要统一 npm install、私有仓库权限、Figma 登录或额外 AI API。
+3. 读取 AGENTS.md、docs/draft-first.md 和 skill 的 references/workflow.md。
+4. 从材料整理页面与字段，建立任务记录，保存讨论稿并打开 HTML 预览。
+5. 根据反馈保存新版本、检查和对比；用户确认后导出指定版本。本阶段到此即可交付。
+
+可用公开演示检查本地运行能力：
 
 ```sh
-node scripts/verify.mjs
-node sketch/sketch.mjs save tasks/demo/draft sketch/examples/work-order.json 0
+node sketch/sketch.mjs save tasks/demo/draft examples/draft-first/v1.json 0
 node sketch/sketch.mjs check tasks/demo/draft --discussion
 node sketch/sketch.mjs render tasks/demo/draft
 ```
 
-这是演示数据检查；真实任务从自己的需求组织，并通过 agent 迭代。预览文件为 tasks/demo/draft/预览.html。Mac 可以 open 打开，其他系统用浏览器打开该文件。
+示例 v1 刻意保留取消规则待回答，不能直接确认。v2.json 是演示第二轮反馈后的候选，可用预期版本1保存为新版。
 
-先交付草稿；需要 Figma 时阅读 figma-adapter.md。Figma 由 agent 引导完成工具检查、组件映射和验证；不让同事手动改配置。账号登录、目标选择可能需要本人确认，字体能力取决于实际环境。日志配置是可选项，见 support/README.md，不会自动上传到作者服务器。
+日志默认不上传。当前版本不自动连接 Figma；其既有引导和构建代码仅保留为后续研发参考。

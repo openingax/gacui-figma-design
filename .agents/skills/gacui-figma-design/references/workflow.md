@@ -1,4 +1,4 @@
-# 需求到草稿与 Figma
+# 产品原型到草稿
 
 ## 先确认实际能力
 
@@ -8,6 +8,8 @@ Node.js 20+；草稿不需要 Figma 登录。先在 `tasks/<日期>-<任务>/记
 
 ## 组织需求
 
+材料可以是文字、原型截图或当前客户端可读取的文档。先说明读取了哪些材料；被裁切、模糊或不可读取的内容列为缺失，不猜。只问影响结构和关键业务的问题，并给推荐答案；产品经理不需要提供技术ID或JSON。
+
 提取使用者、目标、页面、字段、操作、状态、导航及验收标准。先做组件覆盖预检；缺组件用 gap 表达，不用相似控件冒充。关键业务问题集中提出并给推荐答案；低影响设计判断可明确标注后继续。
 
 ## 保存与修改草稿
@@ -15,18 +17,15 @@ Node.js 20+；草稿不需要 Figma 登录。先在 `tasks/<日期>-<任务>/记
 格式见 `docs/sketch-design.md`，命令和恢复规则见 `docs/draft-commands.md`。参考 `sketch/examples/` 的格式，不复制示例业务作为用户需求。
 
 - 每个字段/节点用 from 记录需求出处、推荐、判断或演示；依照 `docs/state-checklist.md` 写出 decisions 和待回答 questions。
+- 有演示数据的表格按条件展示行操作时用 rowActionRules；自然语言 when 不是可执行条件，rowActions 仅用于逐行示例。
 - 写候选 JSON，再用 `node sketch/sketch.mjs save <草稿目录> <候选.json> 0` 保存初版。
 - 用 `check <目录> --discussion` 检查讨论稿；运行 `render <目录>` 后给用户预览链接、版本、变化、问题与缺口。文件生成不代表视觉通过，应实际查看预览。
 - 修改前读 status，基于当前版本保存新版本，不直接改 vN.json 或 versions.json。restore 保留全部历史。
 - 用户明确确认具体版本后，先严格检查，再按 status 返回的版本/hash 调用 confirm。接受建议不自动等于草稿确认，更不自动授权 Figma。
 
-## Figma
+## 当前阶段交付边界
 
-仅在明确请求后阅读 `docs/figma-adapter.md`，执行 agent 引导接入。用户只确认账号和目标（已知则复用）；agent 负责 start、盘点/库发现、匹配、缺失组件初始化、校验实例、回读和截图，技术 JSON 全部由 agent 维护在 .local。
-
-已有 ready 连接先 verify-code 复查后复用；失效由 agent reset 并重新接入。不要让产品或 UI 填 fileKey、节点 ID、映射文件或 adapterVerified。
-
-新连接默认使用 agent-native 原生组件组合，不调用依赖历史内部基线的旧 code 路径。根据需求按需扩展实际组件角色；未支持项明确说明。复杂页面仍需 agent 按规范组织和截图验收。人工改过的节点先比对现稿，只改明确范围。
+当前先交付本地草稿，不自动接入或写入 Figma。草稿确认与导出后即可结束；不要求用户配置 Figma 账号、目标或组件映射。已有 Figma 引导代码保留为后续研发参考，完整组件与整页验证另行完善后更新。
 
 ## 反馈、日志和交付
 
