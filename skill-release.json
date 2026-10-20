@@ -1,1 +1,7 @@
-{"version":"0.1.0","protocol":1,"nodeMajor":20,"channel":"stable","notice":"首个公开版本：本地草稿无需私有仓库权限即可使用；Figma 需配置自己的目标和组件映射。日志默认不上传。"}
+{
+  "version": "0.2.0",
+  "protocol": 1,
+  "nodeMajor": 20,
+  "channel": "stable",
+  "notice": "新增 agent 引导 Figma 接入：自动盘点、组件匹配、原生实例验证与本机连接保存，无需同事手动改映射。首次登录及账号/目标选择仍需本人确认；空文件基础按钮初始化已实测。"
+}

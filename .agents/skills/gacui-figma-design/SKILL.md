@@ -16,7 +16,7 @@ node <本skill目录>/scripts/manage.mjs sync
 1. 读取输出 workspace 下的 `AGENTS.md`、`docs/onboarding.md` 和 `.agents/skills/gacui-figma-design/references/workflow.md`，在那里执行任务。相对路径均相对运行目录。
 2. notice 非空时先向用户展示新版本、影响和操作，再调用 `ack --version <版本>`；未展示不确认。blocked 时保留现有文件，说明原因；离线可继续已安装版本。
 3. 不在业务生成中途升级。有本地修改不覆盖；固定当前版本用 `pin --version X.Y.Z`，解除用 `unpin`；跨不兼容版本在用户选择后用 `sync --accept-breaking`。回退请用新目录安装旧版本。
-4. 不把安装成功当 Figma 已接通。Figma 需要用户明确请求、实际工具能力与目标授权，并完成自有组件映射验证。
+4. 不把安装成功当 Figma 已接通。明确请求 Figma 后，由 agent 按 docs/figma-adapter.md 自动检查、盘点、匹配和保存连接；不让产品/UI同事手动修改目标、节点或组件映射。仅首次登录与缺少的账号/目标选择交给用户。
 5. 日志默认不上传。只有用户要求配置日志时阅读 `docs/support/README.md`，不得沿用作者或其他组织的接收地址、凭据或授权。
 
 维护代码和规则时读 `docs/maintenance.md`。普通出稿保留共享组件实现；缺口如实说明，不把样例内容当业务规则。
