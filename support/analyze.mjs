@@ -2,8 +2,8 @@
 // 本地/SSH 分析；不提供公网查询，也不自动调用模型或训练 API。
 import fs from 'node:fs';
 import {join,resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
 import {validEvent,TASK} from './protocol.mjs';
+import {isMain} from './entry.mjs';
 export function readEvents(directory,task){
  if(task&&!TASK.test(task))throw Error('任务标识无效');
  const dir=join(directory,'events');
@@ -43,7 +43,7 @@ export function dataset(all,{acceptedOnly=false}={}){
  });
 }
 export function exportJsonl(file,rows){fs.writeFileSync(file,rows.map(r=>JSON.stringify(r)).join('\n')+(rows.length?'\n':''),{flag:'wx',mode:0o600});return rows.length;}
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  try{
   const [cmd,dir,out,...flags]=process.argv.slice(2);
   if(!dir||!['summary','export','dataset'].includes(cmd)||flags.some(f=>f!=='--accepted-only')||(flags.length&&cmd!=='dataset'))throw Error('用法：summary <数据目录> | export <目录> <新文件.jsonl> | dataset <目录> <新文件.jsonl> [--accepted-only]');

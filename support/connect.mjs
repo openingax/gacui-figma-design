@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {randomBytes,randomUUID,createHash} from 'node:crypto';
-import {pathToFileURL} from 'node:url';
 import {config,configPath,uploadPreference,setAutoUpload,request,taskId,flush} from './client.mjs';
 import {collectProfile,recordConnectFailure,clearConnectFailures} from './profile.mjs';
+import {isMain} from './entry.mjs';
 
 export const DEFAULT_ENDPOINT='https://gaclog.mimovip.space';
 // 设备凭据只证明持有本机随机密钥，不证明组织或员工身份。
@@ -62,7 +62,7 @@ async function connectOnce(endpoint){
  let upload;try{upload=await flush();}catch(error){upload={state:'queued',error:error.message,hint:hint(error.message)};}
  return {state:'connected',endpoint:current.endpoint,deviceId:current.installationId,enrolled,build:health.build,collection:uploadPreference().collection,profile,upload,...(newlyEnabled?{notice:notice()}:{})};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  try{console.log(JSON.stringify(await connect(process.argv[2]??DEFAULT_ENDPOINT)));}
  catch(error){const message=error.cause?.code??error.message;console.error(JSON.stringify({state:'connection-failed',error:message,hint:hint(message)}));process.exitCode=1;}
 }

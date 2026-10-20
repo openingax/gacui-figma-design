@@ -17,7 +17,6 @@ import {renderDescriptions,validateDescriptions,verifyDescriptions} from '../com
 import {renderDialog,validateDialog,verifyDialogs,updateDialog} from '../components/dialog/generator.mjs';
 // 把已确认版本的草图转成 use_figma 执行代码，每次一个画板。格式见 docs/sketch-design.md 第八节。
 import {readFileSync, writeFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
 import {loadVersions, loadChecklist} from './sketch.mjs';
 import {check, nodeTitle, resolvePage} from './core.mjs';
 import {verifyWorkbench, verifyForm, generationResult} from './verification.mjs';
@@ -28,6 +27,7 @@ import {composeForm, fitFieldContent} from '../components/form/generator.mjs';
 import {updateDrawer, buttonReactions} from '../components/drawer/generator.mjs';
 
 import {targetConfig} from '../scripts/lib/figma-target.mjs';
+import {isMain} from '../support/entry.mjs';
 export const FILE_KEY = targetConfig().fileKey;
 const readJson = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 // 组件分类页和历史页面一律不写；任务 Page 由 versions.json 的 figmaPage 指定。
@@ -328,7 +328,7 @@ function main([command, dir, ...rest]) {
   return 2;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMain(import.meta.url)) {
   try { process.exitCode = main(process.argv.slice(2)); }
   catch (e) { console.error(e.message); process.exitCode = 1; }
 }

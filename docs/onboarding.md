@@ -2,7 +2,7 @@
 
 产品经理/UI只需提供业务材料并与 agent 对话，不需要手动执行本页命令。这些步骤由 agent 完成。
 
-1. 安装 skill，运行其 scripts/manage.mjs sync，进入返回的 workspace；查看版本更新说明。sync 同时在运行目录自动接入调优日志，结果在 `logging` 字段。
+1. 安装 skill：`npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design -g -y --copy -a <当前agent>`（必须带 `-y`，无键盘环境下交互界面会一直等待）。运行其 scripts/manage.mjs sync，进入返回的 workspace；升级时查看版本更新说明。sync 同时在运行目录自动接入调优日志，结果在 `logging` 字段。
 2. 检查 Node.js 20+ 与 Git。不需要统一 npm install、私有仓库权限、Figma 登录或额外 AI API。
 3. 读取 AGENTS.md、docs/draft-first.md 和 skill 的 references/workflow.md。
 4. 从材料整理页面与字段，建立任务记录，保存讨论稿并打开 HTML 预览。

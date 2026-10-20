@@ -2,8 +2,8 @@ import http from 'node:http';
 import fs from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash,createHmac,randomUUID,timingSafeEqual} from 'node:crypto';
-import {pathToFileURL} from 'node:url';
 import {exactKeys,validEvent,validFeedback,TASK} from './protocol.mjs';
+import {isMain} from './entry.mjs';
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
 export function createCollector({dataDir,tokenHashes,ticketSecret,maxBytes=256*1024*1024,build='local',now=()=>Date.now(),autoEnroll=false,maxDevices=100,maxDeviceBytes=16*1024*1024}) {
@@ -76,7 +76,7 @@ export function createCollector({dataDir,tokenHashes,ticketSecret,maxBytes=256*1
  server.requestTimeout=10000;server.headersTimeout=10000;server.maxRequestsPerSocket=100;
  return server;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  const c=JSON.parse(fs.readFileSync(process.env.GAC_COLLECTOR_CONFIG,'utf8'));
  const server=createCollector(c);server.listen(c.port??5186,'127.0.0.1',()=>console.log('gacuiagent-log ready'));
  process.on('SIGTERM',()=>server.close(()=>process.exit(0)));

@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
 import {componentTarget} from '../../scripts/lib/figma-target.mjs';
 import {generateFromData} from '../../scripts/lib/figma-build.mjs';
+import {isMain} from '../../support/entry.mjs';
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 const data=read('./build-data.json'),definition=read('./definition.json');
 export function selectProfile(profile){
@@ -30,4 +30,4 @@ async function bindTextProperties(figma,set,loading){
  return {mutatedNodeIds:ids,labelProperty:label,squareTextProperty:square};
 }
 export function generateButton(profile,stage,target,state={}){if(stage==='properties')return propertyCode(target,state);const p=selectProfile(profile);return generateFromData(p.data,p.definition,stage,target,state)}
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [profile,stage,statePath]=process.argv.slice(2);process.stdout.write(generateButton(profile,stage,componentTarget('button'),statePath?JSON.parse(readFileSync(statePath)):{}))}
+if(isMain(import.meta.url)){const [profile,stage,statePath]=process.argv.slice(2);process.stdout.write(generateButton(profile,stage,componentTarget('button'),statePath?JSON.parse(readFileSync(statePath)):{}))}

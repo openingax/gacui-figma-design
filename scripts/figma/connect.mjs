@@ -2,10 +2,11 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {resolve,join} from 'node:path';
-import {fileURLToPath,pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {begin,inspectCode,libraryCode,verifyCode,inventory,match,choose,acceptProbe,acceptVisual,readSession,saveSession,summary} from './connection.mjs';
 import {composeNative,editNativeText} from './runtime.mjs';
 import {scopeCode,acceptScope,seedPlan,seedCode,seedReceipt} from './bootstrap.mjs';
+import {isMain} from '../../support/entry.mjs';
 export function composeCode(s,layout,{probe=false}={}){
  if(probe?s.status!=='probe'&&s.status!=='visual'&&s.status!=='ready':s.status!=='ready')throw Error('请先完成组件映射和接入验证');
  const roles=Object.keys(s.bindings).sort();
@@ -21,7 +22,7 @@ export function editCode(s,edits){
  return `return await (${editNativeText.toString()})(figma,${JSON.stringify({sessionId:s.id,fileKey:s.target.fileKey,pageId:s.probe.pageId,edits})});`;
 }
 const json=file=>JSON.parse(fs.readFileSync(file,'utf8'));
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  try{
   const args=process.argv.slice(2);const oi=args.indexOf('--out');let output;if(oi>=0){output=args[oi+1];if(!output)throw Error('--out 缺少路径');args.splice(oi,2);}const [cmd,file,input,...rest]=args;if(rest.length)throw Error('多余参数');
   if(cmd==='start'){

@@ -1,6 +1,6 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
 import {buildTable,validate} from '../../components/table/generator.mjs';
+import {isMain} from '../../support/entry.mjs';
 export async function buildPage(figma,spec,buildTable,deps){
  if(figma.fileKey!==spec.fileKey||spec.fileKey!=='UNCONFIGURED_FIGMA_TARGET')throw Error('仅允许授权测试文件');
  const page=await figma.getNodeByIdAsync(spec.pageId);if(page?.type!=='PAGE'||page.name!==spec.pageName)throw Error('目标Page不符');
@@ -95,4 +95,4 @@ export function generate(spec){
  validate(spec.table);const deps=tableDependencies();
  return `${buildTable.toString()}\n${buildPage.toString()}\nreturn await buildPage(figma,${JSON.stringify(spec)},buildTable,${JSON.stringify(deps)});`;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)process.stdout.write(generate(JSON.parse(readFileSync(new URL('spec.json',import.meta.url),'utf8'))));
+if(isMain(import.meta.url))process.stdout.write(generate(JSON.parse(readFileSync(new URL('spec.json',import.meta.url),'utf8'))));

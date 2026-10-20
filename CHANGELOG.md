@@ -1,5 +1,14 @@
 # 更新日志
 
+## 0.4.3 — 2026-10-20
+
+- 修复 #5：通过软链接路径调用（npx skills 默认安装、macOS /tmp）时 sync、草稿 CLI 与工具静默退出。所有入口改为比较真实路径，新增软链接实测与旧写法静态检查。
+- 修复 #7：sync 锁记录进程号、主机名和开始时间；本机且持有进程已退出、或旧版空锁超过10分钟时自动接管并在输出注明，其余情况报错给出锁文件路径与处置命令。
+- 修复 #6：安装命令改为 `npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design -g -y --copy -a <agent>`，避免无键盘环境卡在交互选择。
+- agent 客户端识别补充祖先进程名与更多环境变量名；网页按 CodeBuddy、WorkBuddy、Claude、Codex、Cursor 等归类。
+- SKILL.md 将每轮记录需求原文、回复与来源链接列为必做步骤。
+- 自建服务安装清单补充 dashboard.mjs 与 entry.mjs。
+
 ## 0.4.2 — 2026-10-20
 
 - 全新安装不再显示更新说明并要求确认；升级时仍显示，确认前持续提示。

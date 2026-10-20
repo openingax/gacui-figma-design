@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 
 // 字段由调用者选择已验证的本地主组件，业务数量/文字不来自源样例枚举。
 export function validateSpec(spec){
@@ -79,4 +79,4 @@ export function generate(spec){
  validateSpec(spec);
  return `if(figma.fileKey!=='UNCONFIGURED_FIGMA_TARGET')throw Error('目标文件不符');const page=await figma.getNodeByIdAsync('112:92');await figma.setCurrentPageAsync(page);const spec=${JSON.stringify(spec)};if(page.children.some(n=>n.name===spec.name))throw Error('同名组合已存在');${fitFieldContent.toString()};${composeForm.toString()};const ids=[];const result=await composeForm(figma,page,spec,ids);return {...result,createdNodeIds:ids};`;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)process.stdout.write(generate(JSON.parse(readFileSync(process.argv[2],'utf8'))));
+if(isMain(import.meta.url))process.stdout.write(generate(JSON.parse(readFileSync(process.argv[2],'utf8'))));

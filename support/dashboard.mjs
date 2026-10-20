@@ -3,8 +3,8 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import {join,resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
 import {validEvent,validFeedback} from './protocol.mjs';
+import {isMain} from './entry.mjs';
 
 const TZ='Asia/Shanghai';
 const DRAFT_OPS=['save','restore','label','star','confirm','recover','export','check','render','diff','status'];
@@ -19,6 +19,15 @@ function links(value,found=new Set()){
  else if(Array.isArray(value))value.forEach(v=>links(v,found));
  else if(value&&typeof value==='object')Object.values(value).forEach(v=>links(v,found));
  return found;
+}
+// 从入口标识、祖先进程名或环境变量名推断 agent 客户端；识别不出时展示原始进程链。
+const KNOWN_AGENTS=[[/codebuddy/i,'CodeBuddy'],[/workbuddy/i,'WorkBuddy'],[/claude/i,'Claude'],[/codex/i,'Codex'],[/cursor/i,'Cursor'],[/windsurf/i,'Windsurf'],[/trae/i,'Trae'],[/qoder/i,'Qoder'],[/kiro/i,'Kiro'],[/opencode/i,'OpenCode'],[/gemini/i,'Gemini CLI'],[/copilot/i,'Copilot'],[/^(code|electron)$/i,'VS Code 类'],[/aider/i,'Aider']];
+export function agentLabel(agent){
+ if(!agent)return null;
+ if(agent.CLAUDE_CODE_ENTRYPOINT)return 'Claude Code ('+agent.CLAUDE_CODE_ENTRYPOINT+')';
+ const hay=[...(agent.processes??[]),agent.__CFBundleIdentifier??'',...(agent.envNames??[])];
+ for(const [pattern,label] of KNOWN_AGENTS)if(hay.some(v=>pattern.test(v)))return label;
+ return agent.TERM_PROGRAM??(agent.processes?.length?agent.processes.join(' ← '):null);
 }
 // 从路径推断系统用户名，仅在没有设备资料时作为识别线索。
 const pathUser=e=>JSON.stringify(e.details?.payload?.target??'').match(/(?:\/Users\/|\/home\/|\\\\Users\\\\)([^/\\"]+)/)?.[1]??null;
@@ -72,7 +81,7 @@ export function buildReport(dataDir,{now=Date.now()}={}){
  const name=p=>aliases[p.client]??(p.deviceId&&aliases[p.deviceId])??p.profile?.gitName??p.profile?.osUser??p.pathUser??('设备 '+(p.deviceId??p.client).slice(0,8));
  const peopleRows=[...people.values()].map(p=>({client:p.client,name:name(p),deviceId:p.deviceId,revoked:p.revoked,
   osUser:p.profile?.osUser??p.pathUser,hostname:p.profile?.hostname??null,gitName:p.profile?.gitName??null,gitEmail:p.profile?.gitEmail??null,
-  platform:p.profile?[p.profile.platform,p.profile.arch,p.profile.osRelease].filter(Boolean).join(' '):null,agent:p.profile?.agent?.CLAUDE_CODE_ENTRYPOINT??p.profile?.agent?.TERM_PROGRAM??(p.profile?.agent?.envNames?.length?p.profile.agent.envNames.join(','):null),
+  platform:p.profile?[p.profile.platform,p.profile.arch,p.profile.osRelease].filter(Boolean).join(' '):null,agent:agentLabel(p.profile?.agent),
   skillVersion:p.profile?.skillVersion??null,connectFailures:p.profile?.connectFailures?.length??0,profileSeen:p.profileSeen,
   firstSeen:p.firstSeen,lastSeen:p.lastSeen,activeDays:p.days.size,tasks:p.tasks.size,commands:p.commands,commands7d:p.commands7d,saves:p.saves,confirms:p.confirms,
   errors:p.errors,errorCodes:p.errorCodes,agentTurns:p.agentTurns,toolErrors:p.toolErrors,feedback:p.feedback,blockedFeedback:p.blockedFeedback,blockedTasks:p.blockedTasks,
@@ -137,7 +146,7 @@ export function serve(dataDir,port=5190){
  });
  return new Promise(done=>server.listen(port,'127.0.0.1',()=>done(server)));
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  const [dir,port]=process.argv.slice(2);
  if(!dir){console.error('用法：node support/dashboard.mjs <数据目录> [端口，默认5190]');process.exitCode=1;}
  else{const server=await serve(resolve(dir),Number(port??5190));console.log('使用情况网页：http://127.0.0.1:'+server.address().port+'/');process.on('SIGTERM',()=>server.close(()=>process.exit(0)));}

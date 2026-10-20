@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 
 // 此函数被原样嵌入 use_figma，不依赖 Node.js 或外部变量。
 export async function buildCheckbox(figma, definition, target) {
@@ -108,7 +108,7 @@ export function generateCode(definition, target) {
   return code;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMain(import.meta.url)) {
   const [fileKey, pageId] = process.argv.slice(2);
   const definition = JSON.parse(readFileSync(new URL('./definition.json', import.meta.url), 'utf8'));
   process.stdout.write(generateCode(definition, { fileKey, pageId }));

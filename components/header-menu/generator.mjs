@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 const load=name=>JSON.parse(readFileSync(new URL(name,import.meta.url),'utf8'));
 export function generate(stage,target,state={}) {
  const d=load('./definition.json'),data=load('./build-data.json');
@@ -82,4 +82,4 @@ async function buildStructure(figma,page,definition,data,imageHash){
  const set=figma.combineAsVariants([component],page);createdNodeIds.push(set.id);set.name=definition.name;set.description='按源 25795:66655 制作的本地可编辑副本；仅此1440/7项变体。临时 Noto 字体由用户桌面端处理。';set.layoutMode='NONE';component.x=24;component.y=24;set.resizeWithoutConstraints(1488,112);set.x=right+80;set.y=80;component.resize(definition.size[0],definition.size[1]);
  return {componentSetId:set.id,componentId:component.id,map,createdNodeIds,createdStyleIds,imageHash,pendingVectors:data.nodes.filter(n=>n.type==='VECTOR').map(n=>n.sourceId),fontSubstitution:'PingFang SC → Noto Sans SC；由用户桌面端处理'};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [stage,fileKey,pageId,stateFile]=process.argv.slice(2);process.stdout.write(generate(stage,{fileKey,pageId},stateFile?JSON.parse(readFileSync(stateFile,'utf8')):{}));}
+if(isMain(import.meta.url)){const [stage,fileKey,pageId,stateFile]=process.argv.slice(2);process.stdout.write(generate(stage,{fileKey,pageId},stateFile?JSON.parse(readFileSync(stateFile,'utf8')):{}));}

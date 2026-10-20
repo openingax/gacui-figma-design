@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 export function validateSpec(s){
  if(!s||typeof s.componentId!=='string'||!/^\d+:\d+$/.test(s.componentId))throw Error('需要实际组件ID');
  if(s.width!==undefined&&(!Number.isFinite(s.width)||s.width<160))throw Error('宽度至少160');
@@ -78,4 +78,4 @@ export async function createSearch(figma,page,s){
  return {id:instance.id,localized:false,width:instance.width,height:instance.height};
 }
 export function generate(s){validateSpec(s);return `if(figma.fileKey!=='UNCONFIGURED_FIGMA_TARGET')throw Error('目标文件不符');const page=await figma.getNodeByIdAsync('169:2');await figma.setCurrentPageAsync(page);${updateSearch.toString()};${createSearch.toString()};return await createSearch(figma,page,${JSON.stringify(s)});`;}
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)process.stdout.write(generate(JSON.parse(readFileSync(process.argv[2]))));
+if(isMain(import.meta.url))process.stdout.write(generate(JSON.parse(readFileSync(process.argv[2]))));
