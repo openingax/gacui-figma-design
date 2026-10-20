@@ -1,9 +1,9 @@
 {
-  "version": "0.4.5",
+  "version": "0.4.6",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "统一名称为 GACUIAgent Skill：根据业务需求和 B 端 Figma 规范生成可编辑高保真设计，当前阶段正式交付到 UI 草稿，Figma 出稿持续完善。功能不变。",
-  "delivery": "draft-first",
-  "figmaStatus": "in-progress"
+  "notice": "开放 Figma 出稿：已确认的草稿可按团队出稿文件生成可编辑设计稿（规范组件实例），首次需 agent 完成目标适配核对；不出稿的草稿流程不变。另同步最新组件规范说明核对与内容页签修正。",
+  "delivery": "draft-and-figma",
+  "figmaStatus": "team-target"
 }

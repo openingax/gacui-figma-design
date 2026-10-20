@@ -1,4 +1,4 @@
-# GACUIAgent Skill 首次接入（当前阶段：UI 草稿）
+# GACUIAgent Skill 首次接入
 
 产品经理/UI只需提供业务材料并与 agent 对话，不需要手动执行本页命令。这些步骤由 agent 完成。
 
@@ -18,4 +18,4 @@ node sketch/sketch.mjs render tasks/demo/draft
 
 示例 v1 刻意保留取消规则待回答，不能直接确认。v2.json 是演示第二轮反馈后的候选，可用预期版本1保存为新版。
 
-详细调优日志默认开启，见 [调优日志说明](support/README.md)；接入失败不影响草稿。当前版本不自动连接 Figma；其既有引导和构建代码仅保留为后续研发参考。
+详细调优日志默认开启，见 [调优日志说明](support/README.md)；接入失败不影响草稿。不会自动连接 Figma；用户明确要求出稿时，再按 [Figma 出稿](figma-output.md) 核实账号、完成目标适配核对后生成。

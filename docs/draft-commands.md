@@ -54,7 +54,7 @@ node sketch/sketch.mjs export <目录> <指定版本> <新文件.html>
 
 ## 按需交接 Figma
 
-用户明确请求后，核实所选版本、实际账号、目标授权和组件依赖。运行既有 Figma 预检及严格检查后，按原流程设置 `confirmed`、`figmaPage`。草稿确认不自动迁移到出稿确认；转换支持范围仍由 `sketch/figma.mjs` 限定。所有缺口继续保留，不能将草稿业务确认当作高保真验收。
+用户明确请求后，核实所选版本、实际账号、目标授权和组件依赖（`scripts/figma/target.mjs`），再用 `node sketch/sketch.mjs figma <目录> <已确认版本> <Page名称>` 记录出稿请求；它只接受通过内容核验的草稿确认版本，写入 `confirmed`、`figmaPage`。完整步骤见 [Figma 出稿](figma-output.md)。草稿确认不自动迁移到出稿确认；转换支持范围仍由 `sketch/figma.mjs` 限定。所有缺口继续保留，不能将草稿业务确认当作高保真验收。
 
 ## 条件字段
 

@@ -1,4 +1,4 @@
-# GACUIAgent Skill 工作流程：需求/原型到 UI 草稿（当前阶段）
+# GACUIAgent Skill 工作流程：需求/原型 → UI 草稿 → Figma 设计稿
 
 ## 先确认实际能力
 
@@ -23,9 +23,9 @@ Node.js 20+；草稿不需要 Figma 登录。先在 `tasks/<日期>-<任务>/记
 - 修改前读 status，基于当前版本保存新版本，不直接改 vN.json 或 versions.json。restore 保留全部历史。
 - 用户明确确认具体版本后，先严格检查，再按 status 返回的版本/hash 调用 confirm。接受建议不自动等于草稿确认，更不自动授权 Figma。
 
-## 当前阶段交付边界
+## Figma 出稿（用户明确要求时）
 
-当前先交付本地草稿，不自动接入或写入 Figma。草稿确认与导出后即可结束；不要求用户配置 Figma 账号、目标或组件映射。已有 Figma 引导代码保留为后续研发参考，完整组件与整页验证另行完善后更新。
+草稿确认与导出后即可结束，不要求用户配置 Figma。用户明确要求出 Figma 时，按 `docs/figma-output.md`：核实实际账号与出稿目标 → `scripts/figma/target.mjs` 目标适配核对（每台电脑首次、版本升级后）→ `sketch.mjs figma` 记录确认版本的出稿请求 → `sketch/figma.mjs plan/code` 逐画板交 use_figma 执行 → 检查回执、实际查看截图并说明临时字体。草稿确认不自动授权出稿；缺口与部分支持的组件照常说明。没有导入组件库的新文件只能走 docs/figma-adapter.md 的引导接入（目前仅基础按钮）。
 
 ## 反馈、日志和交付
 
