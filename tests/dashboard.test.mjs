@@ -70,7 +70,7 @@ try{
  assert.match(html,/飞书/);
 
  page=await serve(dataDir,0);const port=page.address().port;
- const home=await fetch(`http://127.0.0.1:${port}/`);assert.equal(home.status,200);assert.match(await home.text(),/GACUI 使用情况/);
+ const home=await fetch(`http://127.0.0.1:${port}/`);assert.equal(home.status,200);assert.match(await home.text(),/GACUIAgent 使用情况/);
  assert.equal((await fetch(`http://127.0.0.1:${port}/report.json`)).status,200);
  const rebinding=await new Promise(done=>{import('node:http').then(({request})=>{const r=request({host:'127.0.0.1',port,path:'/',headers:{Host:'evil.example'}},res=>done(res.statusCode));r.end();});});
  assert.equal(rebinding,403);

@@ -1,5 +1,11 @@
 # 更新日志
 
+## 0.4.5 — 2026-10-20
+
+- 名称统一为 GACUIAgent Skill（README、SKILL.md、AGENTS.md、接入与 Figma 说明、本机使用情况网页标题）。定位明确为：根据业务需求和 B 端 Figma 规范生成可编辑高保真设计，流程为需求/原型 → UI 草稿 → 可编辑 Figma 稿；“草稿”只描述当前已正式交付的阶段与功能。
+- `figmaStatus` 由 deferred 改为 in-progress；更新过时的“当前0.3.0”表述；README 一句话安装改为无交互命令。
+- 功能与数据格式不变。
+
 ## 0.4.4 — 2026-10-20
 
 - 修复 #8：草稿顶层、页面、节点、字段/按钮/列、状态、问题、结论、缺口按层级登记已知属性名；表外属性在 `save`、`check` 时于 stderr 警告，带节点路径与最接近的有效名称（如 `rowActionRule` → `rowActionRules`、`visibel` → `visible`）。

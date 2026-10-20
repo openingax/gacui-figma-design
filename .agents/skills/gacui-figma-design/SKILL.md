@@ -1,9 +1,9 @@
 ---
 name: gacui-figma-design
-description: 将产品需求、原型截图或可读文档整理为可保存、预览和修改的 B 端 UI 草稿；用于梳理草稿、根据原型生成草稿、反馈修改、版本对比、确认和导出。当前交付聚焦本地草稿，不要求 Figma 接入。
+description: GACUIAgent Skill：根据业务需求和公司 B 端 Figma 规范生成可编辑的高保真设计。把产品需求、原型截图或可读文档（飞书、Figma 链接等）整理为可保存、预览、修改的 UI 草稿，并逐步按规范组件生成可编辑 Figma 设计稿；用于整理需求、生成或修改设计草稿、版本对比、确认导出及 Figma 出稿。当前阶段正式交付到 UI 草稿，Figma 出稿持续完善中，使用草稿不要求 Figma 接入。
 ---
 
-# GACUI 草稿助手
+# GACUIAgent Skill
 
 使用简体中文。首次调用或新会话开始，从本 skill 的真实路径运行：
 
