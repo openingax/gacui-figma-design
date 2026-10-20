@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 const data=JSON.parse(readFileSync(new URL('./build-data.json',import.meta.url)));
 export function validateSpec(s={}){
  const sizes={small:300,medium:500,large:760};
@@ -94,4 +94,4 @@ export function generate(stage,target,state={},spec={}){
  if(stage==='update')return pre+`const library=${JSON.stringify(state)};const spec=${JSON.stringify(validateSpec(spec))};${updateDrawer.toString()};const node=await figma.getNodeByIdAsync(${JSON.stringify(spec.nodeId)});let owner=node;while(owner&&owner.type!=='PAGE')owner=owner.parent;if(!node||owner!==page||node.type!=='FRAME'&&node.type!=='INSTANCE')throw Error('修改目标不在授权Page');return await updateDrawer(figma,node,spec,library);`;
  throw Error('未知阶段');
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [stage,statePath,specPath]=process.argv.slice(2);const state=JSON.parse(readFileSync(statePath));const spec=specPath?JSON.parse(readFileSync(specPath)):{};process.stdout.write(generate(stage,{fileKey:'UNCONFIGURED_FIGMA_TARGET',pageId:state.pageId},state,spec));}
+if(isMain(import.meta.url)){const [stage,statePath,specPath]=process.argv.slice(2);const state=JSON.parse(readFileSync(statePath));const spec=specPath?JSON.parse(readFileSync(specPath)):{};process.stdout.write(generate(stage,{fileKey:'UNCONFIGURED_FIGMA_TARGET',pageId:state.pageId},state,spec));}

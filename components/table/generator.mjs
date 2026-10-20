@@ -1,5 +1,5 @@
-import{readFileSync}from'node:fs';import{pathToFileURL}from'node:url';
-import {componentTarget} from '../../scripts/lib/figma-target.mjs';
+import{readFileSync}from'node:fs';import {componentTarget} from '../../scripts/lib/figma-target.mjs';
+import {isMain} from '../../support/entry.mjs';
 export function validate(config){
  if(typeof config.name!=='string'||!config.name.trim())throw Error('需要表格名称');
  if(!Array.isArray(config.columns)||!config.columns.length)throw Error('至少需要一列');
@@ -72,4 +72,4 @@ export function generate(config,target){
  const code=`const target=${JSON.stringify(target)};if(figma.fileKey!==target.fileKey)throw Error('目标文件不符');const page=await figma.getNodeByIdAsync(target.pageId);if(!page||page.type!=='PAGE')throw Error('Page不存在');await figma.setCurrentPageAsync(page);const buildTable=${buildTable.toString()};return await buildTable(figma,page,${JSON.stringify(config)},${JSON.stringify(deps)});`;
  if(code.length>50000)throw Error('表格代码超过50000字符');return code;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const[configPath,fileKey,pageId]=process.argv.slice(2);process.stdout.write(generate(JSON.parse(readFileSync(configPath,'utf8')),{fileKey,pageId}));}
+if(isMain(import.meta.url)){const[configPath,fileKey,pageId]=process.argv.slice(2);process.stdout.write(generate(JSON.parse(readFileSync(configPath,'utf8')),{fileKey,pageId}));}

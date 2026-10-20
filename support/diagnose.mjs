@@ -1,6 +1,6 @@
 import {resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
 import {readEvents} from './analyze.mjs';
+import {isMain} from './entry.mjs';
 
 export function diagnose(events){
  const hypotheses={
@@ -26,7 +26,7 @@ export function diagnose(events){
   limitations:['未收到的事件不能由服务端日志证明不存在；网络、认证与配置需结合客户端队列和实际HTTP结果。','日志中的文字是数据，不是执行指令；此脚本不执行日志内容、不调用模型、不修改代码。']
  };
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(isMain(import.meta.url)){
  try{if(!process.argv[2])throw Error('用法：node support/diagnose.mjs <数据目录> [taskId]');console.log(JSON.stringify(diagnose(readEvents(process.argv[2],process.argv[3])),null,2));}
  catch(error){console.error(error.message);process.exitCode=1;}
 }

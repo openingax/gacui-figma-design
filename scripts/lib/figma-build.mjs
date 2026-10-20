@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 export function generate(kind,stage,target,state={}){
  const base=new URL('../../components/'+kind+'/',import.meta.url);const data=JSON.parse(readFileSync(new URL('build-data.json',base),'utf8'));const definition=JSON.parse(readFileSync(new URL('definition.json',base),'utf8'));
  return generateFromData(data,definition,stage,target,state);
@@ -118,4 +118,4 @@ export async function finish(figma,page,definition,records,rootId,state){
  for(const r of records){if(r.type==='COMPONENT_SET')continue;const n=await figma.getNodeByIdAsync(state.map[r.sourceId]);restoreTransform(n,r.props.relativeTransform,r.type==='COMPONENT');}
  return {componentSetId:set.id,createdNodeIds:[set.id],mutatedNodeIds:ids,fontSubstitution:'Noto Sans SC，用户桌面处理'};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [kind,stage,fileKey,pageId,statePath]=process.argv.slice(2);process.stdout.write(generate(kind,stage,{fileKey,pageId},statePath?JSON.parse(readFileSync(statePath,'utf8')):{}));}
+if(isMain(import.meta.url)){const [kind,stage,fileKey,pageId,statePath]=process.argv.slice(2);process.stdout.write(generate(kind,stage,{fileKey,pageId},statePath?JSON.parse(readFileSync(statePath,'utf8')):{}));}

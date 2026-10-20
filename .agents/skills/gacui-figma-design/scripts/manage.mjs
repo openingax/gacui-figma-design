@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { execFile, execFileSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 export const REPO = 'https://github.com/openingax/gacui-figma-design.git';
 const versionPattern = /^\d+\.\d+\.\d+$/;
@@ -17,6 +17,21 @@ function manifest(cwd, ref) {
   if(!versionPattern.test(m.version) || m.protocol!==1 || m.channel!=='stable' || !Number.isInteger(m.nodeMajor) || m.nodeMajor>Number(process.versions.node.split('.')[0])) throw Error('发布清单或运行协议不兼容');
   return m;
 }
+// 锁记录持有进程；同机且进程已退出（或旧版空锁超过10分钟）才接管，其余情况给出锁路径与处置方式。
+const LEGACY_LOCK_MS=10*60*1000;
+function acquireLock(lock) {
+  const mine=JSON.stringify({pid:process.pid,hostname:os.hostname(),startedAt:new Date().toISOString()});
+  try { fs.writeFileSync(lock,mine,{flag:'wx'}); return null; } catch(e) { if(e.code!=='EEXIST') throw e; }
+  let holder=null; try { holder=JSON.parse(fs.readFileSync(lock,'utf8')); } catch {}
+  const alive=pid=>{ try { process.kill(pid,0); return true; } catch(e) { return e.code==='EPERM'; } };
+  const sameHost=holder?.hostname===os.hostname();
+  const stale=holder ? sameHost && Number.isInteger(holder.pid) && !alive(holder.pid) : Date.now()-fs.statSync(lock).mtimeMs>LEGACY_LOCK_MS;
+  const busy=()=>Object.assign(Error(`另一 sync 正在运行或锁无法判定（${holder?`PID ${holder.pid} @ ${holder.hostname}，开始于 ${holder.startedAt}`:'旧版空锁，创建不足10分钟'}）。确认没有 sync 在运行后删除锁文件再试：rm "${lock}"`),{code:'LOCKED'});
+  if(!stale) throw busy();
+  fs.rmSync(lock,{force:true});
+  try { fs.writeFileSync(lock,mine,{flag:'wx'}); } catch(e) { if(e.code==='EEXIST') throw busy(); throw e; }
+  return {previous:holder??'legacy-empty-lock',lock};
+}
 // repo 参数仅供本地集成测试；CLI 不接受远程覆盖。
 export function manage({command='sync', workspace=path.join(os.homedir(),'.gacuiagent-public','workspace'), version, acceptBreaking=false, repo=REPO}={}) {
   if(Number(process.versions.node.split('.')[0])<20) throw Error('需要 Node.js 20+');
@@ -24,10 +39,9 @@ export function manage({command='sync', workspace=path.join(os.homedir(),'.gacui
   workspace=path.resolve(workspace);
   const stateFile=workspace+'.skill-state.json', lock=workspace+'.skill-lock';
   fs.mkdirSync(path.dirname(workspace),{recursive:true});
-  // 锁不自动过期，避免另一进程仍在执行时覆盖；中断后由维护者核实再删除。
-  const fd=fs.openSync(lock,'wx'); fs.closeSync(fd);
+  const takeover=acquireLock(lock);
   let state=fs.existsSync(stateFile)?json(stateFile):{};
-  const output={workspace};
+  const output={workspace,...(takeover?{lockTakeover:takeover}:{})};
   try {
     if(!['sync','status','ack','pin','unpin'].includes(command)) throw Error('未知命令');
     if(fs.existsSync(workspace)) {
@@ -102,7 +116,9 @@ export async function connectLogging(workspace, {disable=false, endpoint}={}) {
   if(disable) return r.error?{state:'connection-failed',error:'关闭日志失败'}:{state:'disabled',reason:'explicit-user-choice'};
   try { return JSON.parse((r.error?r.stderr:r.stdout).trim().split('\n').at(-1)); } catch { return {state:'connection-failed',error:r.error?.killed?'timeout':'无法读取接入结果'}; }
 }
-if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href) {
+// 入口安装时独立存在，不能引用运行目录；软链接安装下两侧都取真实路径再比较。
+const isMain=()=>{ try { return !!process.argv[1] && fs.realpathSync(process.argv[1])===fs.realpathSync(fileURLToPath(import.meta.url)); } catch { return false; } };
+if(isMain()) {
   try {
     const args=process.argv.slice(2), options={command:args.shift()||'sync'};
     let noLogging=false;
@@ -113,5 +129,5 @@ if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[
     const output=manage(options);
     if(options.command==='sync' && output.version) output.logging=await connectLogging(output.workspace,{disable:noLogging});
     console.log(JSON.stringify(output,null,2));
-  } catch(e) { console.error(JSON.stringify({error:e.code==='EEXIST'?'另一接入进程或残留锁存在；核实后再试':(e.status!==undefined?'Git 操作失败；已保留现场，请检查权限、网络或合并冲突':e.message)})); process.exitCode=1; }
+  } catch(e) { console.error(JSON.stringify({error:e.code==='LOCKED'?e.message:(e.status!==undefined?'Git 操作失败；已保留现场，请检查权限、网络或合并冲突':e.message)})); process.exitCode=1; }
 }

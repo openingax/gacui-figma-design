@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {isMain} from '../../support/entry.mjs';
 const data=JSON.parse(fs.readFileSync(new URL('./build-data.json',import.meta.url)));
 export const TARGET='UNCONFIGURED_FIGMA_TARGET';
 export async function buildRecords(figma,page,records,state){
@@ -62,4 +62,4 @@ export function generate(stage,state={},arg){
 
  throw Error('未知阶段');
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [stage,statePath,arg]=process.argv.slice(2);process.stdout.write(generate(stage,statePath?JSON.parse(fs.readFileSync(statePath)): {},arg?JSON.parse(arg):undefined));}
+if(isMain(import.meta.url)){const [stage,statePath,arg]=process.argv.slice(2);process.stdout.write(generate(stage,statePath?JSON.parse(fs.readFileSync(statePath)): {},arg?JSON.parse(arg):undefined));}

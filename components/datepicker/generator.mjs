@@ -1,5 +1,5 @@
-import {readFileSync} from 'node:fs';import {pathToFileURL} from 'node:url';
-import {pickerModel} from './model.mjs';import {componentTarget} from '../../scripts/lib/figma-target.mjs';
+import {readFileSync} from 'node:fs';import {pickerModel} from './model.mjs';import {componentTarget} from '../../scripts/lib/figma-target.mjs';
+import {isMain} from '../../support/entry.mjs';
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 export function dependencies(){const kinds=['date-cell','month-cell','year-cell','time-cell','datepicker-date-header','datepicker-year-header','datepicker-month-header','datepicker-time-header'];const cells={},headers={};
  for(const kind of kinds){const raw=read(`../../evidence/${kind}/source.raw.json`),map=read(`../../evidence/${kind}/target.json`).map;if(kind.includes('header'))headers[kind.split('-')[1]]=map[raw.tree.id];else cells[kind]=raw.tree.children.map(n=>({id:map[n.id],sourceId:n.id,flags:Object.entries(n.variantProperties).filter(([k,v])=>v==='true').map(([k])=>k)}));}
@@ -56,4 +56,4 @@ async function buildPicker(figma,page,deps,model,options){
  const panel=await instance(example,popup.id,'popup');
  return {mode:model.mode,popupId:popup.id,exampleId:example.id,inputId:control.id,panelInstanceId:panel.id,createdNodeIds:ids,mutatedNodeIds:changed,removedNodeIds:removed,instances,popupSize:[popup.width,popup.height],exampleSize:[example.width,example.height],gap:example.itemSpacing,popupOffset:[panel.x,panel.y],calendarCount:popup.findAll(n=>n.type==='FRAME'&&n.name==='date-grid').length,timeColumnCount:popup.findAll(n=>n.type==='FRAME'&&n.name==='time-column').length};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [configPath,replace]=process.argv.slice(2);process.stdout.write(generatePicker(JSON.parse(readFileSync(configPath)),{replace:replace==='replace'}));}
+if(isMain(import.meta.url)){const [configPath,replace]=process.argv.slice(2);process.stdout.write(generatePicker(JSON.parse(readFileSync(configPath)),{replace:replace==='replace'}));}

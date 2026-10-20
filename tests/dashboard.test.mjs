@@ -8,7 +8,7 @@ import {createCollector} from '../support/server.mjs';
 import {connect} from '../support/connect.mjs';
 import {recordConnectFailure} from '../support/profile.mjs';
 import * as client from '../support/client.mjs';
-import {buildReport,renderHtml,serve,sourceKind} from '../support/dashboard.mjs';
+import {buildReport,renderHtml,serve,sourceKind,agentLabel} from '../support/dashboard.mjs';
 
 const directory=fs.mkdtempSync(join(tmpdir(),'gac-dashboard-'));
 const dataDir=join(directory,'data');
@@ -33,6 +33,10 @@ try{
  assert.equal(stored.profile.osUser,os.userInfo().username);assert.equal(stored.profile.hostname,os.hostname());
  assert.equal(stored.profile.connectFailures[0].error,'ECONNRESET');
  assert.ok(!JSON.stringify(stored).includes(client.config().token),'资料不得包含凭据');
+ if(process.platform!=='win32')assert.ok(stored.profile.agent.processes.length>0,'记录祖先进程名');
+ assert.equal(agentLabel({envNames:[],processes:['node','zsh','CodeBuddy Helper']}),'CodeBuddy');
+ assert.equal(agentLabel({envNames:['CLAUDECODE'],processes:[],CLAUDE_CODE_ENTRYPOINT:'claude-desktop'}),'Claude Code (claude-desktop)');
+ assert.equal(agentLabel({envNames:[],processes:['node','bash','unknownapp']}),'node ← bash ← unknownapp');
  const firstSeen=stored.firstSeen;await connect(endpoint);
  assert.equal(JSON.parse(fs.readFileSync(join(dataDir,'profiles',tokenHash+'.json'),'utf8')).firstSeen,firstSeen);
 

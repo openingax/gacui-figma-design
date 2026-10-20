@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {manage,connectLogging} from '../.agents/skills/gacui-figma-design/scripts/manage.mjs';
 import {createCollector} from '../support/server.mjs';
@@ -25,7 +25,13 @@ try {
  release('0.7.0');x=call();assert.equal(x.version,'0.6.2');assert.match(x.blocked,/不兼容/);assert.equal(call({acceptBreaking:true}).version,'0.7.0');
  assert.match(call({version:'0.6.0',acceptBreaking:true}).blocked,/回退/);
  fs.renameSync(origin,origin+'-offline');assert.match(call().blocked,/无法检查/);fs.renameSync(origin+'-offline',origin);
- fs.writeFileSync(workspace+'.skill-lock','');assert.throws(()=>call());fs.unlinkSync(workspace+'.skill-lock');
+ // 锁：新空锁/存活进程/他机持有拒绝并给出路径；已退出进程或超时旧空锁可接管。
+ const lock=workspace+'.skill-lock',setLock=v=>fs.writeFileSync(lock,typeof v==='string'?v:JSON.stringify(v));
+ setLock('');assert.throws(()=>call(),e=>e.code==='LOCKED'&&e.message.includes(lock));
+ const old=new Date(Date.now()-20*60*1000);fs.utimesSync(lock,old,old);assert.equal(call().lockTakeover.previous,'legacy-empty-lock');assert.ok(!fs.existsSync(lock));
+ setLock({pid:process.pid,hostname:os.hostname(),startedAt:'t'});assert.throws(()=>call(),/PID/);
+ setLock({pid:1,hostname:'another-host',startedAt:'t'});assert.throws(()=>call(),/another-host/);
+ const dead=spawnSync(process.execPath,['-e','']).pid;setLock({pid:dead,hostname:os.hostname(),startedAt:'t'});assert.equal(call().lockTakeover.previous.pid,dead);assert.ok(!fs.existsSync(lock));
  const other=path.join(root,'other');fs.mkdirSync(other);fs.writeFileSync(path.join(other,'mine'),'keep');assert.throws(()=>call({workspace:other}));assert.equal(fs.readFileSync(path.join(other,'mine'),'utf8'),'keep');
  const rollback=call({workspace:path.join(root,'rollback'),version:'0.6.0'});assert.equal(rollback.version,'0.6.0');assert.equal(rollback.pinned,'0.6.0');
  execFileSync('git',['-c','user.name=Test','-c','user.email=test@example.invalid','commit','--allow-empty','-m','local'],{cwd:workspace});release('0.7.1');assert.match(call().blocked,/提交/);

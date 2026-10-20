@@ -10,11 +10,14 @@
 
 > 帮我安装或更新 https://github.com/openingax/gacui-figma-design ，根据我提供的产品原型整理 UI 草稿，打开预览，并继续按我的反馈修改。当前不需要接入 Figma。
 
-需要直接安装命令时使用：
+需要直接安装命令时使用（agent 环境没有键盘输入，必须带 `-y`，否则会停在交互选择界面）：
 
 ```sh
-npx skills add openingax/gacui-figma-design --skill gacui-figma-design
+npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design -g -y --copy -a <agent>
 ```
+
+- `-a <agent>` 填当前使用的 agent，例如 `codebuddy`；只装给它，避免铺到几十个目录。省略时会装给全部已支持的 agent，个别 agent 不支持全局安装会让命令以失败结束，需在 `--json` 结果中确认本 agent 已成功。
+- `--copy` 复制实体文件而不是建软链接。
 
 需要 Node.js 20+、Git，以及能读取材料和执行命令的 agent；环境检查由 agent 完成。完整运行资源来自本公开仓库，不需要其他私有代码仓库或额外 AI API。
 

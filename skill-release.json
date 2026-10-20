@@ -1,9 +1,9 @@
 {
-  "version": "0.4.2",
+  "version": "0.4.3",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "精简首次使用提示：新安装不再显示更新说明，使用日志只做一句告知后直接开始工作。草稿功能不变。",
+  "notice": "修复软链接安装下命令静默不执行、sync 中断后残留锁永久阻塞；安装命令补充无交互参数。草稿功能不变。",
   "delivery": "draft-first",
   "figmaStatus": "deferred"
 }

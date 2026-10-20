@@ -20,11 +20,12 @@ import {validateTimeline} from '../components/timeline/generator.mjs';
 import {validateImageViewer} from '../components/image-viewer/generator.mjs';
 import {readFileSync, writeFileSync, statSync} from 'node:fs';
 import {join, dirname, basename, resolve} from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {validateDescriptions} from '../components/descriptions/generator.mjs';
 import {validateDialog} from '../components/dialog/generator.mjs';
 import {check, diff, diffSummary, resolvePage} from './core.mjs';
 import {readStore, digest, saveVersion, restoreVersion, updateLabel, confirmDraft, recoverVersion} from './store.mjs';
+import {isMain} from '../support/entry.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 // Windows PowerShell 写出的 UTF-8 文件可能带 BOM。
@@ -179,7 +180,7 @@ async function main([command, ...args], run) {
 }
 
 async function safeContext(target,run) {try{return await support.previewContext(target,run?.runId??null)}catch{return undefined}}
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMain(import.meta.url)) {
   const args=process.argv.slice(2);let run,error,output,code=1;
   try { run=support.begin(args[0],args[1]??'.',args.slice(1)); } catch { console.error('运行日志不可用；草稿操作继续。'); }
   const stopCapture=support.tuningEnabled()?captureConsole():null;
