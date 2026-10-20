@@ -24,7 +24,7 @@ import {fileURLToPath} from 'node:url';
 import {validateDescriptions} from '../components/descriptions/generator.mjs';
 import {validateDialog} from '../components/dialog/generator.mjs';
 import {check, diff, diffSummary, resolvePage, unknownKeys} from './core.mjs';
-import {readStore, digest, saveVersion, restoreVersion, updateLabel, confirmDraft, recoverVersion} from './store.mjs';
+import {readStore, digest, saveVersion, restoreVersion, updateLabel, confirmDraft, recoverVersion, requestFigma} from './store.mjs';
 import {isMain} from '../support/entry.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -125,6 +125,7 @@ async function main([command, ...args], run) {
   if (command === 'label' && args.length === 3) { updateLabel(args[0],num(args[1]),{label:args[2]}); return 0; }
   if (command === 'star' && args.length === 3) { if (!['true','false'].includes(args[2])) throw Error('星标只能 true / false'); updateLabel(args[0],num(args[1]),{star:args[2]==='true'}); return 0; }
   if (command === 'confirm' && args.length === 3) { confirmDraft(args[0],num(args[1]),args[2],data=>validateDraft(data,true));console.log('草稿已确认 v'+num(args[1])+'；未请求 Figma');return 0; }
+  if (command === 'figma' && args.length === 3) { requestFigma(args[0],num(args[1]),args[2]);console.log('已记录 v'+num(args[1])+' 的 Figma 出稿请求（Page：'+args[2].trim()+'）；生成前仍需核实目标适配');return 0; }
   if (command === 'recover' && args.length >= 2) { recoverVersion(args[0],num(args[1]),args[2] ? num(args[2]) : undefined,validateDraft);console.log('快照已登记，未自动确认');return 0; }
   if (command === 'export' && args.length === 3) {
     const bundle=loadVersions(args[0]), version=bundle.versions.find(v=>v.v===num(args[1]));
@@ -178,6 +179,7 @@ async function main([command, ...args], run) {
   node sketch/sketch.mjs star <目录> <版本> <true|false>
   node sketch/sketch.mjs confirm <目录> <版本> <status中的hash>
   node sketch/sketch.mjs recover <目录> <未登记版本> [基于版本]
+  node sketch/sketch.mjs figma <目录> <已确认版本> <Figma Page名>   用户明确要求出稿后记录请求
   node sketch/sketch.mjs export <目录> <版本> <新输出.html>
   node sketch/sketch.mjs check <草图目录或文件> [--final|--discussion]   校验最新版本；--final 用于确认出稿前
   node sketch/sketch.mjs render <草图目录或文件> [输出.html]  生成本地预览页面

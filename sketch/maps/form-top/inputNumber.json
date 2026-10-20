@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:382",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:397",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:413",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:430",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:448",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:464",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:479",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:497",
+   "name": "type 类型=inputNumber 数字输入框, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:515",
+   "name": "type 类型=textarea 多行文本, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:521",
+   "name": "type 类型=textarea 多行文本, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:528",
+   "name": "type 类型=textarea 多行文本, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:536",
+   "name": "type 类型=textarea 多行文本, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:545",
+   "name": "type 类型=textarea 多行文本, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:555",
+   "name": "type 类型=textarea 多行文本, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:564",
+   "name": "type 类型=textarea 多行文本, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:576",
+   "name": "type 类型=textarea 多行文本, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

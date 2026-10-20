@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:2",
+   "name": "type 类型=select 选择器, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:9",
+   "name": "type 类型=select 选择器, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:17",
+   "name": "type 类型=select 选择器, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:26",
+   "name": "type 类型=select 选择器, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:36",
+   "name": "type 类型=select 选择器, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:47",
+   "name": "type 类型=select 选择器, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:57",
+   "name": "type 类型=select 选择器, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:70",
+   "name": "type 类型=select 选择器, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}
