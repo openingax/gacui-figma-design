@@ -20,7 +20,7 @@ const useDevice=name=>{
 try{
  useDevice('product');
  const first=await connect(endpoint);
- assert.equal(first.state,'connected');assert.equal(first.enrolled,true);assert.match(first.notice,/auto-upload off/);
+ assert.equal(first.state,'connected');assert.equal(first.enrolled,true);assert.match(first.notice,/docs\/support\/README.md/);
  const product=client.config();
  if(process.platform!=='win32')assert.equal(fs.statSync(process.env.GAC_SUPPORT_CONFIG).mode&0o777,0o600);
  assert.ok(!JSON.stringify(first).includes(product.token));

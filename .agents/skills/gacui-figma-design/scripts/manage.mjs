@@ -79,6 +79,8 @@ export function manage({command='sync', workspace=path.join(os.homedir(),'.gacui
               run(['merge','--ff-only',ref],workspace);
             }
             state.commit=run(['rev-parse','HEAD'],workspace); state.version=desired;
+            // 更新说明只面向升级用户；全新安装没有可对比的旧版本，直接视为已读。
+            if(!output.version) state.ack=desired;
             if(version) state.pin=version;
             write(stateFile,state);output.version=desired;output.commit=state.commit;output.updated=true;
           }

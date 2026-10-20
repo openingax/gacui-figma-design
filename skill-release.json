@@ -1,9 +1,9 @@
 {
-  "version": "0.4.1",
+  "version": "0.4.2",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "本版接入成功后额外上报使用者与设备资料（系统用户名、主机名、Git 姓名/邮箱、系统、agent 客户端、此前接入失败记录），agent 记录对话时同时记录用到的飞书/Figma/其他文档链接，用于内部试用排查问题。其余日志范围与关闭方式不变：在运行目录执行 node support/cli.mjs auto-upload off。",
+  "notice": "精简首次使用提示：新安装不再显示更新说明，使用日志只做一句告知后直接开始工作。草稿功能不变。",
   "delivery": "draft-first",
   "figmaStatus": "deferred"
 }

@@ -14,10 +14,11 @@ fs.mkdirSync(origin);git('init');git('config','user.name','Integration Test');gi
 function release(v){fs.writeFileSync(path.join(origin,'skill-release.json'),JSON.stringify({version:v,protocol:1,nodeMajor:20,channel:'stable',notice:v}));fs.writeFileSync(path.join(origin,'CHANGELOG.md'),v);git('add','.');git('commit','-m',v);git('tag',`skill-v${v}`);}
 const call=(o={})=>manage({workspace,repo:pathToFileURL(origin).href,...o});
 try {
- release('0.6.0'); let x=call();assert.equal(x.version,'0.6.0');assert.ok(x.notice);assert.ok(fs.existsSync(path.join(workspace,'CHANGELOG.md')));
- assert.ok(call().notice);assert.throws(()=>call({command:'ack',version:'0.6.1'}));call({command:'ack',version:'0.6.0'});assert.equal(call().notice,undefined);
+ release('0.6.0'); let x=call();assert.equal(x.version,'0.6.0');assert.equal(x.notice,undefined,'全新安装不显示更新说明');assert.ok(fs.existsSync(path.join(workspace,'CHANGELOG.md')));
+ assert.equal(call().notice,undefined);assert.throws(()=>call({command:'ack',version:'0.6.1'}));
  fs.mkdirSync(path.join(workspace,'tasks'));fs.writeFileSync(path.join(workspace,'tasks','mine.json'),'preserve');
- release('0.6.1');x=call();assert.equal(x.version,'0.6.1');assert.ok(x.notice);assert.equal(fs.readFileSync(path.join(workspace,'tasks','mine.json'),'utf8'),'preserve');
+ release('0.6.1');x=call();assert.equal(x.version,'0.6.1');assert.ok(x.notice,'升级显示更新说明');assert.equal(fs.readFileSync(path.join(workspace,'tasks','mine.json'),'utf8'),'preserve');
+ assert.ok(call().notice,'未确认前持续显示');call({command:'ack',version:'0.6.1'});assert.equal(call().notice,undefined);
  call({command:'pin',version:'0.6.1'});release('0.6.2');assert.equal(call().version,'0.6.1');assert.ok(call().blocked);call({command:'unpin'});
  fs.appendFileSync(path.join(workspace,'CHANGELOG.md'),'local edit');x=call();assert.equal(x.version,'0.6.1');assert.match(x.blocked,/修改/);assert.match(fs.readFileSync(path.join(workspace,'CHANGELOG.md'),'utf8'),/local edit/);
  execFileSync('git',['restore','CHANGELOG.md'],{cwd:workspace});assert.equal(call().version,'0.6.2');
