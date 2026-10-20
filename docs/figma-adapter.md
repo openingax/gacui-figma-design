@@ -17,7 +17,7 @@
 3. **已有连接**：status=ready 时先执行 verify-code 返回的只读代码。核对当前账号仍符合本次选择；失效时用 reset 归档旧配置并重新盘点，不让使用者修节点 ID。
 4. **发现组件**：先看 Code Connect 和现有页面实例；再读目标已添加的库，限定适用的规范库搜索实际所需组件。不要为了找到结果改用无关风格的库。通过 inspect-code 在各个已观察到的 Page 上只读盘点，返回结果交 inventory 保存；按 nextOffset 分页到完成。库搜索返回的 componentKey/componentSetKey 可交 library-code 导入并盘点真实变体，再交 inventory 保存。
 5. **自动映射**：根据业务角色和实际目录写 requirements（role/name/variant），调用 match。只有精确且唯一的候选自动采用；多个候选由 agent 根据规范回读确认后 choose，不让同事面对技术 ID。缺失的组件由 agent 按规范构建或明确列为缺口，不能猜映射、把近似控件当已支持。
-6. **空文件初始化**：没有合适组件时，可用随包已验证配方自动初始化基础按钮。scope-code 建立独立 Page，scope-receipt 保存真实回执；seed-plan 给出阶段；每阶段 seed-code 输出真实构建代码，交工具执行，再用 seed-receipt 保存工具回执。当前内置初始化只覆盖中尺寸基础纯文字按钮12态；其他家族不因此视为已自动初始化。已有同名集合先盘点复用，不能重跑创建重复集合。
+6. **空文件初始化**：没有合适组件时，可用随包已验证配方自动初始化基础按钮。scope-code 建立独立 Page，scope-receipt 保存真实回执；seed-plan 给出阶段；每阶段 seed-code 输出真实构建代码，交工具执行，再用 seed-receipt 保存工具回执。当前内置初始化只覆盖中尺寸基础纯文字按钮12态；其他家族不因此视为已自动初始化。已有同名集合先盘点复用，不能重跑创建重复集合。同一目标正在被其他人初始化时先协调；本机连接文件不是跨机器锁。
 7. **真实验证**：probe-code 创建校验实例，probe-receipt 保存并校验真实回读；获取截图并实际查看后，visual-receipt 记录 frameId、passed、截图位置 evidence、观察 observations。只有此后才是 ready。临时字体必须说明，不能代用户做设计验收。
 8. **开始出稿**：新连接使用原生组件模式，agent 用 bindings 组合业务页面。compose-code 支持实例布局与按真实文字层名覆盖文案；更复杂页面由当前 Figma 工具按实际组件/样式组合，依旧需要需求核对和截图验收。edit-code 先检查原文，再原位修改；发现人工修改会拒绝覆盖。新增业务角色按需增量盘点与验证。
 

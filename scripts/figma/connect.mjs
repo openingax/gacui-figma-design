@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {resolve,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {begin,inspectCode,libraryCode,verifyCode,inventory,match,choose,acceptProbe,acceptVisual,readSession,saveSession,summary} from './connection.mjs';
@@ -7,8 +8,8 @@ import {composeNative,editNativeText} from './runtime.mjs';
 import {scopeCode,acceptScope,seedPlan,seedCode,seedReceipt} from './bootstrap.mjs';
 export function composeCode(s,layout,{probe=false}={}){
  if(probe?s.status!=='probe'&&s.status!=='visual'&&s.status!=='ready':s.status!=='ready')throw Error('请先完成组件映射和接入验证');
- const roles=Object.keys(s.bindings);
- if(probe)layout={id:'接入校验',direction:'VERTICAL',gap:16,items:roles.map(role=>({role}))};
+ const roles=Object.keys(s.bindings).sort();
+ if(probe){const signature=createHash('sha256').update(JSON.stringify(roles.map(role=>({role,id:s.bindings[role].id,key:s.bindings[role].key,fileKey:s.bindings[role].fileKey,origin:s.bindings[role].origin})))).digest('hex').slice(0,12);layout={id:'接入校验-'+signature,direction:'VERTICAL',gap:16,items:roles.map(role=>({role}))};}
  if(!layout||typeof layout.id!=='string'||!layout.id.trim()||!['HORIZONTAL','VERTICAL'].includes(layout.direction)||!Number.isFinite(layout.gap)||layout.gap<0||!Array.isArray(layout.items)||!layout.items.length)throw Error('布局格式无效');
  for(const item of layout.items){if(!s.bindings[item.role]||item.text&&Object.values(item.text).some(v=>typeof v!=='string'))throw Error('组件角色或文字无效');}
  const bindings=Object.fromEntries([...new Set(layout.items.map(i=>i.role))].map(role=>[role,s.bindings[role]]));

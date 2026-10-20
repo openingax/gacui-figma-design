@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {figmaLink,begin,inventory,match,choose,acceptProbe,acceptVisual,libraryCode,verifyCode} from '../scripts/figma/connection.mjs';
 import {composeCode,editCode} from '../scripts/figma/connect.mjs';
-import {seedPlan} from '../scripts/figma/bootstrap.mjs';
+import {seedPlan,seedReceipt} from '../scripts/figma/bootstrap.mjs';
 assert.equal(figmaLink('https://www.figma.com/design/AAA/branch/BBB/name?node-id=1-2').fileKey,'BBB');
 assert.throws(()=>figmaLink('https://figma.com.evil.test/design/AAA/name'));
 assert.throws(()=>begin({targetUrl:'https://figma.com/design/AAA/n',sourceUrl:'https://figma.com/design/AAA/n',accountId:'test',authorization:'test'}));
@@ -40,6 +40,6 @@ inventory(remote,{schema:1,fileKey:'Target',origin:'library',assetKey:'library-k
 match(remote,[{role:'submit',name:'Button',variant:{state:'normal'}}]);const imported=await execute(composeCode(remote,null,{probe:true}));acceptProbe(remote,imported);
 assert.match(libraryCode(remote,{type:'component_set',key:'a-key'}),/importComponentSetByKeyAsync/);
 assert.throws(()=>libraryCode(remote,{type:'other',key:'a'}));
-s.scope={pageId:probe.pageId};assert.deepEqual(seedPlan(s).stages,['start','nodes:0','nodes:1','nodes:2','finish','properties']);
-const incremental=structuredClone(s);match(incremental,[{role:'secondary',name:'Button',variant:{state:'disabled'}}]);assert.equal(incremental.requirements.length,2);assert.equal(Object.keys(incremental.bindings).length,2);
+s.scope={pageId:probe.pageId};assert.throws(()=>seedReceipt(s,{error:'failed'}));assert.deepEqual(seedPlan(s).stages,['start','nodes:0','nodes:1','nodes:2','finish','properties']);
+const incremental=structuredClone(s);match(incremental,[{role:'secondary',name:'Button',variant:{state:'normal'}}]);assert.equal(incremental.requirements.length,2);assert.equal(Object.keys(incremental.bindings).length,2);const incrementProbe=await execute(composeCode(incremental,null,{probe:true}));assert.equal(incrementProbe.instances.length,2);assert.notEqual(incrementProbe.frameId,probe.frameId);assert.equal((await execute(composeCode(incremental,null,{probe:true}))).created,false);acceptProbe(incremental,incrementProbe);
 console.log('PASS Figma connection: URLs, paginated matching, variants, scoped local/library instances, evidence gates, retry and conflict-safe edits');
