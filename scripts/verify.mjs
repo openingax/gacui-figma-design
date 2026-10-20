@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 const release=JSON.parse(fs.readFileSync('skill-release.json','utf8'));
 assert.ok(fs.readFileSync('CHANGELOG.md','utf8').includes(`## ${release.version} —`));
-for(const test of ['skill-distribution','draft-store','sketch','support','tuning'])execFileSync(process.execPath,[`tests/${test}.test.mjs`],{stdio:'inherit'});
+for(const test of ['figma-connect','skill-distribution','draft-store','sketch','support','tuning'])execFileSync(process.execPath,[`tests/${test}.test.mjs`],{stdio:'inherit'});
 const {code}=await import('../sketch/figma.mjs');assert.throws(()=>code('unconfigured','list'),/尚未适配验证/);
 const tracked=execFileSync('git',['ls-files','-z'],{encoding:'utf8'}).split('\0').filter(Boolean);
 assert.ok(!tracked.some(p=>/^(tasks|evidence|private|credentials)\//.test(p)));
