@@ -1,6 +1,7 @@
 {
   "format": 1,
   "task": "工单工作台与创建工单（试用）",
+  "request": {"text": "按工单工作台和创建工单的试用需求整理草稿（演示示例）。", "sources": []},
   "pages": [
     {"id": "list", "type": "page", "title": "工单列表", "frame": "workbench", "menu": "运维管理 / 工单管理", "children": [
       {"id": "search", "type": "search", "fields": [

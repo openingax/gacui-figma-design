@@ -235,14 +235,14 @@ export async function sketchRuntime(figma, req, lib) {
     if(def.layout){const w=one('工作区');w.resize(CONTENT_WIDTH+64,w.height);for(const n of w.children)n.resize(OUTER_WIDTH,n.height);}
     const tabs = one('页签区');
     for (const c of [...tabs.children]) c.remove();
-    async function fillTabs(parent, items, active, content = false) {
-      for (const [i, item] of items.entries()) {
-        const t = await instance(i === active ? (content ? '47:11' : '47:57') : '47:2', parent, '页签/' + item);
-        await setText(t.findOne(n => n.type === 'TEXT'), item); t.primaryAxisSizingMode = 'AUTO';
+    async function fillTabs(parent,items,active,content=false) {
+      for (const [i,item] of items.entries()) {
+        const t=await instance(i===active?(content?'47:11':'47:57'):'47:2',parent,'页签/'+item);
+        await setText(t.findOne(n=>n.type==='TEXT'),item);t.primaryAxisSizingMode='AUTO';
       }
     }
-    const contentTabs = def.tabs.placement === 'content';
-    await fillTabs(tabs, contentTabs ? [def.pageTitle] : def.tabs.items, contentTabs ? 0 : def.tabs.active);
+    const contentTabs=def.tabs.placement==='content';
+    await fillTabs(tabs,contentTabs?[def.pageTitle]:def.tabs.items,contentTabs?0:def.tabs.active);
     const menu = one('运维菜单').findOne(n => n.name === 'content').children[0];
     await setText(menu.children[0].findOne(n => n.type === 'TEXT'), def.menuLeaf);
 
@@ -276,11 +276,11 @@ export async function sketchRuntime(figma, req, lib) {
       extra = height - query.height; query.resize(query.width, height);
     }
 
-    const toolbar = one('列表工具栏'), mainActions = one('主要操作');
+    const toolbar=one('列表工具栏'),mainActions=one('主要操作');
     one('列设置').remove();
     for (const c of [...mainActions.children]) c.remove();
-    for (const b of def.buttons.filter(b => b.visible !== false)) { const n = await instance(b.primary ? '107:86' : '107:124', mainActions, b.layer); await buttonLabel(n, b.label); await buttonDisabled(n, b.disabled); n.primaryAxisSizingMode = 'AUTO'; if (b.selectionSummary) await text(mainActions, b.layer + '/选择说明', b.selectionSummary); }
-    if (!def.buttons.some(b => b.visible !== false)) { toolbar.remove(); one('工具栏下间距').remove(); }
+    for(const b of def.buttons.filter(b=>b.visible!==false)){const n=await instance(b.primary?'107:86':'107:124',mainActions,b.layer);await buttonLabel(n,b.label);await buttonDisabled(n,b.disabled);n.primaryAxisSizingMode='AUTO';if(b.selectionSummary)await text(mainActions,b.layer+'/选择说明',b.selectionSummary);}
+    if(!def.buttons.some(b=>b.visible!==false)){toolbar.remove();one('工具栏下间距').remove();}
 
     const list = one('工单结果');
     const tagIds={default:'54:27',primary:'54:29',success:'54:31',warning:'54:33',danger:'54:35'};
@@ -297,40 +297,44 @@ export async function sketchRuntime(figma, req, lib) {
       block.paddingBottom=16;
     }
     for(const d of def.descriptions??[]){const node=await lib.renderDescriptions(figma,list,d,lib.descriptionData,{autoFrame,pick,width:CONTENT_WIDTH});list.insertChild(list.children.indexOf(one('工单列表')),node);}
+    // CONTENT_TABS_START
     if (contentTabs) {
-      const content = autoFrame(list, '内容页签', 'HORIZONTAL', CONTENT_WIDTH);
-      content.resize(CONTENT_WIDTH,48); content.primaryAxisSizingMode='FIXED';
-      list.insertChild(list.children.indexOf(one('工单列表')), content);
-      await fillTabs(content, def.tabs.items, def.tabs.active, true);
+      // 规范整栏 normalTabs（top）：spacing 0、Gray0 底、仅底边 Gray3 1px INSIDE；见 evidence/spec-guides-20261020/tabs.md
+      const content=autoFrame(list,'内容页签','HORIZONTAL',CONTENT_WIDTH);content.resize(CONTENT_WIDTH,48);
+      Object.assign(content,{primaryAxisSizingMode:'FIXED',itemSpacing:0,strokeAlign:'INSIDE',strokeWeight:0,strokeBottomWeight:1});
+      await content.setFillStyleIdAsync(styleId(C.white));await content.setStrokeStyleIdAsync(styleId('Gray 中性/Gray3-分割线'));
+      list.insertChild(list.children.indexOf(one('工单列表')),content);
+      await fillTabs(content,def.tabs.items,def.tabs.active,true);
     }
-    for (const m of def.messages ?? []) {
-      const t = await text(list, m.layer, m.text, 'secondary', CONTENT_WIDTH);
-      list.insertChild(Math.max(0, list.children.indexOf(toolbar) + 1), t);
+    // CONTENT_TABS_END
+    for (const m of def.messages??[]) {
+      const t=await text(list,m.layer,m.text,'secondary',CONTENT_WIDTH);
+      list.insertChild(Math.max(0,list.children.indexOf(toolbar)+1),t);
     }
-    if (!def.table) { one('工单列表').remove(); one('工单分页').remove(); }
+    if(!def.table){one('工单列表').remove();one('工单分页').remove();}
     else {
-      const oldTable = one('工单列表'), index = list.children.indexOf(oldTable);
+      const oldTable=one('工单列表'),index=list.children.indexOf(oldTable);
       oldTable.remove();
-      const result = await lib.buildTable(figma, list, def.table.config, lib.tableDeps);
+      const result=await lib.buildTable(figma,list,def.table.config,lib.tableDeps);
       const built=await figma.getNodeByIdAsync(result.componentId);list.insertChild(index,built);
       for(const mapping of def.tagThemes??[]) for(const [i,row] of built.children.filter(n=>n.name.startsWith('row/')).entries()) {
         const value=def.table.config.rows[i][mapping.key], theme=mapping.themes[value];
         let cell=row.children.find(n=>n.name==='cell/'+mapping.key);cell=cell.detachInstance();
         for(const child of [...cell.children]) child.remove();await tag(cell,value,theme);
       }
-      const pagination = one('工单分页');
-      pagination.name = '分页';
+      const pagination=one('工单分页');
+      pagination.name='分页';
       if(def.layout)pagination.resize(CONTENT_WIDTH,pagination.height);
-      if (!def.table.pagination || !def.table.config.rows.length) pagination.visible = false;
+      if(!def.table.pagination||!def.table.config.rows.length)pagination.visible=false;
       else {
         pagination.name = '分页';
         await setText(visibleTexts(pagination).find(t => /^共/.test(t.characters)), `共${def.table.config.rows.length} 条`);
-        const pageButtons = unique(pagination, 'page btn'), numbers = pageButtons.children.filter(n => n.name.startsWith('页码/'));
-        const keep = numbers.find(n => n.name === '页码/2') ?? numbers[0];
-        for (const b of numbers) if (b !== keep) b.remove();
-        keep.name = '页码/1'; await setText(visibleTexts(keep)[0], '1');
-        for (const n of pageButtons.children) if (n !== keep) n.visible = false;
-        unique(pagination, 'jumper').visible = false;
+        const pageButtons=unique(pagination,'page btn'),numbers=pageButtons.children.filter(n=>n.name.startsWith('页码/'));
+        const keep=numbers.find(n=>n.name==='页码/2')??numbers[0];
+        for(const b of numbers)if(b!==keep)b.remove();
+        keep.name='页码/1';await setText(visibleTexts(keep)[0],'1');
+        for(const n of pageButtons.children)if(n!==keep)n.visible=false;
+        unique(pagination,'jumper').visible=false;
       }
     }
     if (def.table && !def.table.config.rows.length) {

@@ -1,6 +1,6 @@
 # 项目协作
 
-本项目是 GACUIAgent Skill：根据业务需求和 B 端 Figma 规范生成可编辑的高保真设计，流程为需求/原型 → UI 草稿 → 可编辑 Figma 稿。当前阶段正式交付到 UI 草稿，Figma 出稿持续完善中。普通草稿任务不启动Figma接入，不将草稿确认当作继续Figma的授权。
+本项目是 GACUIAgent Skill：根据业务需求和 B 端 Figma 规范生成可编辑的高保真设计，流程为需求/原型 → UI 草稿 → 可编辑 Figma 稿。草稿无需 Figma 即可交付；用户明确要求时按 docs/figma-output.md 在已适配的出稿目标生成 Figma 稿。普通草稿任务不启动 Figma 接入，不将草稿确认当作继续 Figma 的授权。
 
 - 使用简体中文。先读 docs/onboarding.md 和组件使用说明；不需要访问其他私有代码仓库。
 - 业务内容由 agent 判断，组件样式和状态由共享实现保证。不能把源样例的内容、数量、选中项当作业务规则。

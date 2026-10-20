@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "154:3",
+   "name": "type 类型=input 输入, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "154:9",
+   "name": "type 类型=input 输入, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "154:16",
+   "name": "type 类型=input 输入, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "154:24",
+   "name": "type 类型=input 输入, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "154:33",
+   "name": "type 类型=input 输入, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "154:43",
+   "name": "type 类型=input 输入, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "154:52",
+   "name": "type 类型=input 输入, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "154:64",
+   "name": "type 类型=input 输入, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

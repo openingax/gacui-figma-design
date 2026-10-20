@@ -1,4 +1,4 @@
-// 本地草稿存储。不连接 Figma；完整快照不可覆盖，元数据单文件原子替换。
+// 本地草稿存储。不连接 Figma（仅记录出稿请求）；完整快照不可覆盖，元数据单文件原子替换。
 import {readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync, unlinkSync, renameSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash, randomUUID} from 'node:crypto';
@@ -110,6 +110,16 @@ export function confirmDraft(dir,v,expectedHash,validate) {
     meta.draftConfirmations=[...(meta.draftConfirmations ?? []), ...(meta.draftConfirmation ? [meta.draftConfirmation] : [])];
     meta.draftConfirmations=meta.draftConfirmations.filter((c,i,all)=>all.findIndex(x=>x.v===c.v&&x.hash===c.hash)===i);
     meta.draftConfirmed=v;meta.draftConfirmation={v,hash:expectedHash,at:new Date().toISOString()};
+    writeMeta(dir,meta);return v;
+  });
+}
+// 出稿请求只能指向已通过内容核验的草稿确认版本；Page 名由用户/agent 为本任务指定。
+export function requestFigma(dir,v,page) {
+  if(typeof page!=='string'||!page.trim()) fail('请指定本任务的 Figma Page 名称');
+  return locked(dir,()=>{
+    const state=readStore(dir);writable(state);
+    if(state.draftConfirmed!==v) fail(`v${v} 不是当前已确认的草稿版本；先确认该版本再请求出稿`);
+    const meta=managed(state);meta.confirmed=v;meta.figmaPage=page.trim();meta.figmaRequest={v,hash:digest(state.versions.find(x=>x.v===v).data),page:page.trim(),at:new Date().toISOString()};
     writeMeta(dir,meta);return v;
   });
 }

@@ -64,6 +64,7 @@ tasks/<日期>-<任务名>/草图/
 | `gaps` | 不在页面里的组件缺口，如全局提示：`need`、`component`、`handling` |
 | `judgments` | 设计判断，一句一条 |
 | `demo` | 演示数据说明 |
+| `request` | 本版本对应的用户需求原文与来源：`{"text":"原文","sources":[{"url"或"path":…,"read":true/false,"note":"读取情况"}]}`。每个版本写本轮内容，不进入版本对比；缺失时 save/check 提示 |
 
 版本号、名称、星标和确认版本不写在草图里，写在同目录的 `versions.json`。这样给旧版本改名、加星时不用改动旧版本文件。
 

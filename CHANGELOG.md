@@ -1,5 +1,19 @@
 # 更新日志
 
+## 0.4.6 — 2026-10-20
+
+- 开放 Figma 出稿：用户确认草稿版本并明确要求后，agent 用 `sketch.mjs figma` 记录出稿请求，按 `sketch/figma.mjs` 逐画板生成团队出稿文件中的可编辑设计稿（规范组件实例），流程见 docs/figma-output.md。
+- 新增 `scripts/figma/target.mjs` 目标适配核对：只读检查目标文件包含出稿所需的全部组件（本版 474 个），回执通过后才写本机 `.local/figma-pages.json`；拒绝规范源，旧格式回执需重新核对。
+- 补齐出稿映射 `sketch/maps/`（表单字段、抽屉、多选弹层），修复公开包抽屉/表单类画板因缺少映射无法生成；组件依赖中的目标占位符在生成时替换为已适配目标。
+- 同步组件规范“结构解析说明板”核对：草稿内容页签容器按整栏 normalTabs 改为间距 0、白底、底边 1px 浅灰线；Tabs、Pagination、Tag、Dialog、Alert、Transfer 说明补充规范要点与覆盖缺口。
+- 验证：35 份已确认验证草稿共 266 个画板离线生成通过（最长 49690 字符）；在团队出稿文件实际生成示例草稿的列表与抽屉画板，语义校验通过并查看截图。云端字体为 Noto Sans SC 临时替代，需桌面端换回苹方后复核。
+- 包含 #13：本机使用情况网页识别 agent 客户端时优先使用应用 bundle id。
+- 草稿顶层新增 `request`：`{"text":"本轮需求原文","sources":[{"url"或"path":…,"read":true/false,"note":…}]}`。每个版本记录本轮内容，随草稿保存自动上传，不再依赖 agent 另行调用 trace；不进入版本对比。
+- `save`、`check` 在 stderr 提示缺少 request、text 为空、来源缺地址或原文中的链接未列入 sources；只提示不阻断，退出码不变。
+- SKILL.md 第6条与 workflow 改为“每次保存草稿必写 request”，trace 保留为补充模型/工具信息的方式；示例草稿补充 request。
+- 维护者本机网页的任务表显示最新需求原文，按使用者统计需求记录次数。
+- 兼容：草稿数据格式向后兼容（新增可选的 request，旧草稿照常可用，仅提示补充）；不出 Figma 时无需任何 Figma 配置。新建空文件仍只支持引导接入的基础按钮（docs/figma-adapter.md）。
+
 ## 0.4.5 — 2026-10-20
 
 - 名称统一为 GACUIAgent Skill（README、SKILL.md、AGENTS.md、接入与 Figma 说明、本机使用情况网页标题）。定位明确为：根据业务需求和 B 端 Figma 规范生成可编辑高保真设计，流程为需求/原型 → UI 草稿 → 可编辑 Figma 稿；“草稿”只描述当前已正式交付的阶段与功能。

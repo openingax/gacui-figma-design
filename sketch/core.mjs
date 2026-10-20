@@ -25,7 +25,25 @@ export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
 export const PATCH_PROPS = ['draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
 // 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
-const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo'];
+const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo','request'];
+const REQUEST_KEYS = ['text','sources'];
+const SOURCE_KEYS = ['url','path','read','note','kind'];
+const URLS = /https?:\/\/[^\s"'<>()[\]{}，。；、）】]+/g;
+const REQUEST_HELP = '在草稿顶层写 request：{"text":"用户本轮需求原文","sources":[{"url":"飞书/Figma/文档链接","read":true}]}；截图等本地材料写 path，读取失败写 read:false 和 note';
+/** 每个版本记录本轮需求原文与来源，随保存上传；缺失或不完整只提示，不阻断保存。 */
+export function requestWarnings(sketch) {
+  const r = sketch?.request, warnings = [];
+  if (r === undefined) return [`草稿：缺少 request，未记录本轮需求原文与来源。${REQUEST_HELP}`];
+  if (!r || typeof r !== 'object' || Array.isArray(r)) return [`草稿：request 必须是对象。${REQUEST_HELP}`];
+  if (typeof r.text !== 'string' || !r.text.trim()) warnings.push(`request：text 为空，应写用户本轮需求原文（原样，不要概括）`);
+  if (r.sources !== undefined && !Array.isArray(r.sources)) warnings.push('request：sources 必须是数组');
+  const sources = Array.isArray(r.sources) ? r.sources : [];
+  sources.forEach((s, i) => { if (!s || typeof s !== 'object' || (typeof s.url !== 'string' && typeof s.path !== 'string')) warnings.push(`request/sources/${i}：每项需要 url 或 path`); });
+  const listed = new Set(sources.map(s => s?.url).filter(Boolean));
+  const missing = [...new Set(String(r.text ?? '').match(URLS) ?? [])].map(u => u.replace(/[.,;:!?]+$/, '')).filter(u => !listed.has(u));
+  if (missing.length) warnings.push(`request：text 中的链接未列入 sources：${missing.join('、')}`);
+  return warnings;
+}
 const PAGE_KEYS = ['id','title','frame','children','over','layout','menu','width','from','type'];
 const STATE_KEYS = ['id','page','title','codes','patch','from'];
 const QUESTION_KEYS = ['id','code','node','ask','recommend','answer','from'];
@@ -61,6 +79,8 @@ export function unknownKeys(sketch) {
     }
   };
   scan('草稿', sketch, TOP_KEYS);
+  scan('request', sketch?.request, REQUEST_KEYS);
+  (Array.isArray(sketch?.request?.sources) ? sketch.request.sources : []).forEach((s, i) => scan(`request/sources/${i}`, s, SOURCE_KEYS));
   for (const page of sketch?.pages ?? []) {
     scan(`页面 ${page.id}`, page, PAGE_KEYS);
     for (const node of page.children ?? []) {
@@ -264,14 +284,15 @@ export function check(sketch, checklist, {final = false} = {}) {
     ...[...questions.values()].filter(q => q.answer == null).map(q => `问题 ${q.id} 未回答`),
   ];
   if (final) pending.forEach(p => errors.push(`确认出稿前：${p}`));
-  return {errors, missing, pending, warnings: unknownKeys(sketch)};
+  return {errors, missing, pending, warnings: [...requestWarnings(sketch), ...unknownKeys(sketch)]};
 }
 
 /** 把草图摊平成 路径 → {label, value}，供版本对比使用。 */
 export function flatten(sketch) {
   const out = new Map();
   const put = (key, label, value) => out.set(key, {label, value: JSON.stringify(value)});
-  const {pages, states, decisions, questions, gaps, judgments, ...metadata} = sketch;
+  // request 是每轮需求记录而非设计内容，不进入版本对比。
+  const {pages, states, decisions, questions, gaps, judgments, request, ...metadata} = sketch;
   put('draft:metadata', '草稿说明', {...metadata, pages: (pages ?? []).map(p => p.id)});
   const paths = indexPaths(sketch);
   for (const [path, {kind, label, item}] of paths) {

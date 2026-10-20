@@ -39,7 +39,7 @@ const PLACEHOLDER = {input: '请输入', textarea: '请输入', select: '请选�
 
 function formVariant(kind, required, help) {
   const want = `required 必填=${!!required}, help 说明=${!!help}, tooltips 提示=false`;
-  const v = readJson(`../evidence/form-top/${FORM_TOP[kind]}-target.json`).variants.find(x => x.name.includes(want));
+  const v = readJson(`./maps/form-top/${FORM_TOP[kind]}.json`).variants.find(x => x.name.includes(want));
   if (!v) throw Error(`表单字段 ${kind} 缺少变体 ${want}`);
   return v.id;
 }
@@ -253,11 +253,11 @@ export function code(dir, boardId) {
   if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify(tableDependencies())}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
     fns = [fitFieldContent, composeForm, updateDrawer].map(f => f.toString()).join('\n');
-    const {variants, titleProperty, footerIds, closeIds} = readJson('../evidence/drawer/target.json');
+    const {variants, titleProperty, footerIds, closeIds} = readJson('./maps/drawer.json');
     lib = `{composeForm, fitFieldContent, updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: buttonReactions()})}}`;
   }
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
-  if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('../evidence/select/open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('../evidence/select/open-rules.json')[1].children[0][k]])))+'}';}
+  if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
   const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
   if(fd?.feedbacks?.length||wd?.table?.feedback||wd?.feedbacks?.length||wd?.imageViewers?.some(s=>s.emptyFeedback)){fns+='\n'+renderFeedback.toString()+'\n'+updateFeedback.toString()+'\n'+verifyFeedback.toString();lib=lib.slice(0,-1)+',renderFeedback,verifyFeedback}';}
   if(wd?.dividers?.length||fd?.dividers?.length){fns+='\n'+[validateDivider,dividerVariant,updateDivider,renderDivider].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderDivider}';}
@@ -296,6 +296,7 @@ export function code(dir, boardId) {
   if(!wd?.checkboxes?.length&&!fd?.checkboxes?.length)runtime=runtime.replace(/        \/\/ CHECKBOX_START[\s\S]*?        \/\/ CHECKBOX_END\n/,'').replace(/^.*if\(\(def\?\?form\)\?\.checkboxes\?\.length\).*\n/gm,'');
   if(!fd?.checkboxes?.length)runtime=runtime.replaceAll("d.type==='checkbox'?lib.renderCheckbox:",'').replaceAll("d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps",'lib.radioDeps');
   if(!wd?.radios?.length&&!fd?.radios?.length)runtime=runtime.replace(/^.*if\(\(def\?\?form\)\?\.radios\?\.length\).*\n/gm,'');
+  if(wd?.tabs?.placement!=='content')runtime=runtime.replace(/    \/\/ CONTENT_TABS_START[\s\S]*?    \/\/ CONTENT_TABS_END\n/,'');
   if(!wd?.layout)runtime=runtime.replace(/    \/\/ LAYOUT_SHELL_START[\s\S]*?    \/\/ LAYOUT_SHELL_END\n/,'').replace(/      \/\/ LAYOUT_FONT_START[\s\S]*?      \/\/ LAYOUT_FONT_END\n/,'').replace(', preservedFontRoots = new Set()','');
   if(!wd?.dividers?.length&&!wd?.links?.length&&!wd?.radios?.length&&!wd?.checkboxes?.length&&!wd?.numbers?.length&&!wd?.inputFields?.length&&!wd?.selectFields?.length&&!wd?.timePickers?.length&&!wd?.cascaders?.length)runtime=runtime.replace(/    \/\/ DIVIDER_ORDER_START[\s\S]*?    \/\/ DIVIDER_ORDER_END\n/,'');
   if(!fd?.inserts?.length)runtime=runtime.replace(/^.*for\(const d of def.inserts.*\n/gm,'');
@@ -303,7 +304,8 @@ export function code(dir, boardId) {
   if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
   if(fd&&!fd.rows.flat().some(f=>f.open))runtime=runtime.replace(/    \/\/ DRAWER_POPUP_START[\s\S]*?    \/\/ DRAWER_POPUP_END\n/,'');
   const generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
-  const out = generated.replace(/\n{2,}/g,'\n');
+  // 公开包中组件依赖以占位符记录目标文件；替换为本机已适配验证的目标。
+  const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET', FILE_KEY);
   if (out.length > 50000) throw Error(`生成代码 ${out.length} 字符，超过 use_figma 上限 50000`);
   return out;
 }
