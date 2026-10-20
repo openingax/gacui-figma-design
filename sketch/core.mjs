@@ -24,6 +24,57 @@ export const COLUMN_KINDS = ['text', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
 export const PATCH_PROPS = ['draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
+// 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
+const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo'];
+const PAGE_KEYS = ['id','title','frame','children','over','layout','menu','width','from','type'];
+const STATE_KEYS = ['id','page','title','codes','patch','from'];
+const QUESTION_KEYS = ['id','code','node','ask','recommend','answer','from'];
+const DECISION_KEYS = ['code','decision','from','text'];
+const GAP_KEYS = ['id','need','component','handling','acceptedFrom','from'];
+export const SKETCH_KEYS = [...PATCH_PROPS,'id','type','title','from','need','handling','component','acceptedFrom','text','subtitle','footer','fields','buttons','columns','children','opens','primary','required','help','max','min','placeholder','wrap','cols','columnCount','actions','actor','content','date','detail','disabledLabel','enableWhenSelected','fullscreen','gallery','groups','height','highlight','icon','images','mode','name','key','pageSize','renderRows','selectionSummary','sourcePage','targetPage','span','suggestions','tags','time','topLabel','unavailable','values','viewportWidth','visibleWhen','demo','menu','layout'];
+const editDistance = (a, b) => {
+  const row = Array.from({length: b.length + 1}, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = row[0]; row[0] = i;
+    for (let j = 1; j <= b.length; j++) { const next = row[j]; row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = next; }
+  }
+  return row[b.length];
+};
+const closest = (key, known) => {
+  const lower = key.toLowerCase();
+  let best = null, score = Infinity;
+  for (const k of known) {
+    const d = k.toLowerCase() === lower ? 0 : editDistance(lower, k.toLowerCase());
+    if (d < score) { best = k; score = d; }
+  }
+  return score <= (key.length >= 6 ? 2 : 1) ? best : null;
+};
+/** 列出没有任何代码会读取的属性名；只作提示，不改变检查结果。 */
+export function unknownKeys(sketch) {
+  const warnings = [];
+  const scan = (where, obj, list) => {
+    if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return;
+    const known = new Set(list);
+    for (const key of Object.keys(obj)) if (!known.has(key)) {
+      const hint = closest(key, known);
+      warnings.push(`${where}：未知属性 ${key}${hint ? `，是否应为 ${hint}` : ''}；预览和检查都不会读取它`);
+    }
+  };
+  scan('草稿', sketch, TOP_KEYS);
+  for (const page of sketch?.pages ?? []) {
+    scan(`页面 ${page.id}`, page, PAGE_KEYS);
+    for (const node of page.children ?? []) {
+      const where = `${page.id}/${node.id}`;
+      scan(where, node, SKETCH_KEYS);
+      for (const list of CHILD_LISTS) for (const child of Array.isArray(node[list]) ? node[list] : []) scan(`${where}/${child?.id}`, child, SKETCH_KEYS);
+    }
+  }
+  for (const s of sketch?.states ?? []) scan(`状态 ${s.id}`, s, STATE_KEYS);
+  for (const q of sketch?.questions ?? []) scan(`问题 ${q.id}`, q, QUESTION_KEYS);
+  for (const d of sketch?.decisions ?? []) scan(`结论 ${d.code}`, d, DECISION_KEYS);
+  for (const g of sketch?.gaps ?? []) scan(`缺口 ${g.id ?? g.need}`, g, GAP_KEYS);
+  return warnings;
+}
 const FROM = /^(需求|产品)(:.+)?$|^(推荐|判断|演示)$/;
 const ID = /^[A-Za-z0-9_-]+$/;
 const CHILD_LISTS = ['fields', 'buttons', 'columns'];
@@ -213,7 +264,7 @@ export function check(sketch, checklist, {final = false} = {}) {
     ...[...questions.values()].filter(q => q.answer == null).map(q => `问题 ${q.id} 未回答`),
   ];
   if (final) pending.forEach(p => errors.push(`确认出稿前：${p}`));
-  return {errors, missing, pending};
+  return {errors, missing, pending, warnings: unknownKeys(sketch)};
 }
 
 /** 把草图摊平成 路径 → {label, value}，供版本对比使用。 */

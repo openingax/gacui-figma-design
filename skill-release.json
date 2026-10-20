@@ -1,9 +1,9 @@
 {
-  "version": "0.4.3",
+  "version": "0.4.4",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "修复软链接安装下命令静默不执行、sync 中断后残留锁永久阻塞；安装命令补充无交互参数。草稿功能不变。",
+  "notice": "草稿保存和检查会提示写错或放错层级的属性名（附路径和建议名称），避免规则被静默丢失；只提示不阻断，已有草稿不受影响。",
   "delivery": "draft-first",
   "figmaStatus": "deferred"
 }
