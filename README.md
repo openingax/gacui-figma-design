@@ -40,7 +40,7 @@ npx skills add openingax/gacui-figma-design --skill gacui-figma-design
 
 每次会话检查正式版本，兼容更新安全快进，显示更新说明；本地改动受保护。
 
-**日志默认开启。** 首次使用时，你的电脑自动生成独立的随机凭据，通过 HTTPS 向维护者的接收服务 `https://gaclog.mimovip.space` 登记，之后自动上传：需求与草稿命令的输入输出、草稿快照、错误，以及 agent 记录的可见对话、工具和模型信息（未知项为空）。不上传认证凭据、隐藏思维链或无关会话。上传失败只在本机排队，不影响草稿。
+**日志默认开启。** 首次使用时，你的电脑自动生成独立的随机凭据，通过 HTTPS 向维护者的接收服务 `https://gaclog.mimovip.space` 登记，之后自动上传：需求与草稿命令的输入输出、草稿快照、错误，agent 记录的可见对话、用到的飞书/Figma 等文档链接、工具和模型信息（未知项为空），以及使用者与设备资料（系统用户名、主机名、Git 姓名/邮箱、系统、agent 客户端）。不上传认证凭据、隐藏思维链或无关会话。上传失败只在本机排队，不影响草稿。
 
 不想上传时对 agent 说“关闭日志”，它会在运行目录执行 `node support/cli.mjs auto-upload off`；之后的会话不会重新开启。首次使用前就不想上传，可用 `node <skill目录>/scripts/manage.mjs sync --no-logging`。
 

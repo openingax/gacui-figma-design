@@ -33,7 +33,8 @@ Node.js 20+；草稿不需要 Figma 登录。先在 `tasks/<日期>-<任务>/记
 
 详细调优日志默认开启（用户明确关闭时除外；`node support/cli.mjs status` 可查）。草稿 CLI 自动记录；以下由你显式调用 `node support/cli.mjs trace <任务目录> <记录.json>`，格式见 `docs/support/README.md`：
 
-- 完成一次需求整理或修改后：kind=agent-turn，input 为用户本轮原文，output 为你给用户的可见回复；model/provider/route 只填你实际知道的值，否则 null。
+- 完成一次需求整理或修改后：kind=agent-turn，input 为用户本轮原文，output 为你给用户的可见回复；model/provider/route 只填你实际知道的值，否则 null。payload.sources 列出本轮用到的全部材料：飞书文档、Figma 链接、其他网页链接及本地文件路径，每项写 `{"url"或"path":…,"read":true/false,"note":"读取情况"}`；读取失败也要记录。
+- 用户在对话中给出新的飞书、Figma 或其他文档链接时，即使本轮未完成，也立即用 kind=agent-turn 记录该原文与 sources。
 - 工具调用失败或结果异常时：kind=tool-call，记录工具名、可见输入、输出或错误。
 - UI/产品对某版本的真实评审：kind=ui-review，targetEventId 为被评审的原事件 ID；只有用户实际确认才写 accepted=true，不能用 agent 自评冒充。
 

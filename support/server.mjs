@@ -8,7 +8,7 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
 export function createCollector({dataDir,tokenHashes,ticketSecret,maxBytes=256*1024*1024,build='local',now=()=>Date.now(),autoEnroll=false,maxDevices=100,maxDeviceBytes=16*1024*1024}) {
  if(!dataDir||!Array.isArray(tokenHashes)||!tokenHashes.length||tokenHashes.some(t=>!/^[a-f0-9]{64}$/.test(t))||typeof ticketSecret!=='string'||ticketSecret.length<32)throw Error('collector configuration invalid');
- for(const d of ['events','reports'])fs.mkdirSync(join(dataDir,d),{recursive:true,mode:0o700});
+ for(const d of ['events','reports','profiles'])fs.mkdirSync(join(dataDir,d),{recursive:true,mode:0o700});
  const deviceFile=join(dataDir,'devices.json');
  const devices=fs.existsSync(deviceFile)?JSON.parse(fs.readFileSync(deviceFile,'utf8')):{};
  const authorized=()=>[...tokenHashes,...Object.values(devices).filter(device=>!device.revoked).map(device=>device.tokenHash)];
@@ -22,8 +22,8 @@ export function createCollector({dataDir,tokenHashes,ticketSecret,maxBytes=256*1
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization','Referrer-Policy':'no-referrer'};
   const reply=(code,data)=>{res.writeHead(code,headers);res.end(JSON.stringify(data));};
   const path=req.url;
-  if(req.method==='GET'&&path==='/healthz')return reply(200,{service:'gacuiagent-log',schema:1,build,features:['tuning-events-v1',...(autoEnroll?['device-enrollment-v1']:[])]});
-  if(!['/v1/events','/v2/events','/v1/tickets','/v1/feedback',...(autoEnroll?['/v1/enroll']:[])].includes(path))return reply(404,{error:'not_found'});
+  if(req.method==='GET'&&path==='/healthz')return reply(200,{service:'gacuiagent-log',schema:1,build,features:['tuning-events-v1','device-profile-v1',...(autoEnroll?['device-enrollment-v1']:[])]});
+  if(!['/v1/events','/v2/events','/v1/tickets','/v1/feedback','/v1/profile',...(autoEnroll?['/v1/enroll']:[])].includes(path))return reply(404,{error:'not_found'});
   if(req.method==='OPTIONS')return reply(204,{});
   if(req.method!=='POST')return reply(405,{error:'method'});
   if(!limit('global',240))return reply(429,{error:'rate_limit'});
@@ -56,6 +56,13 @@ export function createCollector({dataDir,tokenHashes,ticketSecret,maxBytes=256*1
     // 全批先验证，持久化后才回执；部分磁盘失败时可安全重放。
     for(const e of body.events)put('events',client+'-'+e.id,e);
     return reply(200,{accepted:body.events.map(e=>e.id)});
+   }
+   if(path==='/v1/profile'){
+    // 每设备只保留最新资料与首次/最近时间，覆盖写入，不计入事件额度。
+    exactKeys(body,['profile']);if(!body.profile||typeof body.profile!=='object'||Array.isArray(body.profile)||Buffer.byteLength(JSON.stringify(body.profile))>32*1024)throw Error('invalid profile');
+    const file=join(dataDir,'profiles',client+'.json');let firstSeen=new Date(now()).toISOString();try{firstSeen=JSON.parse(fs.readFileSync(file,'utf8')).firstSeen??firstSeen}catch{}
+    const temporary=file+'.'+randomUUID();fs.writeFileSync(temporary,JSON.stringify({client,firstSeen,lastSeen:new Date(now()).toISOString(),profile:body.profile}),{flag:'wx',mode:0o600});fs.renameSync(temporary,file);
+    return reply(200,{accepted:true});
    }
    if(path==='/v1/tickets'){
     exactKeys(body,['taskId']);if(typeof body.taskId!=='string'||!TASK.test(body.taskId))throw Error('invalid task');
