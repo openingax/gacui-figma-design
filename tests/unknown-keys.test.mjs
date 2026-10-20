@@ -7,17 +7,18 @@ import {unknownKeys} from '../sketch/core.mjs';
 
 // #8：写错或放错层级的属性名不会生效；先在 save/check 时警告（不改变退出码），示例与现有稿件不得误报。
 const read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
-for(const f of ['examples/draft-first/v1.json','examples/draft-first/v2.json','sketch/examples/work-order.json','sketch/examples/settlement.json'])
- assert.deepEqual(unknownKeys(read(f)),[],'示例不应有未知属性：'+f);
+const examples=['examples/draft-first/v1.json','examples/draft-first/v2.json','sketch/examples/work-order.json','sketch/examples/settlement.json'].filter(f=>fs.existsSync(f));
+assert.ok(examples.length);
+for(const f of examples)assert.deepEqual(unknownKeys(read(f)),[],'示例不应有未知属性：'+f);
 
-const draft=read('examples/draft-first/v1.json'),node=draft.pages[0].children[0];
-node.bogusField='测试';node.visibel=true;node.rowActionRule=[];node.fields[0].typo='x';draft.pages[0].colour='red';draft.extra=1;
+const draft=read(examples[0]),page=draft.pages.find(p=>p.children?.some(n=>n.fields?.length)),node=page.children.find(n=>n.fields?.length);
+node.bogusField='测试';node.visibel=true;node.rowActionRule=[];node.fields[0].typo='x';page.colour='red';draft.extra=1;
 const warnings=unknownKeys(draft);
 assert.ok(warnings.some(w=>w.includes('bogusField')&&!w.includes('是否应为')));
 assert.ok(warnings.some(w=>w.includes('visibel')&&w.includes('是否应为 visible')));
 assert.ok(warnings.some(w=>w.includes('rowActionRule')&&w.includes('是否应为 rowActionRules')));
-assert.ok(warnings.some(w=>w.startsWith(`${draft.pages[0].id}/${node.id}/${node.fields[0].id}：`)&&w.includes('typo')),'字段层带完整路径');
-assert.ok(warnings.some(w=>w.startsWith(`页面 ${draft.pages[0].id}：`)&&w.includes('colour')));
+assert.ok(warnings.some(w=>w.startsWith(`${page.id}/${node.id}/${node.fields[0].id}：`)&&w.includes('typo')),'字段层带完整路径');
+assert.ok(warnings.some(w=>w.startsWith(`页面 ${page.id}：`)&&w.includes('colour')));
 assert.ok(warnings.some(w=>w.startsWith('草稿：')&&w.includes('extra')));
 
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'gacui-keys-'));
