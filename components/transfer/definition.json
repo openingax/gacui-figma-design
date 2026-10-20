@@ -1,0 +1,166 @@
+{
+  "name": "Transfer 穿梭框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "48890:525315",
+    "pageId": "46709:352686"
+  },
+  "status": "完整盘点，构建验证中；未验收",
+  "displayLayout": {
+    "columns": 3,
+    "padding": 24,
+    "gap": 40
+  },
+  "properties": {
+    "with tree 带树结构": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "search 搜索": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "pagination 分页": {
+      "type": "VARIANT",
+      "defaultValue": "true",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "source empty 源空数据": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "target empty 目标空数据": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    }
+  },
+  "variants": [
+    {
+      "sourceId": "48890:524555",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 281
+    },
+    {
+      "sourceId": "48904:540469",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 239
+    },
+    {
+      "sourceId": "50204:517328",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 335
+    },
+    {
+      "sourceId": "48890:524553",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 239
+    },
+    {
+      "sourceId": "50205:518367",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 335
+    },
+    {
+      "sourceId": "48892:525891",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 281
+    },
+    {
+      "sourceId": "48890:524552",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 239
+    },
+    {
+      "sourceId": "50211:517594",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 335
+    },
+    {
+      "sourceId": "48892:526097",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 600,
+      "height": 281
+    },
+    {
+      "sourceId": "48890:524551",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 314
+    },
+    {
+      "sourceId": "48904:540471",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 272
+    },
+    {
+      "sourceId": "50204:517347",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 368
+    },
+    {
+      "sourceId": "48890:524554",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 279
+    },
+    {
+      "sourceId": "50205:518400",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 368
+    },
+    {
+      "sourceId": "48892:525893",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 321
+    },
+    {
+      "sourceId": "48890:524550",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 279
+    },
+    {
+      "sourceId": "50211:517627",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 368
+    },
+    {
+      "sourceId": "48892:526099",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 600,
+      "height": 321
+    }
+  ]
+}

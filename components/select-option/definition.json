@@ -1,0 +1,234 @@
+{
+  "name": "item/selectOption/l",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "30818:109367",
+    "pageId": "30450:105768"
+  },
+  "properties": {
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬浮",
+        "active 点击",
+        "select 选中"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "divider 分割线": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=false",
+      "size": [
+        304,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=false",
+      "size": [
+        304,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=false",
+      "size": [
+        304,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=false",
+      "size": [
+        304,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=false",
+      "size": [
+        304,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=true",
+      "size": [
+        304,
+        39
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=true",
+      "size": [
+        304,
+        39
+      ]
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=true",
+      "size": [
+        304,
+        39
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=true",
+      "size": [
+        304,
+        39
+      ]
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=true",
+      "size": [
+        304,
+        39
+      ]
+    }
+  ],
+  "rules": [
+    "单选选项10状态，按normal/hover/active/select、disabled及divider选择真实组合",
+    "选项数量由业务数据决定；不建立1至10项数量组件",
+    "弹出列表是普通自动布局容器包裹选项实例，不导入整个示例画板"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray9-强调\\正文",
+    "Gray 中性/Gray1-浅色背景",
+    "Gray 中性/Gray3-分割线",
+    "Gray 中性/Gray6-提示",
+    "Brand 品牌/Brand1-Light",
+    "Brand 品牌/Brand5-Normal"
+  ],
+  "gaps": [
+    "临时Noto字体由用户桌面处理",
+    "静态状态不代表交互、业务事件或数据更新已实现"
+  ],
+  "displayLayout": {
+    "columns": 2,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示判断，不改变组件内部几何"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray6-提示": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.5921568870544434,
+          "g": 0.6039215922355652,
+          "b": 0.615686297416687
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9019607901573181,
+          "g": 0.95686274766922,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告"
+}

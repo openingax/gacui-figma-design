@@ -1,0 +1,577 @@
+{
+  "name": "Upload 上传",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "43937:309296",
+    "nodeId": "43956:310950",
+    "componentSetId": "43995:310836"
+  },
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "221:2"
+  },
+  "status": "已导入，云端逐层回读、全状态截图与七形态原节点修改验证通过；待苹方、桌面效果与用户验收",
+  "variantCount": 62,
+  "variants": [
+    {
+      "sourceId": "43995:310835",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44036:311298",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44174:310843",
+      "theme 主题样式": "file",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44174:310885",
+      "theme 主题样式": "file",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44181:310984",
+      "theme 主题样式": "file",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44174:310806",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44184:311057",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44174:310824",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "dragging 拖拽中",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44029:311156",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "44012:310870",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44016:310996",
+      "theme 主题样式": "file",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44016:310920",
+      "theme 主题样式": "file",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44016:310974",
+      "theme 主题样式": "file",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44022:311020",
+      "theme 主题样式": "file",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44016:310946",
+      "theme 主题样式": "file",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44024:311105",
+      "theme 主题样式": "file",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44029:311126",
+      "theme 主题样式": "file",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44029:311141",
+      "theme 主题样式": "file",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44022:311045",
+      "theme 主题样式": "file",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44022:311066",
+      "theme 主题样式": "file",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601819",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49711:487229",
+      "theme 主题样式": "image",
+      "state 上传状态": "waiting 等待上传",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "49326:601824",
+      "theme 主题样式": "image",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601829",
+      "theme 主题样式": "image",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601834",
+      "theme 主题样式": "image",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601839",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601844",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601849",
+      "theme 主题样式": "image",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601854",
+      "theme 主题样式": "image",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601858",
+      "theme 主题样式": "image",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601867",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49719:487350",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "49326:601874",
+      "theme 主题样式": "image",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601887",
+      "theme 主题样式": "image",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601902",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601909",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601916",
+      "theme 主题样式": "image",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "dragging 拖拽中",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:601922",
+      "theme 主题样式": "image",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "44578:321905",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49719:487299",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "49139:524761",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49139:524849",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "dragging 拖拽中",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "46657:429402",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49711:486050",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "waiting 等待上传",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "46924:521962",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49115:525993",
+      "theme 主题样式": "file-flow",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49139:524896",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49719:487453",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "49167:526182",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49167:526226",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "dragging 拖拽中",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49766:493486",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "waiting 等待上传",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49768:493676",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49768:493852",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49775:494063",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49768:493958",
+      "theme 主题样式": "image-flow",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "true",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602004",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602009",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "true"
+    },
+    {
+      "sourceId": "49326:602014",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "hover 悬浮",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602019",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "before 上传前",
+      "state 交互状态": "active 点击",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602024",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "progress 上传中",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602029",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "success 上传成功",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    },
+    {
+      "sourceId": "49326:602035",
+      "theme 主题样式": "file-input",
+      "state 上传状态": "fail 上传失败",
+      "state 交互状态": "normal 默认",
+      "draggable 启用拖拽": "false",
+      "disabled 禁用": "false"
+    }
+  ],
+  "helperGroups": {
+    "uploadButton": 4,
+    "imageItem": 5,
+    "activeDifference": 1
+  },
+  "defaultSpec": {
+    "theme": "file",
+    "draggable": false,
+    "state": "before",
+    "interaction": "normal",
+    "disabled": false
+  },
+  "contentSlots": [
+    "filename",
+    "helperText",
+    "fileSize",
+    "uploadDate",
+    "buttonLabel",
+    "progress",
+    "files"
+  ],
+  "composition": {
+    "fileFlow": "四列表格；行数由 files 决定，各文件可指定状态",
+    "imageFlow": "四列网格；数量由 files 决定，各图片可指定状态"
+  },
+  "facts": [
+    "主变体没有业务 reactions",
+    "嵌套 Button 有 ON_HOVER / ON_PRESS → CHANGE_TO",
+    "活跃悬浮图片背景 #EEEEEE 与母组件 #F1F1F1 均保留",
+    "图片卡依赖包含 3 张原图，其中一张只在脱离页面母组件中出现"
+  ],
+  "decisions": [
+    "按 7 种形态拆分组件集",
+    "静态业务组合根转为 FRAME，保留并恢复 Button 实例与 reactions",
+    "长说明按固定宽度换行；长文件名单行省略，保留完整字符"
+  ],
+  "unknowns": [
+    "真实上传请求、选择文件、删除、取消及页面导航规则未提供",
+    "苹方及桌面端最终效果待用户验收"
+  ],
+  "font": {
+    "spec": "PingFang SC",
+    "cloudFallback": "Noto Sans SC",
+    "observedNaturalWidthDelta": [
+      -6,
+      7
+    ]
+  },
+  "userAccepted": false,
+  "validation": {
+    "nativeRecords": 1105,
+    "components": 72,
+    "mainVariants": 62,
+    "sourceButtonReactions": 48,
+    "layoutContainers": 592,
+    "examples": 7,
+    "actualFileCounts": [
+      3,
+      6
+    ],
+    "maxVectorCoordinateDelta": 9.99467872020432e-7,
+    "prototypeTriggersTested": false,
+    "userAccepted": false
+  }
+}

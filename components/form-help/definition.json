@@ -1,0 +1,136 @@
+{
+  "name": "item/form/help",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "43038:306387",
+    "pageId": "39306:305660"
+  },
+  "properties": {
+    "statusType 状态": {
+      "type": "VARIANT",
+      "defaultValue": "success 成功",
+      "variantOptions": [
+        "success 成功",
+        "default 默认",
+        "error 错误",
+        "warning 警告"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "statusType 状态=success 成功",
+      "size": [
+        216,
+        20
+      ]
+    },
+    {
+      "name": "statusType 状态=default 默认",
+      "size": [
+        216,
+        20
+      ]
+    },
+    {
+      "name": "statusType 状态=error 错误",
+      "size": [
+        216,
+        20
+      ]
+    },
+    {
+      "name": "statusType 状态=warning 警告",
+      "size": [
+        216,
+        20
+      ]
+    }
+  ],
+  "rules": [
+    "四种提示文字状态default/success/error/warning；母组件样例216×20，真实实例可覆盖为400宽，不作业务固定宽度",
+    "源文案要求超控件宽度换行；活跃默认提示为HEIGHT，错误/警告/成功样例仍为WIDTH_AND_HEIGHT。长文字须按实际容器验证，不宣称四状态自动换行均已实现",
+    "提示颜色来自源状态；不把校验提示等同于已实现校验逻辑"
+  ],
+  "styleNames": [
+    "Success 成功/Success5-Normal",
+    "Gray 中性/Gray6-提示",
+    "Error 错误/Error5-Normal",
+    "Warning 警告/Warning5-Normal"
+  ],
+  "gaps": [
+    "临时Noto字体由用户桌面处理",
+    "静态状态不代表交互、业务事件或数据更新已实现"
+  ],
+  "displayLayout": {
+    "columns": 2,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示判断，不改变组件内部几何"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Success 成功/Success5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.7058823704719543,
+          "b": 0.16620886325836182
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray6-提示": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.5921568870544434,
+          "g": 0.6039215922355652,
+          "b": 0.615686297416687
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Error 错误/Error5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9607843160629272,
+          "g": 0.24705882370471954,
+          "b": 0.24705882370471954
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Warning 警告/Warning5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.4901960790157318,
+          "b": 0
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "familyScope": {
+    "entry": "../form/README.md",
+    "status": "仅部分基础单元；完整Form家族范围以form/definition.json为准",
+    "reanalysisDate": "2026-09-29"
+  }
+}

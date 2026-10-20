@@ -1,0 +1,2041 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "families": {
+    "input": [
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:2",
+        "sourceId": "25406:43065",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:6",
+        "sourceId": "25737:73289",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:9",
+        "sourceId": "26871:84583",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:13",
+        "sourceId": "25406:43072",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=on",
+        "id": "56:17",
+        "sourceId": "25406:43106",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:21",
+        "sourceId": "25406:43116",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:27",
+        "sourceId": "25737:73293",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:32",
+        "sourceId": "26871:84640",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+        "id": "56:38",
+        "sourceId": "25406:43122",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=on",
+        "id": "56:44",
+        "sourceId": "25406:43157",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "56:50",
+        "sourceId": "25412:43101",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "56:56",
+        "sourceId": "25737:73298",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "56:61",
+        "sourceId": "26872:84814",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "56:67",
+        "sourceId": "25412:43107",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=on",
+        "id": "56:73",
+        "sourceId": "25412:43120",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "56:79",
+        "sourceId": "25412:43119",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "58:8",
+        "sourceId": "25737:73303",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "58:16",
+        "sourceId": "26872:84874",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+        "id": "58:25",
+        "sourceId": "25412:43131",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=on",
+        "id": "58:34",
+        "sourceId": "25412:43136",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:41",
+        "sourceId": "25337:43780",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:47",
+        "sourceId": "25737:73310",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:52",
+        "sourceId": "26872:84931",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:58",
+        "sourceId": "25337:43789",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=on",
+        "id": "58:64",
+        "sourceId": "25337:43807",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:70",
+        "sourceId": "25337:43816",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "58:78",
+        "sourceId": "25737:73316",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "62:5",
+        "sourceId": "26872:84994",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+        "id": "62:13",
+        "sourceId": "25337:43822",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=on",
+        "id": "62:21",
+        "sourceId": "25337:43834",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:29",
+        "sourceId": "25337:43876",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:37",
+        "sourceId": "25737:73323",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:44",
+        "sourceId": "26872:85186",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:52",
+        "sourceId": "25337:43882",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=on",
+        "id": "62:60",
+        "sourceId": "25337:43894",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:67",
+        "sourceId": "25337:43903",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "62:78",
+        "sourceId": "25737:73330",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "63:8",
+        "sourceId": "26872:85252",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+        "id": "63:19",
+        "sourceId": "25337:43906",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=on",
+        "id": "63:30",
+        "sourceId": "25337:43912",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      }
+    ],
+    "input-focus": [
+      {
+        "name": "state 状态=focus 聚焦",
+        "id": "89:86",
+        "sourceId": "27023:84496",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      }
+    ],
+    "input-password": [
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:2",
+        "sourceId": "27136:84565",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:10",
+        "sourceId": "25534:53459",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18521",
+        "sourceId": "25534:53462",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=off, disabled 禁用=on",
+        "id": "568:18533",
+        "sourceId": "25534:53468",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18545",
+        "sourceId": "27141:84757",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18549",
+        "sourceId": "25534:53435",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18558",
+        "sourceId": "25534:53441",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=off, disabled 禁用=on",
+        "id": "568:18567",
+        "sourceId": "25534:53453",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18576",
+        "sourceId": "27143:84489",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18583",
+        "sourceId": "27143:84552",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18590",
+        "sourceId": "27143:84612",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=off, disabled 禁用=on",
+        "id": "568:18597",
+        "sourceId": "27143:84732",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18604",
+        "sourceId": "27143:84912",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18608",
+        "sourceId": "27143:84918",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18612",
+        "sourceId": "27143:84924",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=off, disabled 禁用=on",
+        "id": "568:18616",
+        "sourceId": "27143:84936",
+        "width": 240,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18620",
+        "sourceId": "27149:85152",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18630",
+        "sourceId": "25535:53497",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18644",
+        "sourceId": "25535:53500",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=off, tips 提示=on, disabled 禁用=on",
+        "id": "568:18658",
+        "sourceId": "25535:53506",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18672",
+        "sourceId": "27150:84759",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18678",
+        "sourceId": "25535:53471",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18689",
+        "sourceId": "25535:53479",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=off, tips 提示=on, disabled 禁用=on",
+        "id": "568:18700",
+        "sourceId": "25535:53491",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "mask": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18711",
+        "sourceId": "27150:85077",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18720",
+        "sourceId": "27150:85083",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18729",
+        "sourceId": "27150:85089",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=on, browse 浏览=on, tips 提示=on, disabled 禁用=on",
+        "id": "568:18738",
+        "sourceId": "27150:85101",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=normal 默认, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18747",
+        "sourceId": "27150:85107",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18753",
+        "sourceId": "27150:85113",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18759",
+        "sourceId": "27150:85119",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "state 状态=filled 填充, prefixIcon 前置图标=off, browse 浏览=on, tips 提示=on, disabled 禁用=on",
+        "id": "568:18765",
+        "sourceId": "27150:85131",
+        "width": 240,
+        "height": 52,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      }
+    ],
+    "textarea": [
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18771",
+        "sourceId": "26786:74741",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18774",
+        "sourceId": "27005:84024",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18777",
+        "sourceId": "26786:74742",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18780",
+        "sourceId": "26786:74743",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=on",
+        "id": "568:18783",
+        "sourceId": "26786:74744",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18786",
+        "sourceId": "26786:74748",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18788",
+        "sourceId": "27005:84048",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18790",
+        "sourceId": "26786:74747",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=off",
+        "id": "568:18792",
+        "sourceId": "26786:74746",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=off, disabled 禁用=on",
+        "id": "568:18794",
+        "sourceId": "26786:74745",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18796",
+        "sourceId": "26786:74749",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18801",
+        "sourceId": "27005:84060",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18806",
+        "sourceId": "26786:74750",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18811",
+        "sourceId": "26786:74751",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=on",
+        "id": "568:18816",
+        "sourceId": "26786:74752",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18821",
+        "sourceId": "26786:74756",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18825",
+        "sourceId": "27005:84072",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18829",
+        "sourceId": "26786:74755",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=off",
+        "id": "568:18833",
+        "sourceId": "26786:74754",
+        "width": 400,
+        "height": 54,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=off, disabled 禁用=on",
+        "id": "568:18837",
+        "sourceId": "26786:74753",
+        "width": 400,
+        "height": 32,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18841",
+        "sourceId": "26786:74757",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18846",
+        "sourceId": "27005:84099",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18851",
+        "sourceId": "26786:74758",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18856",
+        "sourceId": "26786:74759",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=on",
+        "id": "568:18861",
+        "sourceId": "26786:74760",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18866",
+        "sourceId": "26786:74761",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18872",
+        "sourceId": "27005:84113",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18878",
+        "sourceId": "26786:74762",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=off",
+        "id": "568:18884",
+        "sourceId": "26786:74763",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=off, tips 提示=on, disabled 禁用=on",
+        "id": "568:18890",
+        "sourceId": "26786:74764",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18896",
+        "sourceId": "26786:74768",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18903",
+        "sourceId": "27005:84127",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18910",
+        "sourceId": "26786:74767",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18917",
+        "sourceId": "26786:74766",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=off, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=on",
+        "id": "568:18924",
+        "sourceId": "26786:74765",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              1,
+              1
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18931",
+        "sourceId": "26786:74770",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=filled 填充, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18937",
+        "sourceId": "27005:84141",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=hover 悬浮, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18943",
+        "sourceId": "26786:74769",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=focus 聚集, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=off",
+        "id": "568:18949",
+        "sourceId": "26786:74771",
+        "width": 400,
+        "height": 74,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      },
+      {
+        "name": "status 主题状态=default 默认, state 状态=normal 默认, autosize 自动高度=on, maxcharacter 限制字符=on, tips 提示=on, disabled 禁用=on",
+        "id": "568:18955",
+        "sourceId": "26786:74772",
+        "width": 400,
+        "height": 52,
+        "bindings": {
+          "counter": [
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "value": [
+            0,
+            0
+          ],
+          "tips": [
+            1
+          ]
+        }
+      }
+    ],
+    "input-addon": [
+      {
+        "name": "prepend 前置标签=on, append 后置标签=off, disabled 禁用=off",
+        "id": "568:18961",
+        "sourceId": "49596:472176",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "prepend": [
+            0,
+            0
+          ],
+          "value": [
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "prepend 前置标签=on, append 后置标签=off, disabled 禁用=on",
+        "id": "568:18967",
+        "sourceId": "49596:472200",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "prepend": [
+            0,
+            0
+          ],
+          "value": [
+            1,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "name": "prepend 前置标签=on, append 后置标签=on, disabled 禁用=off",
+        "id": "568:18974",
+        "sourceId": "49596:472626",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "prepend": [
+            0,
+            0
+          ],
+          "value": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "append": [
+            1,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "prepend 前置标签=on, append 后置标签=on, disabled 禁用=on",
+        "id": "568:18983",
+        "sourceId": "49596:472650",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "prepend": [
+            0,
+            0
+          ],
+          "value": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "append": [
+            1,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "prepend 前置标签=off, append 后置标签=on, disabled 禁用=off",
+        "id": "568:18993",
+        "sourceId": "49596:473076",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "append": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "prepend 前置标签=off, append 后置标签=on, disabled 禁用=on",
+        "id": "568:19000",
+        "sourceId": "49596:473100",
+        "width": 280,
+        "height": 32,
+        "bindings": {
+          "counter": [],
+          "value": [
+            0,
+            0,
+            1
+          ],
+          "append": [
+            1,
+            0
+          ]
+        }
+      }
+    ]
+  }
+}

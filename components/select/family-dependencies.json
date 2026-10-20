@@ -1,0 +1,465 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "inputs": [
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:2",
+      "sourceId": "30477:106259"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=true",
+      "id": "72:6",
+      "sourceId": "30526:106504"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:10",
+      "sourceId": "30525:106465"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:14",
+      "sourceId": "30503:106290"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:21",
+      "sourceId": "30586:106524"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=true",
+      "id": "72:28",
+      "sourceId": "30586:106564"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:35",
+      "sourceId": "30601:106938"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=true",
+      "id": "72:39",
+      "sourceId": "30601:106940"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:43",
+      "sourceId": "30601:106942"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:47",
+      "sourceId": "30601:106946"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:54",
+      "sourceId": "30601:106948"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=true",
+      "id": "72:61",
+      "sourceId": "30601:106952"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:68",
+      "sourceId": "30661:107741"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=true",
+      "id": "72:72",
+      "sourceId": "30661:107743"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:76",
+      "sourceId": "30661:107745"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:80",
+      "sourceId": "30661:107749"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "72:87",
+      "sourceId": "30661:107751"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=true",
+      "id": "72:94",
+      "sourceId": "30661:107755"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "72:101",
+      "sourceId": "30661:107789"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=true",
+      "id": "72:121",
+      "sourceId": "30661:107791"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "73:21",
+      "sourceId": "30661:107793"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "73:41",
+      "sourceId": "30661:107797"
+    },
+    {
+      "name": "state 状态=hover 悬浮, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "76:76",
+      "sourceId": "30661:107799"
+    },
+    {
+      "name": "state 状态=normal 默认, expand 展开=false, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=true",
+      "id": "76:101",
+      "sourceId": "30661:107803"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "577:16",
+      "sourceId": "30829:112825"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=false, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "577:33",
+      "sourceId": "30829:112827"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "577:18554",
+      "sourceId": "30829:112837"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=true, multiple 多选=false, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "577:18570",
+      "sourceId": "30829:112839"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "577:18589",
+      "sourceId": "30829:112861"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=false, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "577:18615",
+      "sourceId": "30829:112863"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=false, disabled 禁用=false",
+      "id": "577:18644",
+      "sourceId": "30829:112873"
+    },
+    {
+      "name": "state 状态=focus 聚焦, expand 展开=true, filled 填充=true, multiple 多选=true, prefixIcon 前置图标=true, disabled 禁用=false",
+      "id": "577:18690",
+      "sourceId": "30829:112875"
+    }
+  ],
+  "single": [
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=false",
+      "id": "67:53",
+      "sourceId": "30818:109065"
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=false",
+      "id": "67:55",
+      "sourceId": "30818:109067"
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=false",
+      "id": "67:57",
+      "sourceId": "30818:109069"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=false",
+      "id": "67:59",
+      "sourceId": "30818:109071"
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=false",
+      "id": "67:61",
+      "sourceId": "30829:115292"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=true",
+      "id": "67:63",
+      "sourceId": "30829:109207"
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=true",
+      "id": "67:68",
+      "sourceId": "30829:109209"
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=true",
+      "id": "67:73",
+      "sourceId": "30829:109211"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=true",
+      "id": "67:78",
+      "sourceId": "30829:109213"
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=true",
+      "id": "67:83",
+      "sourceId": "30832:115302"
+    }
+  ],
+  "multi": [
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=false",
+      "id": "440:3",
+      "sourceId": "30818:109073"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=false",
+      "id": "440:8",
+      "sourceId": "30818:109079"
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=false",
+      "id": "440:12",
+      "sourceId": "30833:115316"
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=false",
+      "id": "577:18737",
+      "sourceId": "30818:109075"
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=false",
+      "id": "577:18741",
+      "sourceId": "30818:109077"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=false, divider 分割线=true",
+      "id": "577:18745",
+      "sourceId": "30829:109263"
+    },
+    {
+      "name": "state 状态=hover 悬浮, disabled 禁用=false, divider 分割线=true",
+      "id": "577:18752",
+      "sourceId": "30829:109265"
+    },
+    {
+      "name": "state 状态=active 点击, disabled 禁用=false, divider 分割线=true",
+      "id": "577:18759",
+      "sourceId": "30829:109267"
+    },
+    {
+      "name": "state 状态=normal 默认, disabled 禁用=true, divider 分割线=true",
+      "id": "577:18766",
+      "sourceId": "30829:109269"
+    },
+    {
+      "name": "state 状态=select 选中, disabled 禁用=false, divider 分割线=true",
+      "id": "577:18773",
+      "sourceId": "30833:115332"
+    }
+  ],
+  "singleRules": {
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "strokes": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "strokeWeight": 0.5,
+    "strokeAlign": "INSIDE",
+    "strokesIncludedInLayout": false,
+    "cornerRadius": 6,
+    "effects": [
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 5,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.10000000149011612
+        },
+        "offset": {
+          "x": 0,
+          "y": 5
+        },
+        "spread": -3,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      },
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 10,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.05999999865889549
+        },
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "spread": 1,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      },
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 14,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.05000000074505806
+        },
+        "offset": {
+          "x": 0,
+          "y": 3
+        },
+        "spread": 2,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      }
+    ],
+    "paddingTop": 8,
+    "paddingRight": 8,
+    "paddingBottom": 8,
+    "paddingLeft": 8,
+    "itemSpacing": 2
+  },
+  "multiRules": {
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "strokes": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "strokeWeight": 0.5,
+    "strokeAlign": "INSIDE",
+    "strokesIncludedInLayout": false,
+    "cornerRadius": 6,
+    "effects": [
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 5,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.10000000149011612
+        },
+        "offset": {
+          "x": 0,
+          "y": 5
+        },
+        "spread": -3,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      },
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 10,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.05999999865889549
+        },
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "spread": 1,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      },
+      {
+        "type": "DROP_SHADOW",
+        "visible": true,
+        "radius": 14,
+        "boundVariables": {},
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.05000000074505806
+        },
+        "offset": {
+          "x": 0,
+          "y": 3
+        },
+        "spread": 2,
+        "blendMode": "NORMAL",
+        "showShadowBehindNode": true
+      }
+    ],
+    "paddingTop": 8,
+    "paddingRight": 8,
+    "paddingBottom": 8,
+    "paddingLeft": 8,
+    "itemSpacing": 2
+  }
+}

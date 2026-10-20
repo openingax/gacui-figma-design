@@ -1,0 +1,14 @@
+{
+  "name": "Select 选择器 · 补齐",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "30477:106261",
+    "pageId": "30450:105768"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24,
+    "minCellHeight": 260
+  }
+}

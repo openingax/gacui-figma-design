@@ -1,0 +1,57 @@
+{
+  "name": "TimePicker-input 时间选择输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "37815:305576",
+    "pageId": "30344:105678"
+  },
+  "status": "完整盘点，构建验证中；未验收",
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "placeholder#83717:0": {
+      "type": "TEXT",
+      "defaultValue": "请选择时间"
+    },
+    "fillText#83717:49": {
+      "type": "TEXT",
+      "defaultValue": "14:45:31"
+    },
+    "format 格式": {
+      "type": "VARIANT",
+      "defaultValue": "time 时间",
+      "variantOptions": [
+        "time 时间",
+        "timeRange 时间区间"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "focus 聚焦",
+        "hover 悬浮",
+        "normal 默认"
+      ]
+    },
+    "filled 填充": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  }
+}

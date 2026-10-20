@@ -1,0 +1,267 @@
+{
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "46709:352686"
+  },
+  "recipes": [
+    {
+      "sourceId": "48890:524555",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 281,
+      "tree": false,
+      "search": false,
+      "pagination": true,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48904:540469",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 239,
+      "tree": false,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "50204:517328",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 335,
+      "tree": true,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48890:524553",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 239,
+      "tree": false,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "50205:518367",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 335,
+      "tree": true,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48892:525891",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 281,
+      "tree": false,
+      "search": false,
+      "pagination": true,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48890:524552",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 239,
+      "tree": false,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    },
+    {
+      "sourceId": "50211:517594",
+      "name": "with tree 带树结构=true, search 搜索=false, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 335,
+      "tree": true,
+      "search": false,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    },
+    {
+      "sourceId": "48892:526097",
+      "name": "with tree 带树结构=false, search 搜索=false, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 600,
+      "height": 281,
+      "tree": false,
+      "search": false,
+      "pagination": true,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    },
+    {
+      "sourceId": "48890:524551",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 314,
+      "tree": false,
+      "search": true,
+      "pagination": true,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48904:540471",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 272,
+      "tree": false,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "50204:517347",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=false",
+      "width": 448,
+      "height": 368,
+      "tree": true,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48890:524554",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 279,
+      "tree": false,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "50205:518400",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 368,
+      "tree": true,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48892:525893",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=true, target empty 目标空数据=false",
+      "width": 448,
+      "height": 321,
+      "tree": false,
+      "search": true,
+      "pagination": true,
+      "sourceEmpty": true,
+      "targetEmpty": false
+    },
+    {
+      "sourceId": "48890:524550",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 279,
+      "tree": false,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    },
+    {
+      "sourceId": "50211:517627",
+      "name": "with tree 带树结构=true, search 搜索=true, pagination 分页=false, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 448,
+      "height": 368,
+      "tree": true,
+      "search": true,
+      "pagination": false,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    },
+    {
+      "sourceId": "48892:526099",
+      "name": "with tree 带树结构=false, search 搜索=true, pagination 分页=true, source empty 源空数据=false, target empty 目标空数据=true",
+      "width": 600,
+      "height": 321,
+      "tree": false,
+      "search": true,
+      "pagination": true,
+      "sourceEmpty": false,
+      "targetEmpty": true
+    }
+  ],
+  "counts": [
+    {
+      "sourceId": "48872:526453",
+      "count": 1,
+      "width": 184,
+      "height": 32,
+      "gap": 0
+    },
+    {
+      "sourceId": "48872:526452",
+      "count": 2,
+      "width": 184,
+      "height": 68,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526448",
+      "count": 3,
+      "width": 184,
+      "height": 104,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526449",
+      "count": 4,
+      "width": 184,
+      "height": 140,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526447",
+      "count": 5,
+      "width": 184,
+      "height": 176,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526451",
+      "count": 6,
+      "width": 184,
+      "height": 212,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526450",
+      "count": 7,
+      "width": 184,
+      "height": 248,
+      "gap": 4
+    },
+    {
+      "sourceId": "48872:526446",
+      "count": 8,
+      "width": 184,
+      "height": 284,
+      "gap": 4
+    }
+  ],
+  "rowHeight": 32,
+  "rowGap": 4,
+  "validation": "source-snapshot-only"
+}

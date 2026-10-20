@@ -1,0 +1,130 @@
+{
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "48218:528564"
+  },
+  "nodes": {
+    "25703:122875": {
+      "name": "sideBar",
+      "width": 200,
+      "height": 2168,
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0,
+            "a": 0.03999999910593033
+          },
+          "gutterSize": 20,
+          "alignment": "STRETCH",
+          "count": 24,
+          "offset": 20,
+          "boundVariables": {}
+        }
+      ]
+    },
+    "25788:24793": {
+      "name": "col-12-nonmenu",
+      "width": 1440,
+      "height": 200,
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0,
+            "a": 0.10000000149011612
+          },
+          "gutterSize": 16,
+          "alignment": "STRETCH",
+          "count": 12,
+          "offset": 24,
+          "boundVariables": {}
+        }
+      ]
+    },
+    "25788:24797": {
+      "name": "col-12-nonmenu",
+      "width": 1440,
+      "height": 900,
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0,
+            "a": 0.10000000149011612
+          },
+          "gutterSize": 16,
+          "alignment": "STRETCH",
+          "count": 12,
+          "offset": 24,
+          "boundVariables": {}
+        }
+      ]
+    },
+    "25788:24802": {
+      "name": "Frame 3",
+      "width": 1240,
+      "height": 860,
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0,
+            "a": 0.10000000149011612
+          },
+          "gutterSize": 16,
+          "alignment": "STRETCH",
+          "count": 12,
+          "offset": 24,
+          "boundVariables": {}
+        }
+      ]
+    },
+    "25788:24803": {
+      "name": "col-12-menu-unfold",
+      "width": 1440,
+      "height": 200,
+      "layoutGrids": []
+    },
+    "25788:24804": {
+      "name": "Frame 2",
+      "width": 200,
+      "height": 200,
+      "layoutGrids": []
+    },
+    "25788:24806": {
+      "name": "Frame 2",
+      "width": 1240,
+      "height": 200,
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0,
+            "a": 0.10000000149011612
+          },
+          "gutterSize": 16,
+          "alignment": "STRETCH",
+          "count": 12,
+          "offset": 24,
+          "boundVariables": {}
+        }
+      ]
+    }
+  }
+}

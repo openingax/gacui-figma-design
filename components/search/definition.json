@@ -1,0 +1,708 @@
+{
+  "name": "Search",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "72086:226133",
+    "nodeId": "78092:236156"
+  },
+  "status": "已构建、回读及视觉验证；未用户验收",
+  "properties": {
+    "borderless 无边框": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "prefix 前缀": {
+      "type": "VARIANT",
+      "defaultValue": "true",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "suffix 后缀": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "fill 填充": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬浮",
+        "focus 聚集"
+      ]
+    },
+    "clearable清空": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "multiline 批量搜索": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "popup 联想": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "displayLayout": {
+    "columns": 3,
+    "padding": 60,
+    "gap": 180
+  },
+  "states": [
+    {
+      "sourceId": "78092:236157",
+      "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78415:240331",
+      "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78415:240333",
+      "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236161",
+      "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236163",
+      "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236165",
+      "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236167",
+      "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236175",
+      "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236177",
+      "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236179",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78415:240335",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78415:240337",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236183",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236185",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236187",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236189",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236197",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237074",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237203",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78746:238416",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237076",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237205",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78746:238422",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236201",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236203",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236205",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236207",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236209",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237078",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237207",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78746:238428",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237080",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237209",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78746:238434",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236213",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236215",
+      "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236217",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78415:240339",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236221",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236225",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        120
+      ]
+    },
+    {
+      "sourceId": "78092:236234",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237138",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78108:237211",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        120
+      ]
+    },
+    {
+      "sourceId": "78746:238440",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=true, popup 联想=true, disabled 禁用=false",
+      "size": [
+        240,
+        120
+      ]
+    },
+    {
+      "sourceId": "78092:236238",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78092:236242",
+      "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    }
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "169:2",
+    "componentSetIds": [
+      "169:96",
+      "169:219",
+      "169:364",
+      "169:491"
+    ],
+    "variants": [
+      {
+        "sourceId": "78092:236157",
+        "id": "169:42",
+        "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78415:240331",
+        "id": "169:48",
+        "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78415:240333",
+        "id": "169:54",
+        "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236161",
+        "id": "169:60",
+        "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236163",
+        "id": "169:66",
+        "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236165",
+        "id": "169:72",
+        "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236167",
+        "id": "169:78",
+        "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236175",
+        "id": "169:84",
+        "name": "borderless 无边框=false, prefix 前缀=true, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236177",
+        "id": "169:90",
+        "name": "borderless 无边框=true, prefix 前缀=true, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236179",
+        "id": "169:97",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78415:240335",
+        "id": "169:103",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78415:240337",
+        "id": "169:109",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236183",
+        "id": "169:115",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236185",
+        "id": "169:121",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236187",
+        "id": "169:127",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236189",
+        "id": "169:133",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236197",
+        "id": "169:139",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237074",
+        "id": "169:145",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237076",
+        "id": "169:151",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236201",
+        "id": "169:157",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236203",
+        "id": "169:165",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236205",
+        "id": "169:173",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236207",
+        "id": "169:179",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236209",
+        "id": "169:185",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237078",
+        "id": "169:191",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237080",
+        "id": "169:197",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236213",
+        "id": "169:203",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236215",
+        "id": "169:211",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237203",
+        "id": "169:220",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78746:238416",
+        "id": "169:237",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237205",
+        "id": "169:256",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78746:238422",
+        "id": "169:273",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237207",
+        "id": "169:292",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78746:238428",
+        "id": "169:309",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237209",
+        "id": "169:328",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78746:238434",
+        "id": "169:345",
+        "name": "borderless 无边框=true, prefix 前缀=false, suffix 后缀=false, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=false, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236217",
+        "id": "169:365",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78415:240339",
+        "id": "169:371",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236221",
+        "id": "169:377",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236225",
+        "id": "169:383",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=false, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236234",
+        "id": "169:389",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=normal 默认, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237138",
+        "id": "169:405",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=hover 悬浮, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78108:237211",
+        "id": "169:421",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78746:238440",
+        "id": "169:438",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=true, popup 联想=true, disabled 禁用=false"
+      },
+      {
+        "sourceId": "78092:236238",
+        "id": "169:457",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=false, multiline 批量搜索=true, popup 联想=false, disabled 禁用=true"
+      },
+      {
+        "sourceId": "78092:236242",
+        "id": "169:473",
+        "name": "borderless 无边框=false, prefix 前缀=false, suffix 后缀=true, fill 填充=true, state 状态=focus 聚集, clearable清空=true, multiline 批量搜索=true, popup 联想=false, disabled 禁用=false"
+      }
+    ]
+  },
+  "rules": [
+    "源变体为实际组合，不自动补齐全排列",
+    "文字/数组/宽度通过components/search/generator.mjs定制，结构修改返回可编辑Frame",
+    "样例标签和联想项数量不是业务限制",
+    "源无reactions，不包括业务搜索、清空、提交及导航"
+  ],
+  "fontSubstitution": "Noto Sans SC Regular/Medium；原字体PingFang SC未桌面验收"
+}

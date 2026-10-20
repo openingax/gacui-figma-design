@@ -1,0 +1,234 @@
+{
+  "name": "item/content/cell/border",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "46879:366037",
+    "pageId": "46868:353120"
+  },
+  "properties": {
+    "text 文字": {
+      "type": "VARIANT",
+      "defaultValue": "true",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "operations 操作": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "tag 标签": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "bg 底色": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "text 文字=true, operations 操作=false, state 状态=false, tag 标签=false, bg 底色=false",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=true, state 状态=false, tag 标签=false, bg 底色=false",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=false, state 状态=false, tag 标签=true, bg 底色=false",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=true, operations 操作=false, state 状态=false, tag 标签=true, bg 底色=false",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=false, state 状态=true, tag 标签=false, bg 底色=false",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=true, operations 操作=false, state 状态=false, tag 标签=false, bg 底色=true",
+      "size": [
+        240,
+        46
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=true, state 状态=false, tag 标签=false, bg 底色=true",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=false, state 状态=false, tag 标签=true, bg 底色=true",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=true, operations 操作=false, state 状态=false, tag 标签=true, bg 底色=true",
+      "size": [
+        240,
+        44
+      ]
+    },
+    {
+      "name": "text 文字=false, operations 操作=false, state 状态=true, tag 标签=false, bg 底色=true",
+      "size": [
+        240,
+        44
+      ]
+    }
+  ],
+  "rules": [
+    "表格结构提炼为单元格，而非整张样例",
+    "10个真实单元格组合：文本/操作/状态/标签/文本+标签，各带底色开关",
+    "基准宽240，正文高44；纯文字bg=true源变体高46，作为表头证据保留差异",
+    "列宽、数据行数、文本和动作属于业务参数；数值不是样例上限"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray3-分割线",
+    "Brand 品牌/Brand5-Normal",
+    "Success 成功/Success1-Light",
+    "Success 成功/Success5-Normal",
+    "Gray 中性/Gray1-浅色背景"
+  ],
+  "gaps": [
+    "临时Noto字体由用户桌面处理",
+    "静态状态不代表交互、业务事件或数据更新已实现"
+  ],
+  "displayLayout": {
+    "columns": 2,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示判断，不改变组件内部几何"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9098039269447327,
+          "g": 1,
+          "b": 0.9176470637321472
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.7058823704719543,
+          "b": 0.16620886325836182
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告"
+}

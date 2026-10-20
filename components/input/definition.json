@@ -1,0 +1,462 @@
+{
+  "name": "input 输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25535:53727",
+    "pageId": "24929:36227"
+  },
+  "properties": {
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "simple 普通",
+        "filled 填充",
+        "hover 悬浮"
+      ]
+    },
+    "prefixIcon 前置图标": {
+      "type": "VARIANT",
+      "defaultValue": "off",
+      "variantOptions": [
+        "off",
+        "on"
+      ]
+    },
+    "clearable 清空": {
+      "type": "VARIANT",
+      "defaultValue": "off",
+      "variantOptions": [
+        "off",
+        "on"
+      ]
+    },
+    "tips 提示": {
+      "type": "VARIANT",
+      "defaultValue": "off",
+      "variantOptions": [
+        "off",
+        "on"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "off",
+      "variantOptions": [
+        "off",
+        "on"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=off, disabled 禁用=on",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=off, disabled 禁用=on",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=off, disabled 禁用=on",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=off",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=off, disabled 禁用=on",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=off, tips 提示=on, disabled 禁用=on",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=off, tips 提示=on, disabled 禁用=on",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=off, clearable 清空=on, tips 提示=on, disabled 禁用=on",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=simple 普通, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=filled 填充, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=hover 悬浮, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=off",
+      "size": [
+        240,
+        52
+      ]
+    },
+    {
+      "name": "state 状态=normal 默认, prefixIcon 前置图标=on, clearable 清空=on, tips 提示=on, disabled 禁用=on",
+      "size": [
+        240,
+        52
+      ]
+    }
+  ],
+  "rules": [
+    "基础单行40态；密码、多行、前后标签已由独立包补齐，统一调用见FAMILY.md",
+    "基准240×32，圆角4，横向布局上下5左右8，间距8；有提示的组合保留源容器和提示布局",
+    "前置图标、清空、提示和禁用只选择已有组合；值、标题、提示语属于业务内容",
+    "Focus样例引用集合外独立组件，已由input-focus单独提取；不能以hover代替focus"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray4-边框",
+    "Gray 中性/Gray7-次要信息",
+    "Gray 中性/Gray5-禁用",
+    "Gray 中性/Gray9-强调\\正文",
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray1-浅色背景"
+  ],
+  "gaps": [
+    "用户验收待定",
+    "旧Form字段尚未全量迁移到family.mjs",
+    "不承诺源TEXT/INSTANCE_SWAP属性绑定迁移"
+  ],
+  "displayLayout": {
+    "columns": 5,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示排版判断，不改变元组件内部规范"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray7-次要信息": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.545098066329956,
+          "g": 0.545098066329956,
+          "b": 0.545098066329956
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray5-禁用": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告"
+}

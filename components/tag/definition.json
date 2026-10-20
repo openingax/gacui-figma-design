@@ -1,0 +1,988 @@
+{
+  "name": "Tag 标签",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "31277:112840",
+    "pageId": "31256:112577"
+  },
+  "properties": {
+    "variant 类型": {
+      "type": "VARIANT",
+      "defaultValue": "dark 深色",
+      "variantOptions": [
+        "dark 深色",
+        "light 亮色",
+        "outline 描边",
+        "light-outline 描边亮色"
+      ]
+    },
+    "theme 主题": {
+      "type": "VARIANT",
+      "defaultValue": "default 默认",
+      "variantOptions": [
+        "default 默认",
+        "primary 主要色",
+        "success 成功色",
+        "warning 警告色",
+        "danger 危险色"
+      ]
+    },
+    "shape 形状": {
+      "type": "VARIANT",
+      "defaultValue": "square 矩形",
+      "variantOptions": [
+        "square 矩形"
+      ]
+    },
+    "closable 关闭": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    },
+    "icon 图标": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9137254953384399,
+            "g": 0.9215686321258545,
+            "b": 0.9333333373069763
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.95686274766922,
+            "g": 0.9647058844566345,
+            "b": 0.9725490212440491
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9019607901573181,
+            "g": 0.95686274766922,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9098039269447327,
+            "g": 1,
+            "b": 0.9176470637321472
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9686274528503418,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9254902005195618,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.8627451062202454,
+            "g": 0.8666666746139526,
+            "b": 0.8705882430076599
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.95686274766922,
+            "g": 0.9647058844566345,
+            "b": 0.9725490212440491
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.8627451062202454,
+            "g": 0.8666666746139526,
+            "b": 0.8705882430076599
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9019607901573181,
+            "g": 0.95686274766922,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9098039269447327,
+            "g": 1,
+            "b": 0.9176470637321472
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9686274528503418,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9254902005195618,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    }
+  ],
+  "rules": [
+    "四种外观dark/light/outline/light-outline × 五种主题，共20种基础配色",
+    "本轮保留square、无图标、不可关闭、可用的基础元状态；示例的添加、选择、关闭行为不固化为业务规则",
+    "图标/关闭/禁用/round形状后续按业务需要扩展，不全盘导入320变体"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray3-分割线",
+    "Gray 中性/Gray9-强调\\正文",
+    "Brand 品牌/Brand5-Normal",
+    "Success 成功/Success5-Normal",
+    "Warning 警告/Warning5-Normal",
+    "Error 错误/Error5-Normal",
+    "Gray 中性/Gray1-浅色背景",
+    "Brand 品牌/Brand1-Light",
+    "Success 成功/Success1-Light",
+    "Warning 警告/Warning1-Light",
+    "Error 错误/Error1-Light",
+    "Gray 中性/Gray4-边框"
+  ],
+  "gaps": [
+    "字体暂用Noto Sans SC，由用户桌面处理",
+    "交互事件与业务副作用未在本次静态构建中实现",
+    "完整还原结论须结合实际回读和视觉检查，不以执行成功替代"
+  ],
+  "displayLayout": {
+    "columns": 5,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示排版判断，不改变元组件内部规范"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.7058823704719543,
+          "b": 0.16620886325836182
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Warning 警告/Warning5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.4901960790157318,
+          "b": 0
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Error 错误/Error5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9607843160629272,
+          "g": 0.24705882370471954,
+          "b": 0.24705882370471954
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9019607901573181,
+          "g": 0.95686274766922,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9098039269447327,
+          "g": 1,
+          "b": 0.9176470637321472
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Warning 警告/Warning1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.9686274528503418,
+          "b": 0.9098039269447327
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Error 错误/Error1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.9254902005195618,
+          "b": 0.9098039269447327
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "TimePicker-popup 时间选择菜单",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "37981:307222",
+    "pageId": "30344:105678"
+  },
+  "status": "完整盘点，构建验证中；未验收",
+  "displayLayout": {
+    "columns": 2,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "format 格式": {
+      "type": "VARIANT",
+      "defaultValue": "H:mm:ss 时分秒",
+      "variantOptions": [
+        "H:mm 时分",
+        "H:mm:ss 时分秒"
+      ]
+    },
+    "footer 页脚插槽": {
+      "type": "VARIANT",
+      "defaultValue": "bottom 底部",
+      "variantOptions": [
+        "bottom 底部"
+      ]
+    }
+  }
+}

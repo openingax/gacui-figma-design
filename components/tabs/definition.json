@@ -1,0 +1,1475 @@
+{
+  "name": "item/normalTabs",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "35336:295706",
+    "pageId": "35336:295539"
+  },
+  "properties": {
+    "icon 图标": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬浮",
+        "active 点击",
+        "select 选中"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "remove 移除": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "direction 方向": {
+      "type": "VARIANT",
+      "defaultValue": "no",
+      "variantOptions": [
+        "no",
+        "down",
+        "right"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "icon 图标=false, state 状态=normal 默认, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=hover 悬浮, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=active 点击, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=false, remove 移除=false, direction 方向=down",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=true, remove 移除=false, direction 方向=no",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5921568870544434,
+            "g": 0.6039215922355652,
+            "b": 0.615686297416687
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=normal 默认, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=hover 悬浮, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=active 点击, disabled 禁用=false, remove 移除=false, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=false, remove 移除=false, direction 方向=down",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=true, remove 移除=false, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5921568870544434,
+            "g": 0.6039215922355652,
+            "b": 0.615686297416687
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=normal 默认, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=hover 悬浮, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=active 点击, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=false, remove 移除=true, direction 方向=down",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=true, remove 移除=true, direction 方向=no",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5921568870544434,
+            "g": 0.6039215922355652,
+            "b": 0.615686297416687
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=normal 默认, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=hover 悬浮, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=active 点击, disabled 禁用=false, remove 移除=true, direction 方向=no",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.27450981736183167,
+            "g": 0.2980392277240753,
+            "b": 0.32156863808631897
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=false, remove 移除=true, direction 方向=down",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=true, remove 移除=true, direction 方向=no",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5921568870544434,
+            "g": 0.6039215922355652,
+            "b": 0.615686297416687
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [],
+      "strokeWeights": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=false, remove 移除=false, direction 方向=right",
+      "size": [
+        88,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=false, remove 移除=false, direction 方向=right",
+      "size": [
+        112,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=false, state 状态=select 选中, disabled 禁用=false, remove 移除=true, direction 方向=right",
+      "size": [
+        113,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "icon 图标=true, state 状态=select 选中, disabled 禁用=false, remove 移除=true, direction 方向=right",
+      "size": [
+        136,
+        48
+      ],
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textFill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "textSize": 14,
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "gap": 0,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokeWeights": [
+        0,
+        3,
+        0,
+        0
+      ]
+    }
+  ],
+  "rules": {
+    "height": 48,
+    "widths": [
+      88,
+      112,
+      136
+    ],
+    "sourceException": {
+      "nodeId": "35336:295897",
+      "width": 113
+    },
+    "businessBehavior": "用户确认：点击左侧导航的选项后，在顶部导航下方显示对应Tabs。",
+    "composition": "单项组件可重复组合；条数、默认选中和路由由业务决定，不将样例数量当上限"
+  },
+  "gaps": [
+    "disabled只在源稿select/no组合出现；不补造其他disabled状态",
+    "direction=right表示右侧指示线，页面顶部Tabs使用down；不把right变体当下拉箭头",
+    "关闭后激活哪个标签、重复打开和溢出滚动策略待业务确认",
+    "临时字体Noto Sans SC，由用户桌面处理"
+  ],
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray6-提示": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.5921568870544434,
+          "g": 0.6039215922355652,
+          "b": 0.615686297416687
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray1-浅色背景",
+    "Gray 中性/Gray3-分割线",
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray6-提示",
+    "Gray 中性/Gray9-强调\\正文"
+  ],
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告"
+}

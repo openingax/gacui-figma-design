@@ -1,0 +1,184 @@
+{
+  "name": "充电模块左侧导航",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25839:69516",
+    "pageId": "35282:32783"
+  },
+  "variant": "expandedType 弹出类型=normal 默认, collapsed 折叠=false,模块=订单管理",
+  "size": [
+    184,
+    960
+  ],
+  "layout": {
+    "direction": "VERTICAL",
+    "distribution": "SPACE_BETWEEN",
+    "topPadding": 16,
+    "contentHeight": 660,
+    "footer": {
+      "height": 56,
+      "y": 904
+    },
+    "menuInsetX": 8,
+    "itemWidth": 168,
+    "normalRowHeight": 40,
+    "groupGap": 8,
+    "normalRowPadding": [
+      7,
+      16,
+      7,
+      16
+    ],
+    "expandedOrderGroupHeight": 180,
+    "subitemLabelX": 44
+  },
+  "styles": [
+    "Gray 中性/Gray0-白色背景",
+    "Brand 品牌/Brand5-Normal",
+    "Body/Medium",
+    "Success 成功/Success3-Disabled",
+    "Brand 品牌/Brand1-Light",
+    "Gray 中性/Gray9-强调\\正文",
+    "Gray 中性/Gray3-分割线"
+  ],
+  "gaps": [
+    "只制作指定订单管理展开变体，不把示例菜单数量当上限",
+    "路由、点击后展开/折叠策略未由指定节点定义",
+    "长文字源稿包含实际省略文字，不能当作动态省略算法",
+    "临时Noto字体由用户桌面处理；文字保留源自适应与截断模式"
+  ],
+  "properties": {
+    "expandedType 弹出类型": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认"
+      ]
+    },
+    "collapsed 折叠": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    },
+    "模块": {
+      "type": "VARIANT",
+      "defaultValue": "订单管理",
+      "variantOptions": [
+        "订单管理"
+      ]
+    }
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success3-Disabled": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.48235294222831726,
+          "g": 0.8823529481887817,
+          "b": 0.5333333611488342
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9019607901573181,
+          "g": 0.95686274766922,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Brand 品牌/Brand5-Normal",
+    "Success 成功/Success3-Disabled",
+    "Brand 品牌/Brand1-Light",
+    "Gray 中性/Gray9-强调\\正文",
+    "Gray 中性/Gray3-分割线"
+  ],
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "exampleContent": [
+    "订单管理",
+    "场站管理",
+    "设备管理",
+    "互联互通",
+    "场站结算",
+    "用户中心",
+    "商城",
+    "数据中心",
+    "运营中心",
+    "财务中心",
+    "图片审核"
+  ],
+  "exampleSelected": "订单查询",
+  "exampleExpanded": "订单管理"
+}

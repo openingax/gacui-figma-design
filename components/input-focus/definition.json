@@ -1,0 +1,21 @@
+{
+  "name": "input 输入框 / Focus",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "27023:84496",
+    "pageId": "24929:36227"
+  },
+  "localRoot": {
+    "type": "COMPONENT",
+    "name": "state 状态=focus 聚焦"
+  },
+  "rules": [
+    "从仍挂在规范Page上的Focus实例提取，不把集合外母组件误判为无用",
+    "400×32为样例实例宽度，不是输入框宽度上限",
+    "Brand5描边与2px外圈来自实际示例；光标竖线是静态内容，不代表键盘行为"
+  ],
+  "gaps": [
+    "源40变体集合没有Focus枚举，当前单独组件化；原始TEXT属性绑定未自动迁移",
+    "临时Noto字体由用户桌面处理"
+  ]
+}

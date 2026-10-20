@@ -1,0 +1,1 @@
+{"name":"Dialog 对话框（基础确认）","source":{"fileKey":"jNf9icrxfw8B7QkSQa9g33","pageId":"41952:300048","nodeId":"42005:300106"},"displayLayout":{"columns":1,"padding":24,"gap":24},"support":"partial","supported":{"theme":"default","closeBtn":false,"divider":false,"width":[480,960]},"remaining":"19个主变体、关闭按钮3态、全屏有/无分割线、主题图标；见evidence/dialog/coverage.json"}

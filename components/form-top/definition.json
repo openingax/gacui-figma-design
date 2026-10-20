@@ -1,0 +1,40 @@
+{
+  "name": "item/form/top",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25737:69520",
+    "pageId": "39306:305660"
+  },
+  "status": "可编辑静态组件已生成、回读及视觉检查；未用户验收",
+  "rules": [
+    "保留规范原始几何及样式，文字暂用Noto Sans SC",
+    "仅可编辑静态组件，不包括校验运算、提交或导航"
+  ],
+  "displayLayout": {
+    "columns": 2,
+    "padding": 120,
+    "gap": 80
+  },
+  "variantCount": 88,
+  "targetFileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "targetPageId": "112:92",
+  "targetSets": {
+    "checkbox": "155:772",
+    "radioButton": "155:1058",
+    "switch": "155:1139",
+    "inputNumber": "155:514",
+    "textarea": "155:587",
+    "select": "155:82",
+    "input": "154:75",
+    "inputPassword": "155:381",
+    "radio": "155:952",
+    "timePicker": "155:276",
+    "datePicker": "155:179"
+  },
+  "notes": [
+    "临时Noto字体使必填星号宽度从8变7；未用户验收",
+    "保留节点原始paint；同名不同值边框使用Form/源实例覆盖样式",
+    "展示列宽与组件几何分离，窄控件说明不重叠",
+    "内部实例已本地化为可编辑图层，不宣称源原型事件和INSTANCE_SWAP绑定迁移"
+  ]
+}

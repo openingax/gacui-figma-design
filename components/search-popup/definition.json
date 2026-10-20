@@ -1,0 +1,54 @@
+{
+  "name": "item/searchPopup",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "72086:226133",
+    "nodeId": "78092:236130"
+  },
+  "status": "已构建、回读及视觉验证；未用户验收",
+  "properties": {
+    "mind": {
+      "type": "VARIANT",
+      "defaultValue": "true",
+      "variantOptions": [
+        "true"
+      ]
+    }
+  },
+  "displayLayout": {
+    "columns": 3,
+    "padding": 60,
+    "gap": 180
+  },
+  "states": [
+    {
+      "sourceId": "78092:236131",
+      "name": "mind=true, ",
+      "size": [
+        240,
+        130
+      ]
+    }
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "169:2",
+    "componentSetIds": [
+      "169:41"
+    ],
+    "variants": [
+      {
+        "sourceId": "78092:236131",
+        "id": "169:31",
+        "name": "mind=true, "
+      }
+    ]
+  },
+  "rules": [
+    "源变体为实际组合，不自动补齐全排列",
+    "文字/数组/宽度通过components/search/generator.mjs定制，结构修改返回可编辑Frame",
+    "样例标签和联想项数量不是业务限制",
+    "源无reactions，不包括业务搜索、清空、提交及导航"
+  ],
+  "fontSubstitution": "Noto Sans SC Regular/Medium；原字体PingFang SC未桌面验收"
+}

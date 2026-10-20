@@ -1,0 +1,67 @@
+{
+  "name": "Divider 分割线",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "24830:36245",
+    "pageId": "30445:122549"
+  },
+  "displayLayout": {
+    "columns": 2,
+    "gap": 40,
+    "padding": 40
+  },
+  "variants": [
+    {
+      "sourceId": "24830:36239",
+      "name": "布局=horizontal 水平分割线, 虚线=false, 文字分割线=false, 文字对齐=none"
+    },
+    {
+      "sourceId": "24830:36240",
+      "name": "布局=horizontal 水平分割线, 虚线=true, 文字分割线=false, 文字对齐=none"
+    },
+    {
+      "sourceId": "24830:36243",
+      "name": "布局=vertical 垂直分割线, 虚线=false, 文字分割线=false, 文字对齐=none"
+    },
+    {
+      "sourceId": "24830:36244",
+      "name": "布局=vertical 垂直分割线, 虚线=true, 文字分割线=false, 文字对齐=none"
+    },
+    {
+      "sourceId": "24830:36292",
+      "name": "布局=horizontal 水平分割线, 虚线=false, 文字分割线=true, 文字对齐=left 左对齐"
+    },
+    {
+      "sourceId": "24830:36295",
+      "name": "布局=horizontal 水平分割线, 虚线=true, 文字分割线=true, 文字对齐=left 左对齐"
+    },
+    {
+      "sourceId": "24830:36293",
+      "name": "布局=horizontal 水平分割线, 虚线=false, 文字分割线=true, 文字对齐=center 居中对齐"
+    },
+    {
+      "sourceId": "24830:36296",
+      "name": "布局=horizontal 水平分割线, 虚线=true, 文字分割线=true, 文字对齐=center 居中对齐"
+    },
+    {
+      "sourceId": "24830:36294",
+      "name": "布局=horizontal 水平分割线, 虚线=false, 文字分割线=true, 文字对齐=right 右对齐"
+    },
+    {
+      "sourceId": "24830:36297",
+      "name": "布局=horizontal 水平分割线, 虚线=true, 文字分割线=true, 文字对齐=right 右对齐"
+    }
+  ],
+  "support": "all-source-variants-font-and-acceptance-pending",
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "486:2",
+    "componentSetId": "486:15973"
+  },
+  "limitations": [
+    "云端Noto临时字体，苹方复核未完成",
+    "可编辑组合保留原几何，不迁移源INSTANCE_SWAP/TEXT属性绑定",
+    "草稿Figma工作台将分割线排在内容区末尾，任意区块间插入未接通",
+    "抽屉草稿Figma入口不支持分割线"
+  ]
+}

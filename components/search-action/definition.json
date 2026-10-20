@@ -1,0 +1,192 @@
+{
+  "name": "item/searchBox",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "72086:226133",
+    "nodeId": "78092:236261"
+  },
+  "status": "已构建、回读及视觉验证；未用户验收",
+  "properties": {
+    "state": {
+      "type": "VARIANT",
+      "defaultValue": "normal",
+      "variantOptions": [
+        "normal",
+        "hover",
+        "disabled"
+      ]
+    },
+    "icon only": {
+      "type": "VARIANT",
+      "defaultValue": "true",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "label only": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "icon + label": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "displayLayout": {
+    "columns": 3,
+    "padding": 60,
+    "gap": 180
+  },
+  "states": [
+    {
+      "sourceId": "78092:236262",
+      "name": "state=normal, icon only=false, label only=false, icon + label=true, disabled=false",
+      "size": [
+        56,
+        24
+      ]
+    },
+    {
+      "sourceId": "78092:236265",
+      "name": "state=normal, icon only=false, label only=true, icon + label=false, disabled=false",
+      "size": [
+        36,
+        24
+      ]
+    },
+    {
+      "sourceId": "78092:236267",
+      "name": "state=normal, icon only=true, label only=false, icon + label=false, disabled=false",
+      "size": [
+        24,
+        24
+      ]
+    },
+    {
+      "sourceId": "78092:236269",
+      "name": "state=hover, icon only=false, label only=false, icon + label=true, disabled=false",
+      "size": [
+        56,
+        24
+      ]
+    },
+    {
+      "sourceId": "78746:237479",
+      "name": "state=disabled, icon only=false, label only=false, icon + label=true, disabled=true",
+      "size": [
+        56,
+        24
+      ]
+    },
+    {
+      "sourceId": "78092:236272",
+      "name": "state=hover, icon only=false, label only=true, icon + label=false, disabled=false",
+      "size": [
+        36,
+        24
+      ]
+    },
+    {
+      "sourceId": "78746:237482",
+      "name": "state=disabled, icon only=false, label only=true, icon + label=false, disabled=true",
+      "size": [
+        36,
+        24
+      ]
+    },
+    {
+      "sourceId": "78092:236274",
+      "name": "state=hover, icon only=true, label only=false, icon + label=false, disabled=false",
+      "size": [
+        24,
+        24
+      ]
+    },
+    {
+      "sourceId": "78746:237484",
+      "name": "state=disabled, icon only=true, label only=false, icon + label=false, disabled=true",
+      "size": [
+        24,
+        24
+      ]
+    }
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "169:2",
+    "componentSetIds": [
+      "169:30"
+    ],
+    "variants": [
+      {
+        "sourceId": "78092:236262",
+        "id": "169:3",
+        "name": "state=normal, icon only=false, label only=false, icon + label=true, disabled=false"
+      },
+      {
+        "sourceId": "78092:236265",
+        "id": "169:7",
+        "name": "state=normal, icon only=false, label only=true, icon + label=false, disabled=false"
+      },
+      {
+        "sourceId": "78092:236267",
+        "id": "169:9",
+        "name": "state=normal, icon only=true, label only=false, icon + label=false, disabled=false"
+      },
+      {
+        "sourceId": "78092:236269",
+        "id": "169:12",
+        "name": "state=hover, icon only=false, label only=false, icon + label=true, disabled=false"
+      },
+      {
+        "sourceId": "78746:237479",
+        "id": "169:16",
+        "name": "state=disabled, icon only=false, label only=false, icon + label=true, disabled=true"
+      },
+      {
+        "sourceId": "78092:236272",
+        "id": "169:20",
+        "name": "state=hover, icon only=false, label only=true, icon + label=false, disabled=false"
+      },
+      {
+        "sourceId": "78746:237482",
+        "id": "169:22",
+        "name": "state=disabled, icon only=false, label only=true, icon + label=false, disabled=true"
+      },
+      {
+        "sourceId": "78092:236274",
+        "id": "169:24",
+        "name": "state=hover, icon only=true, label only=false, icon + label=false, disabled=false"
+      },
+      {
+        "sourceId": "78746:237484",
+        "id": "169:27",
+        "name": "state=disabled, icon only=true, label only=false, icon + label=false, disabled=true"
+      }
+    ]
+  },
+  "rules": [
+    "源变体为实际组合，不自动补齐全排列",
+    "文字/数组/宽度通过components/search/generator.mjs定制，结构修改返回可编辑Frame",
+    "样例标签和联想项数量不是业务限制",
+    "源无reactions，不包括业务搜索、清空、提交及导航"
+  ],
+  "fontSubstitution": "Noto Sans SC Regular/Medium；原字体PingFang SC未桌面验收"
+}

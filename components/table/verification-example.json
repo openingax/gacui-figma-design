@@ -1,0 +1,19 @@
+{
+  "name": "Table 表格 / 组合验证",
+  "selection": true,
+  "pagination": true,
+  "selectedRows": [1],
+  "total": 101,
+  "columns": [
+    {"key":"name","title":"项目名称","kind":"text","width":320},
+    {"key":"tag","title":"标签","kind":"tag","width":176},
+    {"key":"state","title":"状态","kind":"state","width":180},
+    {"key":"detail","title":"说明","kind":"text","width":240},
+    {"key":"actions","title":"操作","kind":"operations","width":240}
+  ],
+  "rows": [
+    {"name":"组件验证样例一","tag":"默认标签","state":"正常","detail":"此处是组件验证数据"},
+    {"name":"用于检查长内容截断的项目名称，不代表真实业务需求或已验收页面","tag":"默认标签","state":"正常","detail":"此行已选中"},
+    {"name":"组件验证样例三","tag":"默认标签","state":"正常","detail":"复用相同单元格实现"}
+  ]
+}

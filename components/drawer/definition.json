@@ -1,0 +1,110 @@
+{
+  "name": "Drawer 抽屉",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "45854:328059",
+    "pageId": "45841:327431",
+    "componentSetId": "45844:333905"
+  },
+  "status": "已导入并完成云端回读/截图检查；待苹方替换、桌面检查及用户验收",
+  "defaultSize": "medium",
+  "sizes": {
+    "small": 300,
+    "medium": 500,
+    "large": 760
+  },
+  "supported": {
+    "placement": [
+      "right"
+    ],
+    "overlay": [
+      true
+    ],
+    "visibleState": [
+      "open"
+    ],
+    "footer": [
+      "left",
+      "right"
+    ],
+    "closeState": [
+      "normal",
+      "hover",
+      "active"
+    ]
+  },
+  "shared": {
+    "headerHeight": 56,
+    "footerHeight": 56,
+    "horizontalPadding": 16,
+    "buttonGap": 8,
+    "buttonHeight": 32,
+    "divider": 1,
+    "overlayColor": "#464C52",
+    "overlayOpacity": 0.4000000059604645,
+    "titleFont": {
+      "family": "PingFang SC",
+      "style": "Semibold",
+      "size": 16,
+      "lineHeight": 24
+    }
+  },
+  "variation": {
+    "left": [
+      "confirm",
+      "cancel"
+    ],
+    "right": [
+      "cancel",
+      "confirm"
+    ]
+  },
+  "figmaProperties": {
+    "drawer": {
+      "尺寸": [
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "header": {
+      "标题#203:0": "TEXT"
+    },
+    "footer": {
+      "按钮位置": [
+        "left",
+        "right"
+      ]
+    },
+    "close": {
+      "状态": [
+        "normal 默认",
+        "hover 悬浮",
+        "active 点击"
+      ]
+    }
+  },
+  "generatorInputs": [
+    "size",
+    "footer",
+    "closeState",
+    "title",
+    "confirm",
+    "cancel",
+    "body",
+    "viewportWidth",
+    "viewportHeight"
+  ],
+  "limitations": [
+    "云端Noto Sans SC临时字体",
+    "外壳及业务底栏编辑时本地化为FRAME",
+    "未定义业务关闭/提交/导航、键盘与滚动",
+    "Button悬停仅配置回读，未做演示模式触发测试"
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "202:2",
+    "componentSetId": "203:84",
+    "examplesId": "207:76"
+  }
+}

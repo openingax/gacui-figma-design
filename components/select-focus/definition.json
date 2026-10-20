@@ -1,0 +1,81 @@
+{
+  "name": "Select 聚焦输入区",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "52422:357829",
+    "pageId": "30450:105768"
+  },
+  "scope": "从源聚焦组件拆出输入区，提升为本地组件；弹出选项数量由组合函数控制",
+  "rules": [
+    "320×32，半径3，Brand5边框及2px聚焦外圈均取自源",
+    "源single/multiple两种未填充聚焦输入区外观相同，复用此实现",
+    "保留源向上箭头，不用旋转线段拼造"
+  ],
+  "gaps": [
+    "当前为无前置图标、未填充的聚焦输入区；其他组合按需求扩展"
+  ],
+  "properties": {
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "focus 聚焦",
+      "variantOptions": [
+        "focus 聚焦"
+      ]
+    }
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray5-禁用": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray5-禁用"
+  ],
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "localRoot": {
+    "type": "COMPONENT",
+    "name": "state 状态=focus 聚焦"
+  }
+}

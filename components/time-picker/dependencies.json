@@ -1,0 +1,178 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "inputs": [
+    {
+      "name": "format 格式=time 时间, state 状态=normal 默认, filled 填充=false, disabled 禁用=false",
+      "id": "593:11",
+      "sourceId": "37815:305577"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=hover 悬浮, filled 填充=false, disabled 禁用=false",
+      "id": "593:17",
+      "sourceId": "37815:305579"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=focus 聚焦, filled 填充=false, disabled 禁用=false",
+      "id": "593:23",
+      "sourceId": "37815:305581"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=normal 默认, filled 填充=false, disabled 禁用=true",
+      "id": "593:29",
+      "sourceId": "37815:305583"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=normal 默认, filled 填充=true, disabled 禁用=false",
+      "id": "593:18710",
+      "sourceId": "37815:305585"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=hover 悬浮, filled 填充=true, disabled 禁用=false",
+      "id": "593:18716",
+      "sourceId": "37815:305587"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=focus 聚焦, filled 填充=true, disabled 禁用=false",
+      "id": "593:18722",
+      "sourceId": "37815:305589"
+    },
+    {
+      "name": "format 格式=time 时间, state 状态=normal 默认, filled 填充=true, disabled 禁用=true",
+      "id": "593:18728",
+      "sourceId": "37815:305591"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=false",
+      "id": "593:18734",
+      "sourceId": "37815:305673"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=hover 悬浮, filled 填充=false, disabled 禁用=false",
+      "id": "593:18745",
+      "sourceId": "37815:305675"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=focus 聚焦, filled 填充=false, disabled 禁用=false",
+      "id": "593:18756",
+      "sourceId": "37815:305677"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=true",
+      "id": "593:18767",
+      "sourceId": "37815:305679"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=false",
+      "id": "593:18778",
+      "sourceId": "37815:305681"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=hover 悬浮, filled 填充=true, disabled 禁用=false",
+      "id": "593:18789",
+      "sourceId": "37815:305683"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=focus 聚焦, filled 填充=true, disabled 禁用=false",
+      "id": "593:18800",
+      "sourceId": "37815:305685"
+    },
+    {
+      "name": "format 格式=timeRange 时间区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=true",
+      "id": "593:18811",
+      "sourceId": "37815:305687"
+    }
+  ],
+  "popups": [
+    {
+      "name": "format 格式=H:mm:ss 时分秒, footer 页脚插槽=bottom 底部",
+      "id": "593:18823",
+      "sourceId": "37981:307216"
+    },
+    {
+      "name": "format 格式=H:mm 时分, footer 页脚插槽=bottom 底部",
+      "id": "593:18877",
+      "sourceId": "37981:307213"
+    }
+  ],
+  "ranges": [
+    {
+      "name": "hover 悬浮=false, active 点击=true",
+      "id": "593:3",
+      "sourceId": "37815:305553"
+    },
+    {
+      "name": "hover 悬浮=true, active 点击=false",
+      "id": "593:6",
+      "sourceId": "37815:305555"
+    },
+    {
+      "name": "hover 悬浮=false, active 点击=false",
+      "id": "593:8",
+      "sourceId": "37815:305557"
+    }
+  ],
+  "cells": [
+    {
+      "name": "hover 悬浮=false, active 选中高亮=false, disabled 禁用=false",
+      "id": "129:77",
+      "sourceId": "36688:297652"
+    },
+    {
+      "name": "hover 悬浮=false, active 选中高亮=true, disabled 禁用=false",
+      "id": "129:79",
+      "sourceId": "36690:297658"
+    },
+    {
+      "name": "hover 悬浮=true, active 选中高亮=false, disabled 禁用=false",
+      "id": "129:81",
+      "sourceId": "36688:297651"
+    },
+    {
+      "name": "hover 悬浮=false, active 选中高亮=false, disabled 禁用=true",
+      "id": "129:83",
+      "sourceId": "36690:297660"
+    }
+  ],
+  "placeholderFill": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.7254902124404907,
+        "g": 0.7372549176216125,
+        "b": 0.7450980544090271
+      },
+      "boundVariables": {}
+    }
+  ],
+  "valueFill": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.09019608050584793,
+        "g": 0.12156862765550613,
+        "b": 0.14901961386203766
+      },
+      "boundVariables": {}
+    }
+  ],
+  "disabledFill": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.545098066329956,
+        "g": 0.545098066329956,
+        "b": 0.545098066329956
+      },
+      "boundVariables": {}
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "spacer",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25788:24769",
+    "pageId": "48218:528564"
+  },
+  "displayLayout": {
+    "columns": 6,
+    "gap": 32,
+    "padding": 32
+  },
+  "support": "partial-spacer-only",
+  "spacings": [
+    2,
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    40,
+    48,
+    64,
+    96
+  ]
+}

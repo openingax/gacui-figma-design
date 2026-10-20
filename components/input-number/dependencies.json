@@ -1,0 +1,33 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "variants": {
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=false, filled 填充=false": "556:18290",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=hover 悬浮, disabled 禁用=false, filled 填充=false": "556:18300",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=focus 聚焦, disabled 禁用=false, filled 填充=false": "556:18309",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=true, filled 填充=false": "556:18318",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=false, filled 填充=true": "556:18327",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=hover 悬浮, disabled 禁用=false, filled 填充=true": "556:18336",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=focus 聚焦, disabled 禁用=false, filled 填充=true": "556:18345",
+    "theme 主题=row 双侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=true, filled 填充=true": "556:18354",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=false, filled 填充=false": "556:18363",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=true, filled 填充=false": "556:18365",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=hover 悬浮, disabled 禁用=false, filled 填充=false": "556:18367",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=focus 聚焦, disabled 禁用=false, filled 填充=false": "556:18376",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=false, filled 填充=true": "556:18385",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=normal 默认, disabled 禁用=true, filled 填充=true": "556:18387",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=hover 悬浮, disabled 禁用=false, filled 填充=true": "556:18389",
+    "theme 主题=column 右侧调整, size 尺寸=medium 中, state 状态=focus 聚焦, disabled 禁用=false, filled 填充=true": "556:18398"
+  },
+  "increase": {
+    "state 状态=normal 默认, disabled 禁用=false": "556:2",
+    "state 状态=active 点击, disabled 禁用=false": "556:5",
+    "state 状态=hover 悬浮, disabled 禁用=false": "556:8",
+    "state 状态=normal 默认, disabled 禁用=true": "556:18273"
+  },
+  "decrease": {
+    "state 状态=normal 默认, disabled 禁用=false": "556:18277",
+    "state 状态=active 点击, disabled 禁用=false": "556:18280",
+    "state 状态=hover 悬浮, disabled 禁用=false": "556:18283",
+    "state 状态=normal 默认, disabled 禁用=true": "556:18286"
+  }
+}
