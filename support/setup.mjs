@@ -2,7 +2,6 @@
 // 维护者一次性安装。令牌只写私有文件，绝不打印到终端或嵌入草稿。
 import fs from 'node:fs';
 import {join,resolve,dirname} from 'node:path';
-import {homedir} from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {randomBytes,createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -14,14 +13,14 @@ try {
  const target=resolve(targetArg);
  if(cmd==='client') {
   if(outArg&&outArg!=='--enable-tuning')throw Error('client 仅支持 --enable-tuning 可选参数');
-  const {config,setAutoUpload}=await import('./client.mjs');process.env.GAC_SUPPORT_CONFIG=target;config();
-  const home=join(homedir(),'.gacuiagent-public');fs.mkdirSync(home,{recursive:true,mode:0o700});
-  const dest=join(home,'support-config.json');fs.copyFileSync(target,dest,fs.constants.COPYFILE_EXCL);fs.chmodSync(dest,0o600);
+  const {config,configPath,setAutoUpload}=await import('./client.mjs');if(!config(target))throw Error('上传配置不存在');
+  const dest=resolve(configPath());fs.mkdirSync(dirname(dest),{recursive:true,mode:0o700});
+  fs.copyFileSync(target,dest,fs.constants.COPYFILE_EXCL);fs.chmodSync(dest,0o600);
   if(outArg==='--enable-tuning'){setAutoUpload(true,{collection:'tuning',authorization:'explicit-tuning-configuration'});console.log('上传凭据已配置，按显式配置开启详细调优日志。');}else{setAutoUpload(false,{ask:true,collection:'basic',authorization:null});console.log('上传凭据已配置，自动上传保持关闭。可按项目已有授权开启调优日志。');}
  } else if(cmd==='server') {
   if(fs.existsSync(target))throw Error('服务目录已存在，请使用审核后的发布流程更新，避免覆盖数据或配置');
   for(const dir of ['app','data','logs','private'])fs.mkdirSync(join(target,dir),{recursive:true,mode:0o700});
-  for(const name of ['server.mjs','protocol.mjs','manage.mjs','analyze.mjs'])fs.copyFileSync(join(source,name),join(target,'app',name));
+  for(const name of ['server.mjs','protocol.mjs','manage.mjs','analyze.mjs','diagnose.mjs'])fs.copyFileSync(join(source,name),join(target,'app',name));
   const token=randomBytes(32).toString('hex');let build='unknown';try{build=execFileSync('git',['rev-parse','HEAD'],{cwd:source,encoding:'utf8'}).trim()}catch{}
   write(join(target,'private','collector.json'),{dataDir:join(target,'data'),port:5186,tokenHashes:[createHash('sha256').update(token).digest('hex')],ticketSecret:randomBytes(32).toString('hex'),build,maxBytes:256*1024*1024});
   write(join(target,'private','first-client.json'),{endpoint:'http://127.0.0.1:5186',token});

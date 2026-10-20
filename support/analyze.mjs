@@ -14,8 +14,8 @@ const finite=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0;
 const percentile=(a,p)=>a.length?[...a].sort((x,y)=>x-y)[Math.max(0,Math.ceil(a.length*p)-1)]:null;
 function qualityIndex(all){
  const reviews=new Map();
- for(const e of all)if(e.details?.kind==='ui-review'&&typeof e.details.payload.targetEventId==='string'&&typeof e.details.payload.quality?.accepted==='boolean'&&typeof e.details.payload.quality?.source==='string')reviews.set(e.details.payload.targetEventId,{taskId:e.taskId,...e.details.payload});
- return event=>{const review=reviews.get(event.id);return review?.taskId===event.taskId?{quality:review.quality,correction:review.correction??null}:{quality:event.details?.payload.quality??null,correction:null};};
+ for(const e of [...all].sort((left,right)=>String(left.at).localeCompare(String(right.at))))if(e.details?.kind==='ui-review'&&typeof e.details.payload.targetEventId==='string'&&typeof e.details.payload.quality?.accepted==='boolean'&&typeof e.details.payload.quality?.source==='string')reviews.set(e.taskId+':'+e.details.payload.targetEventId,e.details.payload);
+ return event=>{const review=reviews.get(event.taskId+':'+event.id);return review?{quality:review.quality,correction:review.correction??null}:{quality:event.details?.payload.quality??null,correction:null};};
 }
 export function summarize(all){
  const qualityFor=qualityIndex(all);

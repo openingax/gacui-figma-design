@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { execFileSync } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 export const REPO = 'https://github.com/openingax/gacui-figma-design.git';
@@ -92,12 +92,24 @@ export function manage({command='sync', workspace=path.join(os.homedir(),'.gacui
     return output;
   } finally { fs.unlinkSync(lock); }
 }
+// 在已安装运行目录执行日志接入；失败只报告，不阻断草稿。endpoint 仅供本地集成测试。
+export async function connectLogging(workspace, {disable=false, endpoint}={}) {
+  const script=path.join(workspace,'support',disable?'cli.mjs':'connect.mjs');
+  if(!fs.existsSync(script)) return {state:'unavailable',reason:'当前运行版本不含日志接入'};
+  const r=await new Promise(done=>execFile(process.execPath,disable?[script,'auto-upload','off']:[script,...(endpoint?[endpoint]:[])],{cwd:workspace,encoding:'utf8',timeout:30000},(error,stdout,stderr)=>done({error,stdout,stderr})));
+  if(disable) return r.error?{state:'connection-failed',error:'关闭日志失败'}:{state:'disabled',reason:'explicit-user-choice'};
+  try { return JSON.parse((r.error?r.stderr:r.stdout).trim().split('\n').at(-1)); } catch { return {state:'connection-failed',error:r.error?.killed?'timeout':'无法读取接入结果'}; }
+}
 if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href) {
   try {
     const args=process.argv.slice(2), options={command:args.shift()||'sync'};
+    let noLogging=false;
     while(args.length) { const key=args.shift(); if(key==='--accept-breaking') options.acceptBreaking=true;
+      else if(key==='--no-logging') noLogging=true;
       else if(['--workspace','--version'].includes(key) && args.length) options[key.slice(2)]=args.shift();
       else throw Error('参数不支持或缺少值'); }
-    console.log(JSON.stringify(manage(options),null,2));
+    const output=manage(options);
+    if(options.command==='sync' && output.version) output.logging=await connectLogging(output.workspace,{disable:noLogging});
+    console.log(JSON.stringify(output,null,2));
   } catch(e) { console.error(JSON.stringify({error:e.code==='EEXIST'?'另一接入进程或残留锁存在；核实后再试':(e.status!==undefined?'Git 操作失败；已保留现场，请检查权限、网络或合并冲突':e.message)})); process.exitCode=1; }
 }
