@@ -25,8 +25,9 @@ const KNOWN_AGENTS=[[/codebuddy/i,'CodeBuddy'],[/workbuddy/i,'WorkBuddy'],[/clau
 export function agentLabel(agent){
  if(!agent)return null;
  if(agent.CLAUDE_CODE_ENTRYPOINT)return 'Claude Code ('+agent.CLAUDE_CODE_ENTRYPOINT+')';
- const hay=[...(agent.processes??[]),agent.__CFBundleIdentifier??'',...(agent.envNames??[])];
- for(const [pattern,label] of KNOWN_AGENTS)if(hay.some(v=>pattern.test(v)))return label;
+ // 按可信度依次判断：应用标识 → 祖先进程 → 环境变量名（WorkBuddy 等基于其他内核的客户端会带内核的变量名）。
+ for(const hay of [[agent.__CFBundleIdentifier??''],agent.processes??[],agent.envNames??[]])
+  for(const [pattern,label] of KNOWN_AGENTS)if(hay.some(v=>pattern.test(v)))return label;
  return agent.TERM_PROGRAM??(agent.processes?.length?agent.processes.join(' ← '):null);
 }
 // 从路径推断系统用户名，仅在没有设备资料时作为识别线索。

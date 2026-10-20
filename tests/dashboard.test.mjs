@@ -35,6 +35,7 @@ try{
  assert.ok(!JSON.stringify(stored).includes(client.config().token),'资料不得包含凭据');
  if(process.platform!=='win32')assert.ok(stored.profile.agent.processes.length>0,'记录祖先进程名');
  assert.equal(agentLabel({envNames:[],processes:['node','zsh','CodeBuddy Helper']}),'CodeBuddy');
+ assert.equal(agentLabel({envNames:['CODEBUDDY_HOST'],processes:[],__CFBundleIdentifier:'com.tencent.workbuddy.mac'}),'WorkBuddy','应用标识优先于内核环境变量');
  assert.equal(agentLabel({envNames:['CLAUDECODE'],processes:[],CLAUDE_CODE_ENTRYPOINT:'claude-desktop'}),'Claude Code (claude-desktop)');
  assert.equal(agentLabel({envNames:[],processes:['node','bash','unknownapp']}),'node ← bash ← unknownapp');
  const firstSeen=stored.firstSeen;await connect(endpoint);
