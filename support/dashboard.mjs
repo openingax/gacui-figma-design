@@ -106,7 +106,7 @@ const table=(head,rows)=>`<div class="scroll"><table><thead><tr>${head.map(h=>`<
 const badge=s=>`<span class="badge ${({阻塞:'bad',未恢复:'warn',已确认:'ok'})[s]??''}">${esc(s)}</span>`;
 export function renderHtml(r){
  const max=Math.max(1,...r.daily.map(d=>d.commands));
- return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GACUI 使用情况</title><style>
+ return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GACUIAgent 使用情况</title><style>
 :root{--bg:#f6f7f9;--card:#fff;--text:#1d2129;--muted:#86909c;--line:#e5e6eb;--ok:#00b42a;--warn:#ff7d00;--bad:#f53f3f;--bar:#3370ff}
 @media (prefers-color-scheme:dark){:root{--bg:#17171a;--card:#232324;--text:#e5e6eb;--muted:#86909c;--line:#3a3a3d;--bar:#4c8dff}}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 "PingFang SC","Noto Sans SC",system-ui,sans-serif}
@@ -119,7 +119,7 @@ td.wrap{white-space:normal;min-width:240px;max-width:520px;word-break:break-all}
 .badge.bad{color:var(--bad);border-color:var(--bad)}.badge.warn{color:var(--warn);border-color:var(--warn)}.badge.ok{color:var(--ok);border-color:var(--ok)}
 .bar{display:inline-block;height:8px;background:var(--bar);border-radius:4px;vertical-align:middle}a{color:var(--bar)}code{font-size:12px}
 </style></head><body><main>
-<h1>GACUI 使用情况</h1><div class="muted">生成于 ${esc(time(r.generatedAt))}（${TZ}）· 仅本机访问 · 刷新页面重新统计</div>
+<h1>GACUIAgent 使用情况</h1><div class="muted">生成于 ${esc(time(r.generatedAt))}（${TZ}）· 仅本机访问 · 刷新页面重新统计</div>
 <div class="cards">${[['使用者',r.totals.people],['登记设备',r.totals.devices],['任务',r.totals.tasks],['草稿命令',r.totals.commands],['错误',r.totals.errors],['阻塞任务',r.totals.blockedTasks],['反馈',r.totals.feedback]].map(([k,v])=>`<div class="card"><span class="muted">${k}</span><b>${v}</b></div>`).join('')}</div>
 <h2>按使用者</h2>${table(['使用者','系统用户/主机','Git','系统','agent','Skill','首次','最近','活跃天数','任务','命令','近7天','修改(保存)','确认','错误','错误分类','阻塞任务','agent轮次','工具错误','反馈/阻塞反馈','评审通过/退回','飞书/Figma/其他链接','接入失败','设备'],
  r.people.map(p=>[`<b>${esc(p.name)}</b>`,esc([p.osUser,p.hostname].filter(Boolean).join(' @ ')||null),esc([p.gitName,p.gitEmail].filter(Boolean).join(' ')||null),esc(p.platform),esc(p.agent),esc(p.skillVersion),esc(time(p.firstSeen)),esc(time(p.lastSeen)),p.activeDays,p.tasks,p.commands,p.commands7d,p.saves,p.confirms,p.errors,esc(Object.entries(p.errorCodes).map(([k,v])=>k+'×'+v).join(' ')||null),p.blockedTasks,p.agentTurns,p.toolErrors,`${p.feedback}/${p.blockedFeedback}`,`${p.accepted}/${p.rejected}`,`${p.sources.feishu}/${p.sources.figma}/${p.sources.other}`,p.connectFailures,`<code>${esc((p.deviceId??p.client).slice(0,8))}</code>${p.revoked?' 已撤销':''}`]))}

@@ -1,14 +1,14 @@
-# GACUI 草稿助手
+# GACUIAgent Skill
 
-把产品需求、可读的原型文档或截图，整理成**可保存、预览、讨论和持续修改的 B 端 UI 草稿**。产品经理和 UI 同事通过对话使用，不需要写 JSON、运行命令或配置 Figma。
+根据业务需求和公司 B 端 Figma 规范，由 agent 生成**可编辑的高保真设计**。完整流程是：产品需求、原型文档或截图 → 可保存、预览、讨论和持续修改的 UI 草稿 → 按规范组件生成可编辑的 Figma 设计稿。产品经理和 UI 同事通过对话使用，不需要写 JSON、运行命令或手动配置。
 
-当前正式交付先聚焦“产品原型 → 草稿”。Figma 自动出稿在后续阶段继续完善，不是安装或使用本版的前置条件。
+当前阶段已正式交付“需求/原型 → UI 草稿”；Figma 出稿正在完善，不是安装或使用本版的前置条件。
 
 ## 一句话开始
 
 对你的 agent 说：
 
-> 帮我安装或更新 https://github.com/openingax/gacui-figma-design ，根据我提供的产品原型整理 UI 草稿，打开预览，并继续按我的反馈修改。当前不需要接入 Figma。
+> 帮我安装 GACUIAgent Skill：执行 `npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design -g -y --copy -a <你当前的agent名称，如 codebuddy>`，装好后按 skill 说明运行 sync，然后根据我接下来提供的需求或原型（可以贴飞书文档、Figma 链接或截图）整理一份 UI 草稿并打开预览给我看。
 
 需要直接安装命令时使用（agent 环境没有键盘输入，必须带 `-y`，否则会停在交互选择界面）：
 

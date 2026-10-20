@@ -1,9 +1,9 @@
 {
-  "version": "0.4.4",
+  "version": "0.4.5",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "草稿保存和检查会提示写错或放错层级的属性名（附路径和建议名称），避免规则被静默丢失；只提示不阻断，已有草稿不受影响。",
+  "notice": "统一名称为 GACUIAgent Skill：根据业务需求和 B 端 Figma 规范生成可编辑高保真设计，当前阶段正式交付到 UI 草稿，Figma 出稿持续完善。功能不变。",
   "delivery": "draft-first",
-  "figmaStatus": "deferred"
+  "figmaStatus": "in-progress"
 }
