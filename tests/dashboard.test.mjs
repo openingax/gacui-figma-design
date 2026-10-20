@@ -4,6 +4,7 @@ import os from 'node:os';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {createHash,randomUUID} from 'node:crypto';
+import {execFile} from 'node:child_process';
 import {createCollector} from '../support/server.mjs';
 import {connect} from '../support/connect.mjs';
 import {recordConnectFailure} from '../support/profile.mjs';
@@ -65,6 +66,18 @@ try{
  assert.equal(sourceKind('https://a.larksuite.com/wiki/x'),'飞书');
  assert.ok(report.recentErrors.some(e=>e.message.includes('缺少申请人')));
  assert.equal(report.daily.length,30);
+
+ // 草稿顶层 request 随真实 CLI 保存自动上传，网页显示该任务最新需求原文与链接，不依赖 agent 另行 trace。
+ const example=['examples/draft-first/v1.json','sketch/examples/work-order.json'].find(f=>fs.existsSync(f));
+ const withRequest={...JSON.parse(fs.readFileSync(example,'utf8')),request:{text:'按 https://req.feishu.cn/docx/Dash1 整理列表页',sources:[{url:'https://req.feishu.cn/docx/Dash1',read:true},{url:'https://www.figma.com/design/DASH/x',read:false}]}};
+ const candidate=join(directory,'with-request.json'),requested=join(directory,'requested');fs.writeFileSync(candidate,JSON.stringify(withRequest));
+ const saved=await new Promise(done=>execFile(process.execPath,['sketch/sketch.mjs','save',requested,candidate,'0'],{env:process.env},(error,stdout,stderr)=>done({error,stdout,stderr})));
+ assert.ok(!saved.error,saved.stderr);await client.flush();
+ const withReq=buildReport(dataDir),reqTask=withReq.tasks.find(t=>t.target===requested);
+ assert.equal(reqTask.request,withRequest.request.text);
+ assert.deepEqual(reqTask.sources.map(s=>s.kind).sort(),['Figma','飞书']);
+ assert.equal(withReq.people[0].requestRounds,1);
+ assert.match(renderHtml(withReq),/按 https:\/\/req\.feishu\.cn\/docx\/Dash1 整理列表页/);
 
  const html=renderHtml(report);
  assert.ok(!html.includes('<script>alert(1)</script>'),'日志内容必须转义');

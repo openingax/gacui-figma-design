@@ -23,7 +23,7 @@ import {join, dirname, basename, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateDescriptions} from '../components/descriptions/generator.mjs';
 import {validateDialog} from '../components/dialog/generator.mjs';
-import {check, diff, diffSummary, resolvePage, unknownKeys} from './core.mjs';
+import {check, diff, diffSummary, resolvePage, unknownKeys, requestWarnings} from './core.mjs';
 import {readStore, digest, saveVersion, restoreVersion, updateLabel, confirmDraft, recoverVersion, requestFigma} from './store.mjs';
 import {isMain} from '../support/entry.mjs';
 
@@ -75,7 +75,7 @@ export function renderHtml(bundle, checklist = loadChecklist()) {
 
 // 未知属性只提示，不改变退出码；写到 stderr，避免影响解析 stdout 的调用方。
 function printWarnings(warnings = []) {
-  if (warnings.length) console.warn(`注意：${warnings.length} 个未知属性不会生效，请核对拼写和层级：\n- ${warnings.join('\n- ')}`);
+  if (warnings.length) console.warn(`注意：${warnings.length} 条提示（不影响保存，请补充或改正后另存新版本）：\n- ${warnings.join('\n- ')}`);
 }
 
 function printCheck(result, label) {
@@ -117,7 +117,7 @@ async function main([command, ...args], run) {
   if (command === 'save' && args.length >= 3) {
     const candidate = readJson(args[1]);
     const v = saveVersion(args[0], candidate, {expected:num(args[2]),base:args[3] ? num(args[3]) : (num(args[2]) || undefined),validate:validateDraft});
-    console.log('已保存草稿 v'+v+'，尚未确认'); printWarnings(unknownKeys(candidate)); return 0;
+    console.log('已保存草稿 v'+v+'，尚未确认'); printWarnings([...requestWarnings(candidate), ...unknownKeys(candidate)]); return 0;
   }
   if (command === 'restore' && args.length === 3) {
     console.log('已从旧版继续为 v'+restoreVersion(args[0],num(args[1]),num(args[2]),validateDraft)); return 0;

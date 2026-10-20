@@ -1,6 +1,16 @@
 {
   "format": 1,
   "task": "设备借用管理 · 草稿流程演示",
+  "request": {
+    "text": "根据设备借用管理产品原型，整理借用列表和新建借用申请的 UI 草稿，先出初版给我看。",
+    "sources": [
+      {
+        "path": "examples/draft-first/产品原型.md",
+        "read": true,
+        "note": "演示原型"
+      }
+    ]
+  },
   "demo": "全部业务数据为演示；测试确认不代表真实业务验收。",
   "pages": [
     {

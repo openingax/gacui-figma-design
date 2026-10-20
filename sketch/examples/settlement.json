@@ -1,6 +1,7 @@
 {
   "format": 1,
   "task": "对账未完成：工单明细",
+  "request": {"text": "按对账未完成的工单明细截图整理草稿（演示示例，表格内容为截图转写）。", "sources": []},
   "pages": [
     {"id": "detail", "type": "page", "title": "工单明细 · 对账未完成", "frame": "workbench", "menu": "工单结算", "children": [
       {"id": "tabs", "type": "tabs", "items": ["工单结算", "工单明细"], "active": 1, "from": "需求:截图"},

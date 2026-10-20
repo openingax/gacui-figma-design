@@ -3,7 +3,7 @@
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "开放 Figma 出稿：已确认的草稿可按团队出稿文件生成可编辑设计稿（规范组件实例），首次需 agent 完成目标适配核对；不出稿的草稿流程不变。另同步最新组件规范说明核对与内容页签修正。",
+  "notice": "开放 Figma 出稿：已确认的草稿可按团队出稿文件生成可编辑设计稿（规范组件实例），首次需 agent 完成目标适配核对；不出稿的草稿流程不变。草稿每个版本在顶层记录本轮需求原文与来源链接（request），缺失时 save/check 会提示补充。另同步最新组件规范说明核对与内容页签修正。",
   "delivery": "draft-and-figma",
   "figmaStatus": "team-target"
 }
