@@ -43,6 +43,6 @@ export function trace(target,input){
  if(!tuningEnabled())return {recorded:false,reason:'tuning-disabled'};
  const operations={'agent-turn':'agent','model-call':'model','tool-call':'tool','route':'route','ui-review':'review'};
  if(!operations[input.kind]||!input.payload||typeof input.payload!=='object'||Array.isArray(input.payload))throw Error('调优记录 kind/payload 无效');
- const event={id:randomUUID(),taskId:taskId(target),runId:input.runId??randomUUID(),at:new Date().toISOString(),phase:'finish',operation:operations[input.kind],outcome:input.outcome??'success',durationMs:input.durationMs??0,before:version(target),after:version(target),...environment(),errorCode:input.outcome==='error'?'unexpected':'none',details:{schema:1,kind:input.kind,payload:{...input.payload,durationMeasured:Number.isSafeInteger(input.durationMs)}}};
+ const event={id:randomUUID(),taskId:taskId(target),runId:input.runId??randomUUID(),at:new Date().toISOString(),phase:'finish',operation:operations[input.kind],outcome:input.outcome??'success',durationMs:input.durationMs??0,before:version(target),after:version(target),...environment(),errorCode:input.outcome==='error'?'unexpected':'none',details:{schema:1,kind:input.kind,payload:{target:resolve(target),...input.payload,durationMeasured:Number.isSafeInteger(input.durationMs)}}};
  record(event);return {recorded:true,id:event.id,taskId:event.taskId,runId:event.runId};
 }
