@@ -15,3 +15,5 @@ node scripts/lib/figma-build.mjs pagination STAGE TARGET_FILE_KEY PAGE_ID STATE_
 文字按源textAutoResize处理，临时Noto由用户桌面处理。修改实例文字前加载当前字体；同名label应结合父层定位，不全页替换。定义中的properties仅承诺实际暴露的变体属性，不承诺源TEXT/INSTANCE_SWAP绑定已迁移。
 
 最新回读和字体度量差异见 `readback-after-text-layout.json`；没有用户验收，不加✅。源缺口不得由样例数量、默认选中或常见设计习惯补造。
+
+2026-10-20 说明板（内部验证资料未随公开包分发）核对：源组件集共24组合（default 16、simple 8，含 disable=true 整体禁用），外层820×64、左右定位24，group 间距 default 16 / simple 14，页码按钮 32×32、jumper 160×32。当前五类配置是部分覆盖，整体禁用与其余组合未导入。simple 的源属性 jumper=false 时 btnGroup 内仍可见 jumper，按源保留，不改写。

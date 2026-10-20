@@ -17,3 +17,5 @@
 构建能力：已存精确build-data，通用 `scripts/lib/figma-build.mjs dialog start|nodes:0|nodes:1|finish FILE PAGE STATE_JSON` 生成Plugin API代码；每次将返回mapDelta合并进STATE_JSON后续做。finish后运行 `node scripts/dialog/finalize.mjs PAGE COMPONENT`，原样交给use_figma，将底栏接回现有Button。不要在现有目标重复导入。临时文字样式使用Dialog前缀，防止覆盖历史同名但已被用户替换为苹方的样式。
 
 已验证两个原业务确认态、原位文案修改、底层内容不变、最终入口重跑与截图。云端Noto Sans SC暂代苹方。仅静态可编辑设计：按钮点击、请求、取消导航、停用成功/失败链未实现或验证；用户/UI未验收。
+
+2026-10-20 说明板（内部验证资料未随公开包分发）核对：20主变体=5主题×关闭×分割线。无分割线变体容器内边距32、内容区 padding 16/0/24/0；有分割线变体三区72/114/80、各区 padding 24/32。说明板写“内容区下留白20px”，与全部20个源变体的 padding 24 不符，按源24保留，待UI确认。主题决定语义图标与主操作强调色（警告/错误主操作同步橙/红），默认主题无图标；展示底板不是遮罩。

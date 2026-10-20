@@ -9,3 +9,5 @@
 独立页面反馈：{id:"failure",type:"feedback",from:"需求",kind:"error",message:"巡检计划加载失败，请重试",action:"重试",visible:false}。imageViewer.emptyFeedback={variant:"compact"}启用无附件空态。详情11态及修改证据在evidence/feedback/detail；运行node tests/feedback-detail.test.mjs。
 
 2026-10-16：抽屉正文也支持独立feedback节点，按与form区块的相对顺序插入，状态visible控制显示；语义回读限定前景抽屉，避免把背景页反馈重复计数。保存失败使用error＋重试，字段校验仍用field.error。草稿、现有生成函数原位组合、真实Figma回读及苹方截图见../../evidence/inspection-flow-20261016/；运行node --test tests/inspection-flow.test.mjs。此组合能力不增加Alert家族覆盖数。
+
+2026-10-20 Alert说明板（内部验证资料未随公开包分发）：主例1116×86、圆角6、padding 16/24、语义图标24（距标题8）、关闭入口20（图标16）、描述距头部8；相关操作是紧随标题的文字入口；四主题是语义分类非状态。当前仍仅1/52，未扩展。
