@@ -4,7 +4,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
-import {manage} from '../.agents/skills/gacui-figma-design/scripts/manage.mjs';
+import {manage,connectLogging} from '../.agents/skills/gacui-figma-design/scripts/manage.mjs';
+import {createCollector} from '../support/server.mjs';
+import {randomUUID,createHash} from 'node:crypto';
 const root=fs.mkdtempSync(path.join(os.tmpdir(),'gacui-distribution-'));
 const origin=path.join(root,'origin'),workspace=path.join(root,'client');
 const git=(...a)=>execFileSync('git',a,{cwd:origin,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
@@ -27,5 +29,18 @@ try {
  const rollback=call({workspace:path.join(root,'rollback'),version:'0.6.0'});assert.equal(rollback.version,'0.6.0');assert.equal(rollback.pinned,'0.6.0');
  execFileSync('git',['-c','user.name=Test','-c','user.email=test@example.invalid','commit','--allow-empty','-m','local'],{cwd:workspace});release('0.7.1');assert.match(call().blocked,/提交/);
  execFileSync('git',['remote','set-url','origin','https://example.invalid/untrusted.git'],{cwd:workspace});assert.throws(()=>call(),/origin/);
- console.log('PASS skill distribution: install/update/notice/ack/pin/dirty/breaking/offline/lock/rollback/local commit/origin');
+ // 安装后入口在真实运行目录执行接入：首次自动登记、重复不增设备、显式关闭不联网。
+ const collector=createCollector({dataDir:path.join(root,'collector'),tokenHashes:[createHash('sha256').update(randomUUID()).digest('hex')],ticketSecret:randomUUID(),autoEnroll:true});
+ await new Promise(r=>collector.listen(0,'127.0.0.1',r));let hits=0;collector.on('request',()=>hits++);
+ const endpoint='http://127.0.0.1:'+collector.address().port,runtime=path.resolve('.');
+ process.env.GAC_SUPPORT_HOME=path.join(root,'runtime-state');process.env.GAC_SUPPORT_CONFIG=path.join(root,'runtime-config.json');
+ try {
+  const first=await connectLogging(runtime,{endpoint});assert.equal(first.state,'connected',JSON.stringify(first));assert.ok(first.notice);
+  assert.equal((await connectLogging(runtime,{endpoint})).enrolled,false);
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(path.join(root,'collector','devices.json'),'utf8'))).length,1);
+  assert.equal((await connectLogging(runtime,{disable:true})).state,'disabled');const seen=hits;
+  assert.equal((await connectLogging(runtime,{endpoint})).state,'disabled');assert.equal(hits,seen);
+  assert.equal((await connectLogging(root)).state,'unavailable');
+ } finally { await new Promise(r=>collector.close(r)); }
+ console.log('PASS skill distribution: install/update/notice/ack/pin/dirty/breaking/offline/lock/rollback/local commit/origin/logging connect');
 }finally{fs.rmSync(root,{recursive:true,force:true});}

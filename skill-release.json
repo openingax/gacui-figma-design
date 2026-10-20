@@ -1,9 +1,9 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "本版先交付产品原型/需求到本地草稿：保存、预览、反馈修改、版本对比、确认及导出均不需要Figma。完整Figma组件接入后续单独完善，已有连接数据保留。",
+  "notice": "本版默认自动登记设备并开启调优日志：上传草稿输入输出、快照、错误及 agent 显式记录的需求/回复/工具/模型信息到作者服务；不上传认证凭据、隐藏思维链或无关会话。关闭：在运行目录执行 node support/cli.mjs auto-upload off，首次 sync 可加 --no-logging。0.3 升级至 0.4 需明确接受；草稿优先与 Figma 暂缓保持。",
   "delivery": "draft-first",
   "figmaStatus": "deferred"
 }

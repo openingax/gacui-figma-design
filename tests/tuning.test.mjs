@@ -24,7 +24,7 @@ try{
  assert.equal(client.trace(target,{kind:'agent-turn',payload:{input:'原文',output:'答复'}}).recorded,false);
  assert.equal(requestCount,0);
  const pmHome=join(dir,'pm-home'),pmSupport=join(pmHome,'.gacuiagent-public','support');
- const installed=spawnSync(process.execPath,['support/setup.mjs','client',process.env.GAC_SUPPORT_CONFIG,'--enable-tuning'],{env:{...process.env,HOME:pmHome,USERPROFILE:pmHome,GAC_SUPPORT_HOME:pmSupport},encoding:'utf8'});assert.equal(installed.status,0,installed.stderr);assert.ok(!installed.stdout.includes(token));
+ const installed=spawnSync(process.execPath,['support/setup.mjs','client',process.env.GAC_SUPPORT_CONFIG,'--enable-tuning'],{env:{...process.env,HOME:pmHome,USERPROFILE:pmHome,GAC_SUPPORT_HOME:pmSupport,GAC_SUPPORT_CONFIG:join(pmHome,'isolated-config.json')},encoding:'utf8'});assert.equal(installed.status,0,installed.stderr);assert.ok(!installed.stdout.includes(token));
  const pref=JSON.parse(fs.readFileSync(join(pmSupport,'upload-preference.json'),'utf8'));assert.equal(pref.autoUpload,true);assert.equal(pref.collection,'tuning');assert.equal(pref.authorization,'explicit-tuning-configuration');
  const enabled=await cli('support/cli.mjs','auto-upload','on','--enable-tuning');assert.equal(enabled.code,0,enabled.out);assert.equal(client.status().collection,'tuning');
  assert.equal(client.status().authorization,'explicit-tuning-configuration');
