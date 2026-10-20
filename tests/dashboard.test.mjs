@@ -26,7 +26,7 @@ try{
  useDevice('product');
  recordConnectFailure('ECONNRESET');
  const connected=await connect(endpoint);
- assert.equal(connected.profile,'sent');assert.match(connected.notice,/系统用户名/);
+ assert.equal(connected.profile,'sent');assert.match(connected.notice,/docs\/support\/README.md/);
  assert.ok(!fs.existsSync(join(directory,'product','state','connect-failures.json')));
  const tokenHash=createHash('sha256').update(client.config().token).digest('hex');
  const stored=JSON.parse(fs.readFileSync(join(dataDir,'profiles',tokenHash+'.json'),'utf8'));
