@@ -1,13 +1,13 @@
 # Tag 标签
 
-从320变体的大集合中提炼4种外观 × 5种主题的20个基础标签。仅矩形、无图标、不可关闭、可用组合，见 `definition.json`；原始示例和全库不进入默认知识。
+当前支持规范组件集的320个主变体：4外观（dark/light/outline/light-outline）×5主题（default/primary/success/warning/danger）×2形状（square/round）×可关闭×默认图标×禁用；另有12个large关闭控件（6主题×normal/hover）。Tag高24px，关闭入口16px。medium历史游离类型已排除并在入口拒绝。
 
-dark、light、outline、light-outline各有不同填充/描边组合。文字、数量属于业务输入；生成的默认标签文字不是业务内容。可关闭、添加、选择、圆角、图标、禁用均已识别为扩展维度，但未在此基础包中实现，不冒充支持。
+`heading.status`可配置`{label,theme,variant,shape,icon,closable,disabled,closeState}`，默认outline/square/无图标/不可关闭/可用。表格tag列保留显式`themes:{业务值:主题}`映射，并可通过`tag:{variant,shape,icon,closable,disabled,closeState}`设置列内标签外观；漏配展示值主题会报错，不猜业务颜色。关闭hover只允许可关闭且未禁用；dark彩色主题使用White关闭控件，其余按当前主题。
 
-构建入口为 `scripts/lib/figma-build.mjs tag`：start、nodes:0..4、finish。目标集合54:47，优先实例化。测试集合排成5列只是展示判断，标签自身尺寸不变。
+使用`validateTag`校验，出稿计划从`catalog.json`选取已存在母组件，`renderTag`创建实例，`updateTag`原位修改语义label。默认图标只支持当前规范图标，`iconName/iconId`明确拒绝；源TEXT/INSTANCE_SWAP属性不等于已接通任意图标交换。关闭、添加或选择的业务事件仍由页面业务决定，本能力只表达静态状态。
 
-40个元节点真实回读通过，截图已查看；临时Noto字形与源有差异，用户桌面处理。未用户验收，不加✅。
+保留原20个基础组件ID与54:47集合。旧`build-data.json`与definition的properties/states描述基础包；完整当前范围见currentProperties/currentStates及11个`extension-data`包，全部使用共享figma-build分批构建。`dependencies.json`记录全部映射；恢复应回读，不能重建已有节点。
 
-草图组合入口：`heading.status` 与表格tag列的 `themes` 可复用已导入outline主题，见 `docs/sketch-design.md` 详情补充。业务文案到主题的映射需显式指定，不靠文字猜测；未因此扩大Tag家族导入范围。
+本轮1516新增节点属性、332矢量逐字段复核通过；11组截图及真实草稿截图已查看。验证Page747:2 / 画板747:3回执complete=true，11实例长短文案往返ID与原宽度保持。表格3主题关闭hover精确填充回读一致；预览浏览器已查看。云端Noto Sans SC为临时替代，桌面苹方未验证，用户未验收，coverage.complete=false。
 
-2026-10-20 说明板（内部验证资料未随公开包分发）给出320变体的完整常规/禁用颜色表、尺寸（高24、padding 5/8、prefixContent 间距8、根间距纯文字12其余8、圆角 square 3 / round 9999）与关闭按钮取色映射（dark 彩色主题关闭按钮为 White 反白）。本包仍只实现20基础组合；扩展时以该表和源变体为准，禁用不是整体降低透明度。
+证据和验证边界见导入记录（内部验证资料）。

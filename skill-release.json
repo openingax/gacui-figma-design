@@ -1,9 +1,9 @@
 {
-  "version": "0.4.6",
+  "version": "1.0.0",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "开放 Figma 出稿：已确认的草稿可按团队出稿文件生成可编辑设计稿（规范组件实例），首次需 agent 完成目标适配核对；不出稿的草稿流程不变。草稿每个版本在顶层记录本轮需求原文与来源链接（request），缺失时 save/check 会提示补充。另同步最新组件规范说明核对与内容页签修正。",
+  "notice": "V1.0.0 首个正式版本：新增已验证组件及草稿入口，未完成扩展不提供。升级须重新核对Figma目标依赖；0.x到1.x须明确接受主版本升级。保留日志告知及关闭方式；设计仍需用户验收。",
   "delivery": "draft-and-figma",
   "figmaStatus": "team-target"
 }

@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+import {validateTableExtensions} from '../components/table/extensions.mjs';
+import {validateAlert} from '../components/alert/generator.mjs';
+import {validateNotification} from '../components/notification/generator.mjs';
+import {validatePopconfirm} from '../components/popconfirm/generator.mjs';
+import {validateSteps} from '../components/steps/generator.mjs';
 import {validateUpload} from '../components/upload/compose.mjs';
 import {uploadPreview} from '../components/upload/preview.mjs';
 import {validateTransfer,transferModel,transferHtml} from '../components/transfer/family.mjs';
@@ -23,6 +28,12 @@ import {join, dirname, basename, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateDescriptions} from '../components/descriptions/generator.mjs';
 import {validateDialog} from '../components/dialog/generator.mjs';
+import {validateLoading} from '../components/loading/generator.mjs';
+import {validateTooltip} from '../components/tooltip/generator.mjs';
+import {validateMessage} from '../components/message/generator.mjs';
+import {validateTabs} from '../components/tabs/generator.mjs';
+import {validatePagination} from '../components/pagination/generator.mjs';
+import {validateTag,tagKey} from '../components/tag/generator.mjs';
 import {check, diff, diffSummary, resolvePage, unknownKeys, requestWarnings} from './core.mjs';
 import {readStore, digest, saveVersion, restoreVersion, updateLabel, confirmDraft, recoverVersion, requestFigma} from './store.mjs';
 import {isMain} from '../support/entry.mjs';
@@ -66,7 +77,7 @@ export function renderHtml(bundle, checklist = loadChecklist()) {
     return {...version, missing: result.missing.map(m => m.code), missingDetails: result.missing};
   });
   const data = JSON.stringify({...bundle, support:bundle.support ?? {taskId:randomUUID().replaceAll('-',''),runId:null,events:[]}, versions}).replace(/</g, '\\u003c');
-  const core = 'const UPLOAD_ROOTS='+JSON.stringify(JSON.parse(readFileSync(join(here,'../components/upload/build-data.json'),'utf8')).roots.filter(r=>r.properties)).replace(/</g,'\\u003c')+';\n'+validateUpload.toString()+'\nfunction resolveUpload(spec){return validateUpload(spec,UPLOAD_ROOTS)}\n'+uploadPreview.toString()+'\n'+'const TRANSFER_CATALOG='+readFileSync(join(here,'../components/transfer/recipes.json'),'utf8').replace(/</g,'\\u003c')+';\n'+[validateTransfer,transferModel,transferHtml].map(f=>f.toString()).join('\n')+'\n'+'const FEEDBACK_ICONS='+JSON.stringify(Object.fromEntries(['empty','error'].map(k=>[k,readFileSync(join(here,'../components/feedback/'+k+'.svg'),'utf8')]))).replace(/</g,'\\u003c')+';\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';\n'+validateLink.toString()+'\n'+validateCascader.toString()+'\n'+validateTimePicker.toString()+'\n'+validateSelect.toString()+'\n'+validateInputField.toString()+'\n'+validateInputNumber.toString()+'\n'+validateCheckbox.toString()+'\n'+validateRadio.toString()+'\n'+validateDivider.toString()+'\n'+validateFeedback.toString() + '\n' + validateTimeline.toString() + '\n' + validateImageViewer.toString() + '\n' + validateDescriptions.toString() + '\n' + validateDialog.toString() + '\n' + readFileSync(join(here, 'core.mjs'), 'utf8').replace(/^import .*;\n/gm, '').replace(/^export /gm, '');
+  const core = 'const ALERT_CATALOG='+readFileSync(join(here,'../components/alert/catalog.json'),'utf8')+';\n'+validateTableExtensions.toString()+'\n'+validateAlert.toString()+'\n'+validateNotification.toString()+'\n'+validatePopconfirm.toString()+'\n'+validateSteps.toString()+'\n'+'const TOOLTIP_CATALOG='+readFileSync(join(here,'../components/tooltip/catalog.json'),'utf8')+';\n'+validateTooltip.toString()+'\n'+validateLoading.toString()+'\n'+validateMessage.toString()+'\n'+validateTabs.toString()+'\n'+validatePagination.toString()+'\n'+'const TAG_CATALOG='+readFileSync(join(here,'../components/tag/catalog.json'),'utf8').replace(/</g,'\\u003c')+';\n'+validateTag.toString()+'\n'+tagKey.toString()+'\n'+'const UPLOAD_ROOTS='+JSON.stringify(JSON.parse(readFileSync(join(here,'../components/upload/build-data.json'),'utf8')).roots.filter(r=>r.properties)).replace(/</g,'\\u003c')+';\n'+validateUpload.toString()+'\nfunction resolveUpload(spec){return validateUpload(spec,UPLOAD_ROOTS)}\n'+uploadPreview.toString()+'\n'+'const TRANSFER_CATALOG='+readFileSync(join(here,'../components/transfer/recipes.json'),'utf8').replace(/</g,'\\u003c')+';\n'+[validateTransfer,transferModel,transferHtml].map(f=>f.toString()).join('\n')+'\n'+'const FEEDBACK_ICONS='+JSON.stringify(Object.fromEntries(['empty','error'].map(k=>[k,readFileSync(join(here,'../components/feedback/'+k+'.svg'),'utf8')]))).replace(/</g,'\\u003c')+';\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';\n'+validateLink.toString()+'\n'+validateCascader.toString()+'\n'+validateTimePicker.toString()+'\n'+validateSelect.toString()+'\n'+validateInputField.toString()+'\n'+validateInputNumber.toString()+'\n'+validateCheckbox.toString()+'\n'+validateRadio.toString()+'\n'+validateDivider.toString()+'\n'+validateFeedback.toString() + '\n' + validateTimeline.toString() + '\n' + validateImageViewer.toString() + '\n' + validateDescriptions.toString() + '\n' + validateDialog.toString() + '\n' + readFileSync(join(here, 'core.mjs'), 'utf8').replace(/^import .*;\n/gm, '').replace(/^export /gm, '');
   const script = readFileSync(join(here, 'preview.js'), 'utf8');
   const feedback = readFileSync(join(here, '../support/preview.js'), 'utf8');
   const css = readFileSync(join(here, 'preview.css'), 'utf8');
@@ -179,7 +190,7 @@ async function main([command, ...args], run) {
   node sketch/sketch.mjs star <目录> <版本> <true|false>
   node sketch/sketch.mjs confirm <目录> <版本> <status中的hash>
   node sketch/sketch.mjs recover <目录> <未登记版本> [基于版本]
-  node sketch/sketch.mjs figma <目录> <已确认版本> <Figma Page名>   用户明确要求出稿后记录请求
+  node sketch/sketch.mjs figma <目录> <已确认版本> <Figma Page名>
   node sketch/sketch.mjs export <目录> <版本> <新输出.html>
   node sketch/sketch.mjs check <草图目录或文件> [--final|--discussion]   校验最新版本；--final 用于确认出稿前
   node sketch/sketch.mjs render <草图目录或文件> [输出.html]  生成本地预览页面

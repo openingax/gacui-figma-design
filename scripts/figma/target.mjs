@@ -1,83 +1,12 @@
 #!/usr/bin/env node
-// 草稿出稿的目标适配：只读核对目标文件是否包含出稿所需的已导入组件，回执通过后写本机 .local/figma-pages.json。
-// 本脚本不写 Figma，不把规范源当目标，也不把历史映射当作新使用者的授权；账号与写权限由 agent 用实际工具核实。
-import {readFileSync,writeFileSync,mkdirSync,existsSync,readdirSync} from 'node:fs';
-import {join,dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {isMain} from '../../support/entry.mjs';
-
-const root=join(dirname(fileURLToPath(import.meta.url)),'..','..');
-export const SOURCE_FILE_KEY='jNf9icrxfw8B7QkSQa9g33';
-export const LOCAL_CONFIG=join(root,'.local','figma-pages.json');
-
-export function fileKeyOf(input){
- const m=String(input??'').match(/figma\.com\/(?:design|file)\/([0-9a-zA-Z]{22,128})/);
- const key=m?m[1]:String(input??'').trim();
- if(!/^[0-9a-zA-Z]{22,128}$/.test(key))throw Error('无法识别 Figma 文件链接或 fileKey');
- if(key===SOURCE_FILE_KEY)throw Error('规范源只读，不能作为出稿目标');
- return key;
-}
-
-// 出稿代码按节点 ID 引用目标文件中已导入的组件。目标文件 ID 前缀较短；规范源节点前缀为五位数，不计入目标依赖。
-// generator 中少数短 ID 是规范源图标引用（Link 的 75:2123、75:2074），不属于目标依赖，单独排除。
-const TARGET_ID=/["']([1-9]\d{0,3}:\d+)["']/g, SOURCE_REFS=new Set(['75:2123','75:2074']);
-export function requiredIds(){
- const files=['sketch/figma-runtime.mjs','sketch/figma.mjs','pages/work-orders/build.mjs'];
- for(const d of readdirSync(join(root,'components'),{withFileTypes:true}))if(d.isDirectory())
-  for(const f of readdirSync(join(root,'components',d.name)))if(/dependencies.*\.json$|^generator\.mjs$|^family\.mjs$/.test(f))files.push(`components/${d.name}/${f}`);
- const ids=new Set();
- for(const f of files){const p=join(root,f);if(!existsSync(p))continue;for(const m of readFileSync(p,'utf8').matchAll(TARGET_ID))if(!SOURCE_REFS.has(m[1]))ids.add(m[1]);}
- // 公开包随附的出稿映射（sketch/maps）：只取出稿按 ID 实例化的表单字段变体与抽屉部件；映射内其余子节点 ID 不作依赖。
- const read=f=>{const p=join(root,'sketch','maps',f);return existsSync(p)?JSON.parse(readFileSync(p,'utf8')):null;};
- const form=existsSync(join(root,'sketch','maps','form-top'))?readdirSync(join(root,'sketch','maps','form-top')).filter(f=>f.endsWith('.json')):[];
- for(const f of form)for(const v of read('form-top/'+f).variants??[])ids.add(v.id);
- const drawer=read('drawer.json');
- if(drawer)for(const group of [drawer.variants,drawer.footerIds,drawer.closeIds])for(const id of Object.values(group??{}))ids.add(id);
- return [...ids].sort();
-}
-
-// 交给 use_figma 在目标文件执行的只读代码：核对依赖节点存在，列出 Page 以及哪些 Page 只含草稿出稿画板。
-export function checkCode(target){
- const fileKey=fileKeyOf(target),ids=requiredIds();
- return `if(figma.fileKey!==${JSON.stringify(fileKey)})throw Error('当前文件不是指定的出稿目标');
-const ids=${JSON.stringify(ids)},missing=[];
-for(const id of ids){if(!(await figma.getNodeByIdAsync(id)))missing.push(id);}
-const pages=[];
-for(const p of figma.root.children){await p.loadAsync();pages.push({id:p.id,name:p.name,empty:p.children.length===0,draftOnly:p.children.length>0&&p.children.every(n=>/ · v\\d+$/.test(n.name)||n.name.startsWith('说明 / '))});}
-return {fileKey:figma.fileKey,checked:ids.length,missing,pages};`;
-}
-
-export function acceptReceipt(target,receipt,{now=new Date().toISOString(),write=true}={}){
- const fileKey=fileKeyOf(target),ids=requiredIds();
- if(!receipt||receipt.fileKey!==fileKey)throw Error('回执不是指定目标文件的结果');
- if(receipt.checked!==ids.length)throw Error('回执核对的依赖数量与当前版本不符，请重新生成核对代码');
- if(!Array.isArray(receipt.missing)||receipt.missing.length)throw Error('目标缺少出稿所需组件：'+(receipt.missing??[]).slice(0,20).join('、')+'；该文件不能直接用于草稿出稿，见 docs/figma-adapter.md');
- if(!Array.isArray(receipt.pages)||!receipt.pages.length)throw Error('回执缺少 Page 列表');
- if(receipt.pages.some(p=>typeof p.empty!=='boolean'||typeof p.draftOnly!=='boolean'))throw Error('回执 Page 信息不完整，请用当前版本重新核对');
- // 出稿运行时拒绝写入任何含非草稿内容的 Page；名单只需保护空 Page，避免同名空页被当作任务页写入。
- const config={fileKey,sourceFileKey:SOURCE_FILE_KEY,adapterVerified:true,verifiedAt:now,requiredIds:ids.length,
-  contentPages:receipt.pages.filter(p=>!p.empty&&!p.draftOnly).length,
-  pages:receipt.pages.filter(p=>p.empty).map(p=>({name:p.name,pageId:p.id,packages:[]}))};
- if(write){mkdirSync(dirname(LOCAL_CONFIG),{recursive:true});writeFileSync(LOCAL_CONFIG,JSON.stringify(config,null,2)+'\n');}
- return config;
-}
-
-export function status(){
- if(!existsSync(LOCAL_CONFIG))return {ready:false,message:'尚未适配出稿目标'};
- const c=JSON.parse(readFileSync(LOCAL_CONFIG,'utf8'));
- const ready=c.adapterVerified===true&&!!c.fileKey&&c.fileKey!==SOURCE_FILE_KEY&&c.requiredIds===requiredIds().length;
- return {ready,fileKey:c.fileKey,verifiedAt:c.verifiedAt,contentPages:c.contentPages??null,emptyPagesProtected:c.pages?.length??0,message:ready?'已适配，可按草稿出稿':'适配记录与当前版本不符，请重新核对'};
-}
-
-if(isMain(import.meta.url)){
- const [cmd,a,b]=process.argv.slice(2);
- try{
-  if(cmd==='check-code'&&a)process.stdout.write(checkCode(a)+'\n');
-  else if(cmd==='receipt'&&a&&b){const c=acceptReceipt(a,JSON.parse(readFileSync(b,'utf8')));console.log(JSON.stringify({ready:true,fileKey:c.fileKey,requiredIds:c.requiredIds,contentPages:c.contentPages,emptyPagesProtected:c.pages.length}));}
-  else if(cmd==='status')console.log(JSON.stringify(status()));
-  else{console.log(`用法：
-  node scripts/figma/target.mjs check-code <目标文件链接或fileKey>   输出交给 use_figma 的只读核对代码
-  node scripts/figma/target.mjs receipt <目标文件链接或fileKey> <回执.json>   核对通过后写 .local/figma-pages.json
-  node scripts/figma/target.mjs status`);process.exitCode=2;}
- }catch(e){console.error(e.message);process.exitCode=1;}
-}
+import{readFileSync,writeFileSync,mkdirSync,existsSync}from'node:fs';import{fileURLToPath}from'node:url';import{dirname,join}from'node:path';import{createHash}from'node:crypto';import{isMain}from'../../support/entry.mjs';
+const root=join(dirname(fileURLToPath(import.meta.url)),'../..');export const SOURCE_FILE_KEY='jNf9icrxfw8B7QkSQa9g33',LOCAL_CONFIG=join(root,'.local/figma-pages.json');
+const manifest=()=>{const d=JSON.parse(readFileSync(join(root,'scripts/figma/dependencies.json'),'utf8'));const fp=createHash('sha256').update(JSON.stringify(d.nodes.map(n=>[n.id,n.type]))).digest('hex');if(d.schema!==2||fp!==d.fingerprint||new Set(d.nodes.map(n=>n.id)).size!==d.nodes.length)throw Error('依赖清单损坏');return d;};
+export function fileKeyOf(input){const s=String(input??'').trim();let key=s;if(/^https?:/.test(s)){const u=new URL(s);if(u.hostname!=='www.figma.com'&&u.hostname!=='figma.com')throw Error('无法识别 Figma 文件');key=u.pathname.match(/^\/(?:design|file)\/([0-9a-zA-Z]{22,128})(?:\/|$)/)?.[1];}if(!/^[0-9a-zA-Z]{22,128}$/.test(key??''))throw Error('无法识别 Figma 文件');if(key===SOURCE_FILE_KEY)throw Error('规范源只读');return key;}
+export const requiredIds=()=>manifest().nodes.map(n=>n.id);
+export function checkPlan(target){const fileKey=fileKeyOf(target),d=manifest(),batches=[];for(let i=0;i<d.nodes.length;i+=300)batches.push({index:batches.length,ids:d.nodes.slice(i,i+300).map(n=>n.id)});return {schema:2,fileKey,fingerprint:d.fingerprint,checked:d.nodes.length,batches};}
+export function checkCode(target,batch=0){const p=checkPlan(target);if(!Number.isInteger(batch)||!p.batches[batch])throw Error('无效批次');const nodes=manifest().nodes.slice(batch*300,batch*300+300);const src=`if(figma.fileKey!==${JSON.stringify(p.fileKey)})throw Error('当前文件不是指定的出稿目标');const nodes=${JSON.stringify(nodes.map(n=>({id:n.id,type:n.type})))},missing=[],wrongTypes=[];for(const row of nodes){const n=await figma.getNodeByIdAsync(row.id);if(!n)missing.push(row.id);else if(row.type&&n.type!==row.type)wrongTypes.push({id:row.id,expected:row.type,actual:n.type});}const pages=[];if(${batch}===0)for(const p of figma.root.children){await p.loadAsync();pages.push({id:p.id,name:p.name,empty:p.children.length===0,draftOnly:p.children.length>0&&p.children.every(n=>/ · v\\d+$/.test(n.name)||n.name.startsWith('说明 / '))});}return {schema:2,fileKey:figma.fileKey,fingerprint:${JSON.stringify(p.fingerprint)},batch:${batch},totalBatches:${p.batches.length},checkedIds:nodes.map(n=>n.id),missing,wrongTypes,...(${batch}===0?{pages}:{})};`;if(src.length>48000)throw Error('适配批次超过代码长度');return src;}
+export function acceptReceipt(target,receipt,{now=new Date().toISOString(),write=true}={}){const p=checkPlan(target);if(receipt?.fileKey!==p.fileKey)throw Error('回执不是指定目标');if(receipt.checked!==p.checked)throw Error('回执数量与当前版本不符');if(receipt.schema!==2||receipt.fingerprint!==p.fingerprint)throw Error('依赖指纹不符，请重新核对');if(receipt.missing?.length)throw Error('缺少出稿所需组件');if(!Array.isArray(receipt.receipts)||receipt.receipts.length!==p.batches.length)throw Error('批次未完整');const seen=new Set();for(const r of receipt.receipts){const b=p.batches[r.batch];if(!b||seen.has(r.batch)||r.schema!==2||r.fileKey!==p.fileKey||r.fingerprint!==p.fingerprint||r.totalBatches!==p.batches.length)throw Error('批次重复或来源/指纹不符');seen.add(r.batch);if(JSON.stringify(r.checkedIds)!==JSON.stringify(b.ids))throw Error('批次ID集合不符');if(!Array.isArray(r.missing)||!Array.isArray(r.wrongTypes)||r.missing.length||r.wrongTypes.length)throw Error('缺少出稿所需组件或节点类型不符');}
+const pages=receipt.receipts.find(r=>r.batch===0).pages;if(!Array.isArray(pages)||!pages.length||pages.some(p=>!p.id||typeof p.name!=='string'||typeof p.empty!=='boolean'||typeof p.draftOnly!=='boolean')||new Set(pages.map(p=>p.id)).size!==pages.length)throw Error('Page 信息不完整');const config={fileKey:p.fileKey,sourceFileKey:SOURCE_FILE_KEY,adapterVerified:true,adapterSchema:2,dependencyFingerprint:p.fingerprint,requiredIds:p.checked,verifiedAt:now,contentPages:pages.filter(p=>!p.empty&&!p.draftOnly).length,pages:pages.filter(p=>p.empty).map(p=>({name:p.name,pageId:p.id,packages:[]}))};if(write){mkdirSync(dirname(LOCAL_CONFIG),{recursive:true});writeFileSync(LOCAL_CONFIG,JSON.stringify(config,null,2)+'\n');}return config;}
+export function status(){if(!existsSync(LOCAL_CONFIG))return {ready:false,message:'尚未适配出稿目标'};const c=JSON.parse(readFileSync(LOCAL_CONFIG,'utf8'));let valid=false;try{valid=fileKeyOf(c.fileKey)===c.fileKey;}catch{}const d=manifest(),ready=valid&&c.sourceFileKey===SOURCE_FILE_KEY&&c.adapterVerified===true&&c.adapterSchema===2&&c.dependencyFingerprint===d.fingerprint&&c.requiredIds===d.nodes.length;return {ready,fileKey:c.fileKey,verifiedAt:c.verifiedAt,requiredIds:d.nodes.length,fingerprint:d.fingerprint,message:ready?'已适配':'适配记录与当前依赖集合不符，请重新核对'};}
+if(isMain(import.meta.url)){const[cmd,target,arg]=process.argv.slice(2);try{if(cmd==='plan')console.log(JSON.stringify(checkPlan(target),null,2));else if(cmd==='check-code')console.log(checkCode(target,Number(arg??0)));else if(cmd==='receipt'){acceptReceipt(target,JSON.parse(readFileSync(arg,'utf8')));console.log(JSON.stringify(status()));}else if(cmd==='status')console.log(JSON.stringify(status()));else throw Error('用法：target.mjs plan TARGET | check-code TARGET BATCH | receipt TARGET BUNDLE.json | status');}catch(e){console.error(e.message);process.exitCode=1;}}

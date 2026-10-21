@@ -5,6 +5,8 @@ description: GACUIAgent Skill：根据业务需求和公司 B 端 Figma 规范�
 
 # GACUIAgent Skill
 
+版本：V1.0.0。支持范围和已知限制以随包文档为准。
+
 使用简体中文。首次调用或新会话开始，从本 skill 的真实路径运行：
 
 ```sh

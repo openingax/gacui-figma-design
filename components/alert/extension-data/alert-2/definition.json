@@ -1,0 +1,13 @@
+{
+  "name": "Alert 扩展/2",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "alert-source-2",
+    "pageId": "50063:541914"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}

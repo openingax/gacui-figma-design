@@ -10,7 +10,7 @@ node components/table/generator.mjs CONFIG_JSON TARGET_FILE_KEY PAGE_ID
 
 目标组件75:2。实际生成1200×242、5列3行，复用单元格、已验收Checkbox及分页。已检查长文字截断、行选中、表头半选和分页文本显示。代码拒绝重复列key、非正列宽、越界选中索引及超过现有操作单元容量的文本动作。
 
-单选、展开、多行截断与拖拽列宽没有冒充已实现；交互和业务数据请求不属于本静态组件验证。
+草稿 `table` 已支持单选、多选、展开行、多行截断、文字标签、状态映射和静态列宽配置。拖拽改变列宽、真实选择/展开事件和业务请求不属于静态设计实现。
 
 ## 逐行操作与页面组合
 
@@ -23,3 +23,5 @@ node components/table/generator.mjs CONFIG_JSON TARGET_FILE_KEY PAGE_ID
 2026-10-14：新增`disabledRows`零基索引数组，与`selectedRows`不能重叠。复用已导入Checkbox禁用变体，表头按`rows.length-disabledRows.length`计算全选；无可选行时表头禁用。不新增元组件。业务字段条件在草图层解析，底层Table仍只接收明确的行索引与逐行动作。
 
 文字列可配置 `wrap:true`（仅text类型），以原单元格边距和字体自动换行、按文字实际高度增高整行；表格总高随行更新。用于需要直接读全称的业务布局，不修改源组件或默认单行行为。应在内容修改后复核行高；本次完整重跑证据见docs/full-rerun-20261014.md。
+
+2026-10-21当前扩展已完成技术验证；新增文字标签、状态显式映射及静态列宽配置。完整参数、源差异、11真实画板、修复回读与验收边界见当前导入记录（内部验证资料）。可执行扩展数据在extension-data，映射在dependencies.json；旧受保护组件保持不变。

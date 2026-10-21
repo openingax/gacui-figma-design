@@ -20,19 +20,22 @@
     "selection: 是否显示多选列",
     "selectedRows: 已选索引",
     "pagination: 是否显示分页",
-    "total: 数据总量"
+    "total: 数据总量",
+    "selectionMode: none/multiple/single/expand",
+    "expandedRows/expandedContent/expandHoverRows",
+    "columns.maxLines/width/tagKey/stateThemes",
+    "resizableColumns: 静态示意"
   ],
   "supportedCells": [
     "text",
     "tag",
     "state",
-    "operations"
+    "operations",
+    "textTag"
   ],
   "composition": "实际复用已验收Checkbox、表格单元格和分页母组件；表头半选由已选行数推导，不绑定示例首行",
   "gaps": [
-    "单选、展开行、列宽拖拽、多行截断示例已识别，但本基础生成器尚未实现",
-    "操作单元当前支持两项文本动作和更多图标；交互未实现",
-    "临时字体度量与源有差异，需用户桌面处理",
-    "tag/state单元格使用源默认主题，不根据业务文字猜测颜色；不同业务状态的主题映射需明确配置或扩展"
+    "交互、请求和列宽拖拽事件未实现；本任务只做静态外观",
+    "云端Noto为临时替代，用户验收与苹方最终复核待完成"
   ]
 }

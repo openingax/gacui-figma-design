@@ -1,0 +1,146 @@
+[
+  {
+    "key": "default|true|true|true|false",
+    "sourceId": "45617:338271",
+    "id": "749:2",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=true, disable 禁用=false"
+  },
+  {
+    "key": "default|true|true|false|false",
+    "sourceId": "45617:338275",
+    "id": "749:37",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "default|true|false|false|false",
+    "sourceId": "45617:338279",
+    "id": "55:2",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "default|true|false|true|false",
+    "sourceId": "45617:338283",
+    "id": "749:66",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=true, disable 禁用=false"
+  },
+  {
+    "key": "default|false|true|true|false",
+    "sourceId": "45617:338287",
+    "id": "55:27",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=true, disable 禁用=false"
+  },
+  {
+    "key": "default|false|true|false|false",
+    "sourceId": "45617:338291",
+    "id": "55:60",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "default|false|false|true|false",
+    "sourceId": "45617:338295",
+    "id": "749:96",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=true, disable 禁用=false"
+  },
+  {
+    "key": "default|false|false|false|false",
+    "sourceId": "45617:338299",
+    "id": "55:88",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "default|true|true|true|true",
+    "sourceId": "45678:373512",
+    "id": "749:126",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=true, disable 禁用=true"
+  },
+  {
+    "key": "default|true|true|false|true",
+    "sourceId": "45678:373514",
+    "id": "749:160",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "default|true|false|false|true",
+    "sourceId": "45678:373516",
+    "id": "749:189",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "default|true|false|true|true",
+    "sourceId": "45678:373518",
+    "id": "749:214",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=true, disable 禁用=true"
+  },
+  {
+    "key": "default|false|true|true|true",
+    "sourceId": "45678:373520",
+    "id": "749:20883",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=true, disable 禁用=true"
+  },
+  {
+    "key": "default|false|true|false|true",
+    "sourceId": "45678:373522",
+    "id": "749:20916",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "default|false|false|true|true",
+    "sourceId": "45678:373524",
+    "id": "749:20944",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=true, disable 禁用=true"
+  },
+  {
+    "key": "default|false|false|false|true",
+    "sourceId": "45678:373526",
+    "id": "749:20973",
+    "name": "theme 风格=default 默认, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "simple|true|true|false|false",
+    "sourceId": "45714:375185",
+    "id": "55:112",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "simple|false|false|false|false",
+    "sourceId": "45714:375187",
+    "id": "749:20998",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "simple|true|false|false|false",
+    "sourceId": "45714:375189",
+    "id": "749:21012",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "simple|false|true|false|false",
+    "sourceId": "45714:375191",
+    "id": "749:21027",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=false"
+  },
+  {
+    "key": "simple|true|true|false|true",
+    "sourceId": "45718:375591",
+    "id": "749:21045",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=true, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "simple|false|false|false|true",
+    "sourceId": "45718:375593",
+    "id": "749:21065",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=false, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "simple|true|false|false|true",
+    "sourceId": "45718:375595",
+    "id": "749:21079",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=true, pagesize 条数设置=false, jumper 跳转=false, disable 禁用=true"
+  },
+  {
+    "key": "simple|false|true|false|true",
+    "sourceId": "45718:375597",
+    "id": "749:21094",
+    "name": "theme 风格=simple 极简, totalContent 总条数内容=false, pagesize 条数设置=true, jumper 跳转=false, disable 禁用=true"
+  }
+]

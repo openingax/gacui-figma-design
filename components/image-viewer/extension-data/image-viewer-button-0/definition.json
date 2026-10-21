@@ -1,0 +1,13 @@
+{
+  "name": "ImageViewer扩展/button/0",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "98004:157568",
+    "nodeId": "image-viewer-button-0"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}

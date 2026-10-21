@@ -1,0 +1,13 @@
+{
+  "name": "Table扩展/table-cell-2",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "46868:353120",
+    "nodeId": "table-cell-2"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}

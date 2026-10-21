@@ -1,0 +1,13 @@
+{
+  "name": "Steps 扩展/vertical-dot-0",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "steps-source-vertical-dot-0",
+    "pageId": "43752:306570"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}

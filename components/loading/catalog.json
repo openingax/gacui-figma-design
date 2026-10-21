@@ -1,0 +1,56 @@
+[
+  {
+    "sourceId": "45929:328226",
+    "id": "760:3",
+    "name": "indicator 加载指示符=false, text 提示文案=false, size 尺寸=small 小尺寸",
+    "key": "small|spinner"
+  },
+  {
+    "sourceId": "45929:328228",
+    "id": "760:6",
+    "name": "indicator 加载指示符=false, text 提示文案=false, size 尺寸=medium 中尺寸",
+    "key": "medium|spinner"
+  },
+  {
+    "sourceId": "45929:328230",
+    "id": "760:9",
+    "name": "indicator 加载指示符=false, text 提示文案=false, size 尺寸=large 大尺寸",
+    "key": "large|spinner"
+  },
+  {
+    "sourceId": "45929:328232",
+    "id": "760:12",
+    "name": "indicator 加载指示符=true, text 提示文案=false, size 尺寸=small 小尺寸",
+    "key": "small|spinner-text"
+  },
+  {
+    "sourceId": "45929:328235",
+    "id": "760:18",
+    "name": "indicator 加载指示符=false, text 提示文案=true, size 尺寸=small 小尺寸",
+    "key": "small|text"
+  },
+  {
+    "sourceId": "45929:328237",
+    "id": "760:21",
+    "name": "indicator 加载指示符=true, text 提示文案=false, size 尺寸=medium 中尺寸",
+    "key": "medium|spinner-text"
+  },
+  {
+    "sourceId": "45929:328240",
+    "id": "760:25",
+    "name": "indicator 加载指示符=false, text 提示文案=true, size 尺寸=medium 中尺寸",
+    "key": "medium|text"
+  },
+  {
+    "sourceId": "45929:328242",
+    "id": "760:27",
+    "name": "indicator 加载指示符=true, text 提示文案=false, size 尺寸=large 大尺寸",
+    "key": "large|spinner-text"
+  },
+  {
+    "sourceId": "45929:328245",
+    "id": "760:33",
+    "name": "indicator 加载指示符=false, text 提示文案=true, size 尺寸=large 大尺寸",
+    "key": "large|text"
+  }
+]

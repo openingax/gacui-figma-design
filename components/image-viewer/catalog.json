@@ -1,0 +1,256 @@
+[
+  {
+    "family": "view",
+    "sourceId": "98004:157636",
+    "id": "807:2",
+    "name": "gallery=true, hover=false, error=false",
+    "props": {
+      "gallery": "true",
+      "hover": "false",
+      "error": "false"
+    },
+    "width": 240,
+    "height": 240
+  },
+  {
+    "family": "view",
+    "sourceId": "98004:157639",
+    "id": "422:3",
+    "name": "gallery=false, hover=false, error=false",
+    "props": {
+      "gallery": "false",
+      "hover": "false",
+      "error": "false"
+    },
+    "width": 168,
+    "height": 168
+  },
+  {
+    "family": "view",
+    "sourceId": "98004:157637",
+    "id": "422:6",
+    "name": "gallery=false, hover=true, error=false",
+    "props": {
+      "gallery": "false",
+      "hover": "true",
+      "error": "false"
+    },
+    "width": 168,
+    "height": 168
+  },
+  {
+    "family": "view",
+    "sourceId": "98004:157638",
+    "id": "807:8",
+    "name": "gallery=true, hover=true, error=false",
+    "props": {
+      "gallery": "true",
+      "hover": "true",
+      "error": "false"
+    },
+    "width": 240,
+    "height": 240
+  },
+  {
+    "family": "view",
+    "sourceId": "98004:157635",
+    "id": "807:18",
+    "name": "gallery=true, hover=false, error=true",
+    "props": {
+      "gallery": "true",
+      "hover": "false",
+      "error": "true"
+    },
+    "width": 240,
+    "height": 240
+  },
+  {
+    "family": "view",
+    "sourceId": "98004:157634",
+    "id": "422:13",
+    "name": "gallery=false, hover=false, error=true",
+    "props": {
+      "gallery": "false",
+      "hover": "false",
+      "error": "true"
+    },
+    "width": 168,
+    "height": 168
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157672",
+    "id": "807:22937",
+    "name": "state=1:1, error=true",
+    "props": {
+      "state": "1:1",
+      "error": "true"
+    },
+    "width": 440,
+    "height": 440
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157673",
+    "id": "807:22941",
+    "name": "state=16:9, error=true",
+    "props": {
+      "state": "16:9",
+      "error": "true"
+    },
+    "width": 720,
+    "height": 405
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157670",
+    "id": "807:22945",
+    "name": "state=9:16, error=true",
+    "props": {
+      "state": "9:16",
+      "error": "true"
+    },
+    "width": 405,
+    "height": 720
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157671",
+    "id": "807:22950",
+    "name": "state=1:1, error=false",
+    "props": {
+      "state": "1:1",
+      "error": "false"
+    },
+    "width": 440,
+    "height": 440
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157674",
+    "id": "807:22952",
+    "name": "state=16:9, error=false",
+    "props": {
+      "state": "16:9",
+      "error": "false"
+    },
+    "width": 720,
+    "height": 405
+  },
+  {
+    "family": "image",
+    "sourceId": "98004:157669",
+    "id": "807:22954",
+    "name": "state=9:16, error=false",
+    "props": {
+      "state": "9:16",
+      "error": "false"
+    },
+    "width": 405,
+    "height": 720
+  },
+  {
+    "family": "button",
+    "sourceId": "98004:157687",
+    "id": "807:22957",
+    "name": "hover=false, disabled=false, direction=no",
+    "props": {
+      "hover": "false",
+      "disabled": "false",
+      "direction": "no"
+    },
+    "width": 40,
+    "height": 40
+  },
+  {
+    "family": "button",
+    "sourceId": "25770:97126",
+    "id": "807:22960",
+    "name": "hover=false, disabled=false,direction=left",
+    "props": {
+      "hover": "false",
+      "disabled": "false",
+      "direction": "left"
+    },
+    "width": 40,
+    "height": 40
+  },
+  {
+    "family": "button",
+    "sourceId": "25770:97133",
+    "id": "807:22963",
+    "name": "hover=false, disabled=false, direction=right",
+    "props": {
+      "hover": "false",
+      "disabled": "false",
+      "direction": "right"
+    },
+    "width": 40,
+    "height": 40
+  },
+  {
+    "family": "button",
+    "sourceId": "98004:157686",
+    "id": "807:22967",
+    "name": "hover=true, disabled=false, direction=no",
+    "props": {
+      "hover": "true",
+      "disabled": "false",
+      "direction": "no"
+    },
+    "width": 40,
+    "height": 40
+  },
+  {
+    "family": "button",
+    "sourceId": "98004:157685",
+    "id": "807:22970",
+    "name": "hover=false, disabled=true, direction=no",
+    "props": {
+      "hover": "false",
+      "disabled": "true",
+      "direction": "no"
+    },
+    "width": 40,
+    "height": 40
+  },
+  {
+    "family": "layout",
+    "sourceId": "98004:157884",
+    "id": "422:18",
+    "name": "gallery=false, ⬑show=false, dialog=false",
+    "props": {
+      "gallery": "false",
+      "⬑show": "false",
+      "dialog": "false"
+    },
+    "width": 1200,
+    "height": 640
+  },
+  {
+    "family": "layout",
+    "sourceId": "98004:157883",
+    "id": "807:22974",
+    "name": "gallery=true, ⬑show=false, dialog=false",
+    "props": {
+      "gallery": "true",
+      "⬑show": "false",
+      "dialog": "false"
+    },
+    "width": 1200,
+    "height": 640
+  },
+  {
+    "family": "layout",
+    "sourceId": "98004:157882",
+    "id": "807:22992",
+    "name": "gallery=true, ⬑show=true, dialog=false",
+    "props": {
+      "gallery": "true",
+      "⬑show": "true",
+      "dialog": "false"
+    },
+    "width": 1200,
+    "height": 640
+  }
+]

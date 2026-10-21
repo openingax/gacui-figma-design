@@ -1,0 +1,35 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "pageId": "415:2",
+  "main": {
+    "default/false/false": "415:9",
+    "info/true/false": "731:34",
+    "info/false/false": "731:50",
+    "default/true/false": "731:62",
+    "warning/true/false": "731:76",
+    "warning/false/false": "731:92",
+    "error/true/false": "731:104",
+    "error/false/false": "731:120",
+    "success/true/false": "731:132",
+    "success/false/false": "731:148",
+    "info/true/true": "731:160",
+    "info/false/true": "731:176",
+    "default/true/true": "731:188",
+    "default/false/true": "731:202",
+    "warning/true/true": "731:212",
+    "warning/false/true": "731:20631",
+    "error/true/true": "731:20643",
+    "error/false/true": "731:20659",
+    "success/true/true": "731:20671",
+    "success/false/true": "731:20687"
+  },
+  "close": {
+    "normal": "731:20700",
+    "hover": "731:20703",
+    "active": "731:20706"
+  },
+  "fullscreen": {
+    "false": "731:20710",
+    "true": "731:20726"
+  }
+}

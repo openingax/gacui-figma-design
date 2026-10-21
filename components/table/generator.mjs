@@ -1,10 +1,13 @@
+import {tableExtensionDependencies} from './extension-dependencies.mjs';
+import {validateTableExtensions,applyTableExtensions} from './extensions.mjs';
 import{readFileSync}from'node:fs';import {componentTarget} from '../../scripts/lib/figma-target.mjs';
 import {isMain} from '../../support/entry.mjs';
 export function validate(config){
+ const mode=validateTableExtensions(config);if(config.selectionMode)config.selection=mode!=='none';
  if(typeof config.name!=='string'||!config.name.trim())throw Error('需要表格名称');
  if(!Array.isArray(config.columns)||!config.columns.length)throw Error('至少需要一列');
  if(new Set(config.columns.map(c=>c.key)).size!==config.columns.length)throw Error('列key重复');
- for(const c of config.columns)if(!['text','tag','state','operations'].includes(c.kind)||!Number.isFinite(c.width)||c.width<=0)throw Error('列类型或宽度无效');
+ for(const c of config.columns)if(!['text','textTag','tag','state','operations'].includes(c.kind)||!Number.isFinite(c.width)||c.width<=0)throw Error('列类型或宽度无效');
  for(const c of config.columns)if(c.kind==='operations'&&c.actions&&(!Array.isArray(c.actions)||c.actions.length>2))throw Error('当前操作单元只支持两项文本操作和更多图标');
  if(!Array.isArray(config.rows))throw Error('rows必须为数组');
  if(config.asFrame!==undefined&&typeof config.asFrame!=='boolean')throw Error('asFrame必须为布尔');
@@ -56,6 +59,7 @@ export async function buildTable(figma,page,config,deps){
  if(config.pagination){const pagination=(await main(deps.pagination)).createInstance();table.appendChild(pagination);created.push(pagination.id);pagination.name='pagination';pagination.resize(width,64);const total=pagination.findAllWithCriteria({types:['TEXT']}).find(t=>t.name==='totalContent');if(total)total.characters=`共 ${config.total??config.rows.length} 项数据`;}
  table.resize(width,table.children.reduce((h,n)=>h+n.height,0));
  if(page.type==='PAGE'){table.x=Math.max(0,...page.children.filter(n=>n!==table).map(n=>n.x+n.width))+80;table.y=80;}if(table.type==='COMPONENT')table.description='依据规范单元格、Checkbox和分页组合；行列由业务数据提供，当前数据仅为组件验证样例。';
+ if(config.selectionMode||config.resizableColumns||config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind))){if(!deps.extensions)throw Error('Table扩展依赖未配置');await applyTableExtensions(figma,table,config,deps.extensions);}
  // 包含实例内部后代ID，便于完整审计。
  for(const n of [table,...table.findAll(()=>true)])if('strokes'in n){if(n.strokeStyleId)await n.setStrokeStyleIdAsync(n.strokeStyleId);else n.strokes=clone(n.strokes);}
  const ids=[table.id,...table.findAllWithCriteria({types:['FRAME','INSTANCE','TEXT','VECTOR','RECTANGLE','ELLIPSE']}).map(n=>n.id)];
@@ -69,7 +73,9 @@ export function generate(config,target){
  const deps={cells:{header:cells['46879:366290'],text:cells['46879:366074'],tag:cells['46879:366182'],state:cells['46879:366218'],operations:cells['46879:366110']},checkbox:{off:'31:2',on:'31:12',mixed:'31:6'},pagination:pagination['45617:338279'],surface:{fills:[{type:'SOLID',color:{r:1,g:1,b:1}}],strokes:raw.tree.children[0].strokes},headerFill:raw.tree.children.find(n=>n.id==='46879:366290').fills,gridStroke:raw.tree.children[0].strokes};
  // 外框Gray4与内部Gray3来自表格整体/单元格规范，保留原始浮点值。
  deps.surface.strokes=[{type:'SOLID',color:{r:0.8627451062202454,g:0.8666666746139526,b:0.8705882430076599}}];
- const code=`const target=${JSON.stringify(target)};if(figma.fileKey!==target.fileKey)throw Error('目标文件不符');const page=await figma.getNodeByIdAsync(target.pageId);if(!page||page.type!=='PAGE')throw Error('Page不存在');await figma.setCurrentPageAsync(page);const buildTable=${buildTable.toString()};return await buildTable(figma,page,${JSON.stringify(config)},${JSON.stringify(deps)});`;
+ const extended=config.selectionMode||config.resizableColumns||config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind));if(extended){deps.extensions=tableExtensionDependencies();deps.cells.textTag=deps.extensions.textTag;}
+ const code=`${extended?applyTableExtensions.toString():''}
+const target=${JSON.stringify(target)};if(figma.fileKey!==target.fileKey)throw Error('目标文件不符');const page=await figma.getNodeByIdAsync(target.pageId);if(!page||page.type!=='PAGE')throw Error('Page不存在');await figma.setCurrentPageAsync(page);const buildTable=${buildTable.toString()};return await buildTable(figma,page,${JSON.stringify(config)},${JSON.stringify(deps)});`;
  if(code.length>50000)throw Error('表格代码超过50000字符');return code;
 }
 if(isMain(import.meta.url)){const[configPath,fileKey,pageId]=process.argv.slice(2);process.stdout.write(generate(JSON.parse(readFileSync(configPath,'utf8')),{fileKey,pageId}));}
