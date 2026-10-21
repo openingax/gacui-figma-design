@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+import {validateTableLoading,updateTableLoading,inspectTableLoading} from '../components/table/loading.mjs';
+import {validateTimeRangeGroup,renderTimeRangeGroup,updateTimeRangeGroup,inspectTimeRangeGroup} from '../components/time-range-group/generator.mjs';
+import {renderComposedDialog,updateComposedDialog,updateDialogContent} from '../components/dialog/composition.mjs';
+import {updateTableContents} from '../components/table/extensions.mjs';
 import {renderImageViewerExtended,inspectImageViewerExtended,verifyImageViewerExtended} from '../components/image-viewer/extended.mjs';
 import {applyTableExtensions,inspectTableExtensions,verifyTableExtensions} from '../components/table/extensions.mjs';
 import {validateAlert,updateAlert,renderAlert,inspectAlert,verifyAlerts} from '../components/alert/generator.mjs';
@@ -10,7 +14,7 @@ import {validateTooltip,renderTooltip,positionTooltip,updateTooltip,inspectToolt
 import {validateMessage,renderMessage,updateMessage,inspectMessage,verifyMessage} from '../components/message/generator.mjs';
 import {validateTabs,tabsKey,renderTabs,updateTabs,inspectTabs,arrangeLeftTabs,renderTopTabs} from '../components/tabs/generator.mjs';
 import {validateCascader,cascaderSetText,updateCascaderOption,renderCascaderMenu,renderCascader} from '../components/cascader/family.mjs';
-import {validateTimePicker,renderTimePicker} from '../components/time-picker/family.mjs';
+import {validateTimePicker,renderTimePicker,updateTimePicker} from '../components/time-picker/family.mjs';
 import {validateSelect,renderSelect,selectHelpers,renderSinglePopup,updateSingleOption} from '../components/select/family.mjs';
 import {validateInputField,renderInputField} from '../components/input/family.mjs';
 import {validateInputNumber,renderInputNumber} from '../components/input-number/generator.mjs';
@@ -121,6 +125,14 @@ function tagSpec(input) {
   return {label:s.label,theme:s.theme,mainId:row.id,...(closeId?{closeId}: {})};
 }
 
+function tableLoadingSpec(input){const s=validateTableLoading(input);return s?{...s,mainId:readJson('../components/loading/catalog.json').find(r=>r.key===s.size+'|'+s.variant).id}:undefined;}
+
+function dialogSpec(node){
+ const s=validateDialog(node);if(!s.children?.length)return s;
+ const width=(s.fullscreen?1440:s.width??480)-64;
+ return {...s,message:s.message??'',children:s.children.map(c=>{if(c.type!=='table')return c;const config=tableConfig(c,'Dialog内容/'+c.id+'/table',c.data.length,width);return {...c,config,deps:tableDependencies(config)};})};
+}
+
 function workbenchDef(page, layers) {
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
@@ -141,6 +153,7 @@ function workbenchDef(page, layers) {
     feedbacks: of('feedback').filter(n=>n.kind!=='alert').map(validateFeedback),
     ...(of('feedback').some(n=>n.kind==='alert')?{alerts:of('feedback').filter(n=>n.kind==='alert').map(n=>{const s=validateAlert(n);return {...s,mainId:readJson('../components/alert/catalog.json').find(r=>r.key===[s.theme,s.icon,s.showTitle,!!s.description,!!s.operation,s.collapse].join('|')).id};})}:{}),
     cascaders: of('cascader').length?of('cascader').map(validateCascader):undefined,
+    timeRangeGroups:of('timeRangeGroup').map(validateTimeRangeGroup),
     timePickers: of('timePicker').map(validateTimePicker),
     selectFields: of('selectField').map(validateSelect),
     inputFields: of('inputField').map(validateInputField),
@@ -149,7 +162,7 @@ function workbenchDef(page, layers) {
     radios: of('radio').map(validateRadio),
     links: of('link').map(validateLink),
     dividers: of('divider').map(validateDivider),
-    blocks: !(of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
+    blocks: !(of('timeRangeGroup').length||of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
     timelines: of('timeline').map(validateTimeline),
     imageViewers: of('imageViewer').map(n=>{const s=validateImageViewer(n);return s.gallery||s.showThumbnails||s.openError!==undefined||s.closeState||s.items.some(i=>i.ratio)||s.open&&s.items.find(i=>i.id===s.open)?.state==='error'?{...s,extended:true}:s;}),
     descriptions: of('descriptions').map(validateDescriptions),
@@ -159,20 +172,21 @@ function workbenchDef(page, layers) {
     menuLeaf: page.menu ? page.menu.split('/').pop().trim() : page.title,
     search: search ? search.fields.map(f => ({...f, context: 'search', layer: layers.get(`${page.id}/${search.id}/${f.id}`).layer})) : null,
     buttons: page.children.filter(n => n.type === 'actions').flatMap(n => n.buttons.map(b => ({label: b.label, primary: !!b.primary, disabled: !!b.disabled, selectionSummary: b.selectionSummary, visible: n.visible !== false && b.visible !== false, layer: layers.get(`${page.id}/${n.id}/${b.id}`).layer}))),
-    table: table ? {pagination: paginationSpec(table.pagination), feedback: table.feedback, emptyText: table.emptyText, error: table.error, retryLabel: table.retryLabel, loading: table.loading, config: tableConfig(table, tableLayer, table.renderRows ?? Math.min(table.rows ?? 10, 10),contentWidth-(tabs?.orientation==='left'?160:0))} : null,
+    table: table ? {pagination: paginationSpec(table.pagination), feedback: table.feedback, emptyText: table.emptyText, error: table.error, retryLabel: table.retryLabel, loading: tableLoadingSpec(table.loading), config: tableConfig(table, tableLayer, table.renderRows ?? Math.min(table.rows ?? 10, 10),contentWidth-(tabs?.orientation==='left'?160:0))} : null,
   };
 }
 
 function drawerDef(page, layers, overName) {
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
-  for (const n of page.children ?? []) if (!['form', 'actions', 'note', 'gap', 'dialog','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','cascader'].includes(n.type)) throw Error(`抽屉里的 ${n.type} 本轮不支持生成 Figma`);
+  for (const n of page.children ?? []) if (!['form', 'actions', 'note', 'gap', 'dialog','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','timeRangeGroup','cascader'].includes(n.type)) throw Error(`抽屉里的 ${n.type} 本轮不支持生成 Figma`);
   const width = page.width ?? 500, formWidth = width - 48;
   const size = width <= 300 ? 'small' : width <= 500 ? 'medium' : 'large';
-  const rows = [], groups = [], dividers = [], links = [], radios = [], checkboxes = [], cascaders = [], timePickers = [], selectFields = [], inputFields = [], numbers = [], feedbacks = [], inserts = [];
-  for (const form of page.children.filter(n => ['form','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','cascader'].includes(n.type) && n.visible !== false)) {
+  const rows = [], groups = [], dividers = [], links = [], radios = [], checkboxes = [], cascaders = [], timeRangeGroups = [], timePickers = [], selectFields = [], inputFields = [], numbers = [], feedbacks = [], inserts = [];
+  for (const form of page.children.filter(n => ['form','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','timeRangeGroup','cascader'].includes(n.type) && n.visible !== false)) {
     if(form.type==='feedback'){if(form.kind==='alert')throw Error('Alert当前草稿入口仅支持工作台区块');const item={...validateFeedback(form),beforeRow:rows.length};feedbacks.push(item);inserts.push({type:'feedback',...item});continue;}
     if(form.type==='cascader'){const item={...validateCascader(form),beforeRow:rows.length};cascaders.push(item);inserts.push({type:'cascader',...item});continue;}
+    if(form.type==='timeRangeGroup'){const item={...validateTimeRangeGroup(form),beforeRow:rows.length};if(item.width>formWidth)throw Error('时段组超出抽屉宽度');timeRangeGroups.push(item);inserts.push({type:'timeRangeGroup',...item});continue;}
     if(form.type==='timePicker'){const item={...validateTimePicker(form),beforeRow:rows.length};timePickers.push(item);inserts.push({type:'timePicker',...item});continue;}
     if(form.type==='selectField'){const item={...validateSelect(form),beforeRow:rows.length};selectFields.push(item);inserts.push({type:'selectField',...item});continue;}
     if(form.type==='inputField'){const item={...validateInputField(form),beforeRow:rows.length};inputFields.push(item);inserts.push({type:'inputField',...item});continue;}
@@ -197,7 +211,7 @@ function drawerDef(page, layers, overName) {
   for (const row of rows) for (const d of row) if (d.kind !== 'upload') d.variant = formVariant(d.kind, d.required, d.help);
   const footer = page.children.filter(n => n.type === 'actions' && n.footer).flatMap(n => n.buttons.filter(b => b.visible !== false).map(b => ({...b, layer:layers.get(`${page.id}/${n.id}/${b.id}`).layer})));
   if (page.children.some(n => n.type === 'actions' && !n.footer)) throw Error('抽屉正文里的按钮本轮不支持，底栏按钮请写 footer: true');
-  return {title: page.title, width, size, formWidth, rows, groups, dividers, links, radios, checkboxes, cascaders:cascaders.length?cascaders:undefined, timePickers,selectFields,inputFields,numbers, feedbacks:feedbacks.length?feedbacks:undefined, inserts, buttons:footer, over: overName,
+  return {title: page.title, width, size, formWidth, rows, groups, dividers, links, radios, checkboxes, cascaders:cascaders.length?cascaders:undefined, timeRangeGroups,timePickers,selectFields,inputFields,numbers, feedbacks:feedbacks.length?feedbacks:undefined, inserts, buttons:footer, over: overName,
     confirm: footer.find(b => b.primary)?.label ?? null, cancel: footer.find(b => !b.primary)?.label ?? null};
 }
 
@@ -218,7 +232,7 @@ function unexpressed(page, patches = {}) {
     if (n.type === 'table' && n.rowActions?.some(a => a.when) && !n.rowActionRules) issues.push(`${page.id}/${n.id}：自然语言when未执行，仅按样例行序分配操作`);
     for (const f of n.fields ?? []) if (n.type === 'search' && ((f.kind === 'date-range' && f.value != null) || f.error || f.disabled || f.visible === false)) issues.push(`${page.id}/${n.id}/${f.id}：查询字段值或状态未支持`);
   }
-  const allowed = {notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
+  const allowed = {timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
   for (const [path, props] of Object.entries(patches)) {
     const [, id, child] = path.split('/'), n = page.children.find(n => n.id === id);
     const kind = child ? n?.buttons?.some(b => b.id === child) ? 'button' : 'field' : n?.type;
@@ -264,7 +278,7 @@ export function plan(dir) {
       notes: [`草图 v${v} · ${page.title} · 状态 ${st.id} ${st.title}${st.codes?.length ? `（${st.codes.join(' ')}）` : ''}`, ...Object.entries(st.patch??{}).filter(([,p])=>p.note).map(([path,p])=>`${path}：${p.note}`)],
       expectTexts: resolved ? expectedWorkbench(resolved) : drawer ? [drawer.title, ...drawer.groups.map(g=>g.title), ...drawer.rows.flat().map(f=>f.label), ...drawer.buttons.map(b=>b.label)] : Object.values(st.patch ?? {}).flatMap(p => [p.error, p.emptyText, ...(Array.isArray(p.value) ? p.value : typeof p.value === 'string' ? [p.value] : [])].filter(Boolean))});
   }
-  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(validateDialog); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); const notices=pg.children.filter(n=>n.type==='message'&&n.visible!==false).map(n=>{const s=validateMessage(n);return {...s,mainId:readJson('../components/message/catalog.json').find(r=>r.key===s.theme+'|'+s.closable).id};});if(notices.length>1)throw Error('每个状态画板最多一个全局提示');const tooltips=pg.children.filter(n=>n.type==='tooltip'&&n.visible!==false).map(n=>{const s=validateTooltip(n);return {...s,mainId:readJson('../components/tooltip/catalog.json').find(r=>r.key===s.placement+'|'+s.theme).id};});if(tooltips.length>1)throw Error('每画板最多一个悬停Tooltip');const popconfirms=pg.children.filter(n=>n.type==='popconfirm'&&n.visible!==false).map(n=>{const s=validatePopconfirm(n);return {...s,mainId:readJson('../components/popconfirm/catalog.json').find(r=>r.key===[s.placement,s.theme,s.showArrow].join('|')).id};});if(popconfirms.length>1)throw Error('每画板最多一个气泡确认');const notifications=pg.children.filter(n=>n.type==='notification'&&n.visible!==false).map(n=>{const s=validateNotification(n);return {...s,mainId:readJson('../components/notification/catalog.json').find(r=>r.key===[s.theme,s.icon,s.footerBtn].join('|')).id};});if(notifications.length>1)throw Error('每画板最多一个消息通知');return {...rest,slot,dialogs,...(notifications.length?{notifications}:{}),...(popconfirms.length?{popconfirms}:{}),...(tooltips.length?{tooltips}:{}),...(notices.length?{notices}:{})}; })};
+  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(dialogSpec); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); const notices=pg.children.filter(n=>n.type==='message'&&n.visible!==false).map(n=>{const s=validateMessage(n);return {...s,mainId:readJson('../components/message/catalog.json').find(r=>r.key===s.theme+'|'+s.closable).id};});if(notices.length>1)throw Error('每个状态画板最多一个全局提示');const tooltips=pg.children.filter(n=>n.type==='tooltip'&&n.visible!==false).map(n=>{const s=validateTooltip(n);return {...s,mainId:readJson('../components/tooltip/catalog.json').find(r=>r.key===s.placement+'|'+s.theme).id};});if(tooltips.length>1)throw Error('每画板最多一个悬停Tooltip');const popconfirms=pg.children.filter(n=>n.type==='popconfirm'&&n.visible!==false).map(n=>{const s=validatePopconfirm(n);return {...s,mainId:readJson('../components/popconfirm/catalog.json').find(r=>r.key===[s.placement,s.theme,s.showArrow].join('|')).id};});if(popconfirms.length>1)throw Error('每画板最多一个气泡确认');const notifications=pg.children.filter(n=>n.type==='notification'&&n.visible!==false).map(n=>{const s=validateNotification(n);return {...s,mainId:readJson('../components/notification/catalog.json').find(r=>r.key===[s.theme,s.icon,s.footerBtn].join('|')).id};});if(notifications.length>1)throw Error('每画板最多一个消息通知');return {...rest,slot,dialogs,...(notifications.length?{notifications}:{}),...(popconfirms.length?{popconfirms}:{}),...(tooltips.length?{tooltips}:{}),...(notices.length?{notices}:{})}; })};
 }
 
 // 仅序列化本画板使用的构建分支，避免详情扩展把无关表单代码挤过工具长度上限。
@@ -280,7 +294,7 @@ export function runtimeSource(drawer) {
 }
 
 export function code(dir, boardId) {
-  if(!targetStatus().ready)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
+ if(!targetStatus().ready)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
   const p = plan(dir), board = p.boards.find(b => b.id === boardId);
   if (!board) throw Error(`没有画板 ${boardId}，可用：${p.boards.map(b => b.id).join('、')}`);
   const req = {fileKey: FILE_KEY, pageName: p.pageName, protectedPages: PROTECTED, version: p.version, board};
@@ -291,9 +305,10 @@ export function code(dir, boardId) {
   let fns = '', lib = '{}';
   if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify(tableDependencies((board.def.workbench??board.def).table.config))}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
-    fns = [fitFieldContent, composeForm, updateDrawer].map(f => f.toString()).join('\n');
+    const hasFields=(board.def.drawer??board.def).rows.length>0;
+    fns = (hasFields?[fitFieldContent, composeForm, updateDrawer]:[updateDrawer]).map(f => f.toString()).join('\n');
     const {variants, titleProperty, footerIds, closeIds} = readJson('./maps/drawer.json');
-    lib = `{composeForm, fitFieldContent, updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: buttonReactions()})}}`;
+    lib = `{${hasFields?'composeForm, fitFieldContent, ':''}updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: buttonReactions()})}}`;
   }
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
   if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
@@ -302,6 +317,7 @@ export function code(dir, boardId) {
   if(wd?.alerts?.length){fns+='\n'+[updateAlert,renderAlert,inspectAlert,verifyAlerts].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderAlert,inspectAlert,verifyAlerts}';}
   if(wd?.steps?.length){fns+='\n'+[updateSteps,renderSteps,inspectSteps,verifySteps].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderSteps,inspectSteps,verifySteps}';}
   if(wd?.loadings?.length){fns+='\n'+[updateLoading,renderLoading,inspectLoading,verifyLoading].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLoading,inspectLoading,verifyLoading}';}
+  if(wd?.table?.loading){fns+='\n'+[updateTableLoading,inspectTableLoading].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',updateTableLoading,inspectTableLoading}';}
   const extendedTabs=!!wd?.tabs?.mainId;
   if(extendedTabs){fns+='\n'+(wd.tabs.orientation==='top'&&!wd.tabs.icon?[renderTopTabs,inspectTabs]:[updateTabs,renderTabs,inspectTabs,arrangeLeftTabs]).map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+(wd.tabs.orientation==='top'&&!wd.tabs.icon?',renderTabs:renderTopTabs,inspectTabs}':',renderTabs,inspectTabs,arrangeLeftTabs}');}
   const extendedPagination=!!wd?.table?.pagination?.mainId;
@@ -311,7 +327,12 @@ export function code(dir, boardId) {
   if(fd?.feedbacks?.length||wd?.table?.feedback||wd?.feedbacks?.length||wd?.imageViewers?.some(s=>s.emptyFeedback)){fns+='\n'+renderFeedback.toString()+'\n'+updateFeedback.toString()+'\n'+verifyFeedback.toString();lib=lib.slice(0,-1)+',renderFeedback,verifyFeedback}';}
   if(wd?.dividers?.length||fd?.dividers?.length){fns+='\n'+[validateDivider,dividerVariant,updateDivider,renderDivider].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderDivider}';}
   if(wd?.cascaders?.length||fd?.cascaders?.length){const used=[...(wd?.cascaders??[]),...(fd?.cascaders??[])],deps=readJson('../components/cascader/dependencies.json');deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('state 状态='+({normal:'normal 默认',hover:'hover 悬浮',focus:'focus 聚焦'}[s.state]))&&r.name.includes('multiple 多选='+s.multiple)&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('prefixIcon 前置图标='+s.prefixIcon)&&r.name.includes('disabled 禁用='+s.disabled)));for(const key of Object.keys(deps.rows))deps.rows[key]=deps.rows[key].filter(r=>{const p=Object.fromEntries(r.name.split(',').map(x=>x.trim().split('=')));return used.some(s=>s.open&&s.multiple===key.startsWith('multi')&&s.columns.some((c,i)=>c.options.some(o=>(o.branch??c.branch??i<s.columns.length-1)===key.endsWith('Parent')&&p['state 状态'].startsWith((o.state??'normal')+' ')&&p['disable 禁用']===String(!!o.disabled)&&p['divider 分割线']===String(!!o.divider)&&(!s.multiple||p['indeterminate 半选']===String(!!o.indeterminate)))))});fns+='\n'+[validateCascader,cascaderSetText,updateCascaderOption,renderCascaderMenu,renderCascader].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderCascader,cascaderDeps:'+JSON.stringify(deps)+'}';}
-  if(wd?.timePickers?.length||fd?.timePickers?.length){const deps=readJson('../components/time-picker/dependencies.json'),used=[...(wd?.timePickers??[]),...(fd?.timePickers??[])];deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('format 格式='+(s.range?'timeRange 时间区间':'time 时间'))&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('disabled 禁用='+s.disabled)));fns+='\n'+[validateTimePicker,renderTimePicker].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTimePicker,timePickerDeps:'+JSON.stringify(deps)+'}';}
+  const timeGroups=[...(wd?.timeRangeGroups??[]),...(fd?.timeRangeGroups??[])];
+  if(timeGroups.length){
+    fns+='\n'+[validateTimeRangeGroup,renderTimeRangeGroup,updateTimeRangeGroup,inspectTimeRangeGroup,validateTimePicker,renderTimePicker].map(f=>f.toString()).filter(x=>!fns.includes(x)).join('\n');
+    lib=lib.slice(0,-1)+',renderTimeRangeGroup,inspectTimeRangeGroup,timeGroupDeps:'+JSON.stringify({time:{...readJson('../components/time-picker/dependencies.json'),inputs:readJson('../components/time-picker/dependencies.json').inputs.filter(r=>r.name.includes('timeRange 时间区间')&&r.name.includes('state 状态=normal 默认')).map(({name,id})=>({name,id})),ranges:readJson('../components/time-picker/dependencies.json').ranges.map(({name,id})=>({name,id})),cells:[],popups:[]},button:'107:124',title:descriptionRuntimeData().title})+'}';
+  }
+  if(wd?.timePickers?.length||fd?.timePickers?.length){const deps=readJson('../components/time-picker/dependencies.json'),used=[...(wd?.timePickers??[]),...(fd?.timePickers??[])];deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('format 格式='+(s.range?'timeRange 时间区间':'time 时间'))&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('disabled 禁用='+s.disabled)));fns+='\n'+[validateTimePicker,renderTimePicker].map(f=>f.toString()).filter(x=>!fns.includes(x)).join('\n');lib=lib.slice(0,-1)+',renderTimePicker,timePickerDeps:'+JSON.stringify(deps)+'}';}
   if(wd?.selectFields?.length||fd?.selectFields?.length){const used=[...(wd?.selectFields??[]),...(fd?.selectFields??[])],deps=readJson('../components/select/family-dependencies.json');deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('multiple 多选='+s.multiple)&&r.name.includes('expand 展开='+s.open)&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('prefixIcon 前置图标='+s.prefixIcon)&&r.name.includes('disabled 禁用='+s.disabled)));delete deps.multi;if(!used.some(s=>!s.multiple&&s.open)){deps.single=[];delete deps.singleRules;}fns+='\n'+[validateSelect,selectHelpers,renderSelect,...(used.some(s=>!s.multiple&&s.open)?[updateSingleOption,renderSinglePopup]:[])].map(f=>f.toString()).join('\n');if(used.some(s=>s.multiple&&s.open)&&!fns.includes('function renderMultiPopup('))fns+='\n'+[updateMultiOption,renderMultiPopup].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderSelect,selectDeps:'+JSON.stringify(deps)+'}';}
   if(wd?.inputFields?.length||fd?.inputFields?.length){const used=[...(wd?.inputFields??[]),...(fd?.inputFields??[])],deps=readJson('../components/input/family-dependencies.json');deps.families=Object.fromEntries(Object.entries(deps.families).map(([k,rows])=>[k,rows.filter(r=>used.some(s=>s.family===k&&s.variant===r.name))]));fns+='\n'+[validateInputField,renderInputField].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderInputField,inputFieldDeps:'+JSON.stringify(deps)+'}';}
   if(wd?.numbers?.length||fd?.numbers?.length){fns+='\n'+[validateInputNumber,renderInputNumber].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderInputNumber,numberDeps:'+JSON.stringify(readJson('../components/input-number/dependencies.json'))+'}';}
@@ -329,6 +350,10 @@ export function code(dir, boardId) {
   if(wd?.imageViewers?.some(s=>s.extended)){const cat=readJson('../components/image-viewer/catalog.json'),find=(family,p)=>cat.find(r=>r.family===family&&Object.entries(p).every(([k,v])=>r.props[k]===v)).id,d={demoHash:'43621e4f096140e8706686167dcbe771f046a043',views:{},images:{},layouts:{},close:{}};for(const g of [false,true])for(const st of ['normal','hover','error'])d.views[g+'|'+st]=find('view',{gallery:String(g),hover:String(st==='hover'),error:String(st==='error')});for(const ratio of ['1:1','16:9','9:16'])for(const error of [false,true])d.images[ratio+'|'+error]=find('image',{state:ratio,error:String(error)});for(const [g,show]of [[false,false],[true,false],[true,true]])d.layouts[g+'|'+show]=find('layout',{gallery:String(g),'⬑show':String(show)});for(const state of ['normal','hover','disabled'])d.close[state]=find('button',{hover:String(state==='hover'),disabled:String(state==='disabled'),direction:'no'});fns+='\n'+[renderImageViewerExtended,inspectImageViewerExtended,verifyImageViewerExtended].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',inspectImageViewerExtended,verifyImageViewerExtended,imageViewerDeps:'+JSON.stringify(d)+'}';}
   if(wd?.imageViewers?.length){fns+='\n'+renderImageViewer.toString()+'\n'+verifyImageViewers.toString();lib=lib.slice(0,-1)+',renderImageViewer,verifyImageViewers}';}
   if(wd?.descriptions?.length){fns+='\n'+renderDescriptions.toString()+'\n'+verifyDescriptions.toString();lib=lib.slice(0,-1)+',renderDescriptions,verifyDescriptions,descriptionData:'+JSON.stringify(descriptionRuntimeData())+'}';}
+  if(board.dialogs.some(s=>s.children?.length)){
+    fns+='\n'+[renderComposedDialog,updateComposedDialog,updateDialogContent,buildTable,updateTableContents,applyTableExtensions,renderDescriptions].map(f=>f.toString()).filter(x=>!fns.includes(x)).join('\n');
+    lib=lib.slice(0,-1)+',renderComposedDialog,updateDialogContent,buildTable,updateTableContents,renderDescriptions,descriptionData:'+JSON.stringify(descriptionRuntimeData())+'}';
+  }
   if(board.dialogs.length) {fns+='\n'+dialogMainId.toString()+'\n'+renderDialog.toString()+'\n'+updateDialog.toString()+'\n'+verifyDialogs.toString();lib=lib.slice(0,-1)+',renderDialog,verifyDialogs,dialogDeps:'+JSON.stringify((()=>{const d=readJson('../components/dialog/dependencies.json');return {...d,main:Object.fromEntries(board.dialogs.filter(s=>!s.fullscreen).map(s=>{const k=(s.theme??'default')+'/'+(s.closable??s.closeBtn??false)+'/'+!!s.divider;return [k,d.main[k]];}))};})())+'}';}
   if(board.notices?.length){fns+='\n'+[updateMessage,renderMessage,inspectMessage,verifyMessage].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderMessage,inspectMessage,verifyMessage}';}
   if(board.notifications?.length){fns+='\n'+[updateNotification,renderNotification,inspectNotification,verifyNotification].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderNotification,inspectNotification,verifyNotification}';}
@@ -336,12 +361,16 @@ export function code(dir, boardId) {
   if(board.tooltips?.length){fns+='\n'+[positionTooltip,updateTooltip,renderTooltip,inspectTooltip,verifyTooltip].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTooltip,inspectTooltip,verifyTooltip}';}
   lib=lib.replace(/^\{,/,'{');
   let runtime=runtimeSource(board.kind==='drawer'||!!board.def.drawer);
+  if(!board.dialogs.some(s=>s.children?.length)){
+    runtime=runtime.replace('(s.children?.length?lib.renderComposedDialog:lib.renderDialog)','lib.renderDialog').replace(',...(s.children?.length?{autoFrame,pick,...lib}:{})','').replace('  for(const d of dialogs)if(d.composition)semanticErrors.push(...d.composition.errors);\n','');
+  }
   // 仅裁剪当前画板不可达的段落；实际构建和语义校验代码保持原样。
   const omit = marker => { runtime=runtime.replace(new RegExp('^[ \t]*// '+marker+'_START[\\s\\S]*?^[ \t]*// '+marker+'_END\\n','m'),''); };
   if(!wd?.table||!(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){omit('TABLE_EXT_VERIFY');}
   if(!wd?.imageViewers?.some(s=>s.extended)){omit('IMAGE_VIEWER_EXT_VERIFY');runtime=runtime.replace(',imageViewerDeps:lib.imageViewerDeps','');}
   if(!wd?.alerts?.length){omit('ALERT_BUILD');omit('ALERT_VERIFY');}
   if(!wd?.steps?.length){omit('STEPS_BUILD');omit('STEPS_VERIFY');}
+  if(!wd?.table?.loading){omit('TABLE_LOADING_BUILD');omit('TABLE_LOADING_VERIFY');}
   if(!wd?.loadings?.length){omit('LOADING_BUILD');omit('LOADING_VERIFY');}
   if(!board.notifications?.length){omit('NOTIFICATION_BUILD');omit('NOTIFICATION_VERIFY');runtime=runtime.replace('notifications:notificationReceipts,','');}
   if(!board.popconfirms?.length){omit('POPCONFIRM_BUILD');omit('POPCONFIRM_VERIFY');runtime=runtime.replace('popconfirms:popconfirmReceipts,','');}
@@ -366,6 +395,7 @@ export function code(dir, boardId) {
   if(!wd?.cascaders?.length&&!fd?.cascaders?.length)runtime=runtime.replace(/        \/\/ CASCADER_START[\s\S]*?        \/\/ CASCADER_END\n/,'');
   if(!fd?.cascaders?.length)runtime=runtime.replaceAll("d.type==='cascader'?lib.renderCascader:",'').replaceAll("d.type==='cascader'?lib.cascaderDeps:",'');
   if(!wd?.timePickers?.length&&!fd?.timePickers?.length)runtime=runtime.replace(/        \/\/ TIMEPICKER_START[\s\S]*?        \/\/ TIMEPICKER_END\n/,'');
+  if(!timeGroups.length){omit('TIMEGROUP_FONT');omit('TIMEGROUP_BUILD');omit('TIMEGROUP_VERIFY');runtime=runtime.replaceAll("d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:",'').replaceAll("d.type==='timeRangeGroup'?lib.timeGroupDeps:",'');}
   if(!fd?.timePickers?.length)runtime=runtime.replaceAll("d.type==='timePicker'?lib.renderTimePicker:",'').replaceAll("d.type==='timePicker'?lib.timePickerDeps:",'');
   if(!wd?.selectFields?.length&&!fd?.selectFields?.length)runtime=runtime.replace(/        \/\/ SELECTFIELD_START[\s\S]*?        \/\/ SELECTFIELD_END\n/,'');
   if(!fd?.selectFields?.length)runtime=runtime.replaceAll("d.type==='selectField'?lib.renderSelect:",'').replaceAll("d.type==='selectField'?lib.selectDeps:",'');
@@ -378,7 +408,7 @@ export function code(dir, boardId) {
   if(!wd?.radios?.length&&!fd?.radios?.length)runtime=runtime.replace(/^.*if\(\(def\?\?form\)\?\.radios\?\.length\).*\n/gm,'');
   if(wd?.tabs?.placement!=='content')runtime=runtime.replace(/    \/\/ CONTENT_TABS_START[\s\S]*?    \/\/ CONTENT_TABS_END\n/,'');
   if(!wd?.layout)runtime=runtime.replace(/    \/\/ LAYOUT_SHELL_START[\s\S]*?    \/\/ LAYOUT_SHELL_END\n/,'').replace(/      \/\/ LAYOUT_FONT_START[\s\S]*?      \/\/ LAYOUT_FONT_END\n/,'').replace(', preservedFontRoots = new Set()','');
-  if(!wd?.dividers?.length&&!wd?.links?.length&&!wd?.radios?.length&&!wd?.checkboxes?.length&&!wd?.numbers?.length&&!wd?.inputFields?.length&&!wd?.selectFields?.length&&!wd?.timePickers?.length&&!wd?.cascaders?.length)runtime=runtime.replace(/    \/\/ DIVIDER_ORDER_START[\s\S]*?    \/\/ DIVIDER_ORDER_END\n/,'');
+  if(!wd?.timeRangeGroups?.length&&!wd?.dividers?.length&&!wd?.links?.length&&!wd?.radios?.length&&!wd?.checkboxes?.length&&!wd?.numbers?.length&&!wd?.inputFields?.length&&!wd?.selectFields?.length&&!wd?.timePickers?.length&&!wd?.cascaders?.length)runtime=runtime.replace(/    \/\/ DIVIDER_ORDER_START[\s\S]*?    \/\/ DIVIDER_ORDER_END\n/,'');
   if(!fd?.inserts?.length)runtime=runtime.replace(/^.*for\(const d of def.inserts.*\n/gm,'');
   if(fd&&!fd.rows.flat().some(f=>f.kind==='upload'))runtime=runtime.replace(/  async function uploadFiles\([\s\S]*?(?=  async function formValue)/,'').replace(/      \/\/ DRAWER_UPLOAD_START[\s\S]*?      \/\/ DRAWER_UPLOAD_END\n/,'');
   if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');

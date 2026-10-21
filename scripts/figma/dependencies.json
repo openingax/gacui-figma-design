@@ -1,11 +1,16 @@
 {
   "schema": 2,
-  "base": "skill-v0.4.6",
+  "base": "skill-v1.0.0",
   "nodes": [
     {
+      "id": "107:112",
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/button"
+    },
+    {
       "id": "107:124",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/button"
     },
     {
       "id": "107:139",
@@ -26,6 +31,16 @@
       "id": "107:86",
       "origin": "public-0.4.6",
       "type": null
+    },
+    {
+      "id": "107:93",
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/drawerButtons"
+    },
+    {
+      "id": "107:97",
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/drawerButtons"
     },
     {
       "id": "112:92",
@@ -1724,8 +1739,8 @@
     },
     {
       "id": "593:18734",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/timePicker"
     },
     {
       "id": "593:18745",
@@ -1739,13 +1754,13 @@
     },
     {
       "id": "593:18767",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/timePicker"
     },
     {
       "id": "593:18778",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/timePicker"
     },
     {
       "id": "593:18789",
@@ -1759,8 +1774,8 @@
     },
     {
       "id": "593:18811",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/timePicker"
     },
     {
       "id": "593:18823",
@@ -1784,18 +1799,18 @@
     },
     {
       "id": "593:3",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/range"
     },
     {
       "id": "593:6",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/range"
     },
     {
       "id": "593:8",
-      "origin": "public-0.4.6",
-      "type": null
+      "type": "COMPONENT",
+      "origin": "timeRangeGroup/range"
     },
     {
       "id": "606:10",
@@ -5678,5 +5693,5 @@
       "type": null
     }
   ],
-  "fingerprint": "2ec9ad19df4c71bc35561ab219e389094fdc5fa53ef21ae56f55720922907fb5"
+  "fingerprint": "574df3779635c48bcb98f5af8d73bb7f260440b2eefd14b68934863566775364"
 }

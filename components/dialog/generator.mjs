@@ -1,5 +1,6 @@
+import {validateDescriptions} from '../descriptions/generator.mjs';
 export function validateDialog(s) {
-  for(const k of ['title','message','confirm','cancel']) if(typeof s[k]!=='string'||!s[k].trim()) throw Error('Dialog '+k+' 必须为非空文字');
+  for(const k of ['title','confirm','cancel',...(s.children?.length?[]:['message'])]) if(typeof s[k]!=='string'||!s[k].trim()) throw Error('Dialog '+k+' 必须为非空文字');
   for(const k of ['closable','closeBtn','divider','fullscreen'])if(s[k]!==undefined&&typeof s[k]!=='boolean')throw Error('Dialog '+k+' 必须为布尔值');
   if(s.closable!==undefined&&s.closeBtn!==undefined&&s.closable!==s.closeBtn)throw Error('Dialog closable与closeBtn冲突');
   const theme=s.theme??(s.fullscreen?'info':'default'),closable=s.closable??s.closeBtn??!!s.fullscreen;
@@ -7,6 +8,20 @@ export function validateDialog(s) {
   if(!['normal','hover','active'].includes(s.closeState??'normal')||!closable&&s.closeState&&s.closeState!=='normal')throw Error('Dialog closeState不支持');
   if(s.fullscreen&&(theme!=='info'||!closable||s.width!==undefined))throw Error('Dialog 全屏源仅支持info、带关闭且按视口宽度');
   if(s.width!==undefined&&(!Number.isFinite(s.width)||s.width<480||s.width>960))throw Error('Dialog 宽度须在480至960之间');
+  if(s.message!==undefined&&typeof s.message!=='string')throw Error('Dialog message须为文字');
+  if(s.children!==undefined){
+    if(!Array.isArray(s.children)||!s.children.length)throw Error('Dialog children须为非空内容列表');
+    const ids=new Set();for(const c of s.children){
+      if(!c||!/^[-\w]+$/.test(c.id??'')||ids.has(c.id))throw Error('Dialog内容需要唯一id');ids.add(c.id);
+      if(c.type==='descriptions')validateDescriptions(c);
+      else if(c.type==='table'){
+        if(!Array.isArray(c.columns)||!c.columns.length||new Set(c.columns.map(x=>x.id)).size!==c.columns.length)throw Error('Dialog表格需要不重复的列');
+        if(c.columns.some(x=>!x.id||!x.title||!['text','textTag','state','operations'].includes(x.kind??'text')))throw Error('Dialog表格列类型未支持；标签请用textTag');
+        if(!Array.isArray(c.data)||!c.data.length||c.rows!==undefined&&c.rows!==c.data.length||c.renderRows!==undefined&&c.renderRows!==c.data.length)throw Error('Dialog表格须提供完整非空data，不能省略行');
+        if(c.pagination||c.feedback||c.error||c.loading)throw Error('Dialog表格分页、反馈和加载请暂用页面表格，不得静默省略');
+      }else throw Error('Dialog内容仅支持table/descriptions');
+    }
+  }
   return s;
 }
 export function dialogMainId(s,deps) {

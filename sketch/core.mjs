@@ -1,3 +1,5 @@
+import {validateTableLoading} from '../components/table/loading.mjs';
+import {validateTimeRangeGroup,renderTimeRangeGroup,updateTimeRangeGroup} from '../components/time-range-group/generator.mjs';
 import {validateTableExtensions} from '../components/table/extensions.mjs';
 import {validateNotification} from '../components/notification/generator.mjs';
 import {validatePopconfirm} from '../components/popconfirm/generator.mjs';
@@ -25,7 +27,7 @@ import {validateDialog} from '../components/dialog/generator.mjs';
 import {validatePagination} from '../components/pagination/generator.mjs';
 import {validateTag} from '../components/tag/generator.mjs';
 // 草图格式的纯函数；renderHtml显式内联validateDialog并移除模块import，Node与预览共享校验。
-export const NODE_TITLES = {notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
+export const NODE_TITLES = {timeRangeGroup:'时段组',notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
 export const FIELD_KINDS = {
   search: ['input', 'select', 'date', 'date-range'],
   form: ['input', 'textarea', 'select', 'date', 'date-range', 'switch', 'checkbox', 'upload', 'time', 'number', 'radio'],
@@ -33,7 +35,7 @@ export const FIELD_KINDS = {
 export const COLUMN_KINDS = ['text', 'textTag', 'state', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
-export const PATCH_PROPS = ['gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
+export const PATCH_PROPS = ['min','max','inputWidth','addLabel','removeLabel','children','gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
 // 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
 const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo','request'];
 const REQUEST_KEYS = ['text','sources'];
@@ -188,6 +190,7 @@ export function check(sketch, checklist, {final = false} = {}) {
       if(node.type==='transfer'){try{validateTransfer(node);}catch(e){err(where,e.message);}}
       if(node.type==='feedback'){try{validateFeedback(node);}catch(e){err(where,e.message);}}
       if(node.type==='cascader'){try{validateCascader(node);}catch(e){err(where,e.message);}}
+      if(node.type==='timeRangeGroup'){try{validateTimeRangeGroup(node);}catch(e){err(where,e.message);}}
       if(node.type==='timePicker'){try{validateTimePicker(node);}catch(e){err(where,e.message);}}
       if(node.type==='selectField'){try{validateSelect(node);}catch(e){err(where,e.message);}}
       if(node.type==='inputField'){try{validateInputField(node);}catch(e){err(where,e.message);}}
@@ -214,6 +217,7 @@ export function check(sketch, checklist, {final = false} = {}) {
       if (node.type === 'table' && !node.columns?.length) err(where, 'table 缺少 columns');
       if (node.type === 'actions' && !node.buttons?.length) err(where, 'actions 缺少 buttons');
       if (node.type === 'table') {
+        try{validateTableLoading(node.loading);}catch(e){err(where,e.message);}
         for (const key of ['selectedRows', 'disabledRows']) if (node[key] !== undefined && (!Array.isArray(node[key]) || new Set(node[key]).size !== node[key].length || node[key].some(i => !Number.isInteger(i) || i < 0 || i >= (node.rows ?? 10)))) err(where, key + ' 必须为有效且不重复的行索引');
         if (node.rows !== undefined && (!Number.isInteger(node.rows) || node.rows < 0)) err(where, 'rows 必须为非负整数');
         if (node.disabledWhen && (!node.disabledWhen.field || !Object.hasOwn(node.disabledWhen, 'equals'))) err(where, 'disabledWhen 需要field和equals');
@@ -369,6 +373,7 @@ export function resolvePage(page, patch = {}) {
     if(n.type==='feedback')validateFeedback(n);
     if(n.type==='selectField')validateSelect(n);
     if(n.type==='cascader')validateCascader(n);
+    if(n.type==='timeRangeGroup')validateTimeRangeGroup(n);
     if(n.type==='timePicker')validateTimePicker(n);
     if(n.type==='inputField')validateInputField(n);
     if(n.type==='number')validateInputNumber(n);
@@ -391,6 +396,7 @@ export function resolvePage(page, patch = {}) {
     if(n.type==='tabs'&&(n.orientation!==undefined||n.icon!==undefined))validateTabs(n);
     if (n.type === 'tabs' && (!Number.isInteger(n.active ?? 0) || (n.active ?? 0) < 0 || (n.active ?? 0) >= n.items.length)) throw Error(`页签 ${n.id} active 索引无效`);
     if (n.type !== 'table') continue;
+    validateTableLoading(n.loading);
     const tableMode=validateTableExtensions(n);if(n.selectionMode)n.selection=tableMode!=='none';
     if(n.pagination&&typeof n.pagination==='object')validatePagination(n.pagination);
     if(n.feedback)validateFeedback({id:'table',kind:n.error?'error':'empty',message:n.error||n.emptyText||'暂无数据',action:n.error?(n.retryLabel||'重试'):n.feedback.action,variant:n.feedback.variant});

@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.0.0 首个正式版本：新增已验证组件及草稿入口，未完成扩展不提供。升级须重新核对Figma目标依赖；0.x到1.x须明确接受主版本升级。保留日志告知及关闭方式；设计仍需用户验收。",
+  "notice": "V1.1.0：新增Dialog内嵌表格与只读字段、可增删时段组及表格区域加载。1.0.0可兼容升级，原草稿保留；目标依赖指纹变化须重新适配。未完成组件继续隔离，静态设计与字体替代仍需用户验收。",
   "delivery": "draft-and-figma",
   "figmaStatus": "team-target"
 }
