@@ -1,11 +1,11 @@
 # Figma 出稿：已确认草稿 → 可编辑设计稿
 
-从 0.4.6 起开放。产品经理确认草稿版本并明确要求出 Figma 后，agent 按本页把草稿生成为团队出稿文件中的可编辑画板：使用已导入的规范组件实例，不是截图或静态图片。产品经理只需对话，以下命令由 agent 执行。
+本文适用于V1.0.0，出稿能力始于0.4.6。产品经理确认草稿版本并明确要求出 Figma 后，agent 按本页把草稿生成为团队出稿文件中的可编辑画板：使用已导入的规范组件实例，不是截图或静态图片。产品经理只需对话，以下命令由 agent 执行。
 
 ## 适用范围
 
 - **出稿目标**：已导入本版本所需组件库的团队出稿文件。出稿代码按节点引用其中的组件，`scripts/figma/target.mjs` 会核对全部依赖。目标链接向维护者获取，仓库不保存；没有导入组件的新建空文件不能直接使用，见下文“其他文件”。
-- **页面类型**：草稿支持的工作台（查询、列表、详情、页签、反馈、时间线、图片查看等）与右侧抽屉表单，以及草稿中的状态画板和确认对话框。各组件支持范围以 `components/README.md` 为准，部分家族只部分支持，缺口照常列出。
+- **页面类型**：草稿支持的工作台（查询、列表、详情、页签、反馈、时间线、图片查看等）与右侧抽屉表单，以及草稿中的状态画板和确认对话框。本版本新增入口及隔离边界以 [草稿能力表](draft-component-capabilities.md) 为准，部分家族只部分支持，缺口照常列出。
 - **账号与工具**：当前 Figma 工具需要能查询身份、读取文件、执行 Plugin API 写入和截图。账号对出稿文件需要编辑权限。只有读取或导出图片能力时不能出稿。
 
 ## Agent 执行步骤
@@ -14,13 +14,14 @@
 2. **适配核对（每台电脑首次、版本升级后各一次）**：
    ```sh
    node scripts/figma/target.mjs status
-   node scripts/figma/target.mjs check-code <目标文件链接> > .local/target-check.js
+   node scripts/figma/target.mjs plan <目标文件链接> > .local/target-plan.json
+   node scripts/figma/target.mjs check-code <目标文件链接> <批次索引> > .local/target-check.js
    ```
-   （`.local/` 不存在时先创建。）把输出代码原样交给 use_figma 在目标文件执行（只读），将返回 JSON 存为 `.local/target-receipt.json`，再执行：
+   先创建 `.local/`。按 plan 的 batches 顺序，对每个 index 生成并执行只读代码，保存工具返回的真实 JSON；不能只执行默认第0批。将 plan 原有字段与 `receipts: [各批真实回执]` 合并保存为 `.local/target-receipt.json`，再执行：
    ```sh
    node scripts/figma/target.mjs receipt <目标文件链接> .local/target-receipt.json
    ```
-   有缺失组件即停止，告诉用户该文件不能直接出稿。通过后写入本机 `.local/figma-pages.json`（不提交）。依赖数量随版本变化，`status` 显示不符时需重新核对。
+   本版本检查1135个依赖，分4批（每批最多300）。指纹包含有序ID和预期类型；旧版本回执、缺批、重复批、错误目标/类型/ID集合均拒绝。只读回执证明节点存在及新增主组件类型，不证明编辑权限、字体、视觉、素材或业务验收。身份与写入权限仍按第1步核实，实际出稿需第6步回读和截图。禁止手写成功回执绕过检查；自动测试的 mock 不可用作真实连接。通过后写本机 `.local/figma-pages.json`，不提交；依赖更新须重新适配。
 3. **确认草稿**：用户明确确认具体版本后，按 `status` 返回的 hash 执行 `confirm`。接受建议不等于确认。
 4. **记录出稿请求**：用户明确要求出 Figma 后执行
    ```sh

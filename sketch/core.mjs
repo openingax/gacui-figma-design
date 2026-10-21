@@ -1,3 +1,11 @@
+import {validateTableExtensions} from '../components/table/extensions.mjs';
+import {validateNotification} from '../components/notification/generator.mjs';
+import {validatePopconfirm} from '../components/popconfirm/generator.mjs';
+import {validateSteps} from '../components/steps/generator.mjs';
+import {validateTooltip} from '../components/tooltip/generator.mjs';
+import {validateLoading} from '../components/loading/generator.mjs';
+import {validateMessage} from '../components/message/generator.mjs';
+import {validateTabs} from '../components/tabs/generator.mjs';
 import {resolveUpload} from '../components/upload/compose.mjs';
 import {validateTransfer} from '../components/transfer/family.mjs';
 import {validateCascader} from '../components/cascader/family.mjs';
@@ -14,16 +22,18 @@ import {validateTimeline} from '../components/timeline/generator.mjs';
 import {validateImageViewer} from '../components/image-viewer/generator.mjs';
 import {validateDescriptions} from '../components/descriptions/generator.mjs';
 import {validateDialog} from '../components/dialog/generator.mjs';
+import {validatePagination} from '../components/pagination/generator.mjs';
+import {validateTag} from '../components/tag/generator.mjs';
 // 草图格式的纯函数；renderHtml显式内联validateDialog并移除模块import，Node与预览共享校验。
-export const NODE_TITLES = {upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
+export const NODE_TITLES = {notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
 export const FIELD_KINDS = {
   search: ['input', 'select', 'date', 'date-range'],
   form: ['input', 'textarea', 'select', 'date', 'date-range', 'switch', 'checkbox', 'upload', 'time', 'number', 'radio'],
 };
-export const COLUMN_KINDS = ['text', 'tag', 'operations'];
+export const COLUMN_KINDS = ['text', 'textTag', 'state', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
-export const PATCH_PROPS = ['draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
+export const PATCH_PROPS = ['gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
 // 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
 const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo','request'];
 const REQUEST_KEYS = ['text','sources'];
@@ -49,7 +59,7 @@ const STATE_KEYS = ['id','page','title','codes','patch','from'];
 const QUESTION_KEYS = ['id','code','node','ask','recommend','answer','from'];
 const DECISION_KEYS = ['code','decision','from','text'];
 const GAP_KEYS = ['id','need','component','handling','acceptedFrom','from'];
-export const SKETCH_KEYS = [...PATCH_PROPS,'id','type','title','from','need','handling','component','acceptedFrom','text','subtitle','footer','fields','buttons','columns','children','opens','primary','required','help','max','min','placeholder','wrap','cols','columnCount','actions','actor','content','date','detail','disabledLabel','enableWhenSelected','fullscreen','gallery','groups','height','highlight','icon','images','mode','name','key','pageSize','renderRows','selectionSummary','sourcePage','targetPage','span','suggestions','tags','time','topLabel','unavailable','values','viewportWidth','visibleWhen','demo','menu','layout'];
+export const SKETCH_KEYS = [...PATCH_PROPS,'id','type','title','from','need','handling','component','acceptedFrom','text','subtitle','footer','fields','buttons','columns','children','opens','primary','required','help','max','min','placeholder','ratio','imageHash','wrap','maxLines','stateThemes','tagKey','cols','columnCount','actions','actor','content','date','detail','disabledLabel','enableWhenSelected','fullscreen','gallery','groups','height','highlight','icon','images','mode','name','key','pageSize','renderRows','selectionSummary','sourcePage','targetPage','span','suggestions','tags','tag','themes','time','topLabel','unavailable','values','viewportWidth','visibleWhen','demo','menu','layout'];
 const editDistance = (a, b) => {
   const row = Array.from({length: b.length + 1}, (_, i) => i);
   for (let i = 1; i <= a.length; i++) {
@@ -189,6 +199,12 @@ export function check(sketch, checklist, {final = false} = {}) {
       if(node.type==='timeline'){try{validateTimeline(node);}catch(e){err(where,e.message);}}
       if(node.type==='imageViewer'){try{validateImageViewer(node);}catch(e){err(where,e.message);}}
       if(node.type==='descriptions'){try{validateDescriptions(node);}catch(e){err(where,e.message);}}
+      if(node.type==='message'){try{validateMessage(node);}catch(e){err(where,e.message);}}
+      if(node.type==='notification'){try{validateNotification(node);}catch(e){err(where,e.message);}}
+      if(node.type==='popconfirm'){try{validatePopconfirm(node);}catch(e){err(where,e.message);}}
+      if(node.type==='steps'){try{validateSteps(node);}catch(e){err(where,e.message);}}
+      if(node.type==='loading'){try{validateLoading(node);}catch(e){err(where,e.message);}}
+      if(node.type==='tooltip'){try{validateTooltip(node);}catch(e){err(where,e.message);}}
       if(node.type==='dialog') {try{validateDialog(node);}catch(e){err(where,e.message);}}
       if(node.type==='table'&&node.feedback){try{validateFeedback({id:'table',kind:node.error?'error':'empty',message:node.error||node.emptyText||'暂无数据',action:node.error?(node.retryLabel||'重试'):node.feedback.action,variant:node.feedback.variant});}catch(e){err(where,e.message);}}
       if (node.type === 'gap' && !node.need) err(where, 'gap 必须写明 need（需要什么）');
@@ -363,14 +379,28 @@ export function resolvePage(page, patch = {}) {
     if(n.type==='timeline')validateTimeline(n);
     if(n.type==='imageViewer')validateImageViewer(n);
     if(n.type==='descriptions')validateDescriptions(n);
+    if(n.type==='message')validateMessage(n);
+    if(n.type==='loading')validateLoading(n);
+    if(n.type==='steps')validateSteps(n);
+    if(n.type==='popconfirm')validatePopconfirm(n);
+    if(n.type==='notification')validateNotification(n);
+    if(n.type==='tooltip')validateTooltip(n);
     if(n.type==='dialog')validateDialog(n);
     if (n.type === 'heading' && (!n.title || !n.status?.label || !['default','primary','success','warning','danger'].includes(n.status.theme))) throw Error(`标题 ${n.id} 需要title和有效status`);
+    if(n.type==='heading')validateTag(n.status);
+    if(n.type==='tabs'&&(n.orientation!==undefined||n.icon!==undefined))validateTabs(n);
     if (n.type === 'tabs' && (!Number.isInteger(n.active ?? 0) || (n.active ?? 0) < 0 || (n.active ?? 0) >= n.items.length)) throw Error(`页签 ${n.id} active 索引无效`);
     if (n.type !== 'table') continue;
+    const tableMode=validateTableExtensions(n);if(n.selectionMode)n.selection=tableMode!=='none';
+    if(n.pagination&&typeof n.pagination==='object')validatePagination(n.pagination);
     if(n.feedback)validateFeedback({id:'table',kind:n.error?'error':'empty',message:n.error||n.emptyText||'暂无数据',action:n.error?(n.retryLabel||'重试'):n.feedback.action,variant:n.feedback.variant});
     const count = n.error ? 0 : Math.min(n.rows ?? 10, 10);
     for (const key of ['selectedRows', 'disabledRows']) if (n[key] !== undefined && (!Array.isArray(n[key]) || new Set(n[key]).size !== n[key].length || n[key].some(i => !Number.isInteger(i) || i < 0 || i >= (n.rows ?? 10)))) throw Error(`表格 ${n.id} ${key} 行索引无效`);
     const data = Array.from({length: count}, (_, i) => n.data?.[i] ?? {});
+    for(const c of n.columns.filter(c=>c.kind==='tag')) {
+      if(c.tag&&!c.themes)throw Error('Tag扩展列需要显式themes映射');
+      if(c.themes)for(const row of data)validateTag({...c.tag,label:String(row[c.id]??'演示'),theme:c.themes[row[c.id]??'演示']});
+    }
     const matches = (row, rule) => {
       if (!rule?.field || !Object.hasOwn(rule, 'equals') || !n.columns.some(c => c.id === rule.field)) throw Error(`表格 ${n.id} 条件需要有效field和equals`);
       return row[rule.field] === rule.equals;
@@ -383,7 +413,7 @@ export function resolvePage(page, patch = {}) {
     else if (n.selected === 'none') selected = [];
     if (!n.error && n.selectedRows?.some(i => disabled.includes(i))) throw Error(`表格 ${n.id} 显式选中包含禁选行`);
     n.selectedRows = n.selection ? selected.filter(i => i < count && !disabled.includes(i)) : [];
-    n.disabledRows = disabled;
+    n.disabledRows = disabled;validateTableExtensions(n);
     n.renderRows = count;
     if (n.rowActionRules) n.rowActions = data.map(row => {
       const rule = n.rowActionRules.find(a => !a.match || matches(row, a.match));
@@ -400,6 +430,7 @@ export function resolvePage(page, patch = {}) {
     b.disabled = table.visible === false || !eligible.length;
     b.selectionSummary = table.selectedRows.length ? `已选 ${table.selectedRows.length} 条，可处理 ${eligible.length} 条，跳过 ${table.selectedRows.length - eligible.length} 条` : null;
   }
+  for(const n of out.children??[])if(n.type==='search')for(const f of n.fields??[])if(f.kind==='date'&&f.value!=null&&typeof f.value!=='string')throw Error('查询区单日期值必须为字符串');
   const fields = new Map(out.children.flatMap(n => (n.fields ?? []).map(f => [`${out.id}/${n.id}/${f.id}`, f])));
   for (const f of fields.values()) {
     if (f.visibleWhen) {

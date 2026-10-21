@@ -250,6 +250,7 @@ export async function sketchRuntime(figma, req, lib) {
     let extra = 0;
     if (!def.search) { query.remove(); one('区块间距').remove(); }
     else {
+      // SEARCH_BUILD_START
       const oldRows = [...query.children], kids = oldRows.flatMap(r => r.children);
       const tpl = {input: kids.find(n => n.name === '筛选/工单编号'), select: kids.find(n => n.name === '筛选/场站类型'), actions: kids.find(n => n.name === '查询操作')};
       if (!tpl.input || !tpl.select || !tpl.actions) throw Error('基线查询区结构变化，请先核实 180:3');
@@ -261,12 +262,21 @@ export async function sketchRuntime(figma, req, lib) {
         for (const slot of slots.slice(r * 3, r * 3 + 3)) {
           let n;
           if (slot.kind === 'actions') { n = tpl.actions.clone(); for (const c of [...n.children].slice(2)) c.remove(); }
+          // SEARCH_FIELDS_START
           else if (slot.kind === 'input') { n = tpl.input.clone(); await setText(unique(n, '输入框标题'), slot.label); await setText(unique(n, '请输入'), slot.value ?? slot.placeholder ?? '请输入'); }
           else if (slot.kind === 'select') { n = tpl.select.clone(); await setFieldValue(n, slot, slot.value ?? '全部'); }
+          else if (slot.kind === 'date') {
+            const set=await figma.getNodeByIdAsync('70:2'),filled=slot.value!=null&&slot.value!=='';
+            const main=set.children.find(n=>n.type==='COMPONENT'&&n.name==='mode 类型=date 日期, state 状态=normal 默认, filled 填充='+filled+', disabled 禁用=false');
+            if(!main)throw Error('单日期输入依赖缺失');
+            n=await instance(main.id,row,slot.layer);n.resize((CONTENT_WIDTH-48)/3,32);
+            await setText(visibleTexts(n)[0],slot.label+'    '+(filled?slot.value:(slot.placeholder??'请选择日期')));
+          }
           else if (slot.kind === 'date-range') {
             n = (await figma.getNodeByIdAsync('69:42')).createInstance(); await normalize(n); n.resize(1144 / 3, 32);
             const texts = n.findAllWithCriteria({types: ['TEXT']}); await setText(texts[0], slot.label + '   开始时间'); await setText(texts[2], '结束时间');
           } else throw Error('查询区暂不支持字段类型 ' + slot.kind);
+          // SEARCH_FIELDS_END
           if(def.layout&&slot.kind!=='actions')n.resize((CONTENT_WIDTH-48)/3,n.height);
           row.appendChild(n); n.name = slot.kind === 'actions' ? '查询操作' : slot.layer;
         }
@@ -274,6 +284,7 @@ export async function sketchRuntime(figma, req, lib) {
       for (const r of oldRows) r.remove();
       const height = 32 + rowCount * 32 + (rowCount - 1) * 16;
       extra = height - query.height; query.resize(query.width, height);
+      // SEARCH_BUILD_END
     }
 
     const toolbar=one('列表工具栏'),mainActions=one('主要操作');
@@ -283,22 +294,28 @@ export async function sketchRuntime(figma, req, lib) {
     if(!def.buttons.some(b=>b.visible!==false)){toolbar.remove();one('工具栏下间距').remove();}
 
     const list = one('工单结果');
+    // TAG_HELPER_START
     const tagIds={default:'54:27',primary:'54:29',success:'54:31',warning:'54:33',danger:'54:35'};
-    async function tag(parent, label, theme) {
+    async function tag(parent, label, theme, spec) {
+      if(spec?.mainId)return lib.renderTag(figma,parent,spec);
       if(!tagIds[theme]) throw Error('标签主题未配置：'+theme);
       const n=await instance(tagIds[theme],parent,'状态标签');
       const t=visibleTexts(n)[0];await setText(t,label);t.textAutoResize='WIDTH_AND_HEIGHT';n.primaryAxisSizingMode='AUTO';return n;
     }
+    // TAG_HELPER_END
     for (const h of def.headings ?? []) {
       const block=autoFrame(list,h.layer,'VERTICAL',CONTENT_WIDTH);list.insertChild(0,block);
       await text(block,'标题',h.title,'body',CONTENT_WIDTH);
       if(h.subtitle) await text(block,'编号',h.subtitle);
-      await tag(block,h.status.label,h.status.theme);
+      await tag(block,h.status.label,h.status.theme,h.status);
       block.paddingBottom=16;
     }
     for(const d of def.descriptions??[]){const node=await lib.renderDescriptions(figma,list,d,lib.descriptionData,{autoFrame,pick,width:CONTENT_WIDTH});list.insertChild(list.children.indexOf(one('工单列表')),node);}
     // CONTENT_TABS_START
-    if (contentTabs) {
+    // TABS_EXTENDED_START
+    if(def.tabs.mainId){const c=await lib.renderTabs(figma,list,def.tabs,CONTENT_WIDTH);list.insertChild(list.children.indexOf(one('工单列表')),c);}
+    // TABS_EXTENDED_END
+    else if (contentTabs) {
       // 规范整栏 normalTabs（top）：spacing 0、Gray0 底、仅底边 Gray3 1px INSIDE；见 evidence/spec-guides-20261020/tabs.md
       const content=autoFrame(list,'内容页签','HORIZONTAL',CONTENT_WIDTH);content.resize(CONTENT_WIDTH,48);
       Object.assign(content,{primaryAxisSizingMode:'FIXED',itemSpacing:0,strokeAlign:'INSIDE',strokeWeight:0,strokeBottomWeight:1});
@@ -313,6 +330,7 @@ export async function sketchRuntime(figma, req, lib) {
     }
     if(!def.table){one('工单列表').remove();one('工单分页').remove();}
     else {
+      // TABLE_BUILD_START
       const oldTable=one('工单列表'),index=list.children.indexOf(oldTable);
       oldTable.remove();
       const result=await lib.buildTable(figma,list,def.table.config,lib.tableDeps);
@@ -320,13 +338,17 @@ export async function sketchRuntime(figma, req, lib) {
       for(const mapping of def.tagThemes??[]) for(const [i,row] of built.children.filter(n=>n.name.startsWith('row/')).entries()) {
         const value=def.table.config.rows[i][mapping.key], theme=mapping.themes[value];
         let cell=row.children.find(n=>n.name==='cell/'+mapping.key);cell=cell.detachInstance();
-        for(const child of [...cell.children]) child.remove();await tag(cell,value,theme);
+        for(const child of [...cell.children]) child.remove();await tag(cell,value,theme,mapping.specs?.[value]);
       }
       const pagination=one('工单分页');
       pagination.name='分页';
       if(def.layout)pagination.resize(CONTENT_WIDTH,pagination.height);
-      if(!def.table.pagination||!def.table.config.rows.length)pagination.visible=false;
+      // PAGINATION_EXTENDED_START
+      if(def.table.pagination?.mainId&&def.table.config.rows.length){const index=list.children.indexOf(pagination),n=await lib.renderPagination(figma,list,def.table.pagination,CONTENT_WIDTH);list.insertChild(index,n);pagination.remove();}
+      // PAGINATION_EXTENDED_END
+      else if(!def.table.pagination||!def.table.config.rows.length)pagination.visible=false;
       else {
+        // PAGINATION_BUILD_START
         pagination.name = '分页';
         await setText(visibleTexts(pagination).find(t => /^共/.test(t.characters)), `共${def.table.config.rows.length} 条`);
         const pageButtons=unique(pagination,'page btn'),numbers=pageButtons.children.filter(n=>n.name.startsWith('页码/'));
@@ -335,8 +357,11 @@ export async function sketchRuntime(figma, req, lib) {
         keep.name='页码/1';await setText(visibleTexts(keep)[0],'1');
         for(const n of pageButtons.children)if(n!==keep)n.visible=false;
         unique(pagination,'jumper').visible=false;
+        // PAGINATION_BUILD_END
       }
+      // TABLE_BUILD_END
     }
+    // TABLE_EMPTY_START
     if (def.table && !def.table.config.rows.length) {
       if(def.table.feedback){await lib.renderFeedback(figma,list,{id:'table',kind:def.table.error?'error':'empty',variant:def.table.feedback.variant??'compact',message:def.table.error||def.table.emptyText||'暂无数据',action:def.table.error?(def.table.retryLabel||'重试'):def.table.feedback.action},{autoFrame,normalize,setText,instance,buttonLabel,width:CONTENT_WIDTH});}else{
       const message = autoFrame(list, def.table.error ? '加载失败' : '空结果', 'VERTICAL', CONTENT_WIDTH);
@@ -349,11 +374,24 @@ export async function sketchRuntime(figma, req, lib) {
       } else unsupported.push('空状态没有规范组件，当前只用文字表达，视觉待 UI 确认');
       }
     }
+    // TABLE_EMPTY_END
+    // ALERT_BUILD_START
+    for(const s of def.alerts??[])await lib.renderAlert(figma,list,s,CONTENT_WIDTH);
+    // ALERT_BUILD_END
+    // STEPS_BUILD_START
+    for(const s of def.steps??[])await lib.renderSteps(figma,list,s,CONTENT_WIDTH);
+    // STEPS_BUILD_END
+  // LOADING_BUILD_START
+    for(const s of def.loadings??[])await lib.renderLoading(figma,list,s,CONTENT_WIDTH);
+    // LOADING_BUILD_END
     for(const s of def.feedbacks??[])await lib.renderFeedback(figma,list,s,{autoFrame,normalize,setText,instance,buttonLabel,width:CONTENT_WIDTH});
 
     for(const s of def.timelines??[])await lib.renderTimeline(figma,list,s,{autoFrame,text,normalize,setText,width:CONTENT_WIDTH});
-    for(const s of def.imageViewers??[])await lib.renderImageViewer(figma,root,list,s,{autoFrame,text,instance,normalize,setText,buttonLabel,renderFeedback:lib.renderFeedback,width:CONTENT_WIDTH});
-    if(def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
+    for(const s of def.imageViewers??[])await lib.renderImageViewer(figma,root,list,s,{autoFrame,text,instance,normalize,setText,buttonLabel,renderFeedback:lib.renderFeedback,imageViewerDeps:lib.imageViewerDeps,width:CONTENT_WIDTH});
+    // TABS_LAYOUT_START
+    if(def.tabs?.orientation==='left'){lib.arrangeLeftTabs(figma,list,CONTENT_WIDTH);list.primaryAxisSizingMode='AUTO';}
+    // TABS_LAYOUT_END
+    if(def.alerts?.length||def.steps?.length||def.loadings?.length||def.headings?.length||def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
     // DIVIDER_ORDER_START
     if(def.blocks?.length){
       const workspace=one('工作区'),ordered=autoFrame(workspace,'草稿内容顺序','VERTICAL',OUTER_WIDTH);
@@ -527,7 +565,19 @@ export async function sketchRuntime(figma, req, lib) {
   else if (board.kind === 'drawer') root = await buildDrawer(board.def);
   else root = await buildState(board.def);
   const dialogs=[];
-  for(const s of board.dialogs??[])dialogs.push(await lib.renderDialog(figma,root,s,{normalize,setText,buttonLabel}));
+  for(const s of board.dialogs??[])dialogs.push(await lib.renderDialog(figma,root,s,{normalize,setText,buttonLabel,deps:lib.dialogDeps}));
+  // MESSAGE_BUILD_START
+  const messageReceipts=[];for(const s of board.notices??[]){const n=await lib.renderMessage(figma,root,s);messageReceipts.push(await lib.inspectMessage(n));}
+  // MESSAGE_BUILD_END
+  // NOTIFICATION_BUILD_START
+  const notificationReceipts=[];for(const s of board.notifications??[]){const n=await lib.renderNotification(figma,root,s);notificationReceipts.push(await lib.inspectNotification(n));}
+  // NOTIFICATION_BUILD_END
+  // POPCONFIRM_BUILD_START
+  const popconfirmReceipts=[];for(const s of board.popconfirms??[]){const n=await lib.renderPopconfirm(figma,root,s);popconfirmReceipts.push(await lib.inspectPopconfirm(n));}
+  // POPCONFIRM_BUILD_END
+  // TOOLTIP_BUILD_START
+  const tooltipReceipts=[];for(const s of board.tooltips??[]){const n=await lib.renderTooltip(figma,root,s);tooltipReceipts.push(await lib.inspectTooltip(n));}
+  // TOOLTIP_BUILD_END
   await normalize(root);
   const note = await annotate(root, [...board.notes, ...unsupported.map(u => '未表达：' + u), ...warnings.map(w => '提醒：' + w), ...(fallback.size ? ['字体：使用 ' + [...fallback].join('、') + ' 临时替代苹方，最终需替换并复核'] : [])]);
   const texts = [...new Set(visibleTexts(root).map(t => t.characters.trim()).filter(Boolean))];
@@ -536,20 +586,22 @@ export async function sketchRuntime(figma, req, lib) {
   const missingTexts = board.expectTexts.filter(t => !texts.some(x => x.includes(t)));
   const def = board.def.workbench ?? (board.kind === 'workbench' ? board.def : null);
   let snapshot = null;
+  // WORKBENCH_SNAPSHOT_START
   if (def) {
-    const props = n => n ? {checked: n.componentProperties['checked 已选']?.value === 'true', mixed: n.componentProperties['indeterminate 半选']?.value === 'true', disabled: n.componentProperties['disabled 禁用']?.value === 'true'} : null;
+    const props = n => n?.type==='INSTANCE' ? {checked: n.componentProperties['checked 已选']?.value === 'true', mixed: n.componentProperties['indeterminate 半选']?.value === 'true', disabled: (n.componentProperties['disabled 禁用']??n.componentProperties['disable 禁用'])?.value === 'true'} : null;
     const table = walk(root).find(n => n.name.startsWith('表格/'));
     const rowData = row => ({selection: props(row.children.find(n => n.name === 'selection')?.children[0]), fits: Object.fromEntries(row.children.filter(n=>n.name.startsWith('cell/')).map(n=>[n.name.slice(5),visibleTexts(n).every(t=>t.textTruncation==='DISABLED'&&t.height<=n.height&&t.width<=n.width)])), cells: Object.fromEntries(row.children.filter(n => n.name.startsWith('cell/')).map(n => [n.name.slice(5), visibleTexts(n).map(t => t.characters)]))});
     snapshot = {
       contentTabsHeight: walk(root).find(n=>n.name==='内容页签')?.height ?? null,
       headings: walk(root).filter(n=>n.name.startsWith('详情标题/')).map(n=>({name:n.name,texts:visibleTexts(n).map(t=>t.characters)})),
-      tags: await Promise.all(walk(root).filter(n=>n.type==='INSTANCE'&&n.name==='状态标签').map(async n=>({parent:n.parent.name,text:visibleTexts(n)[0]?.characters,theme:(await n.getMainComponentAsync()).name.match(/theme 主题=(\w+)/)?.[1]}))),
+      tags: await Promise.all(walk(root).filter(n=>n.type==='INSTANCE'&&n.name==='状态标签').map(async n=>({parent:n.parent.name,text:visibleTexts(n)[0]?.characters,mainId:(await n.getMainComponentAsync()).id,theme:(await n.getMainComponentAsync()).name.match(/theme 主题=(\w+)/)?.[1]}))),
       tabs: await Promise.all((def.tabs.placement === 'content' ? unique(root, '内容页签') : unique(root, '页签区')).children.filter(n=>n.type==='INSTANCE').map(async n=>({text:visibleTexts(n)[0]?.characters, selected:(await n.getMainComponentAsync()).name.includes('state 状态=select 选中')}))),
       buttons: walk(root).filter(n => n.type === 'INSTANCE' && n.name.startsWith('按钮/') && n.visible).map(n => ({name:n.name, disabled:n.componentProperties['disabled 禁用']?.value === 'true'})),
       table: table ? {headerSelection: props(table.children.find(n => n.name === 'header')?.children.find(n => n.name === 'selection')?.children[0]), rows: table.children.filter(n => n.name.startsWith('row/')).map(rowData)} : null,
       texts, retry: walk(root).some(n => (n.name === '重试'||n.name==='反馈操作') && n.visible), paginationVisible: walk(root).some(n => n.name === '分页' && n.visible),
     };
   }
+  // WORKBENCH_SNAPSHOT_END
   const form = board.def.drawer ?? (board.kind === 'drawer' ? board.def : null);
   if(form) {
     snapshot = {groups:visibleTexts(root).filter(n=>n.name.startsWith('分组/')).map(n=>({name:n.name,text:n.characters})), fields:[], buttons:[], texts, fieldNames:walk(root).filter(n=>n.name.startsWith('字段/')).map(n=>n.name)};
@@ -576,11 +628,17 @@ export async function sketchRuntime(figma, req, lib) {
   if(def?.timelines?.length)snapshot.timelines=walk(root).filter(n=>n.name.startsWith('日志时间线/')).map(b=>({id:b.name.slice(6),items:b.children.filter(n=>n.name.startsWith('日志项/')).map(n=>({id:n.name.slice(4),title:n.findOne(t=>t.name==='title')?.characters,time:n.findOne(t=>t.name==='date')?.characters,detail:n.findOne(t=>t.name==='日志说明')?.characters,line:!!n.findOne(t=>t.name==='divider'),fits:n.absoluteBoundingBox.y+n.height<=root.absoluteBoundingBox.y+root.height}))}));
   if(def?.imageViewers?.length)snapshot.imageViewers=def.imageViewers.map(s=>{const b=root.findOne(n=>n.name==='图片查看/'+s.id);return {id:s.id,open:root.findOne(n=>n.name==='图片大图/'+s.id)?s.open:null,items:b?b.findAll(n=>n.name.startsWith('图片项/')).map(n=>({id:n.name.slice(4),filename:n.findOne(t=>t.name==='文件名')?.characters,error:!!n.findOne(t=>t.type==='TEXT'&&t.characters==='图片加载失败'),fits:n.absoluteBoundingBox.y+n.height<=root.absoluteBoundingBox.y+root.height})):[]};});
   if(def?.descriptions) snapshot.descriptions=walk(root).filter(n=>n.name.startsWith('基本信息/')).map(n=>({id:n.name.slice(5),title:n.findOne(t=>t.type==='TEXT'&&t.name==='标题')?.characters,items:n.findAll(x=>x.name.startsWith('信息项/')).map(x=>{const a=x.findOne(t=>t.type==='TEXT'&&t.name==='label'),v=x.findOne(t=>t.type==='TEXT'&&t.name==='value');return {id:x.name.slice(4),label:a?.characters,value:v?.characters,fits:!!v&&v.width<=x.width&&v.height<=x.height};})}));
+  // TABS_VERIFY_START
+  if(def?.tabs?.mainId){snapshot.tabsBar=await lib.inspectTabs(root.findOne(n=>n.name==='内容页签'));snapshot.tabs=snapshot.tabsBar.items;}
+  // TABS_VERIFY_END
   const hasFeedback=form?.feedbacks?.length||def?.table?.feedback||def?.feedbacks?.length||def?.imageViewers?.some(s=>s.emptyFeedback);
   const feedbackSpecs=def?.table?.feedback&&!def.table.config.rows.length?[{id:'table',kind:def.table.error?'error':'empty',variant:def.table.feedback.variant??'compact',message:def.table.error||def.table.emptyText||'暂无数据',action:def.table.error?(def.table.retryLabel||'重试'):def.table.feedback.action}]:[];
   feedbackSpecs.push(...(form?.feedbacks??[]),...(def?.feedbacks??[]),...(def?.imageViewers??[]).filter(s=>s.emptyFeedback&&!s.items.length).map(s=>({id:s.id+'-empty',kind:'empty',message:'暂无附件',variant:s.emptyFeedback.variant??'compact'})));
   if(hasFeedback)snapshot.feedback=await Promise.all(walk(form?root.children.find(n=>n.name.startsWith('抽屉 / ')):root).filter(n=>n.name.startsWith('反馈/')).map(async b=>{const v=b.children.find(n=>n.name==='反馈视觉'),m=await v.getMainComponentAsync(),t=v.findOne(n=>n.type==='TEXT'),a=b.children.find(n=>n.name==='反馈操作');return {id:b.name.slice(3),message:t.characters,action:a?a.findOne(n=>n.type==='TEXT').characters:null,mainId:m.id,mainKey:m.key,closeVisible:!!v.findOne(n=>n.name==='item/closeBtn'&&n.visible),fits:t.height<=v.height&&b.absoluteBoundingBox.y+b.height<=root.absoluteBoundingBox.y+root.height};}));
   const semanticErrors = def ? verifyWorkbench(def, snapshot) : form ? verifyForm(form,snapshot) : ['缺少页面语义校验'];
+  // PAGINATION_VERIFY_START
+  if(def?.table?.pagination?.mainId&&def.table.config.rows.length){snapshot.pagination=await lib.inspectPagination(root.findOne(n=>n.name==='分页'));semanticErrors.push(...lib.verifyPagination(def.table.pagination,snapshot.pagination));}
+  // PAGINATION_VERIFY_END
   if(hasFeedback)semanticErrors.push(...lib.verifyFeedback(feedbackSpecs,snapshot.feedback));
   if(form?.rows.flat().some(f=>f.open))semanticErrors.push(...lib.verifyMultiPopup(form.rows.flat().filter(f=>f.open),snapshot.multiPopups));
   if((def??form)?.numbers?.length)for(const s of (def??form).numbers){const n=root.findOne(x=>x.name==='数字输入/'+s.id);if(!n||n.findOne(t=>t.type==='TEXT')?.characters!==(s.value==null?(s.placeholder??'请输入'):String(s.value)))semanticErrors.push('数字输入缺失或值不符');}
@@ -591,9 +649,36 @@ export async function sketchRuntime(figma, req, lib) {
   if(def?.timelines?.length)semanticErrors.push(...lib.verifyTimelines(def.timelines,snapshot.timelines));
   if(def?.imageViewers?.length)semanticErrors.push(...lib.verifyImageViewers(def.imageViewers,snapshot.imageViewers));
   if(def?.descriptions?.length)semanticErrors.push(...lib.verifyDescriptions(def.descriptions,snapshot.descriptions));
-  if(board.dialogs?.length)semanticErrors.push(...lib.verifyDialogs(board.dialogs,dialogs));
+  if(board.dialogs?.length)semanticErrors.push(...lib.verifyDialogs(board.dialogs,dialogs,lib.dialogDeps));
+  // MESSAGE_VERIFY_START
+  for(const [i,s]of (board.notices??[]).entries())semanticErrors.push(...lib.verifyMessage(s,messageReceipts[i]));
+  // MESSAGE_VERIFY_END
+  // IMAGE_VIEWER_EXT_VERIFY_START
+  snapshot.imageViewerExtended=[];for(const s of def.imageViewers.filter(s=>s.extended)){const a=await lib.inspectImageViewerExtended(root,s);snapshot.imageViewerExtended.push(a);semanticErrors.push(...lib.verifyImageViewerExtended(s,a,lib.imageViewerDeps));}
+  // IMAGE_VIEWER_EXT_VERIFY_END
+  // TABLE_EXT_VERIFY_START
+  snapshot.tableExtension=lib.inspectTableExtensions(root.findOne(n=>n.name===def.table.config.name),def.table.config);semanticErrors.push(...lib.verifyTableExtensions(def.table.config,snapshot.tableExtension));
+  // TABLE_EXT_VERIFY_END
+  // ALERT_VERIFY_START
+  if(def?.alerts?.length){snapshot.alerts=await Promise.all(walk(root).filter(n=>n.name.startsWith('警告提示/')).map(n=>lib.inspectAlert(n)));semanticErrors.push(...lib.verifyAlerts(def.alerts,snapshot.alerts));}
+  // ALERT_VERIFY_END
+  // STEPS_VERIFY_START
+  if(def?.steps?.length){snapshot.steps=walk(root).filter(n=>n.name.startsWith('步骤条/')).map(n=>lib.inspectSteps(n));semanticErrors.push(...lib.verifySteps(def.steps,snapshot.steps));}
+  // STEPS_VERIFY_END
+  // LOADING_VERIFY_START
+  if(def?.loadings?.length){snapshot.loadings=await Promise.all(walk(root).filter(n=>n.name.startsWith('区域加载/')).map(n=>lib.inspectLoading(n)));semanticErrors.push(...lib.verifyLoading(def.loadings,snapshot.loadings));}
+  // LOADING_VERIFY_END
+  // NOTIFICATION_VERIFY_START
+  for(const [i,s]of (board.notifications??[]).entries())semanticErrors.push(...lib.verifyNotification(s,notificationReceipts[i]));
+  // NOTIFICATION_VERIFY_END
+  // POPCONFIRM_VERIFY_START
+  for(const [i,s]of (board.popconfirms??[]).entries())semanticErrors.push(...lib.verifyPopconfirm(s,popconfirmReceipts[i]));
+  // POPCONFIRM_VERIFY_END
+  // TOOLTIP_VERIFY_START
+  for(const [i,s]of (board.tooltips??[]).entries())semanticErrors.push(...lib.verifyTooltip(s,tooltipReceipts[i]));
+  // TOOLTIP_VERIFY_END
   const result = generationResult({missingTexts, brokenInstances: broken, unsupported, semanticErrors});
   return {...result, createdNodeIds: [...walk(root).map(n=>n.id), ...(note?[note.id]:[])], snapshot, dialogs, pageId: page.id, boardId: root.id, boardName: root.name, noteId: note?.id ?? null, size: [root.width, root.height],
-    missingTexts, semanticErrors, brokenInstances: broken, unsupported, warnings,
+    notifications:notificationReceipts,popconfirms:popconfirmReceipts,tooltips:tooltipReceipts,notices:messageReceipts,missingTexts, semanticErrors, brokenInstances: broken, unsupported, warnings,
     fontFallback: [...fallback], createdCount: walk(root).length};
 }

@@ -1,0 +1,13 @@
+{
+  "name": "Dialog 全屏（2态）",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "dialog-fullscreen-source",
+    "pageId": "41952:300048"
+  },
+  "displayLayout": {
+    "columns": 2,
+    "padding": 24,
+    "gap": 32
+  }
+}

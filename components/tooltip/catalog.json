@@ -1,0 +1,1346 @@
+[
+  {
+    "sourceId": "44917:322250",
+    "id": "762:3",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "bottom-center|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322252",
+    "id": "762:9",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "bottom-center|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322254",
+    "id": "762:14",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "bottom-center|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322256",
+    "id": "762:19",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "bottom-center|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322258",
+    "id": "762:24",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "bottom-center|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322260",
+    "id": "762:29",
+    "name": "placement 位置=bottom-center 下-中, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "bottom-center|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322262",
+    "id": "762:34",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "bottom-right|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322264",
+    "id": "762:39",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "bottom-right|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322266",
+    "id": "762:44",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "bottom-right|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322268",
+    "id": "762:49",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "bottom-right|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322270",
+    "id": "762:54",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "bottom-right|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322272",
+    "id": "762:59",
+    "name": "placement 位置=bottom-right 下-右, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "bottom-right|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322274",
+    "id": "762:64",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "bottom-left|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322276",
+    "id": "762:69",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "bottom-left|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322278",
+    "id": "762:75",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "bottom-left|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322280",
+    "id": "762:80",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "bottom-left|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322282",
+    "id": "762:85",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "bottom-left|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322284",
+    "id": "762:90",
+    "name": "placement 位置=bottom-left 下-左, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "bottom-left|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322286",
+    "id": "762:95",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=default 默认",
+    "key": "n/a|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "71345:226067",
+    "id": "762:97",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=default 默认",
+    "key": "mouse|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322288",
+    "id": "762:100",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=danger 危险",
+    "key": "n/a|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "71345:226127",
+    "id": "762:102",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=danger 危险",
+    "key": "mouse|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322290",
+    "id": "762:21349",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=primary 品牌色",
+    "key": "n/a|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "71345:226082",
+    "id": "762:21351",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=primary 品牌色",
+    "key": "mouse|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322292",
+    "id": "762:21353",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=success 成功",
+    "key": "n/a|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "71345:226097",
+    "id": "762:21355",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=success 成功",
+    "key": "mouse|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322294",
+    "id": "762:21357",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=warning 警告",
+    "key": "n/a|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "71345:226112",
+    "id": "762:21359",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=warning 警告",
+    "key": "mouse|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322296",
+    "id": "762:21362",
+    "name": "placement 位置=n/a, showArrow 是否带箭头=false, theme 主题=light 亮色",
+    "key": "n/a|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "71345:226142",
+    "id": "762:21364",
+    "name": "placement 位置=mouse 跟随鼠标, showArrow 是否带箭头=false, theme 主题=light 亮色",
+    "key": "mouse|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322298",
+    "id": "762:21366",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "left-bottom|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322300",
+    "id": "762:21371",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "left-bottom|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322302",
+    "id": "762:21376",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "left-bottom|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322304",
+    "id": "762:21381",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "left-bottom|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322306",
+    "id": "762:21386",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "left-bottom|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322308",
+    "id": "762:21391",
+    "name": "placement 位置=left-bottom 左-下, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "left-bottom|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322310",
+    "id": "762:21396",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "right-center|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322312",
+    "id": "762:21401",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "right-center|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322314",
+    "id": "762:21406",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "right-center|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322316",
+    "id": "762:21411",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "right-center|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322318",
+    "id": "762:21416",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "right-center|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322320",
+    "id": "762:21421",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "right-top|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322322",
+    "id": "762:21427",
+    "name": "placement 位置=right-center 右-中, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "right-center|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322324",
+    "id": "762:21432",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "right-top|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322326",
+    "id": "762:21437",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "right-top|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322328",
+    "id": "762:21442",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "right-top|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322330",
+    "id": "762:21447",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "right-bottom|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322332",
+    "id": "762:21452",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "right-top|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322334",
+    "id": "762:21457",
+    "name": "placement 位置=right-top 右-上, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "right-top|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322336",
+    "id": "762:21462",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "right-bottom|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322338",
+    "id": "762:21467",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "right-bottom|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322340",
+    "id": "762:21472",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "left-center|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322342",
+    "id": "762:21477",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "right-bottom|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322344",
+    "id": "762:21482",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "right-bottom|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322346",
+    "id": "762:21487",
+    "name": "placement 位置=right-bottom 右-下, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "right-bottom|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322348",
+    "id": "762:21492",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "left-center|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322350",
+    "id": "762:21498",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "top-center|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322352",
+    "id": "762:21503",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "left-center|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322354",
+    "id": "762:21508",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "left-center|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322356",
+    "id": "762:21513",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "left-center|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322358",
+    "id": "762:21518",
+    "name": "placement 位置=left-center 左-中, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "left-center|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322360",
+    "id": "762:21523",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "left-top|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322362",
+    "id": "762:21528",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "top-center|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322364",
+    "id": "762:21533",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "top-center|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322366",
+    "id": "762:21538",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "top-center|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322368",
+    "id": "762:21543",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "top-center|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322370",
+    "id": "762:21548",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "top-right|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322372",
+    "id": "762:21553",
+    "name": "placement 位置=top-center 上-中, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "top-center|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322374",
+    "id": "762:21558",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "left-top|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322376",
+    "id": "762:21563",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "left-top|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322378",
+    "id": "762:21569",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "left-top|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322380",
+    "id": "762:21574",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "left-top|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322382",
+    "id": "762:21579",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=danger 危险",
+    "key": "top-left|danger",
+    "background": {
+      "r": 1,
+      "g": 0.9254902005195618,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 0.9607843160629272,
+      "g": 0.24705882370471954,
+      "b": 0.24705882370471954
+    }
+  },
+  {
+    "sourceId": "44917:322384",
+    "id": "762:21584",
+    "name": "placement 位置=left-top 左-上, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "left-top|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322386",
+    "id": "762:21589",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "top-right|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322388",
+    "id": "762:21594",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "top-right|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322390",
+    "id": "762:21599",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "top-right|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322392",
+    "id": "762:21604",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "top-right|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322394",
+    "id": "762:21609",
+    "name": "placement 位置=top-right 上-右, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "top-right|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  },
+  {
+    "sourceId": "44917:322396",
+    "id": "762:21614",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=default 默认",
+    "key": "top-left|default",
+    "background": {
+      "r": 0.5921568870544434,
+      "g": 0.6039215922355652,
+      "b": 0.615686297416687
+    },
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322398",
+    "id": "762:21619",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=primary 品牌色",
+    "key": "top-left|primary",
+    "background": {
+      "r": 0.9019607901573181,
+      "g": 0.95686274766922,
+      "b": 1
+    },
+    "color": {
+      "r": 0,
+      "g": 0.40784314274787903,
+      "b": 1
+    }
+  },
+  {
+    "sourceId": "44917:322400",
+    "id": "762:21624",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=success 成功",
+    "key": "top-left|success",
+    "background": {
+      "r": 0.9098039269447327,
+      "g": 1,
+      "b": 0.9176470637321472
+    },
+    "color": {
+      "r": 0,
+      "g": 0.7058823704719543,
+      "b": 0.16620886325836182
+    }
+  },
+  {
+    "sourceId": "44917:322402",
+    "id": "762:21629",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=warning 警告",
+    "key": "top-left|warning",
+    "background": {
+      "r": 1,
+      "g": 0.9686274528503418,
+      "b": 0.9098039269447327
+    },
+    "color": {
+      "r": 1,
+      "g": 0.4901960790157318,
+      "b": 0
+    }
+  },
+  {
+    "sourceId": "44917:322404",
+    "id": "762:21634",
+    "name": "placement 位置=top-left 上-左, showArrow 是否带箭头=true, theme 主题=light 亮色",
+    "key": "top-left|light",
+    "background": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "color": {
+      "r": 0.09019608050584793,
+      "g": 0.12156862765550613,
+      "b": 0.14901961386203766
+    }
+  }
+]

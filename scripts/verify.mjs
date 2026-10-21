@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+assert.ok(!fs.existsSync('CANDIDATE_ONLY.json'),'正式包不能带候选标记');
 const release=JSON.parse(fs.readFileSync('skill-release.json','utf8'));
+assert.equal(release.channel,'stable');
 assert.ok(fs.readFileSync('CHANGELOG.md','utf8').includes(`## ${release.version} —`));
-for(const test of ['draft-release','figma-connect','skill-distribution','draft-store','sketch','support','tuning','log-diagnostics','enrollment','dashboard','entrypoints','unknown-keys','figma-output','request'])execFileSync(process.execPath,[`tests/${test}.test.mjs`],{stdio:'inherit'});
+for(const test of ['candidate-adapter','candidate-components','draft-release','figma-connect','skill-distribution','draft-store','sketch','support','tuning','log-diagnostics','enrollment','dashboard','entrypoints','unknown-keys','figma-output','request'])execFileSync(process.execPath,[`tests/${test}.test.mjs`],{stdio:'inherit'});
 const {code}=await import('../sketch/figma.mjs');assert.throws(()=>code('unconfigured','list'),/尚未适配验证/);
 const tracked=execFileSync('git',['ls-files','-z'],{encoding:'utf8'}).split('\0').filter(Boolean);
 assert.ok(!tracked.some(p=>/^(tasks|evidence|private|credentials)\//.test(p)));

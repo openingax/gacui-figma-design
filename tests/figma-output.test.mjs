@@ -3,7 +3,7 @@ import os from 'node:os';
 import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 import assert from 'node:assert/strict';
-import {fileKeyOf,requiredIds,checkCode,acceptReceipt,SOURCE_FILE_KEY} from '../scripts/figma/target.mjs';
+import {fileKeyOf,requiredIds,checkCode,acceptReceipt,checkPlan,SOURCE_FILE_KEY} from '../scripts/figma/target.mjs';
 
 const root=fs.mkdtempSync(join(os.tmpdir(),'gac-figma-output-')),dir=join(root,'draft');
 const env={...process.env,GAC_SUPPORT_HOME:join(root,'support'),GAC_SUPPORT_CONFIG:join(root,'no-config.json')};
@@ -27,11 +27,11 @@ try{
  assert.ok(!ids.includes('75:2123')&&ids.includes('180:3')&&ids.includes('203:52'),'排除规范源图标引用，包含基线与抽屉映射');
  const code=checkCode(key);assert.ok(code.includes(`figma.fileKey!==${JSON.stringify(key)}`));new Function('figma','return async function(){'+code+'}');
  const pages=[{id:'1:1',name:'组件目录',empty:false,draftOnly:false},{id:'2:1',name:'空白页',empty:true,draftOnly:false},{id:'3:1',name:'旧出稿',empty:false,draftOnly:true}];
- const receipt={fileKey:key,checked:ids.length,missing:[],pages};
+ const spec=checkPlan(key);const receipt={schema:2,fileKey:key,fingerprint:spec.fingerprint,checked:ids.length,missing:[],pages,receipts:spec.batches.map(b=>({schema:2,fileKey:key,fingerprint:spec.fingerprint,batch:b.index,totalBatches:spec.batches.length,checkedIds:b.ids,missing:[],wrongTypes:[],...(b.index===0?{pages}:{})}))};
  assert.throws(()=>acceptReceipt(key,{...receipt,fileKey:'B'.repeat(22)},{write:false}),/不是指定目标/);
  assert.throws(()=>acceptReceipt(key,{...receipt,checked:ids.length-1},{write:false}),/数量与当前版本不符/);
  assert.throws(()=>acceptReceipt(key,{...receipt,missing:['180:3']},{write:false}),/缺少出稿所需组件/);
- assert.throws(()=>acceptReceipt(key,{...receipt,pages:pages.map(({empty,...p})=>p)},{write:false}),/Page 信息不完整/);
+ assert.throws(()=>acceptReceipt(key,{...receipt,receipts:receipt.receipts.map(r=>r.batch===0?{...r,pages:pages.map(({empty,...p})=>p)}:r)},{write:false}),/Page 信息不完整/);
  const config=acceptReceipt(url,receipt,{write:false,now:'2026-10-20T00:00:00.000Z'});
  assert.equal(config.adapterVerified,true);assert.equal(config.sourceFileKey,SOURCE_FILE_KEY);assert.equal(config.contentPages,1);
  assert.deepEqual(config.pages.map(p=>p.name),['空白页'],'含内容的 Page 由运行时内容检查保护，名单只保护空 Page');

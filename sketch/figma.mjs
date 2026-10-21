@@ -1,4 +1,14 @@
 #!/usr/bin/env node
+import {renderImageViewerExtended,inspectImageViewerExtended,verifyImageViewerExtended} from '../components/image-viewer/extended.mjs';
+import {applyTableExtensions,inspectTableExtensions,verifyTableExtensions} from '../components/table/extensions.mjs';
+import {validateAlert,updateAlert,renderAlert,inspectAlert,verifyAlerts} from '../components/alert/generator.mjs';
+import {validateNotification,updateNotification,renderNotification,inspectNotification,verifyNotification} from '../components/notification/generator.mjs';
+import {validatePopconfirm,updatePopconfirm,renderPopconfirm,inspectPopconfirm,verifyPopconfirm} from '../components/popconfirm/generator.mjs';
+import {validateSteps,updateSteps,renderSteps,inspectSteps,verifySteps} from '../components/steps/generator.mjs';
+import {validateLoading,updateLoading,renderLoading,inspectLoading,verifyLoading} from '../components/loading/generator.mjs';
+import {validateTooltip,renderTooltip,positionTooltip,updateTooltip,inspectTooltip,verifyTooltip} from '../components/tooltip/generator.mjs';
+import {validateMessage,renderMessage,updateMessage,inspectMessage,verifyMessage} from '../components/message/generator.mjs';
+import {validateTabs,tabsKey,renderTabs,updateTabs,inspectTabs,arrangeLeftTabs,renderTopTabs} from '../components/tabs/generator.mjs';
 import {validateCascader,cascaderSetText,updateCascaderOption,renderCascaderMenu,renderCascader} from '../components/cascader/family.mjs';
 import {validateTimePicker,renderTimePicker} from '../components/time-picker/family.mjs';
 import {validateSelect,renderSelect,selectHelpers,renderSinglePopup,updateSingleOption} from '../components/select/family.mjs';
@@ -14,7 +24,9 @@ import {renderFeedback,updateFeedback,validateFeedback,verifyFeedback} from '../
 import {renderTimeline,updateTimelineItem,validateTimeline,verifyTimelines} from '../components/timeline/generator.mjs';
 import {renderImageViewer,validateImageViewer,verifyImageViewers} from '../components/image-viewer/generator.mjs';
 import {renderDescriptions,validateDescriptions,verifyDescriptions} from '../components/descriptions/generator.mjs';
-import {renderDialog,validateDialog,verifyDialogs,updateDialog} from '../components/dialog/generator.mjs';
+import {renderDialog,validateDialog,verifyDialogs,updateDialog,dialogMainId} from '../components/dialog/generator.mjs';
+import {validatePagination,paginationKey,updatePagination,renderPagination,inspectPagination,verifyPagination} from '../components/pagination/generator.mjs';
+import {validateTag,tagKey,renderTag,updateTag} from '../components/tag/generator.mjs';
 // 把已确认版本的草图转成 use_figma 执行代码，每次一个画板。格式见 docs/sketch-design.md 第八节。
 import {readFileSync, writeFileSync} from 'node:fs';
 import {loadVersions, loadChecklist} from './sketch.mjs';
@@ -25,9 +37,10 @@ import {buildTable, validate as validateTable} from '../components/table/generat
 import {tableDependencies} from '../pages/work-orders/build.mjs';
 import {composeForm, fitFieldContent} from '../components/form/generator.mjs';
 import {updateDrawer, buttonReactions} from '../components/drawer/generator.mjs';
+import {isMain} from '../support/entry.mjs';
 
 import {targetConfig} from '../scripts/lib/figma-target.mjs';
-import {isMain} from '../support/entry.mjs';
+import {status as targetStatus} from '../scripts/figma/target.mjs';
 export const FILE_KEY = targetConfig().fileKey;
 const readJson = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 // 组件分类页和历史页面一律不写；任务 Page 由 versions.json 的 figmaPage 指定。
@@ -52,13 +65,15 @@ export function tableConfig(node, layer, rowCount, listWidth=LIST_WIDTH) {
   if (ops.length && !node.rowActions?.length && !node.rowActionRules?.length) throw Error('表格有操作列，草图里必须写 rowActions');
   const fixed = ops.length ? opsWidth(node.rowActionRules ?? node.rowActions) : 0;
   const others = node.columns.filter(c => c.kind !== 'operations');
+  const specified=others.filter(c=>c.width!==undefined),specifiedWidth=specified.reduce((sum,c)=>sum+c.width,0),remaining=others.length-specified.length;
   const free = listWidth - (node.selection ? SELECTION_WIDTH : 0) - fixed;
-  const each = Math.floor(free / others.length);
-  if (each < 80) throw Error(`列太多：每列只能分到 ${each}px，请减少列或改为详情里展示`);
-  const columns = node.columns.map(c => ({key: c.id, title: c.title, kind: c.kind ?? 'text', ...(c.wrap!==undefined?{wrap:c.wrap}:{}), width: c.kind === 'operations' ? fixed : each}));
-  columns.find(c => c.kind !== 'operations').width += free - each * others.length;
+  const each = Math.floor((free-specifiedWidth)/Math.max(1,remaining));
+  if (remaining&&each < 80) throw Error(`列太多：每列只能分到 ${each}px，请减少列或改为详情里展示`);
+  const columns = node.columns.map(c => ({key: c.id, title: c.title, kind: c.kind ?? 'text', ...(c.wrap!==undefined?{wrap:c.wrap}:{}),...(c.maxLines?{maxLines:c.maxLines}:{}),...(c.tagKey?{tagKey:c.tagKey}:{}),...(c.stateThemes?{stateThemes:c.stateThemes}:{}), width: c.kind === 'operations' ? fixed : c.width??each}));
+  if(remaining)columns.find(c => c.kind !== 'operations'&&!node.columns.find(n=>n.id===c.key).width).width += free-specifiedWidth-each*remaining;else if(Math.abs(specifiedWidth-free)>.01)throw Error('明确列宽总和必须等于内容区可用宽度');
   const rows = Array.from({length: rowCount}, (_, i) => Object.fromEntries(others.map(c => [c.id, String(node.data?.[i]?.[c.id] ?? '演示')])));
-  const config = {name: layer, asFrame: true, selection: !!node.selection, pagination: false, selectedRows: node.selectedRows ?? [], disabledRows: node.disabledRows ?? [], columns, rows,
+  for(const [i,row]of rows.entries())for(const c of node.columns.filter(c=>c.tagKey))row[c.tagKey]=String(node.data?.[i]?.[c.tagKey]??'');
+  const config = {name: layer,...(node.selectionMode?{selectionMode:node.selectionMode}:{}),...(node.expandHoverRows?{expandHoverRows:node.expandHoverRows}:{}),...(node.expandedRows?{expandedRows:node.expandedRows,expandedContent:node.expandedContent}:{}),...(node.resizableColumns?{resizableColumns:true}:{}), asFrame: true, selection: !!node.selection, pagination: false, selectedRows: node.selectedRows ?? [], disabledRows: node.disabledRows ?? [], columns, rows,
     ...(ops.length ? {rowActions: rows.map((_, i) => { const a = node.rowActions[i % node.rowActions.length]; return {labels: a.labels, more: !!a.more}; })} : {})};
   return validateTable(config);
 }
@@ -85,6 +100,27 @@ function nodeNotes(page) {
   return (page.children ?? []).flatMap(n => n.type === 'note' ? [`说明：${n.text}`] : n.type === 'gap' ? [`缺口：${n.need}（本轮：${n.handling ?? '待定'}）`] : []);
 }
 
+function descriptionRuntimeData(){const d=readJson('../components/descriptions/build-data.json'),pick=(o,keys)=>Object.fromEntries(keys.map(k=>[k,o[k]]));return {...pick(d,['gap','columnGap','headingGap']),bar:pick(d.bar,['width','height','fills']),...Object.fromEntries(['title','label','value'].map(k=>[k,pick(d[k],['fontName','fontSize','lineHeight','letterSpacing','fills'])]))};}
+
+function tabsSpec(tabs){if(!tabs)return null;if(tabs.orientation===undefined&&tabs.icon===undefined&&!(tabs.placement==='content'&&tabs.items.length>=2&&tabs.items.length<=8))return {items:tabs.items,active:tabs.active??0,placement:tabs.placement??'navigation'};const s=validateTabs(tabs);if(s.placement!=='content')throw Error('整栏须 placement=content');return {...s,mainId:readJson('../components/tabs/catalog.json').find(r=>r.key===tabsKey(s)).id};}
+
+function paginationSpec(input){
+  if(!input||typeof input!=='object')return !!input;
+  const s=validatePagination(input),rows=readJson('../components/pagination/catalog.json');
+  return {...s,mainId:rows.find(r=>r.key===paginationKey(s)).id,disabledMainId:rows.find(r=>r.key===paginationKey({...s,disabled:true})).id};
+}
+
+function tagSpec(input) {
+  const s=validateTag(input);
+  if(s.variant==='outline'&&s.shape==='square'&&!s.icon&&!s.closable&&!s.disabled)return {label:s.label,theme:s.theme};
+  const catalog=readJson('../components/tag/catalog.json'),row=catalog.rows.find(r=>r.key===tagKey(s));
+  if(!row?.id)throw Error('Tag映射缺失');
+  const closeTheme=s.variant==='dark'&&s.theme!=='default'?'White':s.theme;
+  const closeId=s.closeState==='hover'?catalog.closes.find(r=>r.theme===closeTheme&&r.state==='hover')?.id:undefined;
+  if(s.closeState==='hover'&&!closeId)throw Error('Tag关闭态映射缺失');
+  return {label:s.label,theme:s.theme,mainId:row.id,...(closeId?{closeId}: {})};
+}
+
 function workbenchDef(page, layers) {
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
@@ -92,15 +128,18 @@ function workbenchDef(page, layers) {
   for (const type of ['form']) if (of(type).length) throw Error(`工作台页面里的 ${type} 本轮不支持生成 Figma`);
   for (const type of ['search', 'table', 'tabs']) if (of(type).length > 1) throw Error(`工作台页面最多一个 ${type}`);
   const [search] = of('search'), [table] = of('table'), [tabs] = of('tabs');
-  for (const f of search?.fields ?? []) if (!['input', 'select', 'date-range'].includes(f.kind)) throw Error(`查询区字段 ${f.label}：Figma 出稿暂不支持 ${f.kind}，可改为 date-range 或写成缺口`);
+  for (const f of search?.fields ?? []) if (!['input', 'select', 'date', 'date-range'].includes(f.kind)) throw Error(`查询区字段 ${f.label}：Figma 出稿暂不支持 ${f.kind}，可改为 date-range 或写成缺口`);
   const contentWidth=page.layout?(page.layout==='top'?1336:1136):1192;
   for(const d of of('divider'))if(d.orientation!=='vertical'&&(d.length??contentWidth)>contentWidth)throw Error('分割线超过工作台正文宽度');
   const tableLayer = table && layers.get(`${page.id}/${table.id}`).layer;
   return {
-    tabs: tabs ? {items: tabs.items, active: tabs.active ?? 0, placement: tabs.placement ?? 'navigation'} : {items: [page.title], active: 0},
+    tabs: tabs ? tabsSpec(tabs) : {items: [page.title], active: 0},
     pageTitle: page.title,
     ...(page.layout?{layout:page.layout,contentWidth}:{}),
-    feedbacks: of('feedback').map(validateFeedback),
+    ...(of('steps').length?{steps:of('steps').map(n=>{const s=validateSteps(n),rows=readJson('../components/steps/catalog.json');return {...s,itemIds:s.items.map((x,i)=>rows.find(r=>r.key===[s.orientation,s.theme,x.state,i===s.items.length-1,s.orientation==='horizontal'&&s.theme==='dot'&&i===0].join('|')).id)};})}:{}),
+    ...(of('loading').length?{loadings:of('loading').map(n=>{const s=validateLoading(n);return {...s,mainId:readJson('../components/loading/catalog.json').find(r=>r.key===s.size+'|'+s.variant).id};})}:{}),
+    feedbacks: of('feedback').filter(n=>n.kind!=='alert').map(validateFeedback),
+    ...(of('feedback').some(n=>n.kind==='alert')?{alerts:of('feedback').filter(n=>n.kind==='alert').map(n=>{const s=validateAlert(n);return {...s,mainId:readJson('../components/alert/catalog.json').find(r=>r.key===[s.theme,s.icon,s.showTitle,!!s.description,!!s.operation,s.collapse].join('|')).id};})}:{}),
     cascaders: of('cascader').length?of('cascader').map(validateCascader):undefined,
     timePickers: of('timePicker').map(validateTimePicker),
     selectFields: of('selectField').map(validateSelect),
@@ -110,17 +149,17 @@ function workbenchDef(page, layers) {
     radios: of('radio').map(validateRadio),
     links: of('link').map(validateLink),
     dividers: of('divider').map(validateDivider),
-    blocks: !(of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','dialog'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
+    blocks: !(of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
     timelines: of('timeline').map(validateTimeline),
-    imageViewers: of('imageViewer').map(validateImageViewer),
+    imageViewers: of('imageViewer').map(n=>{const s=validateImageViewer(n);return s.gallery||s.showThumbnails||s.openError!==undefined||s.closeState||s.items.some(i=>i.ratio)||s.open&&s.items.find(i=>i.id===s.open)?.state==='error'?{...s,extended:true}:s;}),
     descriptions: of('descriptions').map(validateDescriptions),
-    headings: of('heading').map(n=>({layer:'详情标题/'+n.id,title:n.title,subtitle:n.subtitle,status:n.status})),
-    tagThemes: table?.columns.filter(c=>c.kind==='tag' && c.themes).map(c=>({key:c.id,themes:c.themes})) ?? [],
+    headings: of('heading').map(n=>({layer:'详情标题/'+n.id,title:n.title,subtitle:n.subtitle,status:tagSpec(n.status)})),
+    tagThemes: table?.columns.filter(c=>c.kind==='tag' && c.themes).map(c=>({key:c.id,themes:c.themes,...(c.tag?{specs:Object.fromEntries(Object.entries(c.themes).map(([label,theme])=>[label,tagSpec({...c.tag,label,theme})]))}:{})})) ?? [],
     messages: of('actions').filter(n => n.message).map(n => ({layer:'操作说明/'+n.id, text:n.message})),
     menuLeaf: page.menu ? page.menu.split('/').pop().trim() : page.title,
     search: search ? search.fields.map(f => ({...f, context: 'search', layer: layers.get(`${page.id}/${search.id}/${f.id}`).layer})) : null,
     buttons: page.children.filter(n => n.type === 'actions').flatMap(n => n.buttons.map(b => ({label: b.label, primary: !!b.primary, disabled: !!b.disabled, selectionSummary: b.selectionSummary, visible: n.visible !== false && b.visible !== false, layer: layers.get(`${page.id}/${n.id}/${b.id}`).layer}))),
-    table: table ? {pagination: !!table.pagination, feedback: table.feedback, emptyText: table.emptyText, error: table.error, retryLabel: table.retryLabel, loading: table.loading, config: tableConfig(table, tableLayer, table.renderRows ?? Math.min(table.rows ?? 10, 10),contentWidth)} : null,
+    table: table ? {pagination: paginationSpec(table.pagination), feedback: table.feedback, emptyText: table.emptyText, error: table.error, retryLabel: table.retryLabel, loading: table.loading, config: tableConfig(table, tableLayer, table.renderRows ?? Math.min(table.rows ?? 10, 10),contentWidth-(tabs?.orientation==='left'?160:0))} : null,
   };
 }
 
@@ -132,7 +171,7 @@ function drawerDef(page, layers, overName) {
   const size = width <= 300 ? 'small' : width <= 500 ? 'medium' : 'large';
   const rows = [], groups = [], dividers = [], links = [], radios = [], checkboxes = [], cascaders = [], timePickers = [], selectFields = [], inputFields = [], numbers = [], feedbacks = [], inserts = [];
   for (const form of page.children.filter(n => ['form','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','cascader'].includes(n.type) && n.visible !== false)) {
-    if(form.type==='feedback'){const item={...validateFeedback(form),beforeRow:rows.length};feedbacks.push(item);inserts.push({type:'feedback',...item});continue;}
+    if(form.type==='feedback'){if(form.kind==='alert')throw Error('Alert当前草稿入口仅支持工作台区块');const item={...validateFeedback(form),beforeRow:rows.length};feedbacks.push(item);inserts.push({type:'feedback',...item});continue;}
     if(form.type==='cascader'){const item={...validateCascader(form),beforeRow:rows.length};cascaders.push(item);inserts.push({type:'cascader',...item});continue;}
     if(form.type==='timePicker'){const item={...validateTimePicker(form),beforeRow:rows.length};timePickers.push(item);inserts.push({type:'timePicker',...item});continue;}
     if(form.type==='selectField'){const item={...validateSelect(form),beforeRow:rows.length};selectFields.push(item);inserts.push({type:'selectField',...item});continue;}
@@ -179,7 +218,7 @@ function unexpressed(page, patches = {}) {
     if (n.type === 'table' && n.rowActions?.some(a => a.when) && !n.rowActionRules) issues.push(`${page.id}/${n.id}：自然语言when未执行，仅按样例行序分配操作`);
     for (const f of n.fields ?? []) if (n.type === 'search' && ((f.kind === 'date-range' && f.value != null) || f.error || f.disabled || f.visible === false)) issues.push(`${page.id}/${n.id}/${f.id}：查询字段值或状态未支持`);
   }
-  const allowed = {cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note'],timeline:['visible','items','note'],imageViewer:['visible','items','open','note','emptyFeedback'],descriptions:['visible','items','title','note'],dialog:['visible','title','message','confirm','cancel','note'], heading:['title','status','visible','note'], table: ['feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
+  const allowed = {notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
   for (const [path, props] of Object.entries(patches)) {
     const [, id, child] = path.split('/'), n = page.children.find(n => n.id === id);
     const kind = child ? n?.buttons?.some(b => b.id === child) ? 'button' : 'field' : n?.type;
@@ -225,7 +264,7 @@ export function plan(dir) {
       notes: [`草图 v${v} · ${page.title} · 状态 ${st.id} ${st.title}${st.codes?.length ? `（${st.codes.join(' ')}）` : ''}`, ...Object.entries(st.patch??{}).filter(([,p])=>p.note).map(([path,p])=>`${path}：${p.note}`)],
       expectTexts: resolved ? expectedWorkbench(resolved) : drawer ? [drawer.title, ...drawer.groups.map(g=>g.title), ...drawer.rows.flat().map(f=>f.label), ...drawer.buttons.map(b=>b.label)] : Object.values(st.patch ?? {}).flatMap(p => [p.error, p.emptyText, ...(Array.isArray(p.value) ? p.value : typeof p.value === 'string' ? [p.value] : [])].filter(Boolean))});
   }
-  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(validateDialog); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); return {...rest, slot,dialogs}; })};
+  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(validateDialog); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); const notices=pg.children.filter(n=>n.type==='message'&&n.visible!==false).map(n=>{const s=validateMessage(n);return {...s,mainId:readJson('../components/message/catalog.json').find(r=>r.key===s.theme+'|'+s.closable).id};});if(notices.length>1)throw Error('每个状态画板最多一个全局提示');const tooltips=pg.children.filter(n=>n.type==='tooltip'&&n.visible!==false).map(n=>{const s=validateTooltip(n);return {...s,mainId:readJson('../components/tooltip/catalog.json').find(r=>r.key===s.placement+'|'+s.theme).id};});if(tooltips.length>1)throw Error('每画板最多一个悬停Tooltip');const popconfirms=pg.children.filter(n=>n.type==='popconfirm'&&n.visible!==false).map(n=>{const s=validatePopconfirm(n);return {...s,mainId:readJson('../components/popconfirm/catalog.json').find(r=>r.key===[s.placement,s.theme,s.showArrow].join('|')).id};});if(popconfirms.length>1)throw Error('每画板最多一个气泡确认');const notifications=pg.children.filter(n=>n.type==='notification'&&n.visible!==false).map(n=>{const s=validateNotification(n);return {...s,mainId:readJson('../components/notification/catalog.json').find(r=>r.key===[s.theme,s.icon,s.footerBtn].join('|')).id};});if(notifications.length>1)throw Error('每画板最多一个消息通知');return {...rest,slot,dialogs,...(notifications.length?{notifications}:{}),...(popconfirms.length?{popconfirms}:{}),...(tooltips.length?{tooltips}:{}),...(notices.length?{notices}:{})}; })};
 }
 
 // 仅序列化本画板使用的构建分支，避免详情扩展把无关表单代码挤过工具长度上限。
@@ -241,7 +280,7 @@ export function runtimeSource(drawer) {
 }
 
 export function code(dir, boardId) {
-  const target=targetConfig();if(!target.fileKey||!target.sourceFileKey||target.fileKey===target.sourceFileKey||target.adapterVerified!==true)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
+  if(!targetStatus().ready)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
   const p = plan(dir), board = p.boards.find(b => b.id === boardId);
   if (!board) throw Error(`没有画板 ${boardId}，可用：${p.boards.map(b => b.id).join('、')}`);
   const req = {fileKey: FILE_KEY, pageName: p.pageName, protectedPages: PROTECTED, version: p.version, board};
@@ -250,7 +289,7 @@ export function code(dir, boardId) {
   const payloadDrawer=req.board.def.drawer??(req.board.kind==='drawer'?req.board.def:null);
   if(payloadDrawer){const trimmed={...payloadDrawer,rows:payloadDrawer.rows.map(row=>row.map(({from,...field})=>field))};req.board={...req.board,def:req.board.def.drawer?{...req.board.def,drawer:trimmed}:trimmed};}
   let fns = '', lib = '{}';
-  if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify(tableDependencies())}}`; }
+  if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify(tableDependencies((board.def.workbench??board.def).table.config))}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
     fns = [fitFieldContent, composeForm, updateDrawer].map(f => f.toString()).join('\n');
     const {variants, titleProperty, footerIds, closeIds} = readJson('./maps/drawer.json');
@@ -259,6 +298,16 @@ export function code(dir, boardId) {
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
   if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
   const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
+  if(wd?.table&&(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){fns+='\n'+[applyTableExtensions,inspectTableExtensions,verifyTableExtensions].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',inspectTableExtensions,verifyTableExtensions}';}
+  if(wd?.alerts?.length){fns+='\n'+[updateAlert,renderAlert,inspectAlert,verifyAlerts].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderAlert,inspectAlert,verifyAlerts}';}
+  if(wd?.steps?.length){fns+='\n'+[updateSteps,renderSteps,inspectSteps,verifySteps].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderSteps,inspectSteps,verifySteps}';}
+  if(wd?.loadings?.length){fns+='\n'+[updateLoading,renderLoading,inspectLoading,verifyLoading].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLoading,inspectLoading,verifyLoading}';}
+  const extendedTabs=!!wd?.tabs?.mainId;
+  if(extendedTabs){fns+='\n'+(wd.tabs.orientation==='top'&&!wd.tabs.icon?[renderTopTabs,inspectTabs]:[updateTabs,renderTabs,inspectTabs,arrangeLeftTabs]).map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+(wd.tabs.orientation==='top'&&!wd.tabs.icon?',renderTabs:renderTopTabs,inspectTabs}':',renderTabs,inspectTabs,arrangeLeftTabs}');}
+  const extendedPagination=!!wd?.table?.pagination?.mainId;
+  if(extendedPagination){fns+='\n'+[updatePagination,renderPagination,inspectPagination,verifyPagination].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderPagination,inspectPagination,verifyPagination}';}
+  const extendedTags=wd?.headings?.some(h=>h.status.mainId)||wd?.tagThemes?.some(m=>Object.values(m.specs??{}).some(s=>s.mainId));
+  if(extendedTags){fns+='\n'+updateTag.toString()+'\n'+renderTag.toString();lib=lib.slice(0,-1)+',renderTag}';}
   if(fd?.feedbacks?.length||wd?.table?.feedback||wd?.feedbacks?.length||wd?.imageViewers?.some(s=>s.emptyFeedback)){fns+='\n'+renderFeedback.toString()+'\n'+updateFeedback.toString()+'\n'+verifyFeedback.toString();lib=lib.slice(0,-1)+',renderFeedback,verifyFeedback}';}
   if(wd?.dividers?.length||fd?.dividers?.length){fns+='\n'+[validateDivider,dividerVariant,updateDivider,renderDivider].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderDivider}';}
   if(wd?.cascaders?.length||fd?.cascaders?.length){const used=[...(wd?.cascaders??[]),...(fd?.cascaders??[])],deps=readJson('../components/cascader/dependencies.json');deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('state 状态='+({normal:'normal 默认',hover:'hover 悬浮',focus:'focus 聚焦'}[s.state]))&&r.name.includes('multiple 多选='+s.multiple)&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('prefixIcon 前置图标='+s.prefixIcon)&&r.name.includes('disabled 禁用='+s.disabled)));for(const key of Object.keys(deps.rows))deps.rows[key]=deps.rows[key].filter(r=>{const p=Object.fromEntries(r.name.split(',').map(x=>x.trim().split('=')));return used.some(s=>s.open&&s.multiple===key.startsWith('multi')&&s.columns.some((c,i)=>c.options.some(o=>(o.branch??c.branch??i<s.columns.length-1)===key.endsWith('Parent')&&p['state 状态'].startsWith((o.state??'normal')+' ')&&p['disable 禁用']===String(!!o.disabled)&&p['divider 分割线']===String(!!o.divider)&&(!s.multiple||p['indeterminate 半选']===String(!!o.indeterminate)))))});fns+='\n'+[validateCascader,cascaderSetText,updateCascaderOption,renderCascaderMenu,renderCascader].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderCascader,cascaderDeps:'+JSON.stringify(deps)+'}';}
@@ -277,11 +326,42 @@ export function code(dir, boardId) {
   if(wd?.links?.length||fd?.links?.length){fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const STYLE='+JSON.stringify(STYLE)+';const LINK_IDS='+JSON.stringify(LINK_IDS)+';\n'+[validateLink,linkVariant,linkStyleName,propertyKey,recolorIcons,updateLink,renderLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink}';}
   if(wd?.layout){fns+='\n'+[validateLayout,composeLayout].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',composeLayout}';}
   if(wd?.timelines?.length){fns+='\n'+renderTimeline.toString()+'\n'+updateTimelineItem.toString()+'\n'+verifyTimelines.toString();lib=lib.slice(0,-1)+',renderTimeline,verifyTimelines}';}
+  if(wd?.imageViewers?.some(s=>s.extended)){const cat=readJson('../components/image-viewer/catalog.json'),find=(family,p)=>cat.find(r=>r.family===family&&Object.entries(p).every(([k,v])=>r.props[k]===v)).id,d={demoHash:'43621e4f096140e8706686167dcbe771f046a043',views:{},images:{},layouts:{},close:{}};for(const g of [false,true])for(const st of ['normal','hover','error'])d.views[g+'|'+st]=find('view',{gallery:String(g),hover:String(st==='hover'),error:String(st==='error')});for(const ratio of ['1:1','16:9','9:16'])for(const error of [false,true])d.images[ratio+'|'+error]=find('image',{state:ratio,error:String(error)});for(const [g,show]of [[false,false],[true,false],[true,true]])d.layouts[g+'|'+show]=find('layout',{gallery:String(g),'⬑show':String(show)});for(const state of ['normal','hover','disabled'])d.close[state]=find('button',{hover:String(state==='hover'),disabled:String(state==='disabled'),direction:'no'});fns+='\n'+[renderImageViewerExtended,inspectImageViewerExtended,verifyImageViewerExtended].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',inspectImageViewerExtended,verifyImageViewerExtended,imageViewerDeps:'+JSON.stringify(d)+'}';}
   if(wd?.imageViewers?.length){fns+='\n'+renderImageViewer.toString()+'\n'+verifyImageViewers.toString();lib=lib.slice(0,-1)+',renderImageViewer,verifyImageViewers}';}
-  if(wd?.descriptions?.length){fns+='\n'+renderDescriptions.toString()+'\n'+verifyDescriptions.toString();lib=lib.slice(0,-1)+',renderDescriptions,verifyDescriptions,descriptionData:'+JSON.stringify(readJson('../components/descriptions/build-data.json'))+'}';}
-  if(board.dialogs.length) {fns+='\n'+renderDialog.toString()+'\n'+updateDialog.toString()+'\n'+verifyDialogs.toString();lib=lib.slice(0,-1)+',renderDialog,verifyDialogs}';}
+  if(wd?.descriptions?.length){fns+='\n'+renderDescriptions.toString()+'\n'+verifyDescriptions.toString();lib=lib.slice(0,-1)+',renderDescriptions,verifyDescriptions,descriptionData:'+JSON.stringify(descriptionRuntimeData())+'}';}
+  if(board.dialogs.length) {fns+='\n'+dialogMainId.toString()+'\n'+renderDialog.toString()+'\n'+updateDialog.toString()+'\n'+verifyDialogs.toString();lib=lib.slice(0,-1)+',renderDialog,verifyDialogs,dialogDeps:'+JSON.stringify((()=>{const d=readJson('../components/dialog/dependencies.json');return {...d,main:Object.fromEntries(board.dialogs.filter(s=>!s.fullscreen).map(s=>{const k=(s.theme??'default')+'/'+(s.closable??s.closeBtn??false)+'/'+!!s.divider;return [k,d.main[k]];}))};})())+'}';}
+  if(board.notices?.length){fns+='\n'+[updateMessage,renderMessage,inspectMessage,verifyMessage].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderMessage,inspectMessage,verifyMessage}';}
+  if(board.notifications?.length){fns+='\n'+[updateNotification,renderNotification,inspectNotification,verifyNotification].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderNotification,inspectNotification,verifyNotification}';}
+  if(board.popconfirms?.length){fns+='\n'+[updatePopconfirm,renderPopconfirm,inspectPopconfirm,verifyPopconfirm].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderPopconfirm,inspectPopconfirm,verifyPopconfirm}';}
+  if(board.tooltips?.length){fns+='\n'+[positionTooltip,updateTooltip,renderTooltip,inspectTooltip,verifyTooltip].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTooltip,inspectTooltip,verifyTooltip}';}
   lib=lib.replace(/^\{,/,'{');
   let runtime=runtimeSource(board.kind==='drawer'||!!board.def.drawer);
+  // 仅裁剪当前画板不可达的段落；实际构建和语义校验代码保持原样。
+  const omit = marker => { runtime=runtime.replace(new RegExp('^[ \t]*// '+marker+'_START[\\s\\S]*?^[ \t]*// '+marker+'_END\\n','m'),''); };
+  if(!wd?.table||!(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){omit('TABLE_EXT_VERIFY');}
+  if(!wd?.imageViewers?.some(s=>s.extended)){omit('IMAGE_VIEWER_EXT_VERIFY');runtime=runtime.replace(',imageViewerDeps:lib.imageViewerDeps','');}
+  if(!wd?.alerts?.length){omit('ALERT_BUILD');omit('ALERT_VERIFY');}
+  if(!wd?.steps?.length){omit('STEPS_BUILD');omit('STEPS_VERIFY');}
+  if(!wd?.loadings?.length){omit('LOADING_BUILD');omit('LOADING_VERIFY');}
+  if(!board.notifications?.length){omit('NOTIFICATION_BUILD');omit('NOTIFICATION_VERIFY');runtime=runtime.replace('notifications:notificationReceipts,','');}
+  if(!board.popconfirms?.length){omit('POPCONFIRM_BUILD');omit('POPCONFIRM_VERIFY');runtime=runtime.replace('popconfirms:popconfirmReceipts,','');}
+  if(!board.tooltips?.length){omit('TOOLTIP_BUILD');omit('TOOLTIP_VERIFY');runtime=runtime.replace('tooltips:tooltipReceipts,','');}
+  if(!board.notices?.length){omit('MESSAGE_BUILD');omit('MESSAGE_VERIFY');runtime=runtime.replace('notices:messageReceipts,','');}
+  if(!extendedTags)runtime=runtime.replace('      if(spec?.mainId)return lib.renderTag(figma,parent,spec);\n','').replace('mainId:(await n.getMainComponentAsync()).id,','');
+  if(extendedTabs){runtime=runtime.replace(/    async function fillTabs\([\s\S]*?(?=    const contentTabs)/,'').replace("    await fillTabs(tabs,contentTabs?[def.pageTitle]:def.tabs.items,contentTabs?0:def.tabs.active);","    const nav=await instance('47:57',tabs,'页签/'+def.pageTitle);await setText(nav.findOne(n=>n.type==='TEXT'),def.pageTitle);nav.primaryAxisSizingMode='AUTO';");runtime=runtime.replace(/    else if \(contentTabs\) \{[\s\S]*?    \/\/ CONTENT_TABS_END\n/,'');if(wd.tabs.orientation==='top')omit('TABS_LAYOUT');}
+  if(!extendedTabs){omit('TABS_EXTENDED');omit('TABS_VERIFY');omit('TABS_LAYOUT');runtime=runtime.replace('else if (contentTabs)', 'if (contentTabs)');}
+  if(!extendedPagination){omit('PAGINATION_EXTENDED');omit('PAGINATION_VERIFY');runtime=runtime.replace('else if(!def.table.pagination', 'if(!def.table.pagination');}
+  if(fd)omit('WORKBENCH_SNAPSHOT');
+  if(wd&&!wd.headings?.length&&!wd.tagThemes?.length)omit('TAG_HELPER');
+  if(wd&&!wd.search)omit('SEARCH_BUILD');
+  if(wd&&!wd.search?.length){omit('SEARCH_FIELDS');runtime=runtime.replace(/  function fieldControl\([\s\S]*?(?=  async function buildWorkbench)/,'');}
+  if(wd&&!wd.table){omit('TABLE_BUILD');omit('TABLE_EMPTY');}
+  if(wd?.table?.config.rows.length)omit('TABLE_EMPTY');
+  if(wd?.table&&(!wd.table.pagination||!wd.table.config.rows.length))omit('PAGINATION_BUILD');
+  if(!fd?.feedbacks?.length&&!wd?.table?.feedback&&!wd?.feedbacks?.length&&!wd?.imageViewers?.some(s=>s.emptyFeedback))runtime=runtime.replace(/  const hasFeedback=[\s\S]*?(?=  const semanticErrors)/,'  const hasFeedback=false,feedbackSpecs=[];\n');
+  for(const name of ['links','dividers'])if(!wd?.[name]?.length&&!fd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(\\(def\\?\\?form\\)\\?\\.'+name+'[^\\n]*\\n','gm'),'');
+  for(const name of ['timelines','imageViewers','descriptions'])if(!wd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(def\\?\\.'+name+'[^\\n]*\\n','gm'),'');
+
   if(!fd?.feedbacks?.length)runtime=runtime.replaceAll("d.type==='feedback'?lib.renderFeedback:",'').replaceAll("d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:",'').replace("form?.feedbacks?.length||",'').replace("...(form?.feedbacks??[]),",'').replace("form?root.children.find(n=>n.name.startsWith('抽屉 / ')):root",'root');
   if(!wd?.cascaders?.length&&!fd?.cascaders?.length)runtime=runtime.replace(/        \/\/ CASCADER_START[\s\S]*?        \/\/ CASCADER_END\n/,'');
   if(!fd?.cascaders?.length)runtime=runtime.replaceAll("d.type==='cascader'?lib.renderCascader:",'').replaceAll("d.type==='cascader'?lib.cascaderDeps:",'');
@@ -303,8 +383,8 @@ export function code(dir, boardId) {
   if(fd&&!fd.rows.flat().some(f=>f.kind==='upload'))runtime=runtime.replace(/  async function uploadFiles\([\s\S]*?(?=  async function formValue)/,'').replace(/      \/\/ DRAWER_UPLOAD_START[\s\S]*?      \/\/ DRAWER_UPLOAD_END\n/,'');
   if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
   if(fd&&!fd.rows.flat().some(f=>f.open))runtime=runtime.replace(/    \/\/ DRAWER_POPUP_START[\s\S]*?    \/\/ DRAWER_POPUP_END\n/,'');
-  const generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
-  // 公开包中组件依赖以占位符记录目标文件；替换为本机已适配验证的目标。
+  let generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
+  if(!extendedTabs)generated=generated.replace(/^if\(def.tabs\?\.mainId\).*\n/gm,'');
   const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET', FILE_KEY);
   if (out.length > 50000) throw Error(`生成代码 ${out.length} 字符，超过 use_figma 上限 50000`);
   return out;

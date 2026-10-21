@@ -1,8 +1,6 @@
 # 草图环节设计（草案）
 
-> 当前公开版先交付本地草稿。本文 Figma 章节保留为旧构建路径参考；不要因草稿确认自动执行 Figma。使用者流程见 [草稿指南](draft-first.md)。
-
-> 2026-10-15 优先级调整：先完善可独立交付的对话草稿能力，Figma 出稿按需继续。现状核查、实施批次与验收标准见独立草稿能力实施规划（内部验证资料未随公开包分发）；A–C 已完成本地开发与验证，产品经理试用和 Windows 验收待完成。操作见 [草稿命令](draft-commands.md)，以下保留原 Figma 流程及历史记录，草稿可独立交付。
+> 2026-10-15 优先级调整：先完善可独立交付的对话草稿能力，Figma 出稿按需继续。现状核查、实施批次与验收标准见独立草稿能力实施规划（内部验证资料）；A–C 已完成本地开发与验证，产品经理试用和 Windows 验收待完成。操作见 [草稿命令](draft-commands.md)，以下保留原 Figma 流程及历史记录，草稿可独立交付。
 
 日期：2026-10-13。状态：**设计已确认；S1–S5 和草图到 Figma（第八节）已实现并通过本地测试。草图到 Figma 已在测试 Page 实际生成 7 张画板；产品经理实际使用的验证暂缓，见第十二节。**
 
@@ -20,7 +18,7 @@
 
 ## 二、和现有方案卡的关系
 
-现在的方案卡是对话里的一段文字（见使用流程（内部验证资料未随公开包分发））。草图把它升级为**一份结构化数据加两种视图**：
+现在的方案卡是对话里的一段文字（见使用流程（内部验证资料））。草图把它升级为**一份结构化数据加两种视图**：
 
 | 视图 | 给谁看 | 内容 |
 |---|---|---|
@@ -274,7 +272,7 @@ S1 到 S3 是最小可用闭环，S4 依赖 S2。S6 需要真实需求文档，�
 | # | 验证内容 | 怎么验证 | 通过标准 |
 |---|---|---|---|
 | V1 | Codex 能按 skill 写出合格草图 | 在 Codex 新会话里给 2～3 个需求，可以用截图、一句话需求、`sketch/examples` 对应的原需求。只走到草图，不写 Figma | 一次或少量修改就通过 check；节点类型、来源标注、清单结论使用正确；没有把关键规则标成“按推荐”或“本轮不做” |
-| V2 | Mac 上的完整对话流程 | 实测清单（内部验证资料未随公开包分发）第 6、6a 步 | 预览自动打开；复制引用后能定位并生成新版本；旧版本文件没有被改动 |
+| V2 | Mac 上的完整对话流程 | 实测清单（内部验证资料）第 6、6a 步 | 预览自动打开；复制引用后能定位并生成新版本；旧版本文件没有被改动 |
 | V3 | Windows 上的完整对话流程 | 实测清单第 6、6a 步，以及 Windows 风险第 3 条 | 中文检查结果和预览没有乱码；`Start-Process` 能打开 `预览.html` |
 | V4 | 产品经理能否看低保真草图判断方案 | 真实需求盲测（S6），按 B3 评分表打分，并记录每轮修改发生在草图阶段还是 Figma 阶段 | 结构性修改主要发生在草图阶段；产品经理没有反馈“看不懂”或“必须看高保真才能判断” |
 | V5 | 草图和现有页面一致 | 人工对照 `sketch/examples` 的预览和对应 Figma 稿 | 页面、字段、列、操作、状态没有遗漏或多出 |
@@ -309,18 +307,18 @@ Form 新增 `kind: time | number | radio`，复用已导入的 Form 顶部字段
 - 表单回读校验字段集合、值、单选/多选/开关状态、日期类型、时间/数字控件类型、附件成功失败及重试、底栏按钮和加载状态；任一遗漏不能返回完整成功。字体及视觉仍需实看、UI验收。
 # 详情现有能力修复补充（2026-10-14）
 
-工作台可以组合已有文字样式、Tag、Tabs、Button、Table；不代表详情描述、时间线、图片查看器、Dialog已导入。
+工作台可组合文字样式、Tag、Tabs、Button、Table及已接通的descriptions、imageViewer、dialog等入口。Timeline仅提供垂直左对齐同侧的历史入口，其扩展暂停。当前类型、组合配置及边界见[草稿能力表](draft-component-capabilities.md)。
 
 - `heading` 节点：`title`、`subtitle`（编号）、`status: {label, theme}`，主题为 `default/primary/success/warning/danger`。标题完整换行；状态可 patch `title/status/visible`。这是页面组合入口，没有创建新母组件。
 - `tabs.placement: "content"` 在正文生成无关闭按钮的内容页签，顶部导航保留页面名。patch `active` 为从0开始的有效索引，配合 `table.visible` 隐藏非当前内容；静态状态画板不等于点击交互。
 - `actions.message` 是实际画板内的操作/权限/失败说明，可 patch；`note` 仍是画板外注释，不自动当成UI。失败状态可隐藏标题、业务操作和记录，只保留返回及独立重试操作组。使用已有文字样式和Button，不声称规范反馈组件已导入。
-- `tag` 类型表格列可写 `themes: {"有异常":"warning", "正常":"success"}`，必须逐一配置展示值的主题。复用已导入outline Tag；主题映射是业务设计判断，不从文案自动推断。
+- `tag` 类型表格列可写 `themes: {"有异常":"warning", "正常":"success"}`，必须逐一配置展示值的主题。主题映射是业务设计判断，不从文案自动推断。Tag列可加`tag:{variant,shape,icon,closable,disabled,closeState}`，heading.status同样支持这些属性；默认outline/square，medium与任意iconName/iconId明确拒绝，详见components/tag/README.md。
 - 生成校验检查页签集合与选中、标题和状态Tag、操作说明、隐藏表格、行内容与操作。任何剩余 gap 均保持 `complete:false`。原需求含自然语言但未被结构化保留的遗漏，仍需人工逐项核对。
 
 
-## Dialog基础确认入口（2026-10-14）
+## Dialog草稿入口（2026-10-21更新）
 
-页面children可加`dialog`节点，必填id/type/title/message/cancel/confirm/from，默认`visible:false`；状态patch设visible:true。工作台、抽屉共用同一覆盖层实现，不使用Drawer冒充Dialog。每张画板最多一个；主题仅default，无关闭、无分割线，宽480–960，剩余家族未实现。状态允许修改visible/title/message/cancel/confirm/note；校验不接受缺文案或不支持的样式。详见[组件使用说明](../components/dialog/README.md)。
+页面children可加`dialog`节点，必填id/type/title/message/cancel/confirm/from，默认`visible:false`；状态patch设visible:true。工作台、抽屉共用同一覆盖层实现，不使用Drawer冒充Dialog。每张画板最多一个。常规支持5主题×关闭×分割线共20组合，宽480–960；关闭支持normal/hover/active。全屏只支持源提供的info、带关闭、两种分割线配置，不接受固定width。状态允许修改文案、可见性及受支持的样式参数；校验拒绝缺文案与库外组合。详见[组件使用说明](../components/dialog/README.md)。
 
 原form取消态与detail停用态实际验证在evidence/dialog。对这两个已实现确认视图，应移除对应“Dialog未导入”gap，但保留后续成功/失败、历史数据保留、导航等业务规则与未验证结论；不得把静态弹窗称为真实操作链已实现。
 
@@ -328,19 +326,19 @@ Form 新增 `kind: time | number | radio`，复用已导入的 Form 顶部字段
 
 `descriptions` 使用规范Template只读标签/值组合，非新组件家族。属性 `title`、`columnCount:1|2`、`items:[{id,label,value,span?:1|2,from}]`；状态可覆盖 `items`、`title`、`visible`。label不含冒号，value为完整文字。详见components/descriptions/README.md。本次已覆盖默认/只读/长内容/加载失败隐藏，并真实验证新增验收部门原位修改。
 
-### 详情图片查看（部分导入）
+### 详情图片查看（当前20变体已技术验证）
 
-`imageViewer`：`title`、`items:[{id,filename,state?:normal|hover|error,imageHash?}]`、`open?:图片id`、`demo?:演示说明`。支持items/open/visible状态覆盖；正常图查看大图，失败保留文件名与重新加载，空数组显示暂无附件。图库和其余图片比例尚未接通。见components/image-viewer/README.md。
+`imageViewer`：`title`、`items:[{id,filename,state?:normal|hover|error,imageHash?}]`、`open?:图片id`、`demo?:演示说明`。支持items/open/visible状态覆盖；正常图查看大图，失败保留文件名与重新加载，空数组显示暂无附件。支持gallery、showThumbnails、openError、closeState和items.ratio三比例；图库240px、单图168px。左右切换仅normal，关闭支持normal/hover/disabled，库外态显式拒绝。见components/image-viewer/README.md。
 
 ### 日志时间线（部分导入）
 
-`timeline`：`items:[{id,time,actor,action,detail,color?:default|primary}]`。默认垂直左对齐同侧；其它layout/align/icon显式拒绝。顺序按items；最后一项自动结束、无连接线。支持items/visible状态覆盖，与records表互斥由状态patch表达。详见components/timeline/README.md。
+`timeline`：`items:[{id,time,actor,action,detail,color?:default|primary}]`。默认垂直左对齐同侧；其它layout/align、mode交错和节点或条目icon显式拒绝；未验证扩展不提供。顺序按items；最后一项自动结束、无连接线。支持items/visible状态覆盖，与records表互斥由状态patch表达。详见components/timeline/README.md。
 
 ### 空态与失败反馈（2026-10-14）
 
 工作台table增加feedback:{variant:"compact"}启用已导入Empty/Alert：无记录采用emptyText，error采用失败Alert＋retryLabel，保留表头并隐藏分页。imageViewer.emptyFeedback:{variant:"compact"}为空附件启用相同规范空态；不改变图片失败自己的视觉。独立feedback节点需要id/from/type、kind:empty|error、message；error必须提供action（例如重试），允许visible/message/kind/action/note状态覆盖。渲染、更新和回读校验共用components/feedback/generator.mjs。原有未启用的历史草图保留原行为。
 
-Empty三个发布来源保留原生导入，但当前真实页面只验compact；Alert仅1/52，隐藏关闭是业务组合判断，不能声称规范存在close=false。全部来源与真实回归见反馈验证记录（内部验证资料未随公开包分发）。
+Empty三个发布来源保留原生导入，当前真实页面仍只验compact。旧error＋重试反馈沿用专用组合；工作台新增 `feedback.kind:"alert"` 已支持现行52组合，见[Alert说明](../components/alert/README.md)。新Alert拒绝close=false及库外组合，抽屉暂不支持新Alert入口。旧反馈证据见反馈验证记录（内部验证资料），不代表新Alert仍只有1/52。
 
 ### 多选展开状态
 
@@ -366,3 +364,25 @@ Empty三个发布来源保留原生导入，但当前真实页面只验compact�
 ### 抽屉保存失败反馈（2026-10-16）
 
 drawer.children可放独立feedback，格式与工作台相同，按form前后位置插入。推荐默认visible:false，在save_failed状态只覆盖visible:true，并保留已填字段。服务端保存失败不要写入某个字段的error，避免误认为字段校验失败。当前使用已导入danger Alert＋重试按钮，静态稿不执行请求；见evidence/inspection-flow-20261016。
+
+表格 `pagination` 可使用对象：`{theme:'default',totalContent:true,pagesize:true,jumper:true,disabled:false,total:101,pageSize:10,current:1,pages:[1,2,3,4,5,'…',11]}`。当前源default 16/simple 8组合；simple须jumper=false（内部跳页框仍显示），不得带pages。default超过6页须显式提供最多6个数字且包含当前页的窗口，省略号仅在末页前。仅生成静态分页，不承诺真实业务翻页事件。
+
+整栏页签：`{type:'tabs',placement:'content',orientation:'top',icon:true,items:['概览','详情','记录'],active:0}`。top仅2–8项，left仅8项；left内容并列，栏宽160/高600。当前整栏无关闭/禁用/任意图标交换组合，不能补造。顶部输出实例；左侧为母组件实例解除关联后的可编辑FRAME，以支持源选中图标几何切换。文字与选中可原位更新，不代表路由行为已实现。
+
+全局提示使用 `message` 节点：`{id:'notice',type:'message',from:'判断',theme:'success',closable:true,text:'保存成功'}`。主题仅info/success/warning/error/loading，关闭开关对应当前10组合。每画板最多1个，可用state patch修改主题、关闭、文字、visible。当前为静态展示，位于顶部80居中（设计判断），不推导持续时间、关闭事件或等待动画。
+
+区域加载用 `loading` 节点，`variant` 为spinner（纯图形）/spinner-text（图文）/text（纯文字），size为small/medium/large。图文和纯文字可配置label；纯图形拒绝label。可用state patch修改variant/size/label/visible；220高居中区域是设计判断，静态状态不承诺动画或请求行为。
+
+- Tooltip独立节点：anchor唯一匹配操作按钮标签，text非空；placement与theme按当前84组合选择，showArrow仅允许与位置一致。每画板最多一个。静态状态预览/可编辑Figma实例，不实现真实悬停事件；详见components/tooltip/README.md。
+
+- steps：工作台独立流程区块；orientation横/纵、theme default/dot、items 2–6项且各项明确title/description/state。只支持当前正向/无自定义图标，详见components/steps/README.md。
+
+- popconfirm：显式气泡确认节点，anchor匹配唯一触发项文字；title/description/cancel/confirm必填，placement/theme/showArrow按当前28组合，不自动替代Dialog；详见components/popconfirm/README.md。
+
+- notification：title/description必填，四主题、icon/footerBtn按当前10组合；底部按钮存在时cancel/confirm必填，当前源不含关闭按钮。静态右上通知，详见components/notification/README.md。
+
+### Alert（2026-10-21）
+工作台feedback.kind=alert支持现行52组合；主题、描述、图标、相关操作和展开入口规则见[Alert](../components/alert/README.md)。拒绝源不存在的组合；静态预览不执行关闭或展开。
+
+### Table 扩展（2026-10-21）
+`table.selectionMode`支持none/multiple/single/expand；展开需expandedRows与expandedContent，可配expandHoverRows。文字列maxLines与wrap互斥；textTag列用tagKey，state列用stateThemes明确映射normal/error。columns.width和resizableColumns仅表示静态宽度。详见Table记录（内部验证资料）。

@@ -1,3 +1,5 @@
+import {tableExtensionDependencies} from '../../components/table/extension-dependencies.mjs';
+import {applyTableExtensions} from '../../components/table/extensions.mjs';
 import {readFileSync} from 'node:fs';
 import {buildTable,validate} from '../../components/table/generator.mjs';
 import {isMain} from '../../support/entry.mjs';
@@ -85,14 +87,15 @@ export async function buildPage(figma,spec,buildTable,deps){
  const all=[root,...root.findAll(()=>true)];
  return {pageId:page.id,rootId:root.id,sections,createdNodeIds:all.filter(n=>n!==root).map(n=>n.id),mutatedNodeIds:[root.id],table:tableResult,variableWarnings,spacingVariables:Object.values(vars).map(v=>({id:v.id,name:v.name})),fonts:[...new Set(root.findAllWithCriteria({types:['TEXT']}).map(n=>n.fontName.family))],bounds:root.children.map(n=>({name:n.name,x:n.x,y:n.y,w:n.width,h:n.height}))};
 }
-export function tableDependencies(){
+export function tableDependencies(config={columns:[]}){
  const raw=JSON.parse(readFileSync(new URL('../../components/table-cell/build-data.json',import.meta.url),'utf8'));
  const props=id=>raw.nodes.find(n=>n.sourceId===id).props;
  const deps={cells:{header:'67:32',text:'67:11',tag:'67:20',state:'67:28',operations:'67:13'},checkbox:{off:'31:2',on:'31:12',mixed:'31:6'},pagination:'55:2',surface:{fills:props('46879:366074').fills,strokes:props('46879:366074').strokes},headerFill:props('46879:366290').fills,gridStroke:props('46879:366074').strokes};
+ if(config.selectionMode||config.resizableColumns||config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind))){deps.extensions=tableExtensionDependencies();deps.cells.textTag=deps.extensions.textTag;}
  return deps;
 }
 export function generate(spec){
- validate(spec.table);const deps=tableDependencies();
- return `${buildTable.toString()}\n${buildPage.toString()}\nreturn await buildPage(figma,${JSON.stringify(spec)},buildTable,${JSON.stringify(deps)});`;
+ validate(spec.table);const deps=tableDependencies(spec.table);
+ return `${deps.extensions?applyTableExtensions.toString():''}\n${buildTable.toString()}\n${buildPage.toString()}\nreturn await buildPage(figma,${JSON.stringify(spec)},buildTable,${JSON.stringify(deps)});`;
 }
 if(isMain(import.meta.url))process.stdout.write(generate(JSON.parse(readFileSync(new URL('spec.json',import.meta.url),'utf8'))));

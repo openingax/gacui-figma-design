@@ -1,0 +1,13 @@
+{
+  "name": "Notification 扩展/1",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "notification-source-1",
+    "pageId": "45829:327191"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}
