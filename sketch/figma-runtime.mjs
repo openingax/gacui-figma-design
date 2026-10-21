@@ -375,6 +375,13 @@ export async function sketchRuntime(figma, req, lib) {
       }
     }
     // TABLE_EMPTY_END
+    // TABLE_LOADING_BUILD_START
+    if(def.table?.loading){
+      const table=one(def.table.config.name),index=list.children.indexOf(table),region=autoFrame(list,'表格区域/'+def.table.config.name,'VERTICAL',table.width);region.itemSpacing=0;list.insertChild(index,region);region.appendChild(table);
+      for(const name of ['反馈/table','加载失败','空结果']){const n=list.children.find(n=>n.name===name);if(n)region.appendChild(n);}
+      await lib.updateTableLoading(figma,region,def.table.loading);
+    }
+    // TABLE_LOADING_BUILD_END
     // ALERT_BUILD_START
     for(const s of def.alerts??[])await lib.renderAlert(figma,list,s,CONTENT_WIDTH);
     // ALERT_BUILD_END
@@ -384,6 +391,9 @@ export async function sketchRuntime(figma, req, lib) {
   // LOADING_BUILD_START
     for(const s of def.loadings??[])await lib.renderLoading(figma,list,s,CONTENT_WIDTH);
     // LOADING_BUILD_END
+    // TIMEGROUP_BUILD_START
+    for(const s of def.timeRangeGroups??[])await lib.renderTimeRangeGroup(figma,list,s,lib.timeGroupDeps);
+    // TIMEGROUP_BUILD_END
     for(const s of def.feedbacks??[])await lib.renderFeedback(figma,list,s,{autoFrame,normalize,setText,instance,buttonLabel,width:CONTENT_WIDTH});
 
     for(const s of def.timelines??[])await lib.renderTimeline(figma,list,s,{autoFrame,text,normalize,setText,width:CONTENT_WIDTH});
@@ -391,7 +401,7 @@ export async function sketchRuntime(figma, req, lib) {
     // TABS_LAYOUT_START
     if(def.tabs?.orientation==='left'){lib.arrangeLeftTabs(figma,list,CONTENT_WIDTH);list.primaryAxisSizingMode='AUTO';}
     // TABS_LAYOUT_END
-    if(def.alerts?.length||def.steps?.length||def.loadings?.length||def.headings?.length||def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
+    if(def.timeRangeGroups?.length||def.alerts?.length||def.steps?.length||def.loadings?.length||def.headings?.length||def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
     // DIVIDER_ORDER_START
     if(def.blocks?.length){
       const workspace=one('工作区'),ordered=autoFrame(workspace,'草稿内容顺序','VERTICAL',OUTER_WIDTH);
@@ -440,9 +450,9 @@ export async function sketchRuntime(figma, req, lib) {
           for(const name of b.buttons)for(const key of [name,name+'/选择说明']){const n=optional(key);if(n)row.appendChild(n);}
           move('操作说明/'+b.id);
         }else if(b.type==='table'){
-          for(const name of [b.layer,'分页','反馈/table','加载失败','空结果'])move(name);
+          for(const name of [def.table?.loading?'表格区域/'+b.layer:b.layer,'分页','反馈/table','加载失败','空结果'])move(name);
         }else{
-          const prefix={heading:'详情标题/',descriptions:'基本信息/',feedback:'反馈/',timeline:'日志时间线/',imageViewer:'图片查看/'};
+          const prefix={timeRangeGroup:'时段组/',heading:'详情标题/',descriptions:'基本信息/',feedback:'反馈/',timeline:'日志时间线/',imageViewer:'图片查看/'};
           const n=move(b.type==='tabs'?'内容页签':prefix[b.type]+b.id);
           if(!n)throw Error('草稿区块未表达：'+b.id);
         }
@@ -453,7 +463,7 @@ export async function sketchRuntime(figma, req, lib) {
       if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),workspace])n.resize(n.width,n.height+delta);
     }
     // DIVIDER_ORDER_END
-    if (def.table?.loading) unsupported.push('表格加载中尚未表达');
+
     if (extra > 0) for (const n of [root, one('页面主体'), one('运维菜单'), one('工作区')]) n.resize(n.width, n.height + extra);
     for (const n of walk(root)) if ('strokes' in n) { if (n.strokeStyleId) await n.setStrokeStyleIdAsync(n.strokeStyleId); else n.strokes = copy(n.strokes); }
     // LAYOUT_SHELL_START
@@ -504,7 +514,7 @@ export async function sketchRuntime(figma, req, lib) {
     const body = autoFrame(content, '正文内容', 'VERTICAL', def.formWidth);
     const created = [];
     for (const [i, row] of def.rows.entries()) {
-      for(const d of def.inserts??[])if(d.beforeRow===i){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
+      for(const d of def.inserts??[])if(d.beforeRow===i){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
       for (const g of def.groups ?? []) if (g.beforeRow === i) {
         const title = await text(body, g.layer, g.title, 'body', def.formWidth);
         title.fontName = await pick({family:'PingFang SC',style:'Medium'});
@@ -541,7 +551,7 @@ export async function sketchRuntime(figma, req, lib) {
         node = await formValue(node, f);
       }
     }
-    for(const d of def.inserts??[])if(d.beforeRow===def.rows.length){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
+    for(const d of def.inserts??[])if(d.beforeRow===def.rows.length){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
     // DRAWER_POPUP_START
     for(const f of def.rows.flat().filter(f=>f.open)){
       let control=fieldControl(root.findOne(n=>n.name===f.layer));if(control.type==='INSTANCE')control=control.detachInstance();
@@ -560,12 +570,15 @@ export async function sketchRuntime(figma, req, lib) {
     throw Error('状态缺少完整页面定义');
   }
 
+  // TIMEGROUP_FONT_START
+  if(lib.timeGroupDeps)lib.timeGroupDeps.title.fontName=await pick(lib.timeGroupDeps.title.fontName);
+  // TIMEGROUP_FONT_END
   let root;
   if (board.kind === 'workbench') root = await buildWorkbench(board.def);
   else if (board.kind === 'drawer') root = await buildDrawer(board.def);
   else root = await buildState(board.def);
   const dialogs=[];
-  for(const s of board.dialogs??[])dialogs.push(await lib.renderDialog(figma,root,s,{normalize,setText,buttonLabel,deps:lib.dialogDeps}));
+  for(const s of board.dialogs??[])dialogs.push(await (s.children?.length?lib.renderComposedDialog:lib.renderDialog)(figma,root,s,{normalize,setText,buttonLabel,deps:lib.dialogDeps,...(s.children?.length?{autoFrame,pick,...lib}:{})}));
   // MESSAGE_BUILD_START
   const messageReceipts=[];for(const s of board.notices??[]){const n=await lib.renderMessage(figma,root,s);messageReceipts.push(await lib.inspectMessage(n));}
   // MESSAGE_BUILD_END
@@ -650,6 +663,13 @@ export async function sketchRuntime(figma, req, lib) {
   if(def?.imageViewers?.length)semanticErrors.push(...lib.verifyImageViewers(def.imageViewers,snapshot.imageViewers));
   if(def?.descriptions?.length)semanticErrors.push(...lib.verifyDescriptions(def.descriptions,snapshot.descriptions));
   if(board.dialogs?.length)semanticErrors.push(...lib.verifyDialogs(board.dialogs,dialogs,lib.dialogDeps));
+  for(const d of dialogs)if(d.composition)semanticErrors.push(...d.composition.errors);
+  // TIMEGROUP_VERIFY_START
+  snapshot.timeRangeGroups=[];for(const s of (def??form)?.timeRangeGroups??[]){const a=await lib.inspectTimeRangeGroup(figma,root.findOne(x=>x.name==='时段组/'+s.id),s);snapshot.timeRangeGroups.push(a);semanticErrors.push(...a.errors);}
+  // TIMEGROUP_VERIFY_END
+  // TABLE_LOADING_VERIFY_START
+  if(def?.table?.loading){snapshot.tableLoading=await lib.inspectTableLoading(figma,root.findOne(n=>n.name==='表格区域/'+def.table.config.name),def.table.loading);semanticErrors.push(...snapshot.tableLoading.errors);}
+  // TABLE_LOADING_VERIFY_END
   // MESSAGE_VERIFY_START
   for(const [i,s]of (board.notices??[]).entries())semanticErrors.push(...lib.verifyMessage(s,messageReceipts[i]));
   // MESSAGE_VERIFY_END

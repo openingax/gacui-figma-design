@@ -221,3 +221,12 @@ li.add { color: #1f7a3a; } li.del { color: #b22; } li.chg { color: #a36d00; }
 .cell-value.multiline{overflow:hidden;line-height:22px;overflow-wrap:anywhere}
 .gallery-items .image-sample{width:240px;height:240px;position:relative}.image-sample{position:relative}.image-hover{position:absolute;inset:0;background:#0008;color:white;display:grid;place-content:center}.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:20px 16px 12px;background:linear-gradient(transparent,#0006);color:white;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.image-viewer-modal{position:relative;background:#454c52;min-height:440px;margin-top:16px;padding:48px 56px 32px;text-align:center;color:white}.image-modal-picture{margin:24px auto 0;background:#f2f3f5;color:#999;display:grid;place-content:center;max-width:90%}.image-modal-title{display:inline-block;max-width:80%;overflow-wrap:anywhere;background:#ffffff33;padding:5px 8px;border-radius:4px}.image-close,.image-previous,.image-next{position:absolute;width:40px;height:40px;border-radius:50%;background:#ffffff55;display:grid;place-content:center;font-size:28px}.image-close{right:32px;top:32px}.image-close.hover{background:#ffffff88}.image-close.disabled{opacity:.4}.image-previous{left:32px;top:50%}.image-next{right:32px;top:50%}.gallery-strip{display:flex;gap:8px;justify-content:center;background:white;color:#777;margin:-48px -56px 32px;padding:12px;overflow:hidden}.gallery-strip span{width:71.111107px;flex:none;height:40px;background:#f2f3f5;overflow:hidden;font-size:10px;border:1px solid transparent;border-radius:3px}.gallery-strip .active{border-color:#0068ff}
 .image-items.gallery-items>div{width:240px}
+
+.dialog-body{overflow:auto;min-height:0}.dialog-body .n{margin:0 0 16px}.dialog[data-fullscreen="true"] .dialog-body{flex:1}.dialog-body .description-grid{overflow-wrap:anywhere}
+
+.time-range-group{display:flex;flex-direction:column;gap:16px}.time-group-row{display:flex;align-items:center;gap:16px}.time-group-row .select-input{display:flex;align-items:center;justify-content:space-between}
+.time-group-row .select-input{border:1px solid #ddd;border-radius:3px;min-height:32px;padding:0 8px;box-sizing:border-box}.time-range-group>.btn{align-self:flex-start}
+
+.table-region-loading{background:white;display:flex;align-items:center;justify-content:center;gap:8px}
+
+.table-loading-region{position:relative;min-height:46px}
