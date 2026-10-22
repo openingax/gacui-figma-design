@@ -332,7 +332,7 @@ Form 新增 `kind: time | number | radio`，复用已导入的 Form 顶部字段
 
 ### 日志时间线（部分导入）
 
-`timeline`：`items:[{id,time,actor,action,detail,color?:default|primary}]`。默认垂直左对齐同侧；其它layout/align、mode交错和节点或条目icon显式拒绝；未验证扩展不提供。顺序按items；最后一项自动结束、无连接线。支持items/visible状态覆盖，与records表互斥由状态patch表达。详见components/timeline/README.md。
+`timeline` 支持12种横纵布局、5种语义颜色和loading/custom条目图标。配置与原位修改限制见[Timeline](timeline.md)。条目数量与顺序由业务数据决定，空数组表达暂无操作日志；未完成的其他家族继续隔离。
 
 ### 空态与失败反馈（2026-10-14）
 
