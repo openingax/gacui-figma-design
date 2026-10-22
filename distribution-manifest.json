@@ -6,7 +6,7 @@
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
-    "commit": "20d4dd67803cb29a78d2cdcd3daadcd175c65e2a"
+    "commit": "09a736c6ceaedf2dd5fdf6a3df6d675151744d58"
   },
   "differences": [
     ".agents/skills/gacui-figma-design/SKILL.md",
