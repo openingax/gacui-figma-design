@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "base": "skill-v1.0.0",
+  "base": "skill-v1.1.0",
   "nodes": [
     {
       "id": "107:112",
@@ -5683,6 +5683,76 @@
       "type": "COMPONENT"
     },
     {
+      "id": "821:23443",
+      "type": "COMPONENT",
+      "origin": "timeline/icons/loading"
+    },
+    {
+      "id": "821:23446",
+      "type": "COMPONENT",
+      "origin": "timeline/icons/custom"
+    },
+    {
+      "id": "821:23449",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|left|same"
+    },
+    {
+      "id": "821:23522",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|alternate|same"
+    },
+    {
+      "id": "821:23592",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|right|same"
+    },
+    {
+      "id": "821:23657",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|left|alternate"
+    },
+    {
+      "id": "821:23739",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|right|alternate"
+    },
+    {
+      "id": "821:23820",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/vertical|alternate|alternate"
+    },
+    {
+      "id": "821:23902",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|top|same"
+    },
+    {
+      "id": "821:23983",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|top|alternate"
+    },
+    {
+      "id": "821:24073",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|bottom|alternate"
+    },
+    {
+      "id": "821:24161",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|alternate|alternate"
+    },
+    {
+      "id": "821:24250",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|bottom|same"
+    },
+    {
+      "id": "821:24331",
+      "type": "COMPONENT",
+      "origin": "timeline/layouts/horizontal|alternate|same"
+    },
+    {
       "id": "85:85",
       "origin": "public-0.4.6",
       "type": null
@@ -5693,5 +5763,5 @@
       "type": null
     }
   ],
-  "fingerprint": "574df3779635c48bcb98f5af8d73bb7f260440b2eefd14b68934863566775364"
+  "fingerprint": "e0dd461337c62b179636122a338f50efaa232e48125d716176900037a9a9b95f"
 }

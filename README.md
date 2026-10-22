@@ -2,7 +2,7 @@
 
 新增业务组合用法见[业务组合说明](docs/business-compositions.md)。
 
-版本：V1.1.0。支持范围和已知限制以随包文档为准。
+版本：V1.2.0。支持范围和已知限制以随包文档为准。
 
 根据业务需求和公司 B 端 Figma 规范，由 agent 生成**可编辑的高保真设计**。完整流程是：产品需求、原型文档或截图 → 可保存、预览、讨论和持续修改的 UI 草稿 → 按规范组件生成可编辑的 Figma 设计稿。产品经理和 UI 同事通过对话使用，不需要写 JSON、运行命令或手动配置。
 
@@ -58,3 +58,5 @@ npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design
 - [调优日志说明](docs/support/README.md)
 
 字体优先 PingFang SC，缺少时使用 Noto Sans SC。业务任务与原始材料留在本机，不提交公开仓库。
+
+Timeline 新增范围、草稿配置和限制见 [Timeline](docs/timeline.md)。
