@@ -2,11 +2,11 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
-    "tag": "skill-v1.2.0",
-    "commit": "16544e60594de60837354c322594350837d4ef77"
+    "tag": "skill-v1.2.1",
+    "commit": "c428b93d9bcac90ec40e733445a90d40bf3713da"
   },
   "differences": [
     ".agents/skills/gacui-figma-design/SKILL.md",
@@ -23,8 +23,8 @@
   "files": [
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "c504c529d8f5f49414f280c0cd08b991877835f5c774e6ccd4a70944b78872df",
-      "upstreamSha256": "832bb9cb3ad89334192fd82ee416daacede62ede0396949daee182e4f2296c99"
+      "sha256": "03c2af7f4460c8ce2481ac3a3a1748f7dbabea3176e56cb2e297397a7ed2fd1a",
+      "upstreamSha256": "2b92bdbf5e5b6ffda163223c5230357efe061ae12660136a1c7b1bd11ec9ef4f"
     },
     {
       "path": ".agents/skills/gacui-figma-design/references/workflow.md",
@@ -63,8 +63,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f4fa995ca3bfe3fd7808dce28e618d401cf30f1144517a2624e21eacab421070",
-      "upstreamSha256": "f4fa995ca3bfe3fd7808dce28e618d401cf30f1144517a2624e21eacab421070"
+      "sha256": "250fc3012170b12f1a9ca42521269be4beb8976c93b68166a0251f774f3b0e64",
+      "upstreamSha256": "250fc3012170b12f1a9ca42521269be4beb8976c93b68166a0251f774f3b0e64"
     },
     {
       "path": "PUBLIC_EXPORT_MANIFEST.json",
@@ -73,8 +73,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "df23f22a8f11f5c893903481e35bb2be161dafee4f5ac2ed8a0bfcf65b5415ce",
-      "upstreamSha256": "071e92956434daae1618628ee22cc0087ccd1291ba051eaffc5b73bd802c8c4e"
+      "sha256": "f8f052b9bcdc229b77403f7e8320cd73b0dce68e585ff7f61c7738a7f2d33333",
+      "upstreamSha256": "b4fd97b0545192a12435bb8af053afd1245896112da525f7ad40588b159be218"
     },
     {
       "path": "components/README.md",
@@ -2478,8 +2478,8 @@
     },
     {
       "path": "docs/business-compositions.md",
-      "sha256": "4f6e68713856e9d7ef50d91f5feabba9aedad8e34ba0118bbb7d464aa2f14969",
-      "upstreamSha256": "4f6e68713856e9d7ef50d91f5feabba9aedad8e34ba0118bbb7d464aa2f14969"
+      "sha256": "ee056cd927724229a2a82480aac5732936ee5be8da79c494c7dc71b336c885cc",
+      "upstreamSha256": "ee056cd927724229a2a82480aac5732936ee5be8da79c494c7dc71b336c885cc"
     },
     {
       "path": "docs/draft-commands.md",
@@ -2488,8 +2488,8 @@
     },
     {
       "path": "docs/draft-component-capabilities.md",
-      "sha256": "4837b2dba2a64c5595306bd9ce9c08cf447e326de80c361f42ae2d8b08150252",
-      "upstreamSha256": "4837b2dba2a64c5595306bd9ce9c08cf447e326de80c361f42ae2d8b08150252"
+      "sha256": "e896a96cceff15aa53fe62f401e7b905338f468d6cfca0cef6c00b6ec3bd6e8f",
+      "upstreamSha256": "e896a96cceff15aa53fe62f401e7b905338f468d6cfca0cef6c00b6ec3bd6e8f"
     },
     {
       "path": "docs/draft-first.md",
@@ -2503,12 +2503,12 @@
     },
     {
       "path": "docs/figma-output.md",
-      "sha256": "5a5a6c3a9822809184c54dcbf7d8b58d8d360acceb50e4af34b7786aa7899922",
-      "upstreamSha256": "5a5a6c3a9822809184c54dcbf7d8b58d8d360acceb50e4af34b7786aa7899922"
+      "sha256": "49379facb4c02599f8529063b4b45b1cd132426a32fe74fd6c47692d67777ca1",
+      "upstreamSha256": "49379facb4c02599f8529063b4b45b1cd132426a32fe74fd6c47692d67777ca1"
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "2564ef11079d7523c6b8e71a843c77d421269e93534b1abbeca081a79e282bca",
+      "sha256": "457fa94d0b4d25f93ae0353d6a133e7b4a70130dbfb61ced98b7eb26d665bd86",
       "upstreamSha256": "ea70055d48d6b688afa9a75f5c52a58aabf2834aff3e58144808402423667754"
     },
     {
@@ -2523,8 +2523,8 @@
     },
     {
       "path": "docs/sketch-design.md",
-      "sha256": "23b809d83da564f1493d5e0173fb31ef64207f11db67aa9f43809860262f74dc",
-      "upstreamSha256": "23b809d83da564f1493d5e0173fb31ef64207f11db67aa9f43809860262f74dc"
+      "sha256": "3215a55625364d4c9b8fdb8ddc10d33f7c5e59485798eba5bb274947a0956b26",
+      "upstreamSha256": "3215a55625364d4c9b8fdb8ddc10d33f7c5e59485798eba5bb274947a0956b26"
     },
     {
       "path": "docs/state-checklist.md",
@@ -2743,8 +2743,8 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "d63071ae8ca283acb53a6f00f2316db72c738eff4aa6315eec75504efb1e1973",
-      "upstreamSha256": "d63071ae8ca283acb53a6f00f2316db72c738eff4aa6315eec75504efb1e1973"
+      "sha256": "342401863981000b0a21fcf4d73f3a7405c1cd4d913a540c5653278e8672ad92",
+      "upstreamSha256": "342401863981000b0a21fcf4d73f3a7405c1cd4d913a540c5653278e8672ad92"
     },
     {
       "path": "support/analyze.mjs",
