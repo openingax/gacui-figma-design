@@ -1,0 +1,20 @@
+{
+  "layouts": {
+    "vertical|left|same": "821:23449",
+    "vertical|alternate|same": "821:23522",
+    "vertical|right|same": "821:23592",
+    "vertical|left|alternate": "821:23657",
+    "vertical|right|alternate": "821:23739",
+    "vertical|alternate|alternate": "821:23820",
+    "horizontal|top|same": "821:23902",
+    "horizontal|top|alternate": "821:23983",
+    "horizontal|bottom|alternate": "821:24073",
+    "horizontal|alternate|alternate": "821:24161",
+    "horizontal|bottom|same": "821:24250",
+    "horizontal|alternate|same": "821:24331"
+  },
+  "icons": {
+    "loading": "821:23443",
+    "custom": "821:23446"
+  }
+}
