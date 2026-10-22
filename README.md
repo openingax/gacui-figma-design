@@ -2,7 +2,7 @@
 
 新增业务组合用法见[业务组合说明](docs/business-compositions.md)。
 
-版本：V1.2.1。支持范围和已知限制以随包文档为准。
+版本：V1.2.2。支持范围和已知限制以随包文档为准。
 
 根据业务需求和公司 B 端 Figma 规范，由 agent 生成**可编辑的高保真设计**。完整流程是：产品需求、原型文档或截图 → 可保存、预览、讨论和持续修改的 UI 草稿 → 按规范组件生成可编辑的 Figma 设计稿。产品经理和 UI 同事通过对话使用，不需要写 JSON、运行命令或手动配置。
 
@@ -60,3 +60,7 @@ npx -y skills@latest add openingax/gacui-figma-design --skill gacui-figma-design
 字体优先 PingFang SC，缺少时使用 Noto Sans SC。业务任务与原始材料留在本机，不提交公开仓库。
 
 Timeline 新增范围、草稿配置和限制见 [Timeline](docs/timeline.md)。
+
+## GitHub 老用户迁移
+
+本版本 V1.2.2 是迁移桥接版。老用户对 AI 说“更新 Skill”后，按 [迁移说明](docs/gitee-migration.md) 在同一次请求原位切换到 Gitee V1.2.3，保留已有草稿、配置和日志关闭设置。新用户请安装 `https://gitee.com/xieliying/gacui-figma-design.git`；后续版本仅在 Gitee 发行。固定版本和本地修改不会自动解除或覆盖。
