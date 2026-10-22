@@ -7,7 +7,7 @@ description: GACUIAgent Skill：根据业务需求和公司 B 端 Figma 规范�
 
 新增业务组合用法见运行目录 docs/business-compositions.md。
 
-版本：V1.2.1。支持范围和已知限制以随包文档为准。
+版本：V1.2.2。支持范围和已知限制以随包文档为准。
 
 使用简体中文。首次调用或新会话开始，从本 skill 的真实路径运行：
 
@@ -17,6 +17,7 @@ node <本skill目录>/scripts/manage.mjs sync
 
 完整运行资源来自公开仓库 `openingax/gacui-figma-design`，默认目录 `~/.gacuiagent-public/workspace`，不需要其他私有仓库权限。可传 `--workspace <独立路径>`；后续命令使用同一路径。
 
+0. **迁移更新**：sync 返回 V1.2.2 或用户要求更新时，先读 workspace 下 docs/gitee-migration.md；如尚未迁移，在同一次请求运行其中的迁移命令，传入本次真实 Skill 目录和原 workspace，再从原入口 sync。不能只升级到桥接版便报告完成；固定版本或本地修改时保留现场。
 1. 读取输出 workspace 下的 `AGENTS.md`、`docs/draft-first.md`、`docs/onboarding.md`、`docs/figma-output.md` 和 `.agents/skills/gacui-figma-design/references/workflow.md`，在那里执行任务。相对路径均相对运行目录。
 2. notice 非空时先向用户展示新版本、影响和操作，再调用 `ack --version <版本>`；未展示不确认。blocked 时保留现有文件，说明原因；离线可继续已安装版本。
 3. 不在业务生成中途升级。有本地修改不覆盖；固定当前版本用 `pin --version X.Y.Z`，解除用 `unpin`；跨不兼容版本在用户选择后用 `sync --accept-breaking`。回退请用新目录安装旧版本。
