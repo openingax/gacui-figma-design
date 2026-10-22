@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:1059",
+   "name": "type 类型=switch 开关, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:1066",
+   "name": "type 类型=switch 开关, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:1074",
+   "name": "type 类型=switch 开关, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:1083",
+   "name": "type 类型=switch 开关, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:1093",
+   "name": "type 类型=switch 开关, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:1104",
+   "name": "type 类型=switch 开关, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:1114",
+   "name": "type 类型=switch 开关, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:1127",
+   "name": "type 类型=switch 开关, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

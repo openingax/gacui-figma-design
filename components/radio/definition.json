@@ -1,0 +1,29 @@
+{
+  "name": "Radio 单选",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "43606:304677"
+  },
+  "sourceSetCount": 5,
+  "sourceVariantCount": 51,
+  "activePrimaryGroup": "43611:307287",
+  "basePackages": [
+    "radio-unit",
+    "radio-single",
+    "radio-button"
+  ],
+  "kinds": [
+    "single",
+    "group",
+    "buttonGroup"
+  ],
+  "variants": [
+    "outline",
+    "default-filled",
+    "primary-filled"
+  ],
+  "font": "PingFang SC",
+  "fallback": "Noto Sans SC",
+  "status": "technical-validation-passed-awaiting-acceptance",
+  "complete": false
+}

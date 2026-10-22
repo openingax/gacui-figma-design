@@ -1,0 +1,292 @@
+{
+  "name": "Form 表单家族",
+  "status": "已实现当前盘点范围的静态字段、校验表达与布局组合；未用户验收",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "39306:305660",
+    "nodeId": "47967:523354",
+    "readDate": "2026-09-29"
+  },
+  "implementedPackages": [
+    "form-field",
+    "form-help",
+    "form-top",
+    "form-validation",
+    "form"
+  ],
+  "structure": [
+    "Form：排列字段与操作区",
+    "Label：标题、必填标识、辅助提示入口",
+    "Control：复用各控件，保持值、占位和禁用等控件状态",
+    "Feedback：说明文字、校验文字、边框与状态图标",
+    "Actions：按钮内容及事件由业务决定"
+  ],
+  "types": [
+    {
+      "type": "checkbox 多选框",
+      "sourceTopVariants": [
+        "25737:70305",
+        "25737:70309",
+        "25737:70327",
+        "25737:70332",
+        "25737:70353",
+        "25737:70360",
+        "25737:70383",
+        "25737:70391"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "datePicker 日期选择器",
+      "sourceTopVariants": [
+        "25737:69745",
+        "25737:69749",
+        "25737:69767",
+        "25737:69772",
+        "25737:69793",
+        "25737:69800",
+        "25737:69823",
+        "25737:69831"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": true,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "input 输入",
+      "sourceTopVariants": [
+        "25737:69521",
+        "25737:69525",
+        "25737:69543",
+        "25737:69548",
+        "25737:69569",
+        "25737:69576",
+        "25737:69599",
+        "25737:69607"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": true,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "inputNumber 数字输入框",
+      "sourceTopVariants": [
+        "25737:70081",
+        "25737:70085",
+        "25737:70103",
+        "25737:70108",
+        "25737:70129",
+        "25737:70136",
+        "25737:70159",
+        "25737:70167"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "inputPassword 密码输入框",
+      "sourceTopVariants": [
+        "25737:69969",
+        "25737:69973",
+        "25737:69991",
+        "25737:69996",
+        "25737:70017",
+        "25737:70024",
+        "25737:70047",
+        "25737:70055"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "radio 单选框",
+      "sourceTopVariants": [
+        "25737:70417",
+        "25737:70421",
+        "25737:70439",
+        "25737:70444",
+        "25737:70465",
+        "25737:70472",
+        "25737:70495",
+        "25737:70503"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "radioButton 单选按钮",
+      "sourceTopVariants": [
+        "25737:70785",
+        "25737:70789",
+        "25737:70807",
+        "25737:70812",
+        "25737:70833",
+        "25737:70840",
+        "25737:70863",
+        "25737:70871"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "select 选择器",
+      "sourceTopVariants": [
+        "25737:69633",
+        "25737:69637",
+        "25737:69655",
+        "25737:69660",
+        "25737:69681",
+        "25737:69688",
+        "25737:69711",
+        "25737:69719"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": true,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "switch 开关",
+      "sourceTopVariants": [
+        "25737:70657",
+        "25737:70662",
+        "25737:70683",
+        "25737:70689",
+        "25737:70713",
+        "25737:70721",
+        "25737:70747",
+        "25737:70756"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "textarea 多行文本",
+      "sourceTopVariants": [
+        "25737:70193",
+        "25737:70197",
+        "25737:70215",
+        "25737:70220",
+        "25737:70241",
+        "25737:70248",
+        "25737:70271",
+        "25737:70279"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": false,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "timePicker 时间选择器",
+      "sourceTopVariants": [
+        "25737:69857",
+        "25737:69861",
+        "25737:69879",
+        "25737:69884",
+        "25737:69905",
+        "25737:69912",
+        "25737:69935",
+        "25737:69943"
+      ],
+      "topStateCount": 8,
+      "topFieldImplemented": true,
+      "basicFieldImplemented": true,
+      "note": "顶部8状态已生成并回读；仅Form字段外观，不等于独立控件全家族支持"
+    },
+    {
+      "type": "slider 滑块",
+      "sourceNodeId": "25851:134297",
+      "sourceMainId": "47351:511922",
+      "sourceVisible": false,
+      "implemented": false,
+      "note": "指定示例隐藏；保留覆盖条目，未确认启用用途，不纳入可见基础表单"
+    }
+  ],
+  "layoutCoverage": [
+    {
+      "layout": "vertical",
+      "label": "left",
+      "sourceSetId": "47755:513224",
+      "sourceVariants": 14,
+      "implemented": true,
+      "scope": "静态布局；right仅七种活跃input校验表达"
+    },
+    {
+      "layout": "vertical",
+      "label": "top",
+      "sourceSetId": "47755:513224",
+      "sourceVariants": 14,
+      "implemented": true,
+      "scope": "静态布局；right仅七种活跃input校验表达"
+    },
+    {
+      "layout": "inline",
+      "label": "left",
+      "sourceSetId": "47755:513224",
+      "sourceVariants": 6,
+      "implemented": true,
+      "scope": "静态布局；right仅七种活跃input校验表达"
+    },
+    {
+      "layout": "vertical",
+      "label": "right",
+      "sourceInstanceId": "48066:516561",
+      "mainComponentParent": null,
+      "implemented": true,
+      "note": "活跃校验示例，不得因母组件脱离画布而省略",
+      "scope": "静态布局；right仅七种活跃input校验表达"
+    }
+  ],
+  "invariants": [
+    "不把400×56视为所有字段的尺寸；顶标签常见86高，多行文本108高，宽度保留源精度",
+    "required、help、tooltip与validation分别描述，必填星号不等于已实现校验",
+    "help共用四种状态；不能用help颜色替代边框与状态图标",
+    "已证实的共同标签/反馈规则在未来公共构建层仅实现一次；真实布局差异由组合表达",
+    "字段数量、选项数量、按钮文案和默认选中属于业务内容；源枚举只证明已展示范围",
+    "纵向字段组源gap=0；基本示例gap=20属于该示例，不能统一推广",
+    "成功＋文字示例为绿边框；成功＋图标示例为灰边框，保留该事实",
+    "通过form-top/form-validation本地主组件及字段数组生成组合；普通长内容适配保留原控件宽度，右侧长标签因继承约束限制需要本地化"
+  ],
+  "gaps": [
+    "隐藏slider与右标签其他未活跃历史类型未导入",
+    "tooltip弹出、控件原型事件、业务校验运算、提交副作用及导航未实现",
+    "内部控件本地化为可编辑图层，不承诺源INSTANCE_SWAP绑定迁移",
+    "临时Noto星号宽度少1px；云端检查完成，桌面和用户验收未完成"
+  ],
+  "evidence": "../../evidence/form-reanalysis/2026-09-29",
+  "behaviorMatrix": "../../docs/form-reanalysis.md",
+  "generator": "generator.mjs",
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "112:92",
+    "overviewId": "164:840",
+    "layoutSetIds": [
+      "158:653",
+      "158:2913",
+      "158:3028"
+    ]
+  },
+  "verification": {
+    "topVariants": 88,
+    "validationVariants": 7,
+    "layoutVariants": 34,
+    "modifiedInstances": 18,
+    "publicStylesUnchanged": 25
+  }
+}

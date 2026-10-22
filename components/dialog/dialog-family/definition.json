@@ -1,0 +1,13 @@
+{
+  "name": "Dialog 主变体扩展（19态）",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "42005:300073",
+    "pageId": "41952:300048"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 32
+  }
+}

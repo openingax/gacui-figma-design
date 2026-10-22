@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "task": "对账未完成：工单明细",
+  "request": {"text": "按对账未完成的工单明细截图整理草稿（演示示例，表格内容为截图转写）。", "sources": []},
+  "pages": [
+    {"id": "detail", "type": "page", "title": "工单明细 · 对账未完成", "frame": "workbench", "menu": "工单结算", "children": [
+      {"id": "tabs", "type": "tabs", "items": ["工单结算", "工单明细"], "active": 1, "from": "需求:截图"},
+      {"id": "search", "type": "search", "from": "需求:截图", "fields": [
+        {"id": "number", "label": "工单编号", "kind": "input", "placeholder": "请输入工单编号"},
+        {"id": "station", "label": "场站名称", "kind": "input"},
+        {"id": "type", "label": "工单类型", "kind": "select", "value": "全部"},
+        {"id": "subtype", "label": "工单子类型", "kind": "select", "value": "全部"},
+        {"id": "fee", "label": "费用信息", "kind": "select", "value": "全部", "options": ["全部", "需计费", "无需计费"]},
+        {"id": "handler", "label": "处理人", "kind": "input"},
+        {"id": "pushed", "label": "是否已推送", "kind": "select", "value": "全部", "options": ["全部", "是", "否"]},
+        {"id": "closed", "label": "工单关闭时间", "kind": "date-range"}
+      ]},
+      {"id": "toolbar", "type": "actions", "buttons": [{"id": "export", "label": "导出"}]},
+      {"id": "table", "type": "table", "pagination": true, "rows": 10, "from": "需求:截图", "columns": [
+        {"id": "subtype", "title": "工单子类型及服务数量"},
+        {"id": "fee", "title": "费用信息"},
+        {"id": "visit", "title": "上门类型"},
+        {"id": "extra", "title": "额外费用说明"},
+        {"id": "created", "title": "工单创建时间"},
+        {"id": "closed", "title": "工单关闭时间"},
+        {"id": "pushed", "title": "是否已推送"},
+        {"id": "operator", "title": "操作人"},
+        {"id": "actions", "title": "操作", "kind": "operations"}
+      ], "rowActions": [
+        {"when": "已推送", "labels": ["修改明细"]},
+        {"when": "未推送", "labels": ["修改明细", "手动补推"]}
+      ]},
+      {"id": "editGap", "type": "gap", "need": "修改明细表单、补推确认", "handling": "本轮不做，只在列表上保留入口"}
+    ]}
+  ],
+  "states": [
+    {"id": "S-empty", "page": "detail", "title": "无结果", "codes": ["L4"], "patch": {"detail/table": {"rows": 0}}}
+  ],
+  "decisions": [
+    {"code": "L1", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L2", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L3", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L4", "decision": "待决策"},
+    {"code": "L5", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L6", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L7", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L8", "decision": "待决策"},
+    {"code": "L9", "decision": "已明确", "text": "子类型列样例省略文字保持省略，不猜全文", "from": "需求:截图"},
+    {"code": "L12", "decision": "已明确", "text": "未推送的行多一个“手动补推”", "from": "需求:截图第三行"},
+    {"code": "L13", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L14", "decision": "本轮不做", "from": "推荐"},
+    {"code": "L15", "decision": "本轮不做", "from": "推荐"},
+    {"code": "S1", "decision": "本轮不做", "from": "推荐"},
+    {"code": "S2", "decision": "已明确", "text": "筛选下拉默认“全部”", "from": "需求:截图"},
+    {"code": "S3", "decision": "本轮不做", "from": "推荐"},
+    {"code": "S4", "decision": "本轮不做", "from": "推荐"},
+    {"code": "N1", "decision": "已明确", "text": "工单结算", "from": "需求:截图侧栏"},
+    {"code": "N2", "decision": "已明确", "text": "工单结算 / 工单明细两个页签，明细选中", "from": "需求:截图"},
+    {"code": "G1", "decision": "已明确", "text": "工单编号、场站、完整子类型未提供，不编造", "from": "需求:截图"},
+    {"code": "G2", "decision": "本轮不做", "from": "推荐"}
+  ],
+  "questions": [
+    {"id": "Q1", "code": "L4", "node": "detail/table", "ask": "筛选没有结果时显示什么文案？要不要“重置筛选”入口？", "recommend": "“暂无符合条件的工单明细”＋“重置筛选”", "answer": null},
+    {"id": "Q2", "code": "L8", "node": "detail/table", "ask": "截图里 21 条却有 9 页，每页条数按多少算？", "recommend": "每页 10 条，显示总数", "answer": null}
+  ],
+  "gaps": [],
+  "judgments": ["沿用工单工作台的页面外壳"],
+  "demo": "表格 10 行为截图转写，未知字段不补造"
+}

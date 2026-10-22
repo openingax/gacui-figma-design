@@ -1,0 +1,639 @@
+{
+  "name": "Button 按钮",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "22709:32356",
+    "pageId": "30382:113576",
+    "demoNodeId": "30445:105683"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "variant 类型": {
+      "type": "VARIANT",
+      "defaultValue": "base 基础",
+      "variantOptions": [
+        "base 基础",
+        "outline 描边按钮",
+        "text 文字按钮",
+        "ghost 幽灵按钮"
+      ]
+    },
+    "size 尺寸": {
+      "type": "VARIANT",
+      "defaultValue": "small 小尺寸",
+      "variantOptions": [
+        "large 大尺寸",
+        "medium 中尺寸",
+        "small 小尺寸"
+      ]
+    },
+    "theme 主题样式": {
+      "type": "VARIANT",
+      "defaultValue": "primary 主要",
+      "variantOptions": [
+        "primary 主要",
+        "default 默认",
+        "danger 危险"
+      ]
+    },
+    "shape 形状": {
+      "type": "VARIANT",
+      "defaultValue": "rectangle 矩形",
+      "variantOptions": [
+        "circle 圆形",
+        "square 方形",
+        "rectangle 矩形"
+      ]
+    },
+    "icon 图标": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "⬑icon type 图标类型": {
+      "type": "VARIANT",
+      "defaultValue": "n/a",
+      "variantOptions": [
+        "n/a",
+        "prefixIcon 前置图标",
+        "suffixIcon 后置图标",
+        "singleIcon 独立图标"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬停",
+        "active 点击"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "rules": {
+    "sizes": {
+      "small": {
+        "height": 24,
+        "fontSize": 12,
+        "lineHeight": 20,
+        "paddingX": 8,
+        "iconSize": 14,
+        "iconGap": 4
+      },
+      "medium": {
+        "height": 32,
+        "fontSize": 14,
+        "lineHeight": 22,
+        "paddingX": 16,
+        "iconSize": 16,
+        "iconGap": 8
+      },
+      "large": {
+        "height": 40,
+        "fontSize": 16,
+        "lineHeight": 24,
+        "paddingX": 24,
+        "iconSize": 18,
+        "iconGap": 12
+      }
+    },
+    "layouts": [
+      "rectangle/noIcon",
+      "rectangle/prefixIcon",
+      "rectangle/suffixIcon",
+      "square/text",
+      "circle/text",
+      "square/singleIcon",
+      "circle/singleIcon"
+    ],
+    "states": [
+      "normal",
+      "hover",
+      "active",
+      "disabled(normal only)"
+    ],
+    "radius": "矩形/方形4；圆形小/中/大12/16/20",
+    "block": "指定宽度并居中；320仅示例",
+    "content": "label可改，图标是内容槽；无图标布局不增加假图标",
+    "pureTextGap": "32个变体有8/12与10的差异；无第二个子层时不影响视觉，仍保留",
+    "ghost": "透明填充，默认主题normal为白色；禁用白色opacity=0.2199999988079071"
+  },
+  "gaps": [
+    "源未定义focus视觉态及点击后的业务操作",
+    "禁用态没有hover/active组合",
+    "Loading为额外静态样例，未定义动画、取消及业务完成行为",
+    "部分文字与图标颜色未绑定样式",
+    "暂用Noto Sans SC，交付字体由用户桌面处理",
+    "源INSTANCE_SWAP绑定尚未迁移；现有图标位为可编辑矢量，不能宣称任意图标交换属性已实现"
+  ],
+  "status": "已导入并实测代表状态；等待用户验收",
+  "appearanceRules": {
+    "base/primary": {
+      "normal": {
+        "background": "Brand 品牌/Brand5-Normal",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "disabled": {
+        "background": "Brand 品牌/Brand3-Disabled",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "active": {
+        "background": "Brand 品牌/Brand6-Click",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "hover": {
+        "background": "Brand 品牌/Brand4-Hover",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "outline/default": {
+      "disabled": {
+        "background": "Gray 中性/Gray2",
+        "border": "Gray 中性/Gray4-边框",
+        "label": [
+          {
+            "hex": "#979A9D",
+            "opacity": 1
+          }
+        ]
+      },
+      "active": {
+        "background": "Gray 中性/Gray3-分割线",
+        "border": "Brand 品牌/Brand6-Click",
+        "label": "Brand 品牌/Brand6-Click"
+      },
+      "hover": {
+        "background": "Gray 中性/Gray1-浅色背景",
+        "border": "Brand 品牌/Brand4-Hover",
+        "label": "Brand 品牌/Brand4-Hover"
+      },
+      "normal": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Gray 中性/Gray4-边框",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "outline/primary": {
+      "disabled": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Brand 品牌/Brand3-Disabled",
+        "label": "Brand 品牌/Brand3-Disabled"
+      },
+      "active": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Brand 品牌/Brand6-Click",
+        "label": "Brand 品牌/Brand6-Click"
+      },
+      "hover": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Brand 品牌/Brand4-Hover",
+        "label": "Brand 品牌/Brand4-Hover"
+      },
+      "normal": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Brand 品牌/Brand5-Normal",
+        "label": "Brand 品牌/Brand5-Normal"
+      }
+    },
+    "ghost/default": {
+      "disabled": {
+        "background": "none",
+        "border": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ],
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ]
+      },
+      "active": {
+        "background": "none",
+        "border": "Brand 品牌/Brand6-Click",
+        "label": "Brand 品牌/Brand6-Click"
+      },
+      "hover": {
+        "background": "none",
+        "border": "Brand 品牌/Brand4-Hover",
+        "label": "Brand 品牌/Brand4-Hover"
+      },
+      "normal": {
+        "background": "none",
+        "border": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ],
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "ghost/primary": {
+      "disabled": {
+        "background": "none",
+        "border": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ],
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ]
+      },
+      "active": {
+        "background": "none",
+        "border": "Brand 品牌/Brand6-Click",
+        "label": "Brand 品牌/Brand6-Click"
+      },
+      "hover": {
+        "background": "none",
+        "border": "Brand 品牌/Brand4-Hover",
+        "label": "Brand 品牌/Brand4-Hover"
+      },
+      "normal": {
+        "background": "none",
+        "border": "Brand 品牌/Brand5-Normal",
+        "label": "Brand 品牌/Brand5-Normal"
+      }
+    },
+    "ghost/danger": {
+      "disabled": {
+        "background": "none",
+        "border": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ],
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 0.2199999988079071
+          }
+        ]
+      },
+      "active": {
+        "background": "none",
+        "border": "Error 错误/Error6-Click",
+        "label": "Error 错误/Error6-Click"
+      },
+      "hover": {
+        "background": "none",
+        "border": "Error 错误/Error4-Hover",
+        "label": "Error 错误/Error4-Hover"
+      },
+      "normal": {
+        "background": "none",
+        "border": "Error 错误/Error5-Normal",
+        "label": "Error 错误/Error5-Normal"
+      }
+    },
+    "base/default": {
+      "normal": {
+        "background": "Gray 中性/Gray3-分割线",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "hover": {
+        "background": "Gray 中性/Gray4-边框",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "active": {
+        "background": "Gray 中性/Gray5-禁用",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "disabled": {
+        "background": "Gray 中性/Gray2",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#979A9D",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "base/danger": {
+      "disabled": {
+        "background": "Error 错误/Error3-Disabled",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "active": {
+        "background": "Error 错误/Error6-Click",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "hover": {
+        "background": "Error 错误/Error4-Hover",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      },
+      "normal": {
+        "background": "Error 错误/Error5-Normal",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#FFFFFF",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "outline/danger": {
+      "disabled": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Error 错误/Error3-Disabled",
+        "label": "Error 错误/Error3-Disabled"
+      },
+      "active": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Error 错误/Error6-Click",
+        "label": "Error 错误/Error6-Click"
+      },
+      "hover": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Error 错误/Error4-Hover",
+        "label": "Error 错误/Error4-Hover"
+      },
+      "normal": {
+        "background": "Gray 中性/Gray0-白色背景",
+        "border": "Error 错误/Error5-Normal",
+        "label": "Error 错误/Error5-Normal"
+      }
+    },
+    "text/default": {
+      "normal": {
+        "background": "none",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "hover": {
+        "background": "Gray 中性/Gray1-浅色背景",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "active": {
+        "background": "Gray 中性/Gray3-分割线",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#171F26",
+            "opacity": 1
+          }
+        ]
+      },
+      "disabled": {
+        "background": "none",
+        "border": "none",
+        "label": [
+          {
+            "hex": "#979A9D",
+            "opacity": 1
+          }
+        ]
+      }
+    },
+    "text/primary": {
+      "normal": {
+        "background": "none",
+        "border": "none",
+        "label": "Brand 品牌/Brand5-Normal"
+      },
+      "hover": {
+        "background": "Gray 中性/Gray1-浅色背景",
+        "border": "none",
+        "label": "Brand 品牌/Brand5-Normal"
+      },
+      "active": {
+        "background": "Gray 中性/Gray3-分割线",
+        "border": "none",
+        "label": "Brand 品牌/Brand5-Normal"
+      },
+      "disabled": {
+        "background": "none",
+        "border": "none",
+        "label": "Brand 品牌/Brand3-Disabled"
+      }
+    },
+    "text/danger": {
+      "normal": {
+        "background": "none",
+        "border": "none",
+        "label": "Error 错误/Error5-Normal"
+      },
+      "hover": {
+        "background": "Gray 中性/Gray1-浅色背景",
+        "border": "none",
+        "label": "Error 错误/Error5-Normal"
+      },
+      "active": {
+        "background": "Gray 中性/Gray3-分割线",
+        "border": "none",
+        "label": "Error 错误/Error5-Normal"
+      },
+      "disabled": {
+        "background": "none",
+        "border": "none",
+        "label": "Error 错误/Error3-Disabled"
+      }
+    }
+  },
+  "styles": {
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "hex": "#0068FF",
+        "opacity": 1
+      }
+    ],
+    "Brand 品牌/Brand3-Disabled": [
+      {
+        "hex": "#A3D4FF",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray2": [
+      {
+        "hex": "#F1F1F1",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "hex": "#DCDDDE",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "hex": "#FFFFFF",
+        "opacity": 1
+      }
+    ],
+    "Brand 品牌/Brand6-Click": [
+      {
+        "hex": "#004FD9",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray3-分割线": [
+      {
+        "hex": "#E9EBEE",
+        "opacity": 1
+      }
+    ],
+    "Error 错误/Error6-Click": [
+      {
+        "hex": "#CB2634",
+        "opacity": 1
+      }
+    ],
+    "Brand 品牌/Brand4-Hover": [
+      {
+        "hex": "#2986FF",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "hex": "#F4F6F8",
+        "opacity": 1
+      }
+    ],
+    "Error 错误/Error4-Hover": [
+      {
+        "hex": "#F76560",
+        "opacity": 1
+      }
+    ],
+    "Error 错误/Error5-Normal": [
+      {
+        "hex": "#F53F3F",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray5-禁用": [
+      {
+        "hex": "#B9BCBE",
+        "opacity": 1
+      }
+    ],
+    "Error 错误/Error3-Disabled": [
+      {
+        "hex": "#FBACA3",
+        "opacity": 1
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "hex": "#171F26",
+        "opacity": 1
+      }
+    ],
+    "蓝色-6-常规": [
+      {
+        "hex": "#0068FF",
+        "opacity": 1
+      }
+    ]
+  }
+}

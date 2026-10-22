@@ -1,0 +1,394 @@
+[
+  {
+    "sourceId": "43755:319885",
+    "id": "764:21762",
+    "name": "state 状态=finish 完成, last 最后项=false",
+    "group": "steps-horizontal-default-0",
+    "key": "horizontal|default|finish|false|false"
+  },
+  {
+    "sourceId": "43755:319897",
+    "id": "764:21772",
+    "name": "state 状态=process 进行中, last 最后项=false",
+    "group": "steps-horizontal-default-0",
+    "key": "horizontal|default|process|false|false"
+  },
+  {
+    "sourceId": "43755:319909",
+    "id": "764:21783",
+    "name": "state 状态=default 默认, last 最后项=false",
+    "group": "steps-horizontal-default-0",
+    "key": "horizontal|default|default|false|false"
+  },
+  {
+    "sourceId": "43755:319921",
+    "id": "764:21794",
+    "name": "state 状态=error 错误, last 最后项=false",
+    "group": "steps-horizontal-default-0",
+    "key": "horizontal|default|error|false|false"
+  },
+  {
+    "sourceId": "44329:310853",
+    "id": "764:21805",
+    "name": "state 状态=finish 完成, last 最后项=true",
+    "group": "steps-horizontal-default-1",
+    "key": "horizontal|default|finish|true|false"
+  },
+  {
+    "sourceId": "44329:310867",
+    "id": "764:21814",
+    "name": "state 状态=process 进行中, last 最后项=true",
+    "group": "steps-horizontal-default-1",
+    "key": "horizontal|default|process|true|false"
+  },
+  {
+    "sourceId": "44329:310881",
+    "id": "764:21824",
+    "name": "state 状态=default 默认, last 最后项=true",
+    "group": "steps-horizontal-default-1",
+    "key": "horizontal|default|default|true|false"
+  },
+  {
+    "sourceId": "44329:310895",
+    "id": "764:21834",
+    "name": "state 状态=error 错误, last 最后项=true",
+    "group": "steps-horizontal-default-1",
+    "key": "horizontal|default|error|true|false"
+  },
+  {
+    "sourceId": "43755:319832",
+    "id": "764:142",
+    "name": "state 状态=process 进行中, last 最后项=false, start 开始项=false",
+    "group": "steps-horizontal-dot-0",
+    "key": "horizontal|dot|process|false|false"
+  },
+  {
+    "sourceId": "43755:319845",
+    "id": "764:155",
+    "name": "state 状态=finish 完成, last 最后项=false, start 开始项=false",
+    "group": "steps-horizontal-dot-0",
+    "key": "horizontal|dot|finish|false|false"
+  },
+  {
+    "sourceId": "43755:319858",
+    "id": "764:166",
+    "name": "state 状态=default 默认, last 最后项=false, start 开始项=false",
+    "group": "steps-horizontal-dot-0",
+    "key": "horizontal|dot|default|false|false"
+  },
+  {
+    "sourceId": "43755:319871",
+    "id": "764:178",
+    "name": "state 状态=error 错误, last 最后项=false, start 开始项=false",
+    "group": "steps-horizontal-dot-0",
+    "key": "horizontal|dot|error|false|false"
+  },
+  {
+    "sourceId": "44339:310992",
+    "id": "764:21676",
+    "name": "state 状态=process 进行中, last 最后项=false, start 开始项=true",
+    "group": "steps-horizontal-dot-1",
+    "key": "horizontal|dot|process|false|true"
+  },
+  {
+    "sourceId": "44339:311005",
+    "id": "764:21688",
+    "name": "state 状态=finish 完成, last 最后项=false, start 开始项=true",
+    "group": "steps-horizontal-dot-1",
+    "key": "horizontal|dot|finish|false|true"
+  },
+  {
+    "sourceId": "44339:311018",
+    "id": "764:21699",
+    "name": "state 状态=default 默认, last 最后项=false, start 开始项=true",
+    "group": "steps-horizontal-dot-1",
+    "key": "horizontal|dot|default|false|true"
+  },
+  {
+    "sourceId": "44339:311031",
+    "id": "764:21711",
+    "name": "state 状态=error 错误, last 最后项=false, start 开始项=true",
+    "group": "steps-horizontal-dot-1",
+    "key": "horizontal|dot|error|false|true"
+  },
+  {
+    "sourceId": "44344:311200",
+    "id": "764:21723",
+    "name": "state 状态=process 进行中, last 最后项=true, start 开始项=false",
+    "group": "steps-horizontal-dot-2",
+    "key": "horizontal|dot|process|true|false"
+  },
+  {
+    "sourceId": "44344:311213",
+    "id": "764:21733",
+    "name": "state 状态=finish 完成, last 最后项=true, start 开始项=false",
+    "group": "steps-horizontal-dot-2",
+    "key": "horizontal|dot|finish|true|false"
+  },
+  {
+    "sourceId": "44344:311226",
+    "id": "764:21742",
+    "name": "state 状态=default 默认, last 最后项=true, start 开始项=false",
+    "group": "steps-horizontal-dot-2",
+    "key": "horizontal|dot|default|true|false"
+  },
+  {
+    "sourceId": "44344:311239",
+    "id": "764:21752",
+    "name": "state 状态=error 错误, last 最后项=true, start 开始项=false",
+    "group": "steps-horizontal-dot-2",
+    "key": "horizontal|dot|error|true|false"
+  },
+  {
+    "sourceId": "43755:319738",
+    "id": "764:68",
+    "name": "state 状态=finish 完成, last 最后项=false",
+    "group": "steps-vertical-default-0",
+    "key": "vertical|default|finish|false|false"
+  },
+  {
+    "sourceId": "43755:319749",
+    "id": "764:77",
+    "name": "state 状态=process 进行中, last 最后项=false",
+    "group": "steps-vertical-default-0",
+    "key": "vertical|default|process|false|false"
+  },
+  {
+    "sourceId": "43755:319760",
+    "id": "764:87",
+    "name": "state 状态=error 错误, last 最后项=false",
+    "group": "steps-vertical-default-0",
+    "key": "vertical|default|error|false|false"
+  },
+  {
+    "sourceId": "43755:319771",
+    "id": "764:96",
+    "name": "state 状态=default 默认, last 最后项=false",
+    "group": "steps-vertical-default-0",
+    "key": "vertical|default|default|false|false"
+  },
+  {
+    "sourceId": "44349:311454",
+    "id": "764:107",
+    "name": "state 状态=finish 完成, last 最后项=true",
+    "group": "steps-vertical-default-1",
+    "key": "vertical|default|finish|true|false"
+  },
+  {
+    "sourceId": "44349:311467",
+    "id": "764:115",
+    "name": "state 状态=process 进行中, last 最后项=true",
+    "group": "steps-vertical-default-1",
+    "key": "vertical|default|process|true|false"
+  },
+  {
+    "sourceId": "44349:311480",
+    "id": "764:124",
+    "name": "state 状态=error 错误, last 最后项=true",
+    "group": "steps-vertical-default-1",
+    "key": "vertical|default|error|true|false"
+  },
+  {
+    "sourceId": "44349:311493",
+    "id": "764:132",
+    "name": "state 状态=default 默认, last 最后项=true",
+    "group": "steps-vertical-default-1",
+    "key": "vertical|default|default|true|false"
+  },
+  {
+    "sourceId": "43755:319693",
+    "id": "764:3",
+    "name": "state状态=finish 完成, last 最后项=false",
+    "group": "steps-vertical-dot-0",
+    "key": "vertical|dot|finish|false|false"
+  },
+  {
+    "sourceId": "43755:319704",
+    "id": "764:13",
+    "name": "state状态=process 进行中, last 最后项=false",
+    "group": "steps-vertical-dot-0",
+    "key": "vertical|dot|process|false|false"
+  },
+  {
+    "sourceId": "43755:319715",
+    "id": "764:22",
+    "name": "state状态=error 错误, last 最后项=false",
+    "group": "steps-vertical-dot-0",
+    "key": "vertical|dot|error|false|false"
+  },
+  {
+    "sourceId": "43755:319726",
+    "id": "764:30",
+    "name": "state状态=default 默认, last 最后项=false",
+    "group": "steps-vertical-dot-0",
+    "key": "vertical|dot|default|false|false"
+  },
+  {
+    "sourceId": "44349:311654",
+    "id": "764:39",
+    "name": "state状态=finish 完成, last 最后项=true",
+    "group": "steps-vertical-dot-1",
+    "key": "vertical|dot|finish|true|false"
+  },
+  {
+    "sourceId": "44349:311665",
+    "id": "764:46",
+    "name": "state状态=process 进行中, last 最后项=true",
+    "group": "steps-vertical-dot-1",
+    "key": "vertical|dot|process|true|false"
+  },
+  {
+    "sourceId": "44349:311676",
+    "id": "764:53",
+    "name": "state状态=error 错误, last 最后项=true",
+    "group": "steps-vertical-dot-1",
+    "key": "vertical|dot|error|true|false"
+  },
+  {
+    "sourceId": "44349:311687",
+    "id": "764:60",
+    "name": "state状态=default 默认, last 最后项=true",
+    "group": "steps-vertical-dot-1",
+    "key": "vertical|dot|default|true|false"
+  },
+  {
+    "sourceId": "43755:319934",
+    "id": "764:21844",
+    "name": "item 数量=3, layout 布局=horizontal 横向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-0",
+    "key": "whole|3|horizontal|default"
+  },
+  {
+    "sourceId": "45624:372666",
+    "id": "764:21876",
+    "name": "item 数量=2, layout 布局=horizontal 横向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-0",
+    "key": "whole|2|horizontal|default"
+  },
+  {
+    "sourceId": "43755:319938",
+    "id": "764:21897",
+    "name": "item 数量=4, layout 布局=horizontal 横向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-0",
+    "key": "whole|4|horizontal|default"
+  },
+  {
+    "sourceId": "43755:319943",
+    "id": "764:21940",
+    "name": "item 数量=5, layout 布局=horizontal 横向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-0",
+    "key": "whole|5|horizontal|default"
+  },
+  {
+    "sourceId": "43755:319949",
+    "id": "764:21995",
+    "name": "item 数量=6, layout 布局=horizontal 横向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-1",
+    "key": "whole|6|horizontal|default"
+  },
+  {
+    "sourceId": "43755:319956",
+    "id": "764:22060",
+    "name": "item 数量=3, layout 布局=horizontal 横向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-1",
+    "key": "whole|3|horizontal|dot"
+  },
+  {
+    "sourceId": "45650:372910",
+    "id": "764:22093",
+    "name": "item 数量=2, layout 布局=horizontal 横向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-1",
+    "key": "whole|2|horizontal|dot"
+  },
+  {
+    "sourceId": "43755:319960",
+    "id": "764:22114",
+    "name": "item 数量=4, layout 布局=horizontal 横向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-1",
+    "key": "whole|4|horizontal|dot"
+  },
+  {
+    "sourceId": "43755:319965",
+    "id": "764:22160",
+    "name": "item 数量=5, layout 布局=horizontal 横向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-2",
+    "key": "whole|5|horizontal|dot"
+  },
+  {
+    "sourceId": "43755:319971",
+    "id": "764:22217",
+    "name": "item 数量=6, layout 布局=horizontal 横向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=n/a",
+    "group": "steps-whole-2",
+    "key": "whole|6|horizontal|dot"
+  },
+  {
+    "sourceId": "43755:320000",
+    "id": "764:22286",
+    "name": "item 数量=3, layout 布局=vertical 纵向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-2",
+    "key": "whole|3|vertical|default"
+  },
+  {
+    "sourceId": "45658:373022",
+    "id": "764:22315",
+    "name": "item 数量=2, layout 布局=vertical 纵向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-2",
+    "key": "whole|2|vertical|default"
+  },
+  {
+    "sourceId": "43755:320004",
+    "id": "764:22335",
+    "name": "item 数量=4, layout 布局=vertical 纵向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-3",
+    "key": "whole|4|vertical|default"
+  },
+  {
+    "sourceId": "43755:320009",
+    "id": "764:22374",
+    "name": "item 数量=5, layout 布局=vertical 纵向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-3",
+    "key": "whole|5|vertical|default"
+  },
+  {
+    "sourceId": "43755:320015",
+    "id": "764:22423",
+    "name": "item 数量=6, layout 布局=vertical 纵向, theme 主题=default 默认, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-3",
+    "key": "whole|6|vertical|default"
+  },
+  {
+    "sourceId": "43755:320022",
+    "id": "764:22482",
+    "name": "item 数量=3, layout 布局=vertical 纵向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-3",
+    "key": "whole|3|vertical|dot"
+  },
+  {
+    "sourceId": "45658:375986",
+    "id": "764:22507",
+    "name": "item 数量=2, layout 布局=vertical 纵向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-4",
+    "key": "whole|2|vertical|dot"
+  },
+  {
+    "sourceId": "43755:320026",
+    "id": "764:22523",
+    "name": "item 数量=4, layout 布局=vertical 纵向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-4",
+    "key": "whole|4|vertical|dot"
+  },
+  {
+    "sourceId": "43755:320031",
+    "id": "764:22555",
+    "name": "item 数量=5, layout 布局=vertical 纵向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-4",
+    "key": "whole|5|vertical|dot"
+  },
+  {
+    "sourceId": "43755:320037",
+    "id": "764:22595",
+    "name": "item 数量=6, layout 布局=vertical 纵向, theme 主题=dot 不带序号, icon 图标=false, sequence 纵向布局顺序=positive 正向",
+    "group": "steps-whole-4",
+    "key": "whole|6|vertical|dot"
+  }
+]

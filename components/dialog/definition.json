@@ -1,0 +1,55 @@
+{
+  "name": "Dialog 对话框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "41952:300048",
+    "nodeId": "42005:300106"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 24
+  },
+  "support": "source-inventory-supported",
+  "supported": {
+    "themes": [
+      "default",
+      "info",
+      "warning",
+      "error",
+      "success"
+    ],
+    "closable": [
+      false,
+      true
+    ],
+    "divider": [
+      false,
+      true
+    ],
+    "closeState": [
+      "normal",
+      "hover",
+      "active"
+    ],
+    "fullscreen": {
+      "theme": "info",
+      "closable": true,
+      "divider": [
+        false,
+        true
+      ]
+    },
+    "width": [
+      480,
+      960
+    ]
+  },
+  "remaining": "用户/UI验收与桌面苹方验证；不含源未提供的全屏主题交叉组合",
+  "buildPackages": [
+    "build-data.json",
+    "dialog-family/build-data.json",
+    "dialog-close/build-data.json",
+    "dialog-fullscreen/build-data.json"
+  ]
+}

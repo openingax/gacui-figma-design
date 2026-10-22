@@ -1,0 +1,13 @@
+{
+  "name": "InputNumber数字输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "42467:306736",
+    "pageId": "42459:300256"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  }
+}

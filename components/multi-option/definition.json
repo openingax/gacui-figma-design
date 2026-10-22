@@ -1,0 +1,12 @@
+{
+  "name": "MultiOption 多选选项（部分）",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "30818:109368"
+  },
+  "displayLayout": {
+    "padding": 24,
+    "columns": 1,
+    "gap": 24
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "format": 1,
+  "task": "工单工作台与创建工单（试用）",
+  "request": {"text": "按工单工作台和创建工单的试用需求整理草稿（演示示例）。", "sources": []},
+  "pages": [
+    {"id": "list", "type": "page", "title": "工单列表", "frame": "workbench", "menu": "运维管理 / 工单管理", "children": [
+      {"id": "search", "type": "search", "fields": [
+        {"id": "number", "label": "工单编号", "kind": "input", "placeholder": "请输入工单编号"},
+        {"id": "name", "label": "工单名称", "kind": "input", "placeholder": "请输入工单名称"},
+        {"id": "station", "label": "场站名称", "kind": "input", "placeholder": "请输入场站名称"},
+        {"id": "stationType", "label": "场站类型", "kind": "select", "value": "全部"},
+        {"id": "status", "label": "工单状态", "kind": "select", "value": "全部", "options": ["全部", "处理中", "待分配", "已关闭"]},
+        {"id": "type", "label": "工单类型", "kind": "select", "value": "全部"},
+        {"id": "level", "label": "工单等级", "kind": "select", "value": "全部"},
+        {"id": "timeout", "label": "是否超时", "kind": "select", "value": "全部"}
+      ]},
+      {"id": "toolbar", "type": "actions", "buttons": [
+        {"id": "create", "label": "创建工单", "primary": true, "opens": "create"},
+        {"id": "bulk", "label": "批量操作"}
+      ]},
+      {"id": "table", "type": "table", "selection": true, "pagination": true, "rows": 10, "columns": [
+        {"id": "number", "title": "工单编号"},
+        {"id": "title", "title": "工单名称"},
+        {"id": "level", "title": "工单等级"},
+        {"id": "station", "title": "场站名称"},
+        {"id": "region", "title": "地区"},
+        {"id": "status", "title": "工单状态"},
+        {"id": "city", "title": "城市"},
+        {"id": "actions", "title": "操作", "kind": "operations"}
+      ], "rowActions": [
+        {"when": "处理中", "labels": ["处理", "转派"], "more": true},
+        {"when": "待分配", "labels": ["查看", "指派", "关闭"]},
+        {"when": "已关闭", "labels": ["查看"]}
+      ]}
+    ]},
+    {"id": "create", "type": "page", "title": "创建工单", "frame": "drawer", "over": "list", "width": 900, "children": [
+      {"id": "form", "type": "form", "cols": 2, "fields": [
+        {"id": "title", "label": "工单标题", "kind": "input", "required": true, "max": 50},
+        {"id": "type", "label": "工单类型", "kind": "select", "required": true, "value": "维护工单–充电月度巡查"},
+        {"id": "stationType", "label": "场站类型", "kind": "select", "required": true},
+        {"id": "station", "label": "场站名称", "kind": "select", "required": true},
+        {"id": "level", "label": "工单等级", "kind": "select", "required": true, "value": "二级（48小时内完成）", "options": ["一级（紧急，8小时内完成）", "二级（48小时内完成）", "三级（7天内完成）", "四级（28天内完成）"]},
+        {"id": "assignment", "label": "工单指派", "kind": "select", "required": true, "value": "自动指派", "options": ["自动指派", "手动指派"]},
+        {"id": "description", "label": "问题描述", "kind": "textarea", "required": true, "max": 1000},
+        {"id": "attachments", "label": "附件", "kind": "upload", "help": "最多3个，支持 rar、zip、doc、docx、pdf、jpg"}
+      ]},
+      {"id": "footer", "type": "actions", "footer": true, "buttons": [
+        {"id": "ok", "label": "确定", "primary": true},
+        {"id": "cancel", "label": "取消"}
+      ]}
+    ]}
+  ],
+  "states": [
+    {"id": "W1", "page": "list", "title": "已筛选 · 待分配", "codes": ["L1", "L2"], "patch": {"list/search/status": {"value": "待分配"}, "list/table": {"rows": 3}}},
+    {"id": "W2", "page": "list", "title": "无结果", "codes": ["L4"], "patch": {"list/search/status": {"value": "已关闭"}, "list/table": {"rows": 0, "emptyText": "暂无符合条件的工单　重置筛选"}}},
+    {"id": "W3-partial", "page": "list", "title": "选择对照 · 半选", "codes": ["L10"], "patch": {"list/table": {"selected": "partial"}}},
+    {"id": "W3-all", "page": "list", "title": "选择对照 · 当前页全选", "codes": ["L10"], "patch": {"list/table": {"selected": "all"}}},
+    {"id": "D1", "page": "create", "title": "已填写与长内容", "codes": ["F5", "F13", "U4"], "patch": {"create/form/title": {"value": "【演示】广州埃安场站月度巡查与充电设备故障复核工单，请核对现场运行状态及维修记录"}, "create/form/attachments": {"value": ["现场检查记录.pdf", "充电设备巡查现场异常…结果完整说明及现场照片演示附件.jpg", "维修记录.zip"]}}},
+    {"id": "D2", "page": "create", "title": "必填错误与内容保留", "codes": ["F4", "F6", "F7"], "patch": {"create/form/title": {"error": "请输入工单标题"}, "create/form/stationType": {"error": "请选择场站类型"}, "create/form/station": {"error": "请选择场站名称"}, "create/form/description": {"value": "已填写的演示说明，校验失败时保留。"}}},
+    {"id": "D3-format", "page": "create", "title": "附件格式拒绝", "codes": ["U1", "U2"], "patch": {"create/form/attachments": {"value": ["现场检查记录.pdf"], "error": "格式不支持：仅支持 rar、zip、doc、docx、pdf、jpg"}}},
+    {"id": "D3-count", "page": "create", "title": "附件数量拒绝", "codes": ["U1", "U2"], "patch": {"create/form/attachments": {"value": ["现场检查记录.pdf"], "error": "最多可上传3个附件，请减少本次选择"}}}
+  ],
+  "decisions": [
+    {"code": "L1", "decision": "已确认", "text": "点“查询”才应用条件", "from": "产品:试用规则3"},
+    {"code": "L2", "decision": "已确认", "text": "每次查询回第1页并清空选择", "from": "产品:试用规则3"},
+    {"code": "L3", "decision": "已确认", "text": "重置立即恢复全部演示记录，文本清空、下拉回到全部、清空选择", "from": "产品:试用规则3"},
+    {"code": "L4", "decision": "已确认", "text": "显示“暂无符合条件的工单”和“重置筛选”", "from": "产品:试用规则3"},
+    {"code": "L5", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L6", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L7", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L8", "decision": "已确认", "text": "10条/页，共1页", "from": "产品:试用规则2"},
+    {"code": "L9", "decision": "已确认", "text": "单行省略", "from": "产品:试用验收清单"},
+    {"code": "L10", "decision": "已确认", "text": "全选仅当前页，无选择时批量禁用", "from": "产品:试用规则4"},
+    {"code": "L11", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L12", "decision": "已确认", "text": "处理中：处理/转派/更多；待分配：查看/指派/关闭；已关闭：查看", "from": "产品:试用规则4"},
+    {"code": "L13", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L14", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "L15", "decision": "已确认", "text": "提交成功后清筛选和选择、回第1页、新记录置顶且为待分配（只作说明）", "from": "产品:试用规则9"},
+    {"code": "F1", "decision": "已确认", "text": "抽屉", "from": "产品:沿用既有稿"},
+    {"code": "F2", "decision": "已确认", "text": "沿用既有稿 900 宽（历史稿例外）", "from": "产品:沿用既有稿"},
+    {"code": "F3", "decision": "已确认", "text": "标题、描述、场站类型和名称为空；类型为维护工单–充电月度巡查，二级，自动指派；附件为空", "from": "产品:试用规则5"},
+    {"code": "F4", "decision": "已确认", "text": "附件以外 7 项必填，去掉首尾空白后判空", "from": "产品:试用规则6"},
+    {"code": "F5", "decision": "已确认", "text": "标题50字、描述1000字，显示计数", "from": "产品:试用规则6"},
+    {"code": "F6", "decision": "已确认", "text": "点“确定”时统一校验", "from": "产品:试用规则6"},
+    {"code": "F7", "decision": "已确认", "text": "字段下方就地提示，保留已填内容", "from": "产品:试用规则6"},
+    {"code": "F8", "decision": "已确认", "text": "手动指派只作静态选项，展开流程本轮不做", "from": "产品:试用规则6"},
+    {"code": "F9", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "F10", "decision": "已确认", "text": "关闭抽屉并提示创建成功（只作说明，不做画板）", "from": "产品:试用规则9"},
+    {"code": "F11", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "F12", "decision": "已确认", "text": "关闭和取消丢弃输入，不二次确认，点蒙层不关闭", "from": "产品:试用规则8"},
+    {"code": "F13", "decision": "已确认", "text": "底栏固定，内容区滚动", "from": "产品:试用验收清单"},
+    {"code": "F14", "decision": "已确认", "text": "标题“创建工单”不会超长", "from": "产品:沿用既有稿"},
+    {"code": "U1", "decision": "已确认", "text": "最多3个；rar/zip/doc/docx/pdf/jpg，扩展名忽略大小写；不限大小", "from": "产品:试用规则7"},
+    {"code": "U2", "decision": "已确认", "text": "整批拒绝并保留已有列表", "from": "产品:试用规则7"},
+    {"code": "U3", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "U4", "decision": "已确认", "text": "中间省略并保留扩展名", "from": "产品:试用规则7"},
+    {"code": "U5", "decision": "已确认", "text": "可移除，不确认", "from": "产品:试用规则7"},
+    {"code": "S1", "decision": "已确认", "text": "新增选项标记为演示内容", "from": "产品:试用规则5"},
+    {"code": "S2", "decision": "已确认", "text": "筛选默认全部；表单下拉除已确认默认值外为空", "from": "产品:试用规则5"},
+    {"code": "S3", "decision": "本轮不做", "from": "产品:试用规则1"},
+    {"code": "N1", "decision": "已确认", "text": "沿用既有稿的菜单位置", "from": "产品:沿用既有稿"},
+    {"code": "N2", "decision": "已确认", "text": "沿用既有稿的页签", "from": "产品:沿用既有稿"},
+    {"code": "N3", "decision": "已确认", "text": "“创建工单”打开右侧抽屉；行操作的后续弹窗不制作", "from": "产品:试用规则4"},
+    {"code": "G1", "decision": "已确认", "text": "10条演示记录，新增内容标注【演示】", "from": "产品:试用规则2"},
+    {"code": "G2", "decision": "本轮不做", "from": "产品:试用规则1"}
+  ],
+  "questions": [],
+  "gaps": [
+    {"id": "toast", "need": "提交成功提示", "component": "全局提示（未导入）", "handling": "画板外文字说明"},
+    {"id": "empty", "need": "列表空状态", "component": "空状态（未导入）", "handling": "表格内文字，视觉待 UI 确认"}
+  ],
+  "judgments": ["查询区 8 个条件分两行排列", "批量操作在无选择时禁用"],
+  "demo": "表格 10 行和抽屉已填写内容均为演示数据"
+}

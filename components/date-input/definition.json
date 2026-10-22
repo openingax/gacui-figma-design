@@ -1,0 +1,357 @@
+{
+  "name": "DatePicker-input 日期选择输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "36058:296433",
+    "pageId": "30345:106262"
+  },
+  "properties": {
+    "mode 类型": {
+      "type": "VARIANT",
+      "defaultValue": "date 日期",
+      "variantOptions": [
+        "date 日期",
+        "dateRange 日期区间",
+        "datetimesRange 日期时间区间"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬浮",
+        "focus 聚焦"
+      ]
+    },
+    "filled 填充": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "mode 类型=date 日期, state 状态=normal 默认, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=hover 悬浮, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=focus 聚焦, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=normal 默认, filled 填充=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=normal 默认, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=hover 悬浮, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=focus 聚焦, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=date 日期, state 状态=normal 默认, filled 填充=true, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=hover 悬浮, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=focus 聚焦, filled 填充=false, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=hover 悬浮, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=focus 聚焦, filled 填充=true, disabled 禁用=false",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=dateRange 日期区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=true",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=hover 悬浮, filled 填充=false, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=focus 聚焦, filled 填充=false, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=normal 默认, filled 填充=false, disabled 禁用=true",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=hover 悬浮, filled 填充=true, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=focus 聚焦, filled 填充=true, disabled 禁用=false",
+      "size": [
+        360,
+        32
+      ]
+    },
+    {
+      "name": "mode 类型=datetimesRange 日期时间区间, state 状态=normal 默认, filled 填充=true, disabled 禁用=true",
+      "size": [
+        360,
+        32
+      ]
+    }
+  ],
+  "rules": [
+    "24个输入框视觉状态，实际mode只有date/dateRange/datetimesRange；年份、月份、单日期时间示例复用date并覆盖文字",
+    "date/dateRange为240×32，datetimesRange为360×32；单值格式覆盖与对应弹板组合仍需验证",
+    "输入区与弹出日历分离；日历面板由date-panel包负责"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray4-边框",
+    "Gray 中性/Gray5-禁用",
+    "Success 成功/Success3-Disabled",
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray2",
+    "Gray 中性/Gray6-提示",
+    "Gray 中性/Gray9-强调\\正文"
+  ],
+  "gaps": [
+    "临时Noto字体由用户桌面处理",
+    "静态状态不代表交互、业务事件或数据更新已实现"
+  ],
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示判断，不改变组件内部几何"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray5-禁用": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success3-Disabled": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.48235294222831726,
+          "g": 0.8823529481887817,
+          "b": 0.5333333611488342
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray2": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9450980424880981,
+          "g": 0.9450980424880981,
+          "b": 0.9450980424880981
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray6-提示": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.5921568870544434,
+          "g": 0.6039215922355652,
+          "b": 0.615686297416687
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "familyCoverage": "../datepicker/coverage.json",
+  "coverageStatus": "24输入状态保留；六用途文字格式与弹板组合由datepicker包实测"
+}

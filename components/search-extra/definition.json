@@ -1,0 +1,85 @@
+{
+  "name": "Search/活跃扩展",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "72086:226133",
+    "nodeId": "78840:236512"
+  },
+  "status": "已构建、回读及视觉验证；未用户验收",
+  "properties": {},
+  "displayLayout": {
+    "columns": 3,
+    "padding": 60,
+    "gap": 180
+  },
+  "states": [
+    {
+      "sourceId": "78840:236906",
+      "name": "usage 用途=prefix-clear-popup",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78842:236973",
+      "name": "usage 用途=batch-expanded",
+      "size": [
+        240,
+        120
+      ]
+    },
+    {
+      "sourceId": "79728:236715",
+      "name": "usage 用途=borderless-normal",
+      "size": [
+        240,
+        32
+      ]
+    },
+    {
+      "sourceId": "78842:237009",
+      "name": "usage 用途=custom-popup",
+      "size": [
+        240,
+        32
+      ]
+    }
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "169:2",
+    "componentSetIds": [
+      "169:551"
+    ],
+    "variants": [
+      {
+        "sourceId": "78840:236906",
+        "id": "169:492",
+        "name": "usage 用途=prefix-clear-popup"
+      },
+      {
+        "sourceId": "78842:236973",
+        "id": "169:511",
+        "name": "usage 用途=batch-expanded"
+      },
+      {
+        "sourceId": "79728:236715",
+        "id": "169:528",
+        "name": "usage 用途=borderless-normal"
+      },
+      {
+        "sourceId": "78842:237009",
+        "id": "169:534",
+        "name": "usage 用途=custom-popup"
+      }
+    ]
+  },
+  "rules": [
+    "源变体为实际组合，不自动补齐全排列",
+    "文字/数组/宽度通过components/search/generator.mjs定制，结构修改返回可编辑Frame",
+    "样例标签和联想项数量不是业务限制",
+    "源无reactions，不包括业务搜索、清空、提交及导航"
+  ],
+  "fontSubstitution": "Noto Sans SC Regular/Medium；原字体PingFang SC未桌面验收"
+}

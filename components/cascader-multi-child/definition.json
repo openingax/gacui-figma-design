@@ -1,0 +1,50 @@
+{
+  "name": "item/multipleOption/子级",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "46236:332925",
+    "pageId": "46236:328290"
+  },
+  "status": "完整盘点，构建验证中；未验收",
+  "displayLayout": {
+    "columns": 6,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "active 点击",
+        "hover 悬浮",
+        "normal 默认",
+        "select 选中"
+      ]
+    },
+    "disable 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "divider 分割线": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "indeterminate 半选": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  }
+}

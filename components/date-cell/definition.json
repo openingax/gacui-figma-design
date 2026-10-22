@@ -1,0 +1,86 @@
+{
+  "name": "item/datepicker-cell/date",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "36186:297669",
+    "pageId": "30345:106262"
+  },
+  "status": "已生成并回读，存在已记录的临时字体度量差异；未用户验收",
+  "displayLayout": {
+    "columns": 7,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "now 此刻": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "hover 悬浮": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "active 选中激活": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "active-start 选中开始": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "highlight": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "active-end 选中结束": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "additional 额外": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "gaps": [
+    "PingFang SC临时替代为Noto Sans SC",
+    "静态有效状态，不代表完整业务交互已实现"
+  ],
+  "propertyContract": "properties来自目标实际回读；文字在实例内TEXT槽编辑，不宣称源TEXT属性绑定已迁移",
+  "family": "../datepicker/README.md"
+}

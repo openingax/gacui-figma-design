@@ -1,0 +1,98 @@
+[
+  {
+    "sourceId": "35336:308102",
+    "id": "753:2",
+    "name": "placement 位置=top 顶部, items 数量=5, icon 图标=false",
+    "key": "top|5|false"
+  },
+  {
+    "sourceId": "35336:308111",
+    "id": "753:19",
+    "name": "placement 位置=top 顶部, items 数量=2, icon 图标=false",
+    "key": "top|2|false"
+  },
+  {
+    "sourceId": "35336:308117",
+    "id": "753:26",
+    "name": "placement 位置=top 顶部, items 数量=3, icon 图标=false",
+    "key": "top|3|false"
+  },
+  {
+    "sourceId": "35336:308124",
+    "id": "753:36",
+    "name": "placement 位置=top 顶部, items 数量=4, icon 图标=false",
+    "key": "top|4|false"
+  },
+  {
+    "sourceId": "35336:308132",
+    "id": "753:50",
+    "name": "placement 位置=top 顶部, items 数量=6, icon 图标=false",
+    "key": "top|6|false"
+  },
+  {
+    "sourceId": "35336:308142",
+    "id": "753:69",
+    "name": "placement 位置=top 顶部, items 数量=7, icon 图标=false",
+    "key": "top|7|false"
+  },
+  {
+    "sourceId": "35336:308153",
+    "id": "753:91",
+    "name": "placement 位置=top 顶部, items 数量=8, icon 图标=false",
+    "key": "top|8|false"
+  },
+  {
+    "sourceId": "35336:308192",
+    "id": "753:116",
+    "name": "placement 位置=top 顶部, items 数量=5, icon 图标=true",
+    "key": "top|5|true"
+  },
+  {
+    "sourceId": "35336:308201",
+    "id": "753:143",
+    "name": "placement 位置=top 顶部, items 数量=2, icon 图标=true",
+    "key": "top|2|true"
+  },
+  {
+    "sourceId": "35336:308207",
+    "id": "753:154",
+    "name": "placement 位置=top 顶部, items 数量=3, icon 图标=true",
+    "key": "top|3|true"
+  },
+  {
+    "sourceId": "35336:308214",
+    "id": "753:170",
+    "name": "placement 位置=top 顶部, items 数量=4, icon 图标=true",
+    "key": "top|4|true"
+  },
+  {
+    "sourceId": "35336:308222",
+    "id": "753:20963",
+    "name": "placement 位置=top 顶部, items 数量=6, icon 图标=true",
+    "key": "top|6|true"
+  },
+  {
+    "sourceId": "35336:308232",
+    "id": "753:20995",
+    "name": "placement 位置=top 顶部, items 数量=7, icon 图标=true",
+    "key": "top|7|true"
+  },
+  {
+    "sourceId": "35336:308243",
+    "id": "753:21031",
+    "name": "placement 位置=top 顶部, items 数量=8, icon 图标=true",
+    "key": "top|8|true"
+  },
+  {
+    "sourceId": "35336:313851",
+    "id": "753:21072",
+    "name": "placement 位置=left 左 (only 8items), items 数量=8, icon 图标=false",
+    "key": "left|8|false"
+  },
+  {
+    "sourceId": "35336:313941",
+    "id": "753:21097",
+    "name": "placement 位置=left 左 (only 8items), items 数量=8, icon 图标=true",
+    "key": "left|8|true"
+  }
+]

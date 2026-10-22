@@ -1,0 +1,57 @@
+{
+  "name": "Cascader-input 级联选择输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "46236:331768",
+    "pageId": "46236:328290"
+  },
+  "status": "完整盘点，构建验证中；未验收",
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  },
+  "properties": {
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "normal 默认",
+        "hover 悬浮",
+        "focus 聚焦"
+      ]
+    },
+    "filled 填充": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "multiple 多选": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "prefixIcon 前置图标": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  }
+}

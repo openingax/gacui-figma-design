@@ -1,0 +1,13 @@
+{
+  "name": "inputPassword 密码输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "27133:84519",
+    "pageId": "24929:36227"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  }
+}

@@ -1,0 +1,103 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import {spawnSync} from 'node:child_process';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID,createHash} from 'node:crypto';
+import {spawn} from 'node:child_process';
+import {createCollector} from '../support/server.mjs';
+import * as client from '../support/client.mjs';
+import {bundle,send} from '../support/cli.mjs';
+import {reports,triage,markdown} from '../support/manage.mjs';
+const dir=fs.mkdtempSync(join(tmpdir(),'gac-support-'));
+const token=randomUUID()+randomUUID(),hash=createHash('sha256').update(token).digest('hex');
+let clock=Date.now();const server=createCollector({dataDir:join(dir,'server'),tokenHashes:[hash],ticketSecret:randomUUID(),now:()=>clock});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const endpoint='http://127.0.0.1:'+server.address().port;
+process.env.GAC_SUPPORT_HOME=join(dir,'client');process.env.GAC_SUPPORT_CONFIG=join(dir,'config.json');
+fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint,token}));
+const post=(path,body,key=token)=>fetch(endpoint+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});
+const cli=(...args)=>new Promise(resolve=>{const p=spawn(process.execPath,['sketch/sketch.mjs',...args],{env:process.env});let out='';p.stdout.on('data',b=>out+=b);p.stderr.on('data',b=>out+=b);p.on('close',code=>resolve({code,out}));});
+try {
+ const target=join(dir,'draft'),input=join(dir,'input.json');fs.copyFileSync('sketch/examples/work-order.json',input);
+ // 凭据存在也默认关闭；旧配置不构成用户同意，render不能签发票据。
+ let requests=0;server.on('request',()=>requests++);
+ assert.equal(client.uploadPreference().autoUpload,false);
+ assert.equal(client.status().decision,'not-asked');
+ assert.equal((await client.flush()).state,'disabled');
+ const disabledRun=client.begin('status',target);client.finish(disabledRun,0);
+ assert.equal((await client.previewContext(target)).upload,undefined);
+ assert.equal(requests,0);
+ const missingConsent=spawnSync(process.execPath,['support/cli.mjs','auto-upload','on'],{env:process.env});assert.equal(missingConsent.status,1);assert.equal(client.uploadPreference().autoUpload,false);
+ const consent=spawnSync(process.execPath,['support/cli.mjs','auto-upload','on','--user-consented'],{env:process.env});assert.equal(consent.status,0);
+ client.setAutoUpload(true);
+ assert.equal(client.pending().length,0,'开启前的本地日志不追溯上传');
+ const r=await cli('save',target,input,'0');assert.equal(r.code,0,r.out);
+ assert.equal(client.events().length,4);assert.equal(client.pending().length,0);
+ const logged=client.events().filter(e=>e.operation==='save');assert.deepEqual(logged.map(e=>e.phase),['start','finish']);assert.equal(logged[1].after,1);
+ assert.ok(!JSON.stringify(logged).includes(dir));assert.ok(!JSON.stringify(logged).includes('工单'));assert.ok(!JSON.stringify(logged).includes(token));
+ const conflict=await cli('save',target,input,'0');assert.equal(conflict.code,1);assert.equal(client.events().at(-1).errorCode,'version_conflict');
+ const e=logged[0];assert.equal((await post('/v1/events',{events:[e]},'bad')).status,401);
+ assert.equal((await post('/v1/events',{events:[{...e,rawMessage:'secret'}]})).status,400);
+ assert.equal((await post('/v1/events',{events:[e]})).status,200,'same id replay succeeds');
+ assert.equal((await post('/v1/events',{events:[{...e,before:88}]})).status,409,'changed replay rejected');
+ assert.equal((await fetch(endpoint+'/events')).status,404);assert.equal((await fetch(endpoint+'/v1/feedback')).status,405);
+ const ctx=await client.previewContext(target,e.runId);assert.ok(ctx.upload.ticket);assert.ok(!JSON.stringify(ctx).includes(token));
+ const report=bundle(target,{description:'无法继续',expected:'保留原稿',version:1,page:'list'});
+ assert.deepEqual(report.attachments,{});
+ assert.equal((await post('/v1/feedback',report,ctx.upload.ticket)).status,200);
+ assert.equal((await post('/v1/feedback',report,ctx.upload.ticket)).status,200);
+ assert.equal(reports(join(dir,'server')).length,1);
+ assert.equal((await post('/v1/feedback',{...report,description:'changed'},ctx.upload.ticket)).status,409);
+ assert.equal((await post('/v1/feedback',{...report,taskId:'a'.repeat(32),events:[]},ctx.upload.ticket)).status,403);
+ assert.equal((await post('/v1/feedback',{...report,attachments:{file:'/etc/passwd'}},ctx.upload.ticket)).status,400);
+ assert.equal((await post('/v1/feedback',{...report,attachments:{screenshot:'data:image/svg+xml;base64,AAAA'}},ctx.upload.ticket)).status,400);
+ assert.equal((await post('/v1/feedback',{...report,description:'x'.repeat(5000)},ctx.upload.ticket)).status,400);
+ assert.equal((await post('/v1/events',{events:[],huge:'x'.repeat(70000)})).status,413);
+ clock+=8*86400000;assert.equal((await post('/v1/feedback',report,ctx.upload.ticket)).status,401);clock=Date.now();
+ const newReport=bundle(target,{description:'第二条模拟反馈'});assert.equal((await send(newReport)).accepted,newReport.id);
+ const patch={status:'fixed',priority:'P1',owner:'维护者',fixVersion:'test-build',verification:'',duplicateOf:''};
+ triage(join(dir,'server'),report.id,patch);assert.throws(()=>triage(join(dir,'server'),report.id,{...patch,status:'verified'}),/复测/);
+ triage(join(dir,'server'),report.id,{...patch,status:'verified',verification:'原步骤通过'});assert.match(markdown(join(dir,'server')),/verified/);
+ // 断网后事件仍在，下次命令补传；成功保存不因上传失败而失败。
+ fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint:'http://127.0.0.1:1',token}));
+ assert.equal((await cli('save',target,input,'1')).code,0);assert.equal(client.pending().length,2);
+ fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint,token}));await client.flush();assert.equal(client.pending().length,0);
+ // 日志存储不可写时，业务保存仍成功且原快照保留。
+ const prior=process.env.GAC_SUPPORT_HOME;process.env.GAC_SUPPORT_HOME=join(dir,'not-directory');fs.writeFileSync(process.env.GAC_SUPPORT_HOME,'x');
+ assert.equal((await cli('save',target,input,'2')).code,0);assert.ok(fs.existsSync(join(target,'v3.json')));process.env.GAC_SUPPORT_HOME=prior;
+ // 并发事件不覆盖；队列满/过期计数可见。
+ const runs=Array.from({length:5},()=>client.begin('check',target));runs.forEach(r=>client.finish(r,0));assert.equal(client.pending().length,10);await client.flush();
+ client.record({...e,id:randomUUID(),at:'2000-01-01T00:00:00.000Z'});client.prune();assert.equal(client.status().expired,1);
+ // 严格字段脱敏之外，正文绝不进入自动日志，失败只记录分类。
+ const bad=JSON.parse(fs.readFileSync(input));bad.pages[0].children[0].type='private-secret-component';fs.writeFileSync(input,JSON.stringify(bad));await cli('save',target,input,'3');assert.ok(!JSON.stringify(client.events()).includes('private-secret-component'));
+ const screenshotReport=bundle(target,{description:'模拟截图附件',attachments:{screenshot:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+cWZkAAAAASUVORK5CYII='}});assert.equal((await send(screenshotReport)).accepted,screenshotReport.id);
+ const hang=http.createServer(()=>{});await new Promise(r=>hang.listen(0,'127.0.0.1',r));const hangingRun=client.begin('status',target);client.finish(hangingRun,0);fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint:'http://127.0.0.1:'+hang.address().port,token}));const started=Date.now();await assert.rejects(()=>client.flush());assert.ok(Date.now()-started<4000);assert.equal(client.pending().length,2);hang.closeAllConnections();await new Promise(r=>hang.close(r));fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint,token}));await client.flush();assert.equal(client.pending().length,0);
+ const install=spawnSync(process.execPath,['support/setup.mjs','server',join(dir,'installed')],{encoding:'utf8'});assert.equal(install.status,0,install.stderr);const installed=JSON.parse(fs.readFileSync(join(dir,'installed/private/first-client.json')));assert.ok(!install.stdout.includes(installed.token));if(process.platform!=='win32')assert.equal(fs.statSync(join(dir,'installed/private/first-client.json')).mode&0o777,0o600);assert.equal(spawnSync(process.execPath,['support/setup.mjs','server',join(dir,'installed')]).status,1,'拒绝覆盖已有服务器');
+ // 模拟新电脑按试用说明安装：即使该隔离环境曾开启，安装也必须重置为待询问且关闭。
+ const pmHome=join(dir,'pm-home'),pmSupport=join(pmHome,'.gacuiagent-public','support');
+ fs.mkdirSync(pmSupport,{recursive:true});fs.writeFileSync(join(pmSupport,'upload-preference.json'),JSON.stringify({autoUpload:true,decision:'enabled',epoch:randomUUID()}));
+ const pmEnv={...process.env,HOME:pmHome,USERPROFILE:pmHome,GAC_SUPPORT_HOME:pmSupport};delete pmEnv.GAC_SUPPORT_CONFIG;
+ const received=join(dir,'installed/private/first-client.json');
+ const pmInstall=spawnSync(process.execPath,['support/setup.mjs','client',received],{env:pmEnv,encoding:'utf8'});
+ assert.equal(pmInstall.status,0,pmInstall.stderr);assert.ok(!pmInstall.stdout.includes(installed.token));
+ const pmConfig=join(pmHome,'.gacuiagent-public','support-config.json');
+ assert.deepEqual(JSON.parse(fs.readFileSync(pmConfig)),installed);if(process.platform!=='win32')assert.equal(fs.statSync(pmConfig).mode&0o777,0o600);
+ const pmStatus=spawnSync(process.execPath,['support/cli.mjs','status'],{env:pmEnv,encoding:'utf8'});
+ assert.equal(pmStatus.status,0,pmStatus.stderr);const pmState=JSON.parse(pmStatus.stdout);
+ assert.equal(pmState.autoUpload,false);assert.equal(pmState.decision,'not-asked');assert.ok(!pmStatus.stdout.includes(installed.token));
+ const pmFlush=spawnSync(process.execPath,['support/cli.mjs','flush'],{env:pmEnv,encoding:'utf8'});
+ assert.equal(pmFlush.status,0,pmFlush.stderr);assert.equal(JSON.parse(pmFlush.stdout).state,'disabled');
+ assert.equal(spawnSync(process.execPath,['support/setup.mjs','client',received],{env:pmEnv}).status,1,'重复安装拒绝覆盖');
+ assert.deepEqual(JSON.parse(fs.readFileSync(pmConfig)),installed);
+ // 关闭后flush/render/真实CLI均不联网；重新开启也不补传关闭前遗留队列。
+ const queuedRun=client.begin('status',target);client.finish(queuedRun,0);assert.equal(client.pending().length,2);
+ client.setAutoUpload(false);const beforeOff=requests;
+ assert.equal((await client.flush()).state,'disabled');assert.equal((await client.previewContext(target)).upload,undefined);
+ assert.equal((await cli('render',target)).code,0);assert.equal(requests,beforeOff);
+ client.setAutoUpload(true);assert.equal(client.pending().length,0);
+ const afterOn=client.begin('status',target);client.finish(afterOn,0);await client.flush();assert.equal(requests,beforeOff+1);
+ const tiny=createCollector({dataDir:join(dir,'tiny'),tokenHashes:[hash],ticketSecret:randomUUID(),maxBytes:1});await new Promise(r=>tiny.listen(0,'127.0.0.1',r));
+ const q=await fetch('http://127.0.0.1:'+tiny.address().port+'/v1/events',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({events:[e]})});assert.equal(q.status,507);await new Promise(r=>tiny.close(r));
+ console.log('support ok: real CLI → authenticated collector → private files; privacy, conflict, idempotency, attachment boundaries, expiry, offline retry, log failure isolation, quota, triage');
+} finally {await new Promise(r=>server.close(r));fs.rmSync(dir,{recursive:true,force:true});}

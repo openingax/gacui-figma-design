@@ -1,0 +1,26 @@
+{
+  "name": "Link 链接",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "69043:216869",
+    "pageId": "69043:216748",
+    "readOn": "2026-10-15"
+  },
+  "variantCount": 32,
+  "properties": {
+    "text": "text 文案",
+    "prefixSwap": "prefixIcon instance 前置图标实例",
+    "suffixSwap": "suffixIcon Instance",
+    "size": ["large 大尺寸", "medium 中尺寸"],
+    "state": ["normal 默认", "hover 悬停", "active 点击"],
+    "prefix": ["false", "true"],
+    "suffix": ["false", "true"],
+    "disabled": ["false", "true"]
+  },
+  "rules": [
+    "2 尺寸 × 4 图标槽位 × 3 状态，另加每个槽位的禁用默认态，共 32。禁用不与悬停或点击组合。",
+    "默认文案为跳转链接。前置默认图标 link 75:2123，后置默认图标 jump 75:2074。",
+    "medium active 且前置图标可见的两个变体，前置实例图层名为 download，mainComponent 仍是 link，图形与 link 相同，颜色为点击态。这不是第四种图标。",
+    "活跃示例只使用默认文案和默认图标，不覆盖上述规则。"
+  ]
+}

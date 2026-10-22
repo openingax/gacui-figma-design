@@ -1,0 +1,13 @@
+{
+  "name": "Loading 扩展/1",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "loading-source-1",
+    "pageId": "45921:328218"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "padding": 24,
+    "gap": 32
+  }
+}

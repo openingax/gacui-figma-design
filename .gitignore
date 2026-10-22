@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+*.local
+.local/
+private/
+credentials/
+tasks/
+evidence/
+node_modules/
+__pycache__/
+*.pyc
+tmp/
+dist/
+*.log
+*.pem
+*.key

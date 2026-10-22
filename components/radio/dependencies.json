@@ -1,0 +1,63 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "pageId": "539:2",
+  "single": {
+    "checked 已选=false, state 状态=normal默认, disable 禁用=false": "539:17850",
+    "checked 已选=false, state 状态=hover悬停, disable 禁用=false": "539:17856",
+    "checked 已选=true, state 状态=normal默认, disable 禁用=false": "539:17861",
+    "checked 已选=false, state 状态=normal默认, disable 禁用=true": "539:17866",
+    "checked 已选=true, state 状态=normal默认, disable 禁用=true": "539:17870"
+  },
+  "button": {
+    "variants 类型=outline描边, state 状态=select已选, disabled 禁用=true, position 位置=left to selected 选中左边": "539:17876",
+    "variants 类型=outline描边, state 状态=select已选, disabled 禁用=true, position 位置=right to seleted 选中右边": "539:17878",
+    "variants 类型=primary-filled品牌填充, state 状态=select已选, disabled 禁用=true, position 位置=/": "539:17880",
+    "variants 类型=default-filled默认填充, state 状态=select已选, disabled 禁用=true, position 位置=/": "539:17882",
+    "variants 类型=outline描边, state 状态=normal默认, disabled 禁用=false, position 位置=left to selected 选中左边": "539:17884",
+    "variants 类型=outline描边, state 状态=normal默认, disabled 禁用=false, position 位置=right to seleted 选中右边": "539:17886",
+    "variants 类型=primary-filled品牌填充, state 状态=normal默认, disabled 禁用=false, position 位置=/": "539:17888",
+    "variants 类型=default-filled默认填充, state 状态=normal默认, disabled 禁用=false, position 位置=/": "539:17890",
+    "variants 类型=outline描边, state 状态=normal默认, disabled 禁用=true, position 位置=left to selected 选中左边": "539:17892",
+    "variants 类型=outline描边, state 状态=normal默认, disabled 禁用=true, position 位置=right to seleted 选中右边": "539:17894",
+    "variants 类型=primary-filled品牌填充, state 状态=normal默认, disabled 禁用=true, position 位置=/": "539:17896",
+    "variants 类型=default-filled默认填充, state 状态=normal默认, disabled 禁用=true, position 位置=/": "539:17898",
+    "variants 类型=outline描边, state 状态=hover悬停, disabled 禁用=false, position 位置=left to selected 选中左边": "539:17900",
+    "variants 类型=outline描边, state 状态=hover悬停, disabled 禁用=false, position 位置=right to seleted 选中右边": "539:17902",
+    "variants 类型=primary-filled品牌填充, state 状态=hover悬停, disabled 禁用=false, position 位置=/": "539:17904",
+    "variants 类型=default-filled默认填充, state 状态=hover悬停, disabled 禁用=false, position 位置=/": "539:17906",
+    "variants 类型=outline描边, state 状态=select已选, disabled 禁用=false, position 位置=left to selected 选中左边": "539:17908",
+    "variants 类型=outline描边, state 状态=select已选, disabled 禁用=false, position 位置=right to seleted 选中右边": "539:17910",
+    "variants 类型=primary-filled品牌填充, state 状态=select已选, disabled 禁用=false, position 位置=/": "539:17912",
+    "variants 类型=default-filled默认填充, state 状态=select已选, disabled 禁用=false, position 位置=/": "539:17914"
+  },
+  "groupFills": {
+    "default-filled": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ],
+    "primary-filled": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ]
+  }
+}

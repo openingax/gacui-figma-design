@@ -1,0 +1,13 @@
+{
+  "name": "addonInput 标签输入框",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "49596:470375",
+    "pageId": "24929:36227"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  }
+}

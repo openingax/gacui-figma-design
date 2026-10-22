@@ -1,0 +1,338 @@
+{
+  "name": "item/form",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "47352:507906",
+    "pageId": "39306:305660"
+  },
+  "properties": {
+    "type 类型": {
+      "type": "VARIANT",
+      "defaultValue": "input 输入",
+      "variantOptions": [
+        "input 输入",
+        "select 选择器",
+        "datePicker 日期选择器",
+        "timePicker 时间选择器"
+      ]
+    },
+    "help 说明": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "type 类型=input 输入, help 说明=false",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          0,
+          0,
+          24,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=input 输入, help 说明=true",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "VERTICAL",
+        "padding": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=select 选择器, help 说明=false",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          0,
+          0,
+          24,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=select 选择器, help 说明=true",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "VERTICAL",
+        "padding": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=datePicker 日期选择器, help 说明=false",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          0,
+          0,
+          24,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=datePicker 日期选择器, help 说明=true",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "VERTICAL",
+        "padding": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=timePicker 时间选择器, help 说明=false",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          0,
+          0,
+          24,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    },
+    {
+      "name": "type 类型=timePicker 时间选择器, help 说明=true",
+      "size": [
+        400,
+        56
+      ],
+      "layout": {
+        "direction": "VERTICAL",
+        "padding": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "gap": 0
+      },
+      "fill": [],
+      "strokes": [],
+      "radius": 0
+    }
+  ],
+  "rules": [
+    "本包仅为item/form的四类型×说明开关8状态，源基准400×56；不是完整Form字段家族，不代表顶部/右侧标签能力",
+    "组合表单由字段序列组织，不导入400×882的整张业务示例",
+    "help说明开关仅控制已有说明单元；required、tooltip、validation和statusIcon是独立能力，本包未提供对应完整接口",
+    "timePicker两种状态的标题容器为绝对定位x=-68/y=5，组合时需为左侧标题预留空间"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray0-白色背景",
+    "Gray 中性/Gray4-边框",
+    "Gray 中性/Gray7-次要信息",
+    "Gray 中性/Gray5-禁用",
+    "Gray 中性/Gray6-提示",
+    "Gray 中性/Gray8-正文",
+    "Success 成功/Success3-Disabled",
+    "Gray 中性/Gray9-强调\\正文"
+  ],
+  "gaps": [
+    "字体暂用Noto Sans SC，由用户桌面处理",
+    "交互事件与业务副作用未在本次静态构建中实现",
+    "完整还原结论须结合实际回读和视觉检查，不以执行成功替代"
+  ],
+  "displayLayout": {
+    "columns": 2,
+    "padding": 96,
+    "gap": 96,
+    "classification": "测试集合展示排版判断，不改变元组件内部规范"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray7-次要信息": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.545098066329956,
+          "g": 0.545098066329956,
+          "b": 0.545098066329956
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray5-禁用": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray6-提示": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.5921568870544434,
+          "g": 0.6039215922355652,
+          "b": 0.615686297416687
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray8-正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.27450981736183167,
+          "g": 0.2980392277240753,
+          "b": 0.32156863808631897
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success3-Disabled": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.48235294222831726,
+          "g": 0.8823529481887817,
+          "b": 0.5333333611488342
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "familyScope": {
+    "entry": "../form/README.md",
+    "status": "仅部分基础单元；完整Form家族范围以form/definition.json为准",
+    "reanalysisDate": "2026-09-29"
+  }
+}

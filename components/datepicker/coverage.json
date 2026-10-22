@@ -1,0 +1,317 @@
+{
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "30345:106262"
+  },
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "112:91"
+  },
+  "readDate": "2026-09-29",
+  "scope": "六类用途，去重复展示，不省略功能类型",
+  "useCases": [
+    {
+      "useCase": "year",
+      "name": "年份选择器",
+      "exampleNodeId": "37370:308675",
+      "input": {
+        "sourceComponentId": "36058:296429",
+        "mode": "date 日期",
+        "size": [
+          240,
+          32
+        ],
+        "exampleText": [
+          "2026"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "37035:305083",
+        "sourceVariantName": "mode 类型=year 年份",
+        "size": [
+          280,
+          224
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "year-cell",
+        "year-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "130:2",
+      "targetExampleId": "130:44",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    },
+    {
+      "useCase": "month",
+      "name": "月份选择器",
+      "exampleNodeId": "37370:308676",
+      "input": {
+        "sourceComponentId": "36058:296429",
+        "mode": "date 日期",
+        "size": [
+          240,
+          32
+        ],
+        "exampleText": [
+          "2026/09"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "37035:305069",
+        "sourceVariantName": "mode 类型=month 月份",
+        "size": [
+          280,
+          224
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "month-cell",
+        "month-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "131:71",
+      "targetExampleId": "131:113",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    },
+    {
+      "useCase": "date",
+      "name": "日期选择器",
+      "exampleNodeId": "37375:308799",
+      "input": {
+        "sourceComponentId": "36058:296429",
+        "mode": "date 日期",
+        "size": [
+          240,
+          32
+        ],
+        "exampleText": [
+          "2026/09/21"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "37035:305085",
+        "sourceVariantName": "mode 类型=date 日期",
+        "size": [
+          280,
+          278
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "date-cell",
+        "date-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "71:2",
+      "targetExampleId": "131:380",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    },
+    {
+      "useCase": "dateTime",
+      "name": "日期时间选择器",
+      "exampleNodeId": "37375:309012",
+      "input": {
+        "sourceComponentId": "36058:296429",
+        "mode": "date 日期",
+        "size": [
+          240,
+          32
+        ],
+        "exampleText": [
+          "2026/09/21 09:41:00"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "37035:305066",
+        "sourceVariantName": "mode 类型=dateTimes 日期时间",
+        "size": [
+          496,
+          278
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "date-cell",
+        "time-cell",
+        "time-columns",
+        "dateTime-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "131:636",
+      "targetExampleId": "131:812",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    },
+    {
+      "useCase": "dateRange",
+      "name": "日期区间选择器",
+      "exampleNodeId": "37379:309578",
+      "input": {
+        "sourceComponentId": "36133:296521",
+        "mode": "dateRange 日期区间",
+        "size": [
+          240,
+          32
+        ],
+        "exampleText": [
+          "2026/08/02",
+          "-",
+          "2026/08/02"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "25719:116291",
+        "sourceVariantName": "mode 类型=mode 类型6",
+        "size": [
+          560,
+          278
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "date-cell-range-states",
+        "dateRange-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "131:995",
+      "targetExampleId": "131:1288",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    },
+    {
+      "useCase": "dateTimeRange",
+      "name": "日期时间区间选择器",
+      "exampleNodeId": "37381:310168",
+      "input": {
+        "sourceComponentId": "36147:296677",
+        "mode": "datetimesRange 日期时间区间",
+        "size": [
+          360,
+          32
+        ],
+        "exampleText": [
+          "2026/09/21 09:41:00",
+          "-",
+          "2026/09/21 09:41:00"
+        ],
+        "existingImplementation": "date-input；单值/区间文字覆盖已实测"
+      },
+      "popup": {
+        "sourceComponentId": "37035:305074",
+        "sourceVariantName": "mode 类型=d&t + d&t日期区间时间选择器",
+        "size": [
+          560,
+          556
+        ],
+        "existingImplementation": "datepicker/generator.mjs：共享原生状态实例组合"
+      },
+      "composition": {
+        "offset": [
+          0,
+          40
+        ],
+        "gap": 8,
+        "alignment": "left"
+      },
+      "requiredUnits": [
+        "date-cell-range-states",
+        "time-cell",
+        "time-columns",
+        "dateTimeRange-panel"
+      ],
+      "analysisStatus": "direct-source-and-example-inspected",
+      "completeCompositionVerified": true,
+      "implementationStatus": "editable-static-composition-verified",
+      "targetPopupId": "131:1593",
+      "targetExampleId": "131:1986",
+      "userAccepted": false,
+      "verificationBoundary": "实际生成、尺寸/样式/内容回读、修改及视觉检查；非交互原型"
+    }
+  ],
+  "sharedUnits": {
+    "inputModes": 3,
+    "inputVariants": 24,
+    "dateCellStates": 14,
+    "monthCellStates": 8,
+    "yearCellStates": 8,
+    "timeCellStates": 4,
+    "dateRangeTextStates": 3,
+    "dateTimeRangeTextStates": 3
+  },
+  "pending": [
+    "用户视觉验收",
+    "按用户约定在桌面更换PingFang字体"
+  ],
+  "notes": [
+    "六类静态用途已经实现，不把它表述为交互控件已完成",
+    "源样例日期不联动；本地日历数据模型及状态优先级是明确的生成策略",
+    "源mode 类型6语义映射为dateRange，源名称保留",
+    "日期、月、年、时间及区间文字共40个有效状态，未补造未定义组合"
+  ],
+  "limitations": [
+    "原型行为（翻页点击、滚动、关闭、键盘、提交）未实现",
+    "Noto文字度量与源不同",
+    "时间列自动布局产生约0.000004px的浮点差异"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "units": {
+    "checked 已选=false, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=false": "31:2",
+    "checked 已选=false, state 状态=hover 悬停, disabled 禁用=false, indeterminate 半选=false": "31:4",
+    "checked 已选=true, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=true": "31:6",
+    "checked 已选=true, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=true": "31:9",
+    "checked 已选=true, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=false": "31:12",
+    "checked 已选=false, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=false": "31:15",
+    "checked 已选=true, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=false": "31:17"
+  },
+  "normalFills": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.09019608050584793,
+        "g": 0.12156862765550613,
+        "b": 0.14901961386203766
+      },
+      "boundVariables": {}
+    }
+  ],
+  "disabledFills": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.5921568870544434,
+        "g": 0.6039215922355652,
+        "b": 0.615686297416687
+      },
+      "boundVariables": {}
+    }
+  ]
+}

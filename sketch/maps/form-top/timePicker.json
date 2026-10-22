@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:180",
+   "name": "type 类型=timePicker 时间选择器, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:189",
+   "name": "type 类型=timePicker 时间选择器, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:199",
+   "name": "type 类型=timePicker 时间选择器, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:210",
+   "name": "type 类型=timePicker 时间选择器, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:222",
+   "name": "type 类型=timePicker 时间选择器, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:235",
+   "name": "type 类型=timePicker 时间选择器, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:247",
+   "name": "type 类型=timePicker 时间选择器, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:262",
+   "name": "type 类型=timePicker 时间选择器, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

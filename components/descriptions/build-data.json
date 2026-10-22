@@ -1,0 +1,162 @@
+{
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "63959:213876"
+  },
+  "gap": 16,
+  "columnGap": 24.000001907348633,
+  "headingGap": 8,
+  "bar": {
+    "id": "25696:22966",
+    "name": "Rectangle 3",
+    "type": "RECTANGLE",
+    "width": 2,
+    "height": 16,
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.20236001908779144,
+          "g": 0.48723143339157104,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "fillStyleId": "",
+    "strokes": [],
+    "strokeWeight": 1,
+    "cornerRadius": 0
+  },
+  "title": {
+    "id": "25696:22967",
+    "name": "已审核备份 9",
+    "type": "TEXT",
+    "width": 726,
+    "height": 22,
+    "layoutSizingHorizontal": "FILL",
+    "layoutSizingVertical": "HUG",
+    "textAutoResize": "HEIGHT",
+    "fontName": {
+      "family": "PingFang SC",
+      "style": "Medium"
+    },
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 139.9999976158142
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "fillStyleId": "",
+    "textStyleId": "",
+    "strokes": [],
+    "strokeWeight": 0,
+    "characters": "基本信息"
+  },
+  "label": {
+    "id": "25696:22977",
+    "name": "会员方案描述：",
+    "type": "TEXT",
+    "width": 98,
+    "height": 20,
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "textAutoResize": "WIDTH_AND_HEIGHT",
+    "fontName": {
+      "family": "PingFang SC",
+      "style": "Regular"
+    },
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 139.9999976158142
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.45490196347236633,
+          "g": 0.47058823704719543,
+          "b": 0.4901960790157318
+        },
+        "boundVariables": {}
+      }
+    ],
+    "fillStyleId": "",
+    "textStyleId": "",
+    "strokes": [],
+    "strokeWeight": 1,
+    "characters": "会员方案描述："
+  },
+  "value": {
+    "id": "25696:22978",
+    "name": "描述描述描述",
+    "type": "TEXT",
+    "width": 84,
+    "height": 20,
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "textAutoResize": "WIDTH_AND_HEIGHT",
+    "fontName": {
+      "family": "PingFang SC",
+      "style": "Regular"
+    },
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 139.9999976158142
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "fillStyleId": "",
+    "textStyleId": "",
+    "strokes": [],
+    "strokeWeight": 1,
+    "characters": "描述描述描述"
+  }
+}

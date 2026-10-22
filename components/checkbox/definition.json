@@ -1,0 +1,882 @@
+{
+  "name": "item/unit/checkbox",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "43606:305652",
+    "pageId": "43626:307824"
+  },
+  "properties": {
+    "checked 已选": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    },
+    "state 状态": {
+      "type": "VARIANT",
+      "defaultValue": "normal 默认",
+      "variantOptions": [
+        "hover 悬停",
+        "normal 默认"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false",
+        "true"
+      ]
+    },
+    "indeterminate 半选": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "true",
+        "false"
+      ]
+    }
+  },
+  "styles": {
+    "Gray 中性/Gray5-禁用": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "geometries": {
+    "check": {
+      "vectorNetwork": {
+        "vertices": [
+          {
+            "x": 2.121171474456787,
+            "y": 6.354159355163574,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 0,
+            "y": 4.232987880706787,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 1.4347940683364868,
+            "y": 2.8393547534942627,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 3.5376789569854736,
+            "y": 4.942239761352539,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 0,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 8.49493408203125,
+            "y": 0,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 9.899495124816895,
+            "y": 1.4045608043670654,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 4.942239761352539,
+            "y": 6.346800327301025,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 4.949747562408447,
+            "y": 6.354308128356934,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 4.928869247436523,
+            "y": 6.374587535858154,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 4.79496431350708,
+            "y": 6.4936299324035645,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 4.232986927032471,
+            "y": 7.0539045333862305,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          },
+          {
+            "x": 2.8198461532592773,
+            "y": 7.0528340339660645,
+            "strokeCap": "NONE",
+            "strokeJoin": "MITER",
+            "cornerRadius": 1,
+            "handleMirroring": "NONE"
+          }
+        ],
+        "segments": [
+          {
+            "start": 1,
+            "end": 0,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 2,
+            "end": 1,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 3,
+            "end": 2,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 3,
+            "end": 4,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 4,
+            "end": 5,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 5,
+            "end": 6,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 7,
+            "end": 6,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 8,
+            "end": 7,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 9,
+            "end": 8,
+            "tangentStart": {
+              "x": 0.045948851853609085,
+              "y": -0.03733500838279724
+            },
+            "tangentEnd": {
+              "x": -0.043268267065286636,
+              "y": 0.042027007788419724
+            }
+          },
+          {
+            "start": 9,
+            "end": 10,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "start": 10,
+            "end": 11,
+            "tangentStart": {
+              "x": -0.39069676399230957,
+              "y": 0.38951337337493896
+            },
+            "tangentEnd": {
+              "x": 0.3901054859161377,
+              "y": 0.3901054859161377
+            }
+          },
+          {
+            "start": 11,
+            "end": 0,
+            "tangentStart": {
+              "x": 0,
+              "y": 0
+            },
+            "tangentEnd": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "regions": [
+          {
+            "windingRule": "NONZERO",
+            "loops": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "variants": [
+    {
+      "name": "checked 已选=false, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=false",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "style": "Gray 中性/Gray4-边框"
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=false, state 状态=hover 悬停, disabled 禁用=false, indeterminate 半选=false",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "style": "Brand 品牌/Brand5-Normal"
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=true, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=true",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "style": "Brand 品牌/Brand5-Normal"
+          }
+        },
+        {
+          "type": "RECTANGLE",
+          "x": 4,
+          "y": 4,
+          "width": 8,
+          "height": 8,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "dash",
+          "cornerRadius": 1,
+          "fills": {
+            "style": "Brand 品牌/Brand5-Normal"
+          },
+          "strokes": {
+            "paints": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=true, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=true",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "style": "Gray 中性/Gray4-边框"
+          }
+        },
+        {
+          "type": "RECTANGLE",
+          "x": 4,
+          "y": 4,
+          "width": 8,
+          "height": 8,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "dash",
+          "cornerRadius": 1,
+          "fills": {
+            "style": "Gray 中性/Gray5-禁用"
+          },
+          "strokes": {
+            "paints": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=true, state 状态=normal 默认, disabled 禁用=false, indeterminate 半选=false",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "style": "Brand 品牌/Brand5-Normal"
+          },
+          "strokes": {
+            "paints": []
+          }
+        },
+        {
+          "type": "VECTOR",
+          "x": 3,
+          "y": 4,
+          "width": 9.899495124816895,
+          "height": 7.345726490020752,
+          "strokeWeight": 0,
+          "strokeAlign": "CENTER",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "check",
+          "geometry": "check",
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "paints": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=false, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=false",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "style": "Gray 中性/Gray1-浅色背景"
+          },
+          "strokes": {
+            "style": "Gray 中性/Gray4-边框"
+          }
+        }
+      ]
+    },
+    {
+      "name": "checked 已选=true, state 状态=normal 默认, disabled 禁用=true, indeterminate 半选=false",
+      "width": 16,
+      "height": 16,
+      "layers": [
+        {
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "bg",
+          "cornerRadius": 3,
+          "fills": {
+            "style": "Gray 中性/Gray1-浅色背景"
+          },
+          "strokes": {
+            "style": "Gray 中性/Gray4-边框"
+          }
+        },
+        {
+          "type": "VECTOR",
+          "x": 3,
+          "y": 4,
+          "width": 9.899495124816895,
+          "height": 7.345726490020752,
+          "strokeWeight": 0,
+          "strokeAlign": "CENTER",
+          "strokeCap": "NONE",
+          "strokeJoin": "MITER",
+          "strokeMiterLimit": 4,
+          "dashPattern": [],
+          "cornerSmoothing": 0,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "opacity": 1,
+          "blendMode": "PASS_THROUGH",
+          "visible": true,
+          "name": "check",
+          "geometry": "check",
+          "fills": {
+            "paints": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.5921568870544434,
+                  "g": 0.6039215922355652,
+                  "b": 0.615686297416687
+                },
+                "boundVariables": {}
+              }
+            ]
+          },
+          "strokes": {
+            "paints": []
+          }
+        }
+      ]
+    }
+  ],
+  "composition": {
+    "single": {
+      "direction": "HORIZONTAL",
+      "gap": 8,
+      "boxOffsetY": 3,
+      "lineHeight": 22,
+      "textStyle": "Body/Medium",
+      "font": {
+        "family": "PingFang SC",
+        "style": "Regular"
+      },
+      "fontSize": 14,
+      "textPaints": {
+        "normal": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.09019608050584793,
+              "g": 0.12156862765550613,
+              "b": 0.14901961386203766
+            },
+            "boundVariables": {}
+          }
+        ],
+        "disabled": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.5921568870544434,
+              "g": 0.6039215922355652,
+              "b": 0.615686297416687
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "disabledFollowsCheckbox": true
+    },
+    "group": {
+      "direction": "HORIZONTAL",
+      "gap": 16
+    },
+    "semanticLayers": {
+      "bg": "底框",
+      "check": "已选勾",
+      "dash": "半选块"
+    },
+    "selection": "由业务数据决定；示例第 1 项已选不是默认规则"
+  },
+  "gaps": [
+    "已选 / 半选没有悬停态",
+    "半选只和 checked=true 组合",
+    "文字色和禁用勾色没挂样式",
+    "规范没定义交互",
+    "竖排、换行、数量上限：待 UI 确认",
+    "长文字、多行标签的行为：待 UI 确认"
+  ]
+}

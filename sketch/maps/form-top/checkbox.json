@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:588",
+   "name": "type 类型=checkbox 多选框, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:608",
+   "name": "type 类型=checkbox 多选框, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:629",
+   "name": "type 类型=checkbox 多选框, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:651",
+   "name": "type 类型=checkbox 多选框, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:674",
+   "name": "type 类型=checkbox 多选框, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:698",
+   "name": "type 类型=checkbox 多选框, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:721",
+   "name": "type 类型=checkbox 多选框, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:747",
+   "name": "type 类型=checkbox 多选框, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

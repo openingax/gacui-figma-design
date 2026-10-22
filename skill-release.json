@@ -1,0 +1,9 @@
+{
+  "version": "1.2.0",
+  "protocol": 1,
+  "nodeMajor": 20,
+  "channel": "stable",
+  "notice": "V1.2.0：新增 Timeline 的12种布局、语义颜色和图标，支持草稿与原位文案/颜色修改。升级后须重新适配目标依赖；Menu等未完成组件继续隔离。静态设计及字体替代仍需用户验收。",
+  "delivery": "draft-and-figma",
+  "figmaStatus": "team-target"
+}

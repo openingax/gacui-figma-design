@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:776",
+   "name": "type 类型=radio 单选框, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:795",
+   "name": "type 类型=radio 单选框, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:815",
+   "name": "type 类型=radio 单选框, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:836",
+   "name": "type 类型=radio 单选框, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:858",
+   "name": "type 类型=radio 单选框, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:881",
+   "name": "type 类型=radio 单选框, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:903",
+   "name": "type 类型=radio 单选框, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:928",
+   "name": "type 类型=radio 单选框, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

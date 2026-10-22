@@ -1,0 +1,36 @@
+{
+ "variants": [
+  {
+   "id": "155:83",
+   "name": "type 类型=datePicker 日期选择器, required 必填=false, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:92",
+   "name": "type 类型=datePicker 日期选择器, required 必填=true, help 说明=false, tooltips 提示=false"
+  },
+  {
+   "id": "155:102",
+   "name": "type 类型=datePicker 日期选择器, required 必填=false, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:113",
+   "name": "type 类型=datePicker 日期选择器, required 必填=true, help 说明=false, tooltips 提示=true"
+  },
+  {
+   "id": "155:125",
+   "name": "type 类型=datePicker 日期选择器, required 必填=true, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:138",
+   "name": "type 类型=datePicker 日期选择器, required 必填=false, help 说明=true, tooltips 提示=false"
+  },
+  {
+   "id": "155:150",
+   "name": "type 类型=datePicker 日期选择器, required 必填=true, help 说明=true, tooltips 提示=true"
+  },
+  {
+   "id": "155:165",
+   "name": "type 类型=datePicker 日期选择器, required 必填=false, help 说明=true, tooltips 提示=true"
+  }
+ ]
+}

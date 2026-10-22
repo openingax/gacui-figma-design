@@ -1,0 +1,2648 @@
+{
+  "name": "Tag 标签",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "31277:112840",
+    "pageId": "31256:112577"
+  },
+  "properties": {
+    "variant 类型": {
+      "type": "VARIANT",
+      "defaultValue": "dark 深色",
+      "variantOptions": [
+        "dark 深色",
+        "light 亮色",
+        "outline 描边",
+        "light-outline 描边亮色"
+      ]
+    },
+    "theme 主题": {
+      "type": "VARIANT",
+      "defaultValue": "default 默认",
+      "variantOptions": [
+        "default 默认",
+        "primary 主要色",
+        "success 成功色",
+        "warning 警告色",
+        "danger 危险色"
+      ]
+    },
+    "shape 形状": {
+      "type": "VARIANT",
+      "defaultValue": "square 矩形",
+      "variantOptions": [
+        "square 矩形"
+      ]
+    },
+    "closable 关闭": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    },
+    "icon 图标": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    },
+    "disabled 禁用": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "variantOptions": [
+        "false"
+      ]
+    }
+  },
+  "states": [
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9137254953384399,
+            "g": 0.9215686321258545,
+            "b": 0.9333333373069763
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.95686274766922,
+            "g": 0.9647058844566345,
+            "b": 0.9725490212440491
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9019607901573181,
+            "g": 0.95686274766922,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9098039269447327,
+            "g": 1,
+            "b": 0.9176470637321472
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9686274528503418,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9254902005195618,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.8627451062202454,
+            "g": 0.8666666746139526,
+            "b": 0.8705882430076599
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.95686274766922,
+            "g": 0.9647058844566345,
+            "b": 0.9725490212440491
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.8627451062202454,
+            "g": 0.8666666746139526,
+            "b": 0.8705882430076599
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9019607901573181,
+            "g": 0.95686274766922,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9098039269447327,
+            "g": 1,
+            "b": 0.9176470637321472
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9686274528503418,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "size": [
+        64,
+        24
+      ],
+      "layout": {
+        "direction": "HORIZONTAL",
+        "padding": [
+          5,
+          8,
+          5,
+          8
+        ],
+        "gap": 12
+      },
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.9254902005195618,
+            "b": 0.9098039269447327
+          },
+          "boundVariables": {}
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "radius": 3
+    }
+  ],
+  "rules": [
+    "四种外观dark/light/outline/light-outline × 五种主题，共20种基础配色",
+    "本轮保留square、无图标、不可关闭、可用的基础元状态；示例的添加、选择、关闭行为不固化为业务规则",
+    "图标/关闭/禁用/round形状后续按业务需要扩展，不全盘导入320变体"
+  ],
+  "styleNames": [
+    "Gray 中性/Gray3-分割线",
+    "Gray 中性/Gray9-强调\\正文",
+    "Brand 品牌/Brand5-Normal",
+    "Success 成功/Success5-Normal",
+    "Warning 警告/Warning5-Normal",
+    "Error 错误/Error5-Normal",
+    "Gray 中性/Gray1-浅色背景",
+    "Brand 品牌/Brand1-Light",
+    "Success 成功/Success1-Light",
+    "Warning 警告/Warning1-Light",
+    "Error 错误/Error1-Light",
+    "Gray 中性/Gray4-边框"
+  ],
+  "gaps": [
+    "字体暂用Noto Sans SC，由用户桌面处理",
+    "交互事件与业务副作用未在本次静态构建中实现",
+    "完整还原结论须结合实际回读和视觉检查，不以执行成功替代"
+  ],
+  "displayLayout": {
+    "columns": 5,
+    "padding": 24,
+    "gap": 24,
+    "classification": "测试集合展示排版判断，不改变元组件内部规范"
+  },
+  "propertyContract": "此处只列目标实际暴露的变体属性；文字通过实例内语义图层编辑，不承诺源TEXT/INSTANCE_SWAP属性已连接",
+  "paintStyles": {
+    "Gray 中性/Gray3-分割线": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray9-强调\\正文": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.7058823704719543,
+          "b": 0.16620886325836182
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Warning 警告/Warning5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.4901960790157318,
+          "b": 0
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Error 错误/Error5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9607843160629272,
+          "g": 0.24705882370471954,
+          "b": 0.24705882370471954
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray1-浅色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Brand 品牌/Brand1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9019607901573181,
+          "g": 0.95686274766922,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Success 成功/Success1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9098039269447327,
+          "g": 1,
+          "b": 0.9176470637321472
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Warning 警告/Warning1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.9686274528503418,
+          "b": 0.9098039269447327
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Error 错误/Error1-Light": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 0.9254902005195618,
+          "b": 0.9098039269447327
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray4-边框": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "currentSourceScope": {
+    "mainVariants": 320,
+    "closeVariants": 12,
+    "excluded": [
+      "medium历史游离类型"
+    ],
+    "date": "2026-10-21"
+  },
+  "extensionBuildStatus": "technical-validation-passed-awaiting-user",
+  "extensionPackages": [
+    "extension-data/tag-close/build-data.json",
+    "extension-data/tag-danger-round/build-data.json",
+    "extension-data/tag-danger-square/build-data.json",
+    "extension-data/tag-default-round/build-data.json",
+    "extension-data/tag-default-square/build-data.json",
+    "extension-data/tag-primary-round/build-data.json",
+    "extension-data/tag-primary-square/build-data.json",
+    "extension-data/tag-success-round/build-data.json",
+    "extension-data/tag-success-square/build-data.json",
+    "extension-data/tag-warning-round/build-data.json",
+    "extension-data/tag-warning-square/build-data.json"
+  ],
+  "currentProperties": {
+    "variant": [
+      "dark",
+      "light",
+      "outline",
+      "light-outline"
+    ],
+    "theme": [
+      "default",
+      "primary",
+      "success",
+      "warning",
+      "danger"
+    ],
+    "shape": [
+      "square",
+      "round"
+    ],
+    "closable": [
+      false,
+      true
+    ],
+    "icon": [
+      false,
+      true
+    ],
+    "disabled": [
+      false,
+      true
+    ],
+    "closeState": [
+      "normal",
+      "hover"
+    ]
+  },
+  "currentStates": [
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31392:114091",
+      "targetId": "54:7"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31392:114097",
+      "targetId": "740:2"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31392:114099",
+      "targetId": "740:5"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31392:114105",
+      "targetId": "740:10"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122081",
+      "targetId": "740:15"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122083",
+      "targetId": "740:19"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31392:114107",
+      "targetId": "740:23"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31392:114113",
+      "targetId": "740:31"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31392:114115",
+      "targetId": "740:20703"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31392:114121",
+      "targetId": "740:20705"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31392:114123",
+      "targetId": "740:20707"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31392:114129",
+      "targetId": "740:20712"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:121901",
+      "targetId": "740:20717"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:121903",
+      "targetId": "740:20721"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31392:114131",
+      "targetId": "740:20725"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31392:114137",
+      "targetId": "740:20733"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31398:114309",
+      "targetId": "54:9"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31398:114315",
+      "targetId": "740:20857"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31398:114317",
+      "targetId": "740:20859"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31398:114323",
+      "targetId": "740:20864"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122117",
+      "targetId": "740:20869"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122119",
+      "targetId": "740:20873"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31398:114325",
+      "targetId": "740:20877"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31398:114331",
+      "targetId": "740:20885"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31398:114333",
+      "targetId": "740:21002"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31398:114339",
+      "targetId": "740:21004"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31398:114341",
+      "targetId": "740:21006"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31398:114347",
+      "targetId": "740:21011"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:121937",
+      "targetId": "740:21016"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:121939",
+      "targetId": "740:21020"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31398:114349",
+      "targetId": "740:21024"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31398:114355",
+      "targetId": "740:21032"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:116261",
+      "targetId": "54:11"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:116267",
+      "targetId": "740:21156"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:116269",
+      "targetId": "740:21158"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:116275",
+      "targetId": "740:21163"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122153",
+      "targetId": "740:21168"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122155",
+      "targetId": "740:21172"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31403:116277",
+      "targetId": "740:21176"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31403:116283",
+      "targetId": "740:21184"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:116285",
+      "targetId": "740:21301"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:116291",
+      "targetId": "740:21303"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:116293",
+      "targetId": "740:21305"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:116299",
+      "targetId": "740:21310"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:121973",
+      "targetId": "740:21315"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:121975",
+      "targetId": "740:21319"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31403:116301",
+      "targetId": "740:21323"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31403:116307",
+      "targetId": "740:21331"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:118061",
+      "targetId": "54:13"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:118067",
+      "targetId": "740:21456"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:118069",
+      "targetId": "740:21458"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:118075",
+      "targetId": "740:21463"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122189",
+      "targetId": "740:21468"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122191",
+      "targetId": "740:21472"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31403:118077",
+      "targetId": "740:21476"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31403:118083",
+      "targetId": "740:21484"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:118085",
+      "targetId": "740:21601"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:118091",
+      "targetId": "740:21603"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31403:118093",
+      "targetId": "740:21605"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31403:118099",
+      "targetId": "740:21610"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122009",
+      "targetId": "740:21615"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122011",
+      "targetId": "740:21619"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31403:118101",
+      "targetId": "740:21623"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31403:118107",
+      "targetId": "740:21631"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31405:119861",
+      "targetId": "54:15"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31405:119867",
+      "targetId": "743:20678"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31405:119869",
+      "targetId": "743:20680"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31405:119875",
+      "targetId": "743:20685"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122225",
+      "targetId": "743:20690"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122227",
+      "targetId": "743:20694"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31405:119877",
+      "targetId": "743:20698"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31405:119883",
+      "targetId": "743:20706"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31405:119885",
+      "targetId": "743:20823"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31405:119891",
+      "targetId": "743:20825"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31405:119893",
+      "targetId": "743:20827"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31405:119899",
+      "targetId": "743:20832"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31527:122045",
+      "targetId": "743:20837"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31527:122047",
+      "targetId": "743:20841"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31405:119901",
+      "targetId": "743:20845"
+    },
+    {
+      "name": "variant 类型=dark 深色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31405:119907",
+      "targetId": "743:20853"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:124973",
+      "targetId": "54:17"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:124979",
+      "targetId": "740:20595"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:124981",
+      "targetId": "740:20597"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:124987",
+      "targetId": "740:20602"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123755",
+      "targetId": "740:20607"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123757",
+      "targetId": "740:20611"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:124989",
+      "targetId": "740:20615"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:124995",
+      "targetId": "740:20623"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:124997",
+      "targetId": "740:20741"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125003",
+      "targetId": "740:20743"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125005",
+      "targetId": "740:20745"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125011",
+      "targetId": "740:20750"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123539",
+      "targetId": "740:20755"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123541",
+      "targetId": "740:20759"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125013",
+      "targetId": "740:20763"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125019",
+      "targetId": "740:20771"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125189",
+      "targetId": "54:19"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125195",
+      "targetId": "740:20893"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125197",
+      "targetId": "740:20895"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125203",
+      "targetId": "740:20900"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123791",
+      "targetId": "740:20905"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123793",
+      "targetId": "740:20909"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125205",
+      "targetId": "740:20913"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125211",
+      "targetId": "740:20921"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125213",
+      "targetId": "740:21040"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125219",
+      "targetId": "740:21042"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125221",
+      "targetId": "740:21044"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125227",
+      "targetId": "740:21049"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123575",
+      "targetId": "740:21054"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123577",
+      "targetId": "740:21058"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125229",
+      "targetId": "740:21062"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125235",
+      "targetId": "740:21070"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125405",
+      "targetId": "54:21"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125411",
+      "targetId": "740:21192"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125413",
+      "targetId": "740:21194"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125419",
+      "targetId": "740:21199"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123827",
+      "targetId": "740:21204"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123829",
+      "targetId": "740:21208"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125421",
+      "targetId": "740:21212"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125427",
+      "targetId": "740:21220"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125429",
+      "targetId": "740:21339"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125435",
+      "targetId": "740:21341"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125437",
+      "targetId": "740:21343"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125443",
+      "targetId": "740:21348"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123611",
+      "targetId": "740:21353"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123613",
+      "targetId": "740:21357"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125445",
+      "targetId": "740:21361"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125451",
+      "targetId": "740:21369"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125621",
+      "targetId": "54:23"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125627",
+      "targetId": "740:21492"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125629",
+      "targetId": "740:21494"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125635",
+      "targetId": "740:21499"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123863",
+      "targetId": "740:21504"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123865",
+      "targetId": "740:21508"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125637",
+      "targetId": "740:21512"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125643",
+      "targetId": "740:21520"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125645",
+      "targetId": "743:7"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125651",
+      "targetId": "743:9"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125653",
+      "targetId": "743:11"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125659",
+      "targetId": "743:16"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123647",
+      "targetId": "743:21"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123649",
+      "targetId": "743:25"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125661",
+      "targetId": "743:29"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125667",
+      "targetId": "743:37"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125837",
+      "targetId": "54:25"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125843",
+      "targetId": "743:20714"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125845",
+      "targetId": "743:20716"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125851",
+      "targetId": "743:20721"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123899",
+      "targetId": "743:20726"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123901",
+      "targetId": "743:20730"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125853",
+      "targetId": "743:20734"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125859",
+      "targetId": "743:20742"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125861",
+      "targetId": "743:20861"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125867",
+      "targetId": "743:20863"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31407:125869",
+      "targetId": "743:20865"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31407:125875",
+      "targetId": "743:20870"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:123719",
+      "targetId": "743:20875"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:123721",
+      "targetId": "743:20879"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31407:125877",
+      "targetId": "743:20883"
+    },
+    {
+      "name": "variant 类型=light 亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31407:125883",
+      "targetId": "743:20891"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118851",
+      "targetId": "54:27"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118853",
+      "targetId": "740:20631"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118855",
+      "targetId": "740:20633"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118857",
+      "targetId": "740:20638"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125375",
+      "targetId": "740:20643"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125377",
+      "targetId": "740:20647"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:118859",
+      "targetId": "740:20651"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:118861",
+      "targetId": "740:20659"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118863",
+      "targetId": "740:20779"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118865",
+      "targetId": "740:20781"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118867",
+      "targetId": "740:20783"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118869",
+      "targetId": "740:20788"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125195",
+      "targetId": "740:20793"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125197",
+      "targetId": "740:20797"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:118871",
+      "targetId": "740:20801"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:118873",
+      "targetId": "740:20809"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118959",
+      "targetId": "54:29"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118961",
+      "targetId": "740:20929"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118963",
+      "targetId": "740:20931"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118965",
+      "targetId": "740:20936"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125411",
+      "targetId": "740:20941"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125413",
+      "targetId": "740:20945"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:118967",
+      "targetId": "740:20949"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:118969",
+      "targetId": "740:20957"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118971",
+      "targetId": "740:21078"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118973",
+      "targetId": "740:21080"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:118975",
+      "targetId": "740:21082"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:118977",
+      "targetId": "740:21087"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125231",
+      "targetId": "740:21092"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125233",
+      "targetId": "740:21096"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:118979",
+      "targetId": "740:21100"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:118981",
+      "targetId": "740:21108"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119067",
+      "targetId": "54:31"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119069",
+      "targetId": "740:21228"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119071",
+      "targetId": "740:21230"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119073",
+      "targetId": "740:21235"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125447",
+      "targetId": "740:21240"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125449",
+      "targetId": "740:21244"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119075",
+      "targetId": "740:21248"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119077",
+      "targetId": "740:21256"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119079",
+      "targetId": "740:21377"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119081",
+      "targetId": "740:21379"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119083",
+      "targetId": "740:21381"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119085",
+      "targetId": "740:21386"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125267",
+      "targetId": "740:21391"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125269",
+      "targetId": "740:21395"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119087",
+      "targetId": "740:21399"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119089",
+      "targetId": "740:21407"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119175",
+      "targetId": "54:33"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119177",
+      "targetId": "740:21528"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119179",
+      "targetId": "740:21530"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119181",
+      "targetId": "740:21535"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125483",
+      "targetId": "740:21540"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125485",
+      "targetId": "740:21544"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119183",
+      "targetId": "740:21548"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119185",
+      "targetId": "740:21556"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119187",
+      "targetId": "743:45"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119189",
+      "targetId": "743:47"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119191",
+      "targetId": "743:49"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119193",
+      "targetId": "743:54"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125303",
+      "targetId": "743:59"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125305",
+      "targetId": "743:63"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119195",
+      "targetId": "743:20623"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119197",
+      "targetId": "743:20631"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119283",
+      "targetId": "54:35"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119285",
+      "targetId": "743:20750"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119287",
+      "targetId": "743:20752"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119289",
+      "targetId": "743:20757"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125519",
+      "targetId": "743:20762"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125521",
+      "targetId": "743:20766"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119291",
+      "targetId": "743:20770"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119293",
+      "targetId": "743:20778"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119295",
+      "targetId": "743:20899"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119297",
+      "targetId": "743:20901"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31436:119299",
+      "targetId": "743:20903"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31436:119301",
+      "targetId": "743:20908"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:125339",
+      "targetId": "743:20913"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:125341",
+      "targetId": "743:20917"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31436:119303",
+      "targetId": "743:20921"
+    },
+    {
+      "name": "variant 类型=outline 描边, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31436:119305",
+      "targetId": "743:20929"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125333",
+      "targetId": "54:37"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125335",
+      "targetId": "740:20667"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125337",
+      "targetId": "740:20669"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125339",
+      "targetId": "740:20674"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126995",
+      "targetId": "740:20679"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126997",
+      "targetId": "740:20683"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125341",
+      "targetId": "740:20687"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125343",
+      "targetId": "740:20695"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125345",
+      "targetId": "740:20817"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125347",
+      "targetId": "740:20819"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125349",
+      "targetId": "740:20821"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125351",
+      "targetId": "740:20826"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126815",
+      "targetId": "740:20832"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126817",
+      "targetId": "740:20836"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125353",
+      "targetId": "740:20840"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=default 默认, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125355",
+      "targetId": "740:20848"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125441",
+      "targetId": "54:39"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125443",
+      "targetId": "740:20965"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125445",
+      "targetId": "740:20967"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125447",
+      "targetId": "740:20972"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:127031",
+      "targetId": "740:20977"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:127033",
+      "targetId": "740:20981"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125449",
+      "targetId": "740:20985"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125451",
+      "targetId": "740:20993"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125453",
+      "targetId": "740:21116"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125455",
+      "targetId": "740:21118"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125457",
+      "targetId": "740:21120"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125459",
+      "targetId": "740:21125"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126851",
+      "targetId": "740:21130"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126853",
+      "targetId": "740:21134"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125461",
+      "targetId": "740:21138"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=primary 主要色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125463",
+      "targetId": "740:21146"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125549",
+      "targetId": "54:41"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125551",
+      "targetId": "740:21264"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125553",
+      "targetId": "740:21266"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125555",
+      "targetId": "740:21271"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:127067",
+      "targetId": "740:21276"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:127069",
+      "targetId": "740:21280"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125557",
+      "targetId": "740:21284"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125559",
+      "targetId": "740:21292"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125561",
+      "targetId": "740:21415"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125563",
+      "targetId": "740:21417"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125565",
+      "targetId": "740:21419"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125567",
+      "targetId": "740:21424"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126887",
+      "targetId": "740:21429"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126889",
+      "targetId": "740:21433"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125569",
+      "targetId": "740:21437"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=success 成功色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125571",
+      "targetId": "740:21445"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125657",
+      "targetId": "54:43"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125659",
+      "targetId": "740:21564"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125661",
+      "targetId": "740:21566"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125663",
+      "targetId": "740:21571"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:127103",
+      "targetId": "740:21576"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:127105",
+      "targetId": "740:21580"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125665",
+      "targetId": "740:21584"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125667",
+      "targetId": "740:21592"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125669",
+      "targetId": "743:20639"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125671",
+      "targetId": "743:20641"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125673",
+      "targetId": "743:20643"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125675",
+      "targetId": "743:20648"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126923",
+      "targetId": "743:20653"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126925",
+      "targetId": "743:20657"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125677",
+      "targetId": "743:20661"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=warning 警告色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125679",
+      "targetId": "743:20669"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125765",
+      "targetId": "54:45"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125767",
+      "targetId": "743:20786"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125769",
+      "targetId": "743:20788"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125771",
+      "targetId": "743:20793"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:127139",
+      "targetId": "743:20798"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:127141",
+      "targetId": "743:20802"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125773",
+      "targetId": "743:20806"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=square 矩形, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125775",
+      "targetId": "743:20814"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125777",
+      "targetId": "743:20937"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125779",
+      "targetId": "743:20939"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=false",
+      "sourceId": "31444:125781",
+      "targetId": "743:20941"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=false, disabled 禁用=true",
+      "sourceId": "31444:125783",
+      "targetId": "743:20946"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31618:126959",
+      "targetId": "743:20951"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=false, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31618:126961",
+      "targetId": "743:20955"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=false",
+      "sourceId": "31444:125785",
+      "targetId": "743:20959"
+    },
+    {
+      "name": "variant 类型=light-outline 描边亮色, theme 主题=danger 危险色, shape 形状=round 圆角, closable 关闭=true, icon 图标=true, disabled 禁用=true",
+      "sourceId": "31444:125787",
+      "targetId": "743:20967"
+    }
+  ],
+  "basePackage": "properties/states描述保留的20基础组件；完整当前范围由currentProperties/currentStates和extensionPackages实现"
+}

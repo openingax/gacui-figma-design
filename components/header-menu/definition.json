@@ -1,0 +1,113 @@
+{
+  "name": "headerMenu 顶部菜单导航-智慧云平台",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25795:66655",
+    "pageId": "35282:32783"
+  },
+  "variant": "icon 图标=false, theme 主题=dark 暗色, items 数量=7, expandType 展开类型=Popup 浮层, logo 标志=true, size=1440",
+  "size": [
+    1440,
+    64
+  ],
+  "scope": "仅指定变体；不把菜单数量 7 当作通用上限",
+  "layout": {
+    "direction": "HORIZONTAL",
+    "justify": "SPACE_BETWEEN",
+    "padding": [
+      12,
+      24,
+      12,
+      24
+    ],
+    "contentGap": 24,
+    "brandGap": 8,
+    "menuGap": 8,
+    "menuPadding": [
+      5,
+      12,
+      5,
+      12
+    ],
+    "operationGap": 16
+  },
+  "fonts": {
+    "source": "PingFang SC Medium / Regular",
+    "temporary": "Noto Sans SC Medium / Regular",
+    "handoff": "用户在桌面端处理字体；不将临时字体判定为完全还原"
+  },
+  "layers": [
+    "brand",
+    "menu-items",
+    "operations",
+    "menu-item",
+    "label",
+    "logo",
+    "icon"
+  ],
+  "styles": [
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray0-白色背景"
+  ],
+  "gaps": [
+    "浮层内容与路由行为未由指定节点定义",
+    "选中、展开由业务决定，不将示例末项选中固化为通用规则",
+    "其他27变体未导入",
+    "保留源文字自适应规则，临时字体度量差异和长内容需验证",
+    "子实例制作成本地可编辑图层，未导入依赖组件的其他状态"
+  ],
+  "paintStyles": {
+    "Brand 品牌/Brand5-Normal": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "Gray 中性/Gray0-白色背景": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "styleNames": [
+    "Brand 品牌/Brand5-Normal",
+    "Gray 中性/Gray0-白色背景"
+  ],
+  "textBehavior": "保留源textAutoResize：自适应、换行和省略按实际源节点区分；字体替代造成的度量差异需单独报告",
+  "exampleContent": {
+    "title": "广汽能源智慧管理云平台",
+    "menus": [
+      "首页",
+      "菜单",
+      "充电",
+      "运维",
+      "选址",
+      "能源",
+      "SaaS"
+    ],
+    "selectedMenu": "SaaS",
+    "dropdownMenus": [
+      "能源",
+      "SaaS"
+    ],
+    "accountText": "demo-user01",
+    "classification": "源样例内容，不是业务默认规则"
+  }
+}

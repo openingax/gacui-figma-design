@@ -1,0 +1,13 @@
+{
+  "name": ".master/radioGroup",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "43606:304792",
+    "pageId": "43606:304677"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "padding": 24,
+    "gap": 24
+  }
+}

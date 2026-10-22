@@ -1,0 +1,17 @@
+{
+ "variants": {
+  "small": "203:36",
+  "medium": "203:52",
+  "large": "203:68"
+ },
+ "titleProperty": "标题#203:0",
+ "footerIds": {
+  "left": "203:17",
+  "right": "203:25"
+ },
+ "closeIds": {
+  "normal": "203:2",
+  "hover": "203:5",
+  "active": "203:8"
+ }
+}

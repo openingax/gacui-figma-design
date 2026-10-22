@@ -1,0 +1,24 @@
+{
+  "name": "详情只读信息组合",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "pageId": "63959:213876"
+  },
+  "kind": "template-composition",
+  "sourceUnits": [
+    "25696:22965",
+    "25696:22975"
+  ],
+  "coverage": [
+    "分组标题",
+    "标签值行",
+    "1/2列",
+    "跨列长文本"
+  ],
+  "judgments": [
+    "标签预留126宽以对齐业务字段",
+    "值HEIGHT自动换行",
+    "长说明跨两列"
+  ],
+  "notFamily": "未发现独立Descriptions组件家族"
+}

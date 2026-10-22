@@ -1,0 +1,505 @@
+{
+  "format": 1,
+  "task": "设备借用管理 · 草稿流程演示",
+  "request": {
+    "text": "根据设备借用管理产品原型，整理借用列表和新建借用申请的 UI 草稿，先出初版给我看。",
+    "sources": [
+      {
+        "path": "examples/draft-first/产品原型.md",
+        "read": true,
+        "note": "演示原型"
+      }
+    ]
+  },
+  "demo": "全部业务数据为演示；测试确认不代表真实业务验收。",
+  "pages": [
+    {
+      "id": "requests",
+      "type": "page",
+      "title": "借用申请列表",
+      "frame": "workbench",
+      "menu": "行政管理 / 设备借用",
+      "from": "需求:设备借用演示原型",
+      "children": [
+        {
+          "id": "filters",
+          "type": "search",
+          "from": "需求:设备借用演示原型",
+          "fields": [
+            {
+              "id": "keyword",
+              "label": "申请标题",
+              "kind": "input",
+              "placeholder": "输入申请标题",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "status",
+              "label": "申请状态",
+              "kind": "select",
+              "value": "全部",
+              "options": [
+                "全部",
+                "待审批",
+                "借用中",
+                "已归还"
+              ],
+              "from": "需求:设备借用演示原型"
+            }
+          ]
+        },
+        {
+          "id": "toolbar",
+          "type": "actions",
+          "from": "需求:设备借用演示原型",
+          "buttons": [
+            {
+              "id": "create",
+              "label": "发起借用",
+              "primary": true,
+              "opens": "apply",
+              "from": "需求:设备借用演示原型"
+            }
+          ]
+        },
+        {
+          "id": "records",
+          "type": "table",
+          "from": "需求:设备借用演示原型",
+          "selection": false,
+          "pagination": true,
+          "rows": 3,
+          "columns": [
+            {
+              "id": "number",
+              "title": "申请编号",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "title",
+              "title": "申请标题",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "device",
+              "title": "设备类型",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "status",
+              "title": "申请状态",
+              "kind": "tag",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "date",
+              "title": "借用日期",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "actions",
+              "title": "操作",
+              "kind": "operations",
+              "from": "需求:设备借用演示原型"
+            }
+          ],
+          "data": [
+            {
+              "number": "DEMO-001",
+              "title": "演示：项目会议设备",
+              "device": "投影仪",
+              "status": "待审批",
+              "date": "2026-10-21"
+            },
+            {
+              "number": "DEMO-002",
+              "title": "演示：外出展示设备",
+              "device": "笔记本",
+              "status": "借用中",
+              "date": "2026-10-20"
+            },
+            {
+              "number": "DEMO-003",
+              "title": "演示：活动拍摄设备",
+              "device": "相机",
+              "status": "已归还",
+              "date": "2026-10-19"
+            }
+          ],
+          "rowActionRules": [
+            {
+              "match": {
+                "field": "status",
+                "equals": "待审批"
+              },
+              "labels": [
+                "查看",
+                "撤回"
+              ]
+            },
+            {
+              "labels": [
+                "查看"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apply",
+      "type": "page",
+      "title": "发起借用",
+      "frame": "drawer",
+      "over": "requests",
+      "width": 500,
+      "from": "需求:设备借用演示原型",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 1,
+          "from": "需求:设备借用演示原型",
+          "fields": [
+            {
+              "id": "title",
+              "label": "申请标题",
+              "kind": "input",
+              "required": true,
+              "max": 40,
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "device",
+              "label": "设备类型",
+              "kind": "select",
+              "required": true,
+              "options": [
+                "笔记本",
+                "投影仪",
+                "相机"
+              ],
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "date",
+              "label": "借用日期",
+              "kind": "date",
+              "required": true,
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "reason",
+              "label": "用途说明",
+              "kind": "textarea",
+              "max": 200,
+              "from": "需求:设备借用演示原型"
+            }
+          ]
+        },
+        {
+          "id": "footer",
+          "type": "actions",
+          "footer": true,
+          "from": "需求:设备借用演示原型",
+          "buttons": [
+            {
+              "id": "cancel",
+              "label": "取消",
+              "from": "需求:设备借用演示原型"
+            },
+            {
+              "id": "submit",
+              "label": "提交申请",
+              "primary": true,
+              "from": "需求:设备借用演示原型"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "empty",
+      "page": "requests",
+      "title": "筛选无结果",
+      "patch": {
+        "requests/records": {
+          "rows": 0,
+          "data": [],
+          "emptyText": "暂无符合条件的借用申请"
+        }
+      }
+    },
+    {
+      "id": "filled",
+      "page": "apply",
+      "title": "已填写示例",
+      "patch": {
+        "apply/form/title": {
+          "value": "演示：部门培训会议设备借用"
+        },
+        "apply/form/device": {
+          "value": "投影仪"
+        },
+        "apply/form/date": {
+          "value": "2026-10-21"
+        },
+        "apply/form/reason": {
+          "value": "演示说明：用于内部培训，使用后归还。"
+        }
+      }
+    },
+    {
+      "id": "errors",
+      "page": "apply",
+      "title": "必填错误与内容保留",
+      "patch": {
+        "apply/form/title": {
+          "error": "请输入申请标题"
+        },
+        "apply/form/device": {
+          "error": "请选择设备类型"
+        },
+        "apply/form/reason": {
+          "value": "演示：已填写的用途保留"
+        }
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "cancel-rule",
+      "code": "F12",
+      "ask": "已填写内容时，取消是否需要二次确认？",
+      "recommend": "本演示建议直接关闭，不二次确认；请明确选择。",
+      "from": "推荐"
+    }
+  ],
+  "decisions": [
+    {
+      "code": "G1",
+      "text": "全部数据为演示，未提供真实个人信息。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "G2",
+      "text": "本轮交付静态草稿，业务提交与权限校验不实现。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "N1",
+      "text": "列表位于行政管理 / 设备借用。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "N2",
+      "text": "本轮不增加面包屑返回入口，不影响两个页面的讨论。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "N3",
+      "text": "发起借用对应新增抽屉；预览左侧可切换页面/状态，业务按钮为静态示意。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L1",
+      "text": "点击查询才应用条件。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L2",
+      "text": "查询后回第一页。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L3",
+      "text": "重置清空标题，下拉回到全部。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L4",
+      "text": "无结果显示暂无符合条件的借用申请。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L5",
+      "text": "加载中本轮只作文字说明，不新增加载画板。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L6",
+      "text": "查询失败保留条件，本轮不新增失败画板。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L7",
+      "text": "没有申请时使用同一空态，不增加引导按钮。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L8",
+      "text": "演示三条记录，每页十条。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L9",
+      "text": "表格长内容单行省略，完整内容由查看承载。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L12",
+      "text": "待审批可查看/撤回；其他状态只查看。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L13",
+      "text": "撤回前二次确认，草稿中只记录规则，不新增弹窗。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L14",
+      "text": "本轮不做额外行高亮，不影响列表内容。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "L15",
+      "text": "提交成功回列表并显示新增记录，仅作规则说明。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F1",
+      "text": "新增申请使用抽屉。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F2",
+      "text": "抽屉宽500，表单单列。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F3",
+      "text": "字段初始为空，不默认选中设备或日期。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F4",
+      "text": "标题、设备、日期必填；标题去除首尾空白。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F5",
+      "text": "标题40字，用途200字，显示计数。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F6",
+      "text": "点击提交统一校验。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F7",
+      "text": "错误在字段下方显示，保留已填内容。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F8",
+      "text": "本演示没有字段联动。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F9",
+      "text": "提交中本轮只作说明，不新增加载画板。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F10",
+      "text": "提交成功关闭抽屉并刷新列表，仅作规则说明。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F11",
+      "text": "提交失败保留输入，本轮不新增失败画板。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F13",
+      "text": "底栏固定，长内容区滚动。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F14",
+      "text": "标题使用短文案，不需要省略。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F15",
+      "text": "右对齐底栏，取消在左、提交在右。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "S1",
+      "text": "选项固定为原型中的设备类型与申请状态。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "S2",
+      "text": "状态默认全部，设备类型不默认选择。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "S3",
+      "text": "本演示下拉单选，不涉及搜索和联动。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "S4",
+      "text": "日期格式YYYY-MM-DD，演示不限制日期范围。",
+      "decision": "已明确",
+      "from": "需求:设备借用演示原型"
+    },
+    {
+      "code": "F12",
+      "decision": "待决策",
+      "text": "取消是否二次确认待回答。",
+      "from": "推荐"
+    }
+  ],
+  "gaps": []
+}

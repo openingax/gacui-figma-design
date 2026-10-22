@@ -1,0 +1,17 @@
+{
+  "name": "layout-sidebar",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25703:122875",
+    "pageId": "48218:528564"
+  },
+  "localRoot": {
+    "type": "COMPONENT",
+    "name": "布局依赖=layout-sidebar"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "gap": 32,
+    "padding": 32
+  }
+}
