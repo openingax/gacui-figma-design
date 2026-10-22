@@ -33,3 +33,7 @@
 运行 `node scripts/verify.mjs`。从真实 Gitee 正式标签使用完整 URL 安装并运行 sync，检查 origin、版本、草稿保存/预览、软链接、固定版本及升级。匿名 Git 验证应关闭凭据助手，记录 Git 资源网络目标，不能仅凭网页公开或 Git 推送成功。
 
 版本回退使用新目录安装已存在的旧 Gitee 标签。首次只有一个标签时，旧版到新版的真实升级不能声称完成；必须有实际历史 Gitee 发行标签后再验证。
+
+## V1.2.3 起的发布规则
+
+Gitee 已成为后续公开发行源，GitHub V1.2.2 只提供一次性迁移桥接。V1.2.3 保留双方历史并包含 GitHub 桥接提交，因此旧安装可以原位快进。以后直接在 Gitee 分支维护并逐版本验证、合并、发布；不得再用旧 build-gitee.mjs 导出脚本覆盖此历史。distribution-manifest.json 的 upstream 记录桥接代码来源，组件与 V1.2.1 不变。GitHub 不再跟随 Gitee 发新标签，公司内部仓库仍不参与。

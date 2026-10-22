@@ -5,7 +5,7 @@ import os from 'node:os';
 import { execFile, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { REPO, WORKSPACE_DIRECTORY } from './source.mjs';
+import { REPO, WORKSPACE_DIRECTORY, defaultWorkspace } from './source.mjs';
 export { REPO, WORKSPACE_DIRECTORY };
 const versionPattern = /^\d+\.\d+\.\d+$/;
 const compare = (a,b) => { const x=a.split('.').map(Number), y=b.split('.').map(Number); for(let i=0;i<3;i++) if(x[i]!==y[i]) return x[i]-y[i]; return 0; };
@@ -34,7 +34,7 @@ function acquireLock(lock) {
   return {previous:holder??'legacy-empty-lock',lock};
 }
 // repo 参数仅供本地集成测试；CLI 不接受远程覆盖。
-export function manage({command='sync', workspace=path.join(os.homedir(),WORKSPACE_DIRECTORY,'workspace'), version, acceptBreaking=false, repo=REPO}={}) {
+export function manage({command='sync', workspace=defaultWorkspace(), version, acceptBreaking=false, repo=REPO}={}) {
   if(Number(process.versions.node.split('.')[0])<20) throw Error('需要 Node.js 20+');
   if(version && !versionPattern.test(version)) throw Error('版本必须是 X.Y.Z');
   workspace=path.resolve(workspace);

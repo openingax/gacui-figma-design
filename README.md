@@ -2,7 +2,7 @@
 
 新增业务组合用法见[业务组合说明](docs/business-compositions.md)。
 
-版本：V1.2.1（Gitee 发行版）。支持范围和已知限制以随包文档为准。
+版本：V1.2.3（Gitee 发行版）。支持范围和已知限制以随包文档为准。
 
 根据业务需求和公司 B 端 Figma 规范，由 agent 生成**可编辑的高保真设计**。完整流程是：产品需求、原型文档或截图 → 可保存、预览、讨论和持续修改的 UI 草稿 → 按规范组件生成可编辑的 Figma 设计稿。产品经理和 UI 同事通过对话使用，不需要写 JSON、运行命令或手动配置。
 
@@ -66,3 +66,5 @@ Timeline 新增范围、草稿配置和限制见 [Timeline](docs/timeline.md)。
 本入口的安装和运行资源更新均使用 Gitee，不回退 GitHub。运行目录为 `~/.gacuiagent-gitee/workspace`，不接管已有 GitHub 运行目录。同一 agent 的 Skill 名称相同，请选择一个发行入口，勿将两者安装到同一 Skill 路径。已有 GitHub 用户无需改动。
 
 版本功能与同名上游版本对应，发行差异与维护流程见 [双平台发行](docs/platform-distribution.md)。`npx` 自身需要 npm；Figma 与调优日志仍使用各自服务。日志配置和用户关闭选择继续沿用现有配置，不因安装来源改变而重新开启。
+
+GitHub 老用户可通过 V1.2.2 桥接版原位迁移，详见 [迁移说明](docs/gitee-migration.md)。迁移用户保留原 workspace，新用户继续使用 Gitee 默认目录。

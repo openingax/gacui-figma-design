@@ -2,29 +2,32 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
-    "tag": "skill-v1.2.1",
-    "commit": "c428b93d9bcac90ec40e733445a90d40bf3713da"
+    "tag": "skill-v1.2.2",
+    "commit": "20d4dd67803cb29a78d2cdcd3daadcd175c65e2a"
   },
   "differences": [
     ".agents/skills/gacui-figma-design/SKILL.md",
     ".agents/skills/gacui-figma-design/scripts/manage.mjs",
     ".agents/skills/gacui-figma-design/scripts/source.mjs",
+    "AGENTS.md",
+    "CHANGELOG.md",
     "README.md",
     "docs/maintenance.md",
     "docs/onboarding.md",
     "docs/platform-distribution.md",
     "scripts/distribution/build-gitee.mjs",
     "scripts/verify.mjs",
+    "skill-release.json",
     "tests/gitee-distribution.test.mjs"
   ],
   "files": [
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "03c2af7f4460c8ce2481ac3a3a1748f7dbabea3176e56cb2e297397a7ed2fd1a",
-      "upstreamSha256": "2b92bdbf5e5b6ffda163223c5230357efe061ae12660136a1c7b1bd11ec9ef4f"
+      "sha256": "669a1b230a142ee198d88475178763dd7e671a7c37a604def605a8aeeb1f6b0d",
+      "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
       "path": ".agents/skills/gacui-figma-design/references/workflow.md",
@@ -33,12 +36,12 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/scripts/manage.mjs",
-      "sha256": "4b73b6660ec322342fdf8c0b04d8d62bb5f884e9c040ad6a934f2d91451c11ba",
+      "sha256": "891707c579a54a51ef60874908d7511ed4ee465ca94a930dd03d5d5f545cd2ac",
       "upstreamSha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599"
     },
     {
       "path": ".agents/skills/gacui-figma-design/scripts/source.mjs",
-      "sha256": "2ab6b0c6afd5dbacea6f167519d39aff754055981e30e005c52367a03fb216da",
+      "sha256": "a978f1454d115a8ffb8f272f66fb09e5c868ef353a7baac99bcfef2690ca0194",
       "upstreamSha256": null
     },
     {
@@ -59,12 +62,12 @@
     {
       "path": "AGENTS.md",
       "sha256": "e3370beaaf0e43b4d0fc5c68e83416dd0d3fd831c4899b42b2a7db58809e7092",
-      "upstreamSha256": "e3370beaaf0e43b4d0fc5c68e83416dd0d3fd831c4899b42b2a7db58809e7092"
+      "upstreamSha256": "9bab85cd301035d6f4e1560e3e3f87e0e2cb129661a2384c40f0c3e6bdb9a58e"
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "250fc3012170b12f1a9ca42521269be4beb8976c93b68166a0251f774f3b0e64",
-      "upstreamSha256": "250fc3012170b12f1a9ca42521269be4beb8976c93b68166a0251f774f3b0e64"
+      "sha256": "da734f64e25f222dcde205395cea16b2122179298834a6fe7d762628df19a661",
+      "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
       "path": "PUBLIC_EXPORT_MANIFEST.json",
@@ -73,8 +76,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "f8f052b9bcdc229b77403f7e8320cd73b0dce68e585ff7f61c7738a7f2d33333",
-      "upstreamSha256": "b4fd97b0545192a12435bb8af053afd1245896112da525f7ad40588b159be218"
+      "sha256": "d937a284fb22f4f383dfcb2fac498d7d2d88e7299bb4b6eaf3a6c29f0ee3a25d",
+      "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
       "path": "components/README.md",
@@ -2507,9 +2510,14 @@
       "upstreamSha256": "49379facb4c02599f8529063b4b45b1cd132426a32fe74fd6c47692d67777ca1"
     },
     {
+      "path": "docs/gitee-migration.md",
+      "sha256": "4f81a187670c9e384c8f89694af014fe9a3a4f9474debfc59962773ca5341f29",
+      "upstreamSha256": "4f81a187670c9e384c8f89694af014fe9a3a4f9474debfc59962773ca5341f29"
+    },
+    {
       "path": "docs/maintenance.md",
-      "sha256": "457fa94d0b4d25f93ae0353d6a133e7b4a70130dbfb61ced98b7eb26d665bd86",
-      "upstreamSha256": "ea70055d48d6b688afa9a75f5c52a58aabf2834aff3e58144808402423667754"
+      "sha256": "82aba12c0a189e68c999bfb11fa07109d0898a1920c8a84fbd0481ec2521d2b5",
+      "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
       "path": "docs/onboarding.md",
@@ -2518,7 +2526,7 @@
     },
     {
       "path": "docs/platform-distribution.md",
-      "sha256": "4bac0b236919dd9c31ddd059c1d7b9704a25753c7467f1bdb58d1d61edf9f538",
+      "sha256": "eb2f404ed1004011e8fe493d92959b77733525bf99184f03c81bd4fe64e12d28",
       "upstreamSha256": null
     },
     {
@@ -2552,7 +2560,7 @@
       "upstreamSha256": "03304b3fc57c4470a8a98f3e3ed7589fa0315e5c169b5c67dca676a73a4e1229"
     },
     {
-      "path": "examples/draft-first/产品原型.md",
+      "path": "examples/draft-first/\u4ea7\u54c1\u539f\u578b.md",
       "sha256": "a5d1aa9052428a68a8405159cba3a31fa3b0a6d8414bb159064b7b5b86adf8a9",
       "upstreamSha256": "a5d1aa9052428a68a8405159cba3a31fa3b0a6d8414bb159064b7b5b86adf8a9"
     },
@@ -2565,6 +2573,16 @@
       "path": "scripts/distribution/build-gitee.mjs",
       "sha256": "594fd3881b5beba48455c14abd82e240262a21d398a240a339bd0044f0631f9e",
       "upstreamSha256": null
+    },
+    {
+      "path": "scripts/distribution/legacy-entry-hashes.json",
+      "sha256": "4ee98587cc5119adbac034e0da280f9cb1f6c08754dd23095536381f6a11aa2c",
+      "upstreamSha256": "4ee98587cc5119adbac034e0da280f9cb1f6c08754dd23095536381f6a11aa2c"
+    },
+    {
+      "path": "scripts/distribution/migrate-gitee.mjs",
+      "sha256": "1287bad09aa820abef27aa419f3319a55a7449a63bb244a5ed2dae426a598e7b",
+      "upstreamSha256": "1287bad09aa820abef27aa419f3319a55a7449a63bb244a5ed2dae426a598e7b"
     },
     {
       "path": "scripts/figma/bootstrap.mjs",
@@ -2633,8 +2651,8 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "992c15868b0a7be1132283a90b4d37e549e6c596ae8752515d023bc48dbd3038",
-      "upstreamSha256": "b8c00877797ef2951bdc3b6445b7897d85b64ef8305ea889b7d2d3a07267ddd7"
+      "sha256": "7cdd66375d481589f3477514c2123df68f891083edcc9639a18f4026e0155fa9",
+      "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
       "path": "sketch/core.mjs",
@@ -2743,8 +2761,8 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "342401863981000b0a21fcf4d73f3a7405c1cd4d913a540c5653278e8672ad92",
-      "upstreamSha256": "342401863981000b0a21fcf4d73f3a7405c1cd4d913a540c5653278e8672ad92"
+      "sha256": "a80ae7111413a04ed8d966d3dc34af60c85a4773926a4c4c192e8143a691c6c6",
+      "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
       "path": "support/analyze.mjs",
@@ -2867,9 +2885,19 @@
       "upstreamSha256": "d9d4ab263841f3ce9255f6c28b10faa5b92d3a2df40788d974362a900ef30951"
     },
     {
+      "path": "tests/fixtures/legacy-manage.mjs",
+      "sha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599",
+      "upstreamSha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599"
+    },
+    {
       "path": "tests/gitee-distribution.test.mjs",
-      "sha256": "7d13db85d71205ea49604f6527590b21420328653fd4111f9ecc03bb5390798a",
+      "sha256": "8173ce780b651de1d2b0e9076d4549f729dbe0e0ce1b4d56aa8e62e7f0db6b86",
       "upstreamSha256": null
+    },
+    {
+      "path": "tests/gitee-migration.test.mjs",
+      "sha256": "501ec3f2736a8cc6ffa0a833a878fbb3a807cb02e6719ee229f50855cf8f59b3",
+      "upstreamSha256": "501ec3f2736a8cc6ffa0a833a878fbb3a807cb02e6719ee229f50855cf8f59b3"
     },
     {
       "path": "tests/log-diagnostics.test.mjs",

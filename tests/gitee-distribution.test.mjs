@@ -24,5 +24,7 @@ try {
  const manager=fs.readFileSync(path.join(skill,'scripts/manage.mjs'),'utf8');
  assert.ok(!manager.includes('github.com'));assert.ok(!manager.includes('gacexly8638'));
  assert.match(fs.readFileSync('README.md','utf8'),/skills@latest add https:\/\/gitee.com\/xieliying\/gacui-figma-design.git/);
+ const migrated=path.join(temp,'migrated'),inside=path.join(migrated,'.agents/skills/gacui-figma-design');fs.mkdirSync(path.dirname(inside),{recursive:true});fs.cpSync(skill,inside,{recursive:true});fs.mkdirSync(path.join(migrated,'.git'));fs.writeFileSync(migrated+'.skill-state.json',JSON.stringify({migration:{repository:REPO}}));
+ const resolved=execFileSync(process.execPath,['--input-type=module','-e',"import {defaultWorkspace} from './.agents/skills/gacui-figma-design/scripts/source.mjs'; console.log(defaultWorkspace())"],{cwd:migrated,encoding:'utf8'}).trim();assert.equal(resolved,fs.realpathSync(migrated));
  console.log('PASS Gitee distribution: fixed source, isolated default workspace, copied/symlinked standalone entry, GitHub origin refused without mutation; update/pin/offline/dirty covered by distribution suite');
 } finally {fs.rmSync(temp,{recursive:true,force:true});}
