@@ -1,9 +1,9 @@
 {
-  "version": "1.2.3",
+  "version": "1.2.4",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.2.3：支持 GitHub 旧用户原位迁移至 Gitee，保留草稿、配置、日志关闭设置。后续更新仅从 Gitee 获取；组件能力与 V1.2.1 相同。",
+  "notice": "V1.2.4：明确展示发现的新版本、变化与跨版本升级选择；接受后升级指定版本并复查，不再只输出被阻止原因。保留固定版本、草稿、本地修改和日志关闭设置。旧0.4.6入口需按docs/upgrade.md一次性引导升级与Gitee迁移。",
   "delivery": "draft-and-figma",
   "figmaStatus": "team-target"
 }
