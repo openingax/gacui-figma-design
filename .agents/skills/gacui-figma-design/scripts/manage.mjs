@@ -34,8 +34,9 @@ function acquireLock(lock) {
   return {previous:holder??'legacy-empty-lock',lock};
 }
 // repo 参数仅供本地集成测试；CLI 不接受远程覆盖。
-export function manage({command='sync', workspace=defaultWorkspace(), version, acceptBreaking=false, repo=REPO}={}) {
+export function manage({command='sync', workspace=defaultWorkspace(), version, upgradeTo, acceptBreaking=false, repo=REPO}={}) {
   if(Number(process.versions.node.split('.')[0])<20) throw Error('需要 Node.js 20+');
+  if(upgradeTo && (!versionPattern.test(upgradeTo) || version || command!=='sync')) throw Error('--upgrade-to 仅用于 sync，且不能与 --version 同用');
   if(version && !versionPattern.test(version)) throw Error('版本必须是 X.Y.Z');
   workspace=path.resolve(workspace);
   const stateFile=workspace+'.skill-state.json', lock=workspace+'.skill-lock';
@@ -66,11 +67,30 @@ export function manage({command='sync', workspace=defaultWorkspace(), version, a
       try { tags=run(['ls-remote','--tags',repo,'refs/tags/skill-v*']).split('\n').map(l=>l.match(/refs\/tags\/skill-v(\d+\.\d+\.\d+)$/)?.[1]).filter(Boolean).sort(compare); }
       catch { if(!output.version) throw Error('无法读取公开仓库：请检查网络和发布标签'); output.blocked='无法检查远程版本；继续使用已安装版本'; }
       if(tags) {
-        const desired=version || state.pin || tags.at(-1);
+        const desired=upgradeTo || version || state.pin || tags.at(-1);
         if(!desired || !tags.includes(desired)) throw Error('没有对应正式发布标签');
         output.latest=tags.at(-1);output.available=desired;
+        if(output.version && compare(output.latest,output.version)>0) {
+          const target=upgradeTo || output.latest;
+          output.update={current:output.version,target,latest:output.latest,
+            requiresAcceptance:!compatible(output.version,target),status:'available',
+            message:`发现新版本：${output.version} → ${target}。请先展示更新说明，再选择现在升级或本次稍后；稍后会在下次使用时再次提醒。`,
+            choices:['现在升级（推荐）','本次稍后'],
+            args:['sync','--workspace',workspace,'--upgrade-to',target,...(!compatible(output.version,target)?['--accept-breaking']:[])]};
+          try {
+            run(['fetch','--no-tags','origin',`refs/tags/skill-v${target}`],workspace);
+            const candidate=manifest(workspace,'FETCH_HEAD');
+            if(candidate.version!==target) throw Error('标签与版本不一致');
+            output.update.summary=candidate.notice;
+          } catch { output.update.detailsUnavailable=true;output.update.summary='暂时无法读取新版本说明，请检查网络后重试；不要把旧版更新说明当作新版说明。'; }
+        }
+        if(state.pin && desired!==state.pin) {
+          output.blocked=`已固定 ${state.pin}；先明确选择解除固定并执行 unpin，再升级`;
+          if(output.update){output.update.status='pinned';output.update.unpinArgs=['unpin','--workspace',workspace];}
+          return {...output,pinned:state.pin};
+        }
         if(state.pin && output.latest!==state.pin) output.blocked=`已固定 ${state.pin}；有新版本 ${output.latest}，解除固定后才更新`;
-        if(output.version && desired!==output.version && !compatible(output.version,desired) && !acceptBreaking) output.blocked=`${output.version} → ${desired} 为不兼容系列；阅读更新日志后明确接受再升级`;
+        if(output.version && desired!==output.version && !compatible(output.version,desired) && !acceptBreaking) output.blocked=`发现新版本 ${output.version} → ${desired}，属于不兼容系列，需要先展示新版变化并询问“现在升级 / 本次稍后”。接受后使用 update.args，保留原 workspace；不得静默忽略更新。`;
         else if(output.version && compare(desired,output.version)<0) output.blocked='回退请使用新的独立目录，不覆盖当前任务';
         else if(desired!==output.version) {
           if(output.version && (run(['status','--porcelain','--untracked-files=no'],workspace) || output.commit!==state.commit)) output.blocked='存在本地代码修改或提交；保留现有版本，请维护者处理';
@@ -105,6 +125,10 @@ export function manage({command='sync', workspace=defaultWorkspace(), version, a
     if(output.version && state.ack!==output.version) {
       output.notice={version:output.version,summary:manifest(workspace,'HEAD').notice,changelog:path.join(workspace,'CHANGELOG.md')};
     }
+    if(output.update) {
+      output.update.status=output.updated?'updated':state.pin?'pinned':output.blocked?'blocked':'available';
+      if(state.pin) output.update.unpinArgs=['unpin','--workspace',workspace];
+    }
     if(state.pin) output.pinned=state.pin;
     return output;
   } finally { fs.unlinkSync(lock); }
@@ -125,9 +149,10 @@ if(isMain()) {
     let noLogging=false;
     while(args.length) { const key=args.shift(); if(key==='--accept-breaking') options.acceptBreaking=true;
       else if(key==='--no-logging') noLogging=true;
-      else if(['--workspace','--version'].includes(key) && args.length) options[key.slice(2)]=args.shift();
+      else if(['--workspace','--version','--upgrade-to'].includes(key) && args.length) options[key==='--upgrade-to'?'upgradeTo':key.slice(2)]=args.shift();
       else throw Error('参数不支持或缺少值'); }
     const output=manage(options);
+    if(output.update) console.error(output.update.status==='updated'?`已升级：${output.update.current} → ${output.version}。${output.update.summary}`:output.update.message+' '+output.update.summary+(output.blocked?' '+output.blocked:''));
     if(options.command==='sync' && output.version) output.logging=await connectLogging(output.workspace,{disable:noLogging});
     console.log(JSON.stringify(output,null,2));
   } catch(e) { console.error(JSON.stringify({error:e.code==='LOCKED'?e.message:(e.status!==undefined?'Git 操作失败；已保留现场，请检查权限、网络或合并冲突':e.message)})); process.exitCode=1; }
