@@ -37,6 +37,8 @@ import {readFileSync, writeFileSync} from 'node:fs';
 import {loadVersions, loadChecklist} from './sketch.mjs';
 import {check, nodeTitle, resolvePage} from './core.mjs';
 import {verifyWorkbench, verifyForm, generationResult} from './verification.mjs';
+import {disabledButtonReferences} from '../scripts/figma/portable-references.mjs';
+import {buildPortableShell} from '../scripts/figma/portable-shell.mjs';
 import {sketchRuntime} from './figma-runtime.mjs';
 import {buildTable, validate as validateTable} from '../components/table/generator.mjs';
 import {tableDependencies} from '../pages/work-orders/build.mjs';
@@ -294,17 +296,17 @@ export function runtimeSource(drawer) {
  return workbench.slice(0,a)+'  const form = null;\n'+workbench.slice(b);
 }
 
-export function code(dir, boardId) {
- if(!targetStatus().ready)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
+export function code(dir, boardId, options = {}) {
+ if(!options.portable&&!targetStatus().ready)throw Error('Figma 目标和组件映射尚未适配验证；见 docs/figma-adapter.md');
   const p = plan(dir), board = p.boards.find(b => b.id === boardId);
   if (!board) throw Error(`没有画板 ${boardId}，可用：${p.boards.map(b => b.id).join('、')}`);
-  const req = {fileKey: FILE_KEY, pageName: p.pageName, protectedPages: PROTECTED, version: p.version, board};
+  const req = {fileKey: options.fileKey ?? FILE_KEY, pageName: p.pageName, protectedPages: PROTECTED, version: p.version, board};
   if(req.board.def.workbench||req.board.def.drawer)req.board={...board,def:{...board.def,patches:[]}};
   // 来源信息仍保留在草稿及方案卡；执行载荷中的表单字段不读取该展示元数据。
   const payloadDrawer=req.board.def.drawer??(req.board.kind==='drawer'?req.board.def:null);
   if(payloadDrawer){const trimmed={...payloadDrawer,rows:payloadDrawer.rows.map(row=>row.map(({from,...field})=>field))};req.board={...req.board,def:req.board.def.drawer?{...req.board.def,drawer:trimmed}:trimmed};}
   let fns = '', lib = '{}';
-  if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify(tableDependencies((board.def.workbench??board.def).table.config))}}`; }
+  if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify((()=>{const config=(board.def.workbench??board.def).table.config,d=tableDependencies(config);if(options.portable){d.cells=Object.fromEntries(Object.entries(d.cells).filter(([k])=>k==='header'||config.columns.some(c=>c.kind===k)));if(!config.selection)d.checkbox={};if(!config.pagination)delete d.pagination;}return d;})())}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
     const hasFields=(board.def.drawer??board.def).rows.length>0;
     fns = (hasFields?[fitFieldContent, composeForm, updateDrawer]:[updateDrawer]).map(f => f.toString()).join('\n');
@@ -415,6 +417,35 @@ export function code(dir, boardId) {
   if(fd&&!fd.rows.flat().some(f=>f.kind==='upload'))runtime=runtime.replace(/  async function uploadFiles\([\s\S]*?(?=  async function formValue)/,'').replace(/      \/\/ DRAWER_UPLOAD_START[\s\S]*?      \/\/ DRAWER_UPLOAD_END\n/,'');
   if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
   if(fd&&!fd.rows.flat().some(f=>f.open))runtime=runtime.replace(/    \/\/ DRAWER_POPUP_START[\s\S]*?    \/\/ DRAWER_POPUP_END\n/,'');
+  if(options.portable){
+    if(!/^[a-zA-Z0-9]{22,128}$/.test(req.fileKey??'')||req.fileKey==='jNf9icrxfw8B7QkSQa9g33')throw Error('需要独立授权目标，规范源只读');
+    const old="const source = await figma.getNodeByIdAsync('180:3');\n    if (!source) throw Error('工单页基线 180:3 不存在');\n    const root = source.clone(); page.appendChild(root); root.name = board.name; place(root);";
+    if(!runtime.includes(old)&&board.kind==='workbench')throw Error('页面构建分支已变化');
+    runtime=runtime.replace(old,"const root = await buildPortableShell(figma,page,def,{autoFrame,text,instance,buttonLabel}); root.name=board.name; place(root);");
+    if(board.kind==='workbench'||board.def.workbench)fns+='\n'+buildPortableShell.toString();
+    const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
+    if(wd&&!wd.search?.length)fns=fns.replace(/  if\(def.search\)\{[\s\S]*?\n  \}/,'');
+    if(wd?.search&&!wd.search.some(f=>f.kind==='date'))runtime=runtime.replace(/          else if \(slot.kind === 'date'\) \{[\s\S]*?          \}\n          else if \(slot.kind === 'date-range'\)/,"          else if (slot.kind === 'date-range')");
+    if(wd?.search&&!wd.search.some(f=>f.kind==='date-range'))runtime=runtime.replace(/          else if \(slot.kind === 'date-range'\) \{[\s\S]*?          \} else throw Error/,"          else throw Error");
+    const hasDisabled=JSON.stringify(req.board).includes('"disabled":true');
+    if(hasDisabled){
+      const disabled=disabledButtonReferences();
+      runtime=runtime.replace(/  async function buttonDisabled\([\s\S]*?(?=  async function text\()/,`  async function buttonDisabled(n,disabled){if(!disabled)return;const main=await n.getMainComponentAsync();const ids=${JSON.stringify(disabled)};const target=ids[main.id];if(!target)throw Error('按钮禁用态未初始化');const label=n.componentProperties[Object.keys(n.componentProperties).find(k=>k.startsWith('label'))].value;n.swapComponent(await figma.getNodeByIdAsync(target));await normalize(n);await buttonLabel(n,label);}
+`);
+    }
+    const resolve=options.resolveReference;
+    if(typeof resolve!=='function')throw Error('新文件必须提供已核验组件映射');
+    // Transform compiler references only. Never search/replace the user's business text or snapshots.
+    const refs=source=>source.replace(/(['"])(\d+:\d+)\1/g,(_,q,id)=>JSON.stringify(resolve(id)));
+    fns=refs(fns);runtime=refs(runtime);lib=refs(lib);
+    function mapFields(value,key=''){
+      if(Array.isArray(value))return value.map(v=>mapFields(v,key));
+      if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,mapFields(v,k)]));
+      return typeof value==='string'&&['mainId','variant','itemIds'].includes(key)&&/^\d+:\d+$/.test(value)?resolve(value):value;
+    }
+    req.board=mapFields(req.board);
+    req.board.notes=req.board.notes.filter(n=>!n.includes('沿用工单页基线'));
+  }
   let generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
   if(!extendedTabs)generated=generated.replace(/^if\(def.tabs\?\.mainId\).*\n/gm,'');
   const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET', FILE_KEY);

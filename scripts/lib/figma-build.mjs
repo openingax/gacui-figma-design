@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {isMain} from '../../support/entry.mjs';
+import {pathToFileURL} from 'node:url';
 export function generate(kind,stage,target,state={}){
  const base=new URL('../../components/'+kind+'/',import.meta.url);const data=JSON.parse(readFileSync(new URL('build-data.json',base),'utf8'));const definition=JSON.parse(readFileSync(new URL('definition.json',base),'utf8'));
  return generateFromData(data,definition,stage,target,state);
@@ -7,7 +7,7 @@ export function generate(kind,stage,target,state={}){
 // 允许按已验证的组件规则选择构建范围，节点写入行为保持同一实现。
 export function generateFromData(data,definition,stage,target,state={}){
  if(!target.fileKey||target.fileKey===definition.source.fileKey||!/^\d+:\d+$/.test(target.pageId||''))throw Error('目标无效');
- const allowed=new Set(['COMPONENT_SET','COMPONENT','FRAME','INSTANCE','TEXT','VECTOR','RECTANGLE','ELLIPSE','LINE']);for(const n of data.nodes){if(!allowed.has(n.type))throw Error('尚未验证的节点类型 '+n.type);if((n.props.fills||[]).some(p=>p.type==='IMAGE'))throw Error('图片需使用已验证的资产转移适配');}
+ const allowed=new Set(['COMPONENT_SET','COMPONENT','FRAME','INSTANCE','TEXT','VECTOR','RECTANGLE','ELLIPSE','LINE','BOOLEAN_OPERATION']);for(const n of data.nodes){if(!allowed.has(n.type))throw Error('尚未验证的节点类型 '+n.type);if(n.type==='BOOLEAN_OPERATION'&&!['UNION','INTERSECT','SUBTRACT','EXCLUDE'].includes(n.props.booleanOperation))throw Error('布尔运算类型缺失');if((n.props.fills||[]).some(p=>p.type==='IMAGE'))throw Error('图片需使用已验证的资产转移适配');}
  const range=stage.match(/^nodes-range:(\d+):(\d+)$/);let rangeNodes,rangeState;
  if(range){const offset=Number(range[1]),count=Number(range[2]),all=data.nodes.filter(n=>n.type!=='COMPONENT_SET');if(!Number.isSafeInteger(offset)||!Number.isSafeInteger(count)||count<1||offset+count>all.length)throw Error('节点范围无效');rangeNodes=all.slice(offset,offset+count);const needed=new Set(rangeNodes.flatMap(n=>[n.sourceId,n.parentSourceId]));rangeState={paintMap:state.paintMap??{},map:Object.fromEntries(Object.entries(state.map??{}).filter(([id])=>needed.has(id)))};}
  const pre=`const target=${JSON.stringify(target)};if(figma.fileKey!==target.fileKey)throw Error('目标文件不符');const page=await figma.getNodeByIdAsync(target.pageId);if(!page||page.type!=='PAGE')throw Error('Page不存在');await figma.setCurrentPageAsync(page);const state=${JSON.stringify(stage==='finish'||stage.startsWith('vectors:')?{}:(rangeState??state))};`;
@@ -47,10 +47,10 @@ export async function buildNodes(figma,page,records,rootId,state){
  const styles=await figma.getLocalTextStylesAsync();
  for(const r of records){
   const p=r.props;let n;
-  if(r.type==='COMPONENT')n=figma.createComponent();else if(r.type==='TEXT')n=figma.createText();else if(r.type==='VECTOR')n=figma.createVector();else if(r.type==='RECTANGLE')n=figma.createRectangle();else if(r.type==='ELLIPSE')n=figma.createEllipse();else if(r.type==='LINE')n=figma.createLine();else n=figma.createFrame();
+  if(r.type==='COMPONENT')n=figma.createComponent();else if(r.type==='TEXT')n=figma.createText();else if(r.type==='VECTOR')n=figma.createVector();else if(r.type==='RECTANGLE')n=figma.createRectangle();else if(r.type==='ELLIPSE')n=figma.createEllipse();else if(r.type==='LINE')n=figma.createLine();else if(r.type==='BOOLEAN_OPERATION'){n=figma.createBooleanOperation();n.booleanOperation=p.booleanOperation;}else n=figma.createFrame();
   ids.push(n.id);
   if(r.type==='TEXT'){
-   const font={family:'Noto Sans SC',style:r.font.style==='Medium'||r.font.style==='Semibold'?'Medium':'Regular'};await figma.loadFontAsync(n.fontName);await figma.loadFontAsync(font);n.fontName=font;
+   const font={family:state.fontFamily??'Noto Sans SC',style:r.font.style==='Medium'||r.font.style==='Semibold'?'Medium':'Regular'};await figma.loadFontAsync(n.fontName);await figma.loadFontAsync(font);n.fontName=font;
    const name='UIAgent/临时字体/'+font.family+'/'+r.textStyle+'/'+font.style+'/'+p.fontSize+'/'+JSON.stringify(p.lineHeight);
    let style=styles.find(s=>s.name===name);
    if(style&&style.fontName!==figma.mixed&&(style.fontName.family!==font.family||style.fontName.style!==font.style))throw Error('临时文字样式字体冲突 '+name);
@@ -84,7 +84,7 @@ export async function applyFinalStrokes(figma,page,rows){
 // 旋转角度无法表达镜像；布局完成后恢复完整线性变换。
 export function restoreTransform(node,matrix,preservePosition=false){
  if(!matrix)return;
- const auto=node.parent&&node.parent.layoutMode&&node.parent.layoutMode!=='NONE'&&node.layoutPositioning!=='ABSOLUTE';
+ const auto=node.parent&&'layoutMode'in node.parent&&node.parent.layoutMode&&node.parent.layoutMode!=='NONE'&&node.layoutPositioning!=='ABSOLUTE';
  const next=matrix.map(row=>[...row]);
  if(preservePosition||auto){next[0][2]=node.relativeTransform[0][2];next[1][2]=node.relativeTransform[1][2];}
  node.relativeTransform=next;
@@ -118,4 +118,4 @@ export async function finish(figma,page,definition,records,rootId,state){
  for(const r of records){if(r.type==='COMPONENT_SET')continue;const n=await figma.getNodeByIdAsync(state.map[r.sourceId]);restoreTransform(n,r.props.relativeTransform,r.type==='COMPONENT');}
  return {componentSetId:set.id,createdNodeIds:[set.id],mutatedNodeIds:ids,fontSubstitution:'Noto Sans SC，用户桌面处理'};
 }
-if(isMain(import.meta.url)){const [kind,stage,fileKey,pageId,statePath]=process.argv.slice(2);process.stdout.write(generate(kind,stage,{fileKey,pageId},statePath?JSON.parse(readFileSync(statePath,'utf8')):{}));}
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const [kind,stage,fileKey,pageId,statePath]=process.argv.slice(2);process.stdout.write(generate(kind,stage,{fileKey,pageId},statePath?JSON.parse(readFileSync(statePath,'utf8')):{}));}

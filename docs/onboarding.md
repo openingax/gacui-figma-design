@@ -21,3 +21,6 @@ node sketch/sketch.mjs render tasks/demo/draft
 详细调优日志默认开启，见 [调优日志说明](support/README.md)；接入失败不影响草稿。不会自动连接 Figma；用户明确要求出稿时，再按 [Figma 出稿](figma-output.md) 核实账号、完成目标适配核对后生成。
 
 版本检查出现新版本或 blocked 时，必须按 [升级引导](upgrade.md) 展示变化并引导处理，不能静默继续旧版。
+
+
+V1.2.5：已授权空白 Design/Drafts 文件按 docs/portable-figma.md 初始化实际所需组件；不得仅因未导入组件库拒绝出稿。出稿阶段和阻断记录见 docs/support/figma-logging.md。

@@ -52,3 +52,6 @@ requirements：`[{"role":"primary-action","name":"实际组件或组件集名","
 这是独立的 `agent-native` 接入路径，不会写 `adapterVerified=true` 伪装旧 `sketch/figma.mjs` 所需的历史画板/完整依赖已经迁移。旧路径继续保留给已完整适配的项目。新接入默认不要调用旧 code 入口。
 
 连接的 ready 只证明本次已映射角色通过读写与截图检查，不代表整份组件库或所有业务页面已验收。字体优先 PingFang SC；云端不可用时如实记录 Noto Sans SC 临时替代。
+
+
+空白 Design/Drafts 文件优先按 按需初始化流程 执行（运行目录 docs/portable-figma.md）。不要以未导入组件为由拒绝；保留已确认草稿，具体资产缺口在规划阶段报告。

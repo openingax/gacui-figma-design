@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID,createHash} from 'node:crypto';
+import {spawn} from 'node:child_process';
+import {createCollector} from '../support/server.mjs';
+import * as client from '../support/client.mjs';
+import {buildReport} from '../support/dashboard.mjs';
+import {logFigma,figmaTrace} from '../support/figma-log.mjs';
+const dir=fs.mkdtempSync(join(tmpdir(),'gac-figma-log-')),token=randomUUID()+randomUUID();
+process.env.GAC_SUPPORT_HOME=join(dir,'client');process.env.GAC_SUPPORT_CONFIG=join(dir,'config.json');
+const server=createCollector({dataDir:join(dir,'server'),tokenHashes:[createHash('sha256').update(token).digest('hex')],ticketSecret:randomUUID()});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const target=join(dir,'draft');fs.mkdirSync(target);fs.writeFileSync(join(target,'versions.json'),JSON.stringify({versions:[{v:5}],draftConfirmed:5}));
+const before=fs.readFileSync(join(target,'versions.json'),'utf8');
+const input={stage:'preflight',status:'blocked',reason:'空白文件缺少组件；Bearer '+token};
+const cli=args=>new Promise(resolve=>{const p=spawn(process.execPath,args,{env:process.env});let stdout='',stderr='';p.stdout.on('data',b=>stdout+=b);p.stderr.on('data',b=>stderr+=b);p.on('close',code=>resolve({code,stdout,stderr}));});
+try{
+ fs.writeFileSync(process.env.GAC_SUPPORT_CONFIG,JSON.stringify({endpoint:'http://127.0.0.1:'+server.address().port,token}));
+ let calls=0;server.on('request',()=>calls++);
+ assert.equal((await logFigma(target,input)).recorded,false);assert.equal(calls,0);assert.equal(client.events().length,0);
+ client.setAutoUpload(true,{collection:'tuning',authorization:'project-meeting-20261020'});
+ const result=await logFigma(target,input);assert.equal(result.upload.pending,0);assert.equal(result.taskId,client.taskId(target));
+ const event=client.events()[0];assert.equal(event.outcome,'error');assert.equal(event.details.payload.confirmedVersion,5);assert.equal(event.details.payload.deliveryComplete,false);assert.ok(!JSON.stringify(event).includes(token));
+ const received=fs.readdirSync(join(dir,'server/events')).map(n=>JSON.parse(fs.readFileSync(join(dir,'server/events',n))));assert.ok(received.some(e=>e.id===result.id));
+ const report=buildReport(join(dir,'server'));assert.ok(report.tasks.some(t=>t.lastError?.includes('空白文件缺少组件')),'既有看板可读真实阻断原因');
+ const r=await cli(['scripts/figma/portable.mjs','plan',target,'invalid']);assert.equal(r.code,1);assert.equal(r.stdout,'');assert.ok(r.stderr.includes('目标无效'));assert.ok(client.events().some(e=>e.details.payload.reason.includes('目标无效')));
+ const success=figmaTrace(target,{stage:'preflight',status:'completed',reason:'规划通过'});assert.equal(client.events().find(e=>e.id===success.id).details.payload.deliveryComplete,false);
+ assert.throws(()=>figmaTrace(target,{stage:'preflight',status:'blocked',reason:''}));
+ await new Promise(r=>server.close(r));
+ const offline=await logFigma(target,{stage:'generate',status:'unknown',reason:'MCP超时，等待回读'});assert.equal(offline.upload.state,'queued');assert.ok(client.pending().some(e=>e.id===offline.id));
+ await new Promise(r=>server.listen(Number(JSON.parse(fs.readFileSync(process.env.GAC_SUPPORT_CONFIG)).endpoint.split(':').at(-1)),'127.0.0.1',r));assert.equal((await client.flush()).pending,0);
+ const count=client.events().length;client.setAutoUpload(false);assert.equal((await logFigma(target,input)).recorded,false);assert.equal(client.events().length,count);
+ assert.equal(fs.readFileSync(join(target,'versions.json'),'utf8'),before);
+ console.log('figma logging passed: collector readback, blocked, offline replay, disabled, draft preserved');
+}finally{await new Promise(r=>server.close(r));fs.rmSync(dir,{recursive:true,force:true});}
