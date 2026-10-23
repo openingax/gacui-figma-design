@@ -1,9 +1,9 @@
 {
-  "version": "1.2.5",
+  "version": "1.2.6",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.2.5：空白 Design/Drafts 文件可按需初始化本文件规范组件并出稿，不再依赖旧测试文件节点。保留已确认草稿；新增出稿阶段及阻断日志。复杂组件集、位图和超限资产仍明确报告缺口，日志关闭设置保留。",
+  "notice": "V1.2.6：新增项目范围的本机日志 hooks、直接拒绝候选诊断及显式草稿关联；修复状态查询成功误清除 Figma 阻断。原草稿、配置和日志关闭设置保留，升级不会自动注册 hooks 或打开采集。",
   "delivery": "draft-and-figma",
   "figmaStatus": "on-demand-local-components"
 }
