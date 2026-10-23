@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {manage,REPO,WORKSPACE_DIRECTORY} from '../.agents/skills/gacui-figma-design/scripts/manage.mjs';
@@ -28,3 +29,10 @@ try {
  const resolved=execFileSync(process.execPath,['--input-type=module','-e',"import {defaultWorkspace} from './.agents/skills/gacui-figma-design/scripts/source.mjs'; console.log(defaultWorkspace())"],{cwd:migrated,encoding:'utf8'}).trim();assert.equal(resolved,fs.realpathSync(migrated));
  console.log('PASS Gitee distribution: fixed source, isolated default workspace, copied/symlinked standalone entry, GitHub origin refused without mutation; update/pin/offline/dirty covered by distribution suite');
 } finally {fs.rmSync(temp,{recursive:true,force:true});}
+
+const manifest=JSON.parse(fs.readFileSync('distribution-manifest.json','utf8'));
+assert.equal(manifest.version,JSON.parse(fs.readFileSync('skill-release.json','utf8')).version);
+const tracked=execFileSync('git',['ls-files','-z'],{encoding:'utf8'}).split('\0').filter(p=>p && p!=='distribution-manifest.json').sort();
+assert.deepEqual(manifest.files.map(f=>f.path).sort(),tracked);
+for(const f of manifest.files)assert.equal(createHash('sha256').update(fs.readFileSync(f.path)).digest('hex'),f.sha256,f.path);
+console.log('PASS distribution manifest: version, complete tracked-file inventory and hashes');
