@@ -15,3 +15,6 @@ dist/
 *.log
 *.pem
 *.key
+
+# 本机项目hook配置不随Skill同步
+.codex/hooks.json

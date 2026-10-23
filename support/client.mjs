@@ -43,6 +43,16 @@ export function trace(target,input){
  if(!tuningEnabled())return {recorded:false,reason:'tuning-disabled'};
  const operations={'agent-turn':'agent','model-call':'model','tool-call':'tool','route':'route','ui-review':'review'};
  if(!operations[input.kind]||!input.payload||typeof input.payload!=='object'||Array.isArray(input.payload))throw Error('调优记录 kind/payload 无效');
- const event={id:randomUUID(),taskId:taskId(target),runId:input.runId??randomUUID(),at:new Date().toISOString(),phase:'finish',operation:operations[input.kind],outcome:input.outcome??'success',durationMs:input.durationMs??0,before:version(target),after:version(target),...environment(),errorCode:input.outcome==='error'?'unexpected':'none',details:{schema:1,kind:input.kind,payload:{target:resolve(target),...input.payload,durationMeasured:Number.isSafeInteger(input.durationMs)}}};
- record(event);return {recorded:true,id:event.id,taskId:event.taskId,runId:event.runId};
+ const event={id:input.id??randomUUID(),taskId:taskId(target),runId:input.runId??randomUUID(),at:input.at??new Date().toISOString(),phase:'finish',operation:operations[input.kind],outcome:input.outcome??'success',durationMs:input.durationMs??0,before:version(target),after:version(target),...environment(),errorCode:input.outcome==='error'?'unexpected':'none',details:{schema:1,kind:input.kind,payload:{target:resolve(target),...input.payload,durationMeasured:Number.isSafeInteger(input.durationMs)}}};
+ // 先按既有采集规则过滤凭据并裁剪超大内容，再验证可落盘协议。
+ event.details=details(event.details);validEvent(event);
+ try{record(event);}catch(error){
+  if(error.code!=='EEXIST')throw error;
+  const existing=events(event.taskId).find(e=>e.id===event.id),fields=['runId','operation','outcome','durationMs','errorCode'];
+  if(!existing||fields.some(key=>existing[key]!==event[key])||(input.at!==undefined&&existing.at!==event.at)||JSON.stringify(existing.details)!==JSON.stringify(details(event.details)))throw Error('trace event id conflict');
+  // 原事件已经落盘而队列写入中断时补齐队列；不覆盖旧 epoch，也不重传已 ACK 的事件。
+  if(!fs.existsSync(join(supportHome(),'acks',event.id)))try{fs.writeFileSync(join(supportHome(),'queue',event.id),uploadPreference().epoch,{flag:'wx',mode:0o600});}catch(e){if(e.code!=='EEXIST')throw e;}
+  return {recorded:false,reason:'duplicate',id:event.id,taskId:event.taskId,runId:event.runId};
+ }
+ return {recorded:true,id:event.id,taskId:event.taskId,runId:event.runId};
 }

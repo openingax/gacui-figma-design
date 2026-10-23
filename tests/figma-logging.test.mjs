@@ -31,6 +31,9 @@ try{
  await new Promise(r=>server.close(r));
  const offline=await logFigma(target,{stage:'generate',status:'unknown',reason:'MCP超时，等待回读'});assert.equal(offline.upload.state,'queued');assert.ok(client.pending().some(e=>e.id===offline.id));
  await new Promise(r=>server.listen(Number(JSON.parse(fs.readFileSync(process.env.GAC_SUPPORT_CONFIG)).endpoint.split(':').at(-1)),'127.0.0.1',r));assert.equal((await client.flush()).pending,0);
+ const start=figmaTrace(target,{stage:'request',status:'started',reason:'开始出稿'});assert.ok(start.workflowId);
+ const done=figmaTrace(target,{stage:'verify',status:'completed',reason:'真实回读验证已完成',workflowId:start.workflowId});assert.equal(done.runId,start.runId);
+ assert.throws(()=>figmaTrace(target,{stage:'request',status:'started',reason:'bad',workflowId:'../invalid'}));
  const count=client.events().length;client.setAutoUpload(false);assert.equal((await logFigma(target,input)).recorded,false);assert.equal(client.events().length,count);
  assert.equal(fs.readFileSync(join(target,'versions.json'),'utf8'),before);
  console.log('figma logging passed: collector readback, blocked, offline replay, disabled, draft preserved');
