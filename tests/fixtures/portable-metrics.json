@@ -1,0 +1,242 @@
+{
+  "format": 1,
+  "task": "统计指标管理单页面验证",
+  "request": {
+    "text": "统计指标管理：按指标名称与状态查询，新增指标，显示指标名称、统计口径、最近更新、状态和操作。使用3条演示记录，验证长名称。",
+    "sources": []
+  },
+  "demo": "本任务独立演示数据，不是原用户v5",
+  "pages": [
+    {
+      "id": "metrics",
+      "type": "page",
+      "title": "统计指标管理",
+      "frame": "workbench",
+      "menu": "数据管理 / 统计指标",
+      "children": [
+        {
+          "id": "search",
+          "type": "search",
+          "fields": [
+            {
+              "id": "name",
+              "label": "指标名称",
+              "kind": "input",
+              "placeholder": "请输入指标名称"
+            },
+            {
+              "id": "status",
+              "label": "状态",
+              "kind": "select",
+              "value": "全部",
+              "options": [
+                "全部",
+                "启用",
+                "停用"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "actions",
+          "type": "actions",
+          "buttons": [
+            {
+              "id": "create",
+              "label": "新增指标",
+              "primary": true
+            },
+            {
+              "id": "export",
+              "label": "导出"
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "type": "table",
+          "selection": false,
+          "pagination": true,
+          "rows": 3,
+          "data": [
+            {
+              "name": "充电订单完成率",
+              "scope": "已完成订单 / 总订单",
+              "updated": "2026-10-23",
+              "status": "启用"
+            },
+            {
+              "name": "跨区域公共充电站服务质量与设备在线率综合统计指标",
+              "scope": "在线设备 / 设备总数",
+              "updated": "2026-10-22",
+              "status": "启用"
+            },
+            {
+              "name": "月度异常订单占比",
+              "scope": "异常订单 / 总订单",
+              "updated": "2026-10-21",
+              "status": "停用"
+            }
+          ],
+          "columns": [
+            {
+              "id": "name",
+              "title": "指标名称",
+              "wrap": true
+            },
+            {
+              "id": "scope",
+              "title": "统计口径"
+            },
+            {
+              "id": "updated",
+              "title": "最近更新"
+            },
+            {
+              "id": "status",
+              "title": "状态"
+            },
+            {
+              "id": "op",
+              "title": "操作",
+              "kind": "operations"
+            }
+          ],
+          "rowActions": [
+            {
+              "labels": [
+                "查看",
+                "编辑"
+              ],
+              "more": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "states": [],
+  "decisions": [
+    {
+      "code": "G1",
+      "decision": "按推荐",
+      "text": "3条演示记录",
+      "from": "推荐"
+    },
+    {
+      "code": "G2",
+      "decision": "按推荐",
+      "text": "本轮不区分权限",
+      "from": "推荐"
+    },
+    {
+      "code": "L1",
+      "decision": "按推荐",
+      "text": "点击查询生效",
+      "from": "推荐"
+    },
+    {
+      "code": "L2",
+      "decision": "按推荐",
+      "text": "查询回第一页",
+      "from": "推荐"
+    },
+    {
+      "code": "L3",
+      "decision": "按推荐",
+      "text": "重置清空输入，下拉回全部",
+      "from": "推荐"
+    },
+    {
+      "code": "L4",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L5",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L6",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L7",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L8",
+      "decision": "按推荐",
+      "text": "每页10条，显示总数",
+      "from": "推荐"
+    },
+    {
+      "code": "L9",
+      "decision": "按推荐",
+      "text": "名称换行，其他列省略",
+      "from": "推荐"
+    },
+    {
+      "code": "L12",
+      "decision": "按推荐",
+      "text": "所有记录查看、编辑",
+      "from": "推荐"
+    },
+    {
+      "code": "L13",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L14",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "L15",
+      "decision": "本轮不做",
+      "text": "用户授权的独立技术验证单页；本轮验证默认状态，不验证真实交互。",
+      "from": "判断"
+    },
+    {
+      "code": "N1",
+      "decision": "按推荐",
+      "text": "数据管理 / 统计指标",
+      "from": "推荐"
+    },
+    {
+      "code": "N2",
+      "decision": "按推荐",
+      "text": "单页签",
+      "from": "推荐"
+    },
+    {
+      "code": "S1",
+      "decision": "按推荐",
+      "text": "固定演示选项全部、启用、停用",
+      "from": "推荐"
+    },
+    {
+      "code": "S2",
+      "decision": "按推荐",
+      "text": "默认全部",
+      "from": "推荐"
+    },
+    {
+      "code": "S3",
+      "decision": "按推荐",
+      "text": "单选",
+      "from": "推荐"
+    }
+  ],
+  "gaps": []
+}

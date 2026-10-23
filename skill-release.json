@@ -1,9 +1,9 @@
 {
-  "version": "1.2.4",
+  "version": "1.2.5",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.2.4：明确展示发现的新版本、变化与跨版本升级选择；接受后升级指定版本并复查，不再只输出被阻止原因。保留固定版本、草稿、本地修改和日志关闭设置。旧0.4.6入口需按docs/upgrade.md一次性引导升级与Gitee迁移。",
+  "notice": "V1.2.5：空白 Design/Drafts 文件可按需初始化本文件规范组件并出稿，不再依赖旧测试文件节点。保留已确认草稿；新增出稿阶段及阻断日志。复杂组件集、位图和超限资产仍明确报告缺口，日志关闭设置保留。",
   "delivery": "draft-and-figma",
-  "figmaStatus": "team-target"
+  "figmaStatus": "on-demand-local-components"
 }
