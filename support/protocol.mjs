@@ -5,11 +5,16 @@ export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}
 export const TASK = /^[0-9a-f]{32}$/;
 export function exactKeys(o, keys) { if (!o || typeof o!=='object' || Array.isArray(o) || Object.keys(o).some(k=>!keys.includes(k))) throw Error('invalid fields'); }
 export function validEvent(e) {
- exactKeys(e,['id','taskId','runId','at','phase','operation','outcome','durationMs','before','after','build','dirty','platform','node','errorCode','details']);
+ exactKeys(e,['id','taskId','runId','at','phase','operation','outcome','durationMs','before','after','build','dirty','platform','node','errorCode','details','context']);
  if(typeof e.id!=='string'||typeof e.runId!=='string'||typeof e.taskId!=='string'||typeof e.at!=='string'||!UUID.test(e.id)||!UUID.test(e.runId)||!TASK.test(e.taskId)||!/^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(e.at)||!Number.isFinite(Date.parse(e.at))) throw Error('invalid identity');
  if(!['start','finish'].includes(e.phase)||!OPS.includes(e.operation)||!['running','success','error'].includes(e.outcome)||!ERRORS.includes(e.errorCode)) throw Error('invalid event');
  for(const k of ['durationMs','before','after']) if(!Number.isSafeInteger(e[k])||e[k]<0) throw Error('invalid count');
  if(typeof e.build!=='string'||typeof e.node!=='string'||!/^(?:[a-f0-9]{40}|unknown)$/.test(e.build)||typeof e.dirty!=='boolean'||!['darwin','win32','linux','other'].includes(e.platform)||!/^v\d+\.\d+\.\d+$/.test(e.node)) throw Error('invalid environment');
+ if(e.context!==undefined){
+  const c=e.context;exactKeys(c,['command','exitCode','category','message','skillVersion','buildSource','evidenceSource']);
+  for(const k of ['command','category','message','skillVersion','buildSource','evidenceSource'])if(c[k]!==undefined&&(typeof c[k]!=='string'||c[k].length>(k==='message'?1200:100)))throw Error('invalid context');
+  if(c.exitCode!==undefined&&!Number.isSafeInteger(c.exitCode))throw Error('invalid exitCode');
+ }
  if(e.details!==undefined){
   exactKeys(e.details,['schema','kind','payload']);
   if(e.details.schema!==1||!['draft-command','agent-turn','model-call','tool-call','route','ui-review'].includes(e.details.kind)||!e.details.payload||typeof e.details.payload!=='object'||Array.isArray(e.details.payload)||new TextEncoder().encode(JSON.stringify(e.details)).length>2*1024*1024)throw Error('invalid tuning details');

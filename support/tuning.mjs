@@ -44,7 +44,7 @@ export function boundedDetails(details,secrets=[]) {
  // 明确可见的缺失标记，不假装大内容已完整采集。
  return {schema:1,kind:details.kind,payload:{omitted:'details-over-2MiB',originalBytes:bytes}};
 }
-export function basicEvent(event){const {details,...basic}=event;return basic;}
+export function basicEvent(event){const {details,...basic}=event;if(basic.context){const {message,...context}=basic.context;basic.context=context;}return basic;}
 
 // 只在独立 CLI 主过程执行期间捕获公开 console 输出；原输出仍原样发送。
 export function captureConsole(){

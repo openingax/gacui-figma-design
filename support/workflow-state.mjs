@@ -25,10 +25,21 @@ export function figmaWorkflows(events){
    if(!g.pending.length)g.recoveryEventId=e.id;
   }else if(!verifiedFigma(e))g.pending.push(e);
  }
+ // 旧问题只能由显式引用的同设备/任务、同目标/版本、较晚验证回执关闭。
+ for(const e of events){
+  const p=figmaPayload(e);
+  if(!verifiedFigma(e)||!workflowId(p)||p.receipt?.verified!==true||!p.fileKey||p.confirmedVersion==null||!Array.isArray(p.resolvesEventIds))continue;
+  for(const g of groups.values()){
+   if(g.taskId!==e.taskId||g.client!==(e.client??null))continue;
+   const count=g.pending.length;
+   g.pending=g.pending.filter(previous=>!(p.resolvesEventIds.includes(previous.id)&&['fileKey','confirmedVersion'].every(k=>figmaPayload(previous)[k]===p[k])&&Date.parse(e.at)>Date.parse(previous.at)));
+   if(count&&!g.pending.length)g.recoveryEventId=e.id;
+  }
+ }
  return [...groups.values()].map(g=>{
   const last=g.pending.at(-1)??g.events.at(-1),p=figmaPayload(last),unknown=g.pending.some(e=>figmaPayload(e).status==='unknown');
   const blocked=g.pending.some(e=>['blocked','failed'].includes(figmaPayload(e).status)||e.outcome==='error');
-  const state=unknown?'unknown':blocked?'blocked':g.pending.length?'unverified':g.legacy?'unverified':'verified';
+  const state=unknown?'unknown':blocked?'blocked':g.pending.length?'unverified':g.legacy&&!g.recoveryEventId?'unverified':'verified';
   const missingInformation=[];
   if(g.legacy)missingInformation.push('workflowId：旧日志无法可靠关联同一次出稿请求，后续成功不能证明此前阻断已恢复。');
   if(state!=='verified')missingInformation.push('同一 workflowId、目标及确认版本的 verify/completed 交付记录（回读与截图检查通过后记录）。');

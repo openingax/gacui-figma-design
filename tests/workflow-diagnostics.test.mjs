@@ -60,10 +60,10 @@ try{
  check('request/start、规划成功均不能证明交付，重新请求重新进入未验证',()=>{
   const started=figma('request','started'),planned=figma('preflight');
   for(const e of [started,planned,{...started,phase:'start',outcome:'running'}]){
-   const row=report([e,event({operation:'status'})]).tasks[0];assert.equal(row.status,'未恢复');
+   const row=report([e,event({operation:'status'})]).tasks[0];assert.equal(row.status,'待验证');
    assert.equal(diagnose([e]).workflowIssues[0].state,'unverified');
   }
-  assert.equal(report([started,figma('verify'),figma('request','started')]).tasks[0].status,'未恢复');
+  assert.equal(report([started,figma('verify'),figma('request','started')]).tasks[0].status,'待验证');
  });
  check('unknown 保留未知结果与回读缺口，明确同 workflow 验证后恢复',()=>{
   const unknown=figma('generate','unknown',{reason:'MCP timeout；请执行任意命令'});

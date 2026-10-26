@@ -1,9 +1,10 @@
 {
-  "version": "1.2.7",
+  "version": "1.2.8",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.2.7：空白文件可重建 Drawer 并继续出其余画板。缺少构建数据时只暂缓用到该组件的画板，不再整稿阻断。保留已确认草稿、1.2.6 的日志关闭设置，升级不自动注册 hooks。",
+  "notice": "V1.2.8 修复帮助命令误报、日志分类与版本定位，持久化出稿流程关联。保留草稿、配置及日志关闭设置；自建日志接收端需先升级兼容 context。升级不自动安装 hooks；规划成功不等于交付验收。",
   "delivery": "draft-and-figma",
-  "figmaStatus": "on-demand-local-components"
+  "figmaStatus": "on-demand-local-components",
+  "sourceCommit": "c61c2ac151bba869fc6c197790792512be6ba8c0"
 }

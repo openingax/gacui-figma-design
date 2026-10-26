@@ -2,8 +2,13 @@ import {readEvents} from './analyze.mjs';
 import {isMain} from './entry.mjs';
 import {figmaPayload,figmaWorkflows} from './workflow-state.mjs';
 
+import {eventCategory,eventVersion,helpEventIds} from './event-semantics.mjs';
 export function diagnose(events){
+ const ignored=helpEventIds(events);events=events.filter(e=>!ignored.has(e.id));
  const hypotheses={
+  business_pending:'等待业务决策，不属于运行时异常。',
+  target_required:'等待用户提供并授权出稿目标，不属于接口故障。',
+  component_unsupported:'核对当前组件支持范围与升级后的规划结果。',
   version_conflict:'检查调用方预期版本与操作前快照；可能使用了过期基线。',
   storage:'检查指定目录的权限、可用容量和实际文件状态。',
   validation:'对照候选输入、校验输出与当前规则复现。',
@@ -37,10 +42,10 @@ export function diagnose(events){
   workflowIssues,
   failures:events.filter(event=>event.phase==='finish'&&event.outcome==='error').map(event=>{
    const start=events.find(candidate=>candidate.taskId===event.taskId&&candidate.runId===event.runId&&candidate.client===event.client&&candidate.phase==='start');
-   return {eventId:event.id,taskId:event.taskId,runId:event.runId,build:event.build,dirty:event.dirty,operation:event.operation,category:event.errorCode,before:event.before,after:event.after,startEventId:start?.id??null,
+   return {eventId:event.id,taskId:event.taskId,runId:event.runId,build:event.build,dirty:event.dirty,operation:event.operation,category:eventCategory(event),version:eventVersion(event),before:event.before,after:event.after,startEventId:start?.id??null,
     evidence:{input:!!start?.details?.payload.input,snapshotBefore:!!start?.details?.payload.snapshot,snapshotAfter:!!event.details?.payload.snapshot,error:!!event.details?.payload.error,output:!!event.details?.payload.output},
-    hypothesis:hypotheses[event.errorCode]??'根因未知，需要人工核实。',
-    candidateCauses:[{code:event.errorCode??'unknown',description:hypotheses[event.errorCode]??'现有事件不足以确定根因。',evidenceEventIds:[event.id],confirmed:false}],
+    hypothesis:hypotheses[eventCategory(event)]??hypotheses[event.errorCode]??'根因未知，需要人工核实。',
+    candidateCauses:[{code:event.errorCode??'unknown',description:hypotheses[eventCategory(event)]??hypotheses[event.errorCode]??'现有事件不足以确定根因。',evidenceEventIds:[event.id],confirmed:false}],
     missingInformation:[...(!start?['同一任务与运行的开始事件。']:[]),...(!event.details?.payload?.error?['原始可见错误或工具回执。']:[])],
     confirmedRootCause:null,fixCandidate:null,regression:null};
   }),

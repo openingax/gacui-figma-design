@@ -6,6 +6,7 @@ import {join} from 'node:path';
 import {validEvent,validFeedback} from './protocol.mjs';
 import {figmaPayload,figmaWorkflows,recoverySuccess} from './workflow-state.mjs';
 
+import {eventMessage,eventCategory,eventVersion,helpEventIds,isWaiting} from './event-semantics.mjs';
 const TZ='Asia/Shanghai';
 const DRAFT_OPS=['save','restore','label','star','confirm','recover','export','check','render','diff','status'];
 const day=at=>new Intl.DateTimeFormat('sv-SE',{timeZone:TZ}).format(new Date(at));
@@ -37,18 +38,19 @@ export function buildReport(dataDir,{now=Date.now()}={}){
  const deviceOf=Object.fromEntries(Object.entries(devices).map(([id,d])=>[d.tokenHash,{id,...d}]));
  const profiles={};if(fs.existsSync(join(dataDir,'profiles')))for(const n of fs.readdirSync(join(dataDir,'profiles')))if(/^[a-f0-9]{64}\.json$/.test(n)){const p=json(join(dataDir,'profiles',n));if(p)profiles[n.slice(0,64)]=p;}
  const events=owned(join(dataDir,'events'),validEvent).map(({client,value})=>({...value,client})).sort((a,b)=>a.at.localeCompare(b.at));
+ const ignoredHelp=helpEventIds(events);const businessEvents=events.filter(e=>!ignoredHelp.has(e.id));
  const feedback=owned(join(dataDir,'reports'),validFeedback).map(({client,value})=>({...value,client}));
  const people=new Map();
  const person=client=>{
   if(!people.has(client)){
    const profile=profiles[client]?.profile??null,device=deviceOf[client]??null;
    people.set(client,{client,deviceId:device?.id??null,revoked:device?.revoked===true,profile,profileSeen:profiles[client]?.lastSeen??null,pathUser:null,
-    days:new Set(),tasks:new Set(),firstSeen:null,lastSeen:null,commands:0,commands7d:0,week:[0,0,0,0,0,0,0],saves:0,confirms:0,errors:0,errorCodes:{},agentTurns:0,toolErrors:0,feedback:0,blockedFeedback:0,accepted:0,rejected:0,blockedTasks:0,sources:new Set(),requests:new Set(),events:0});
+    days:new Set(),tasks:new Set(),firstSeen:null,lastSeen:null,commands:0,commands7d:0,week:[0,0,0,0,0,0,0],saves:0,confirms:0,errors:0,technicalErrors:0,waiting:0,errorCodes:{},agentTurns:0,toolErrors:0,feedback:0,blockedFeedback:0,accepted:0,rejected:0,blockedTasks:0,sources:new Set(),requests:new Set(),events:0});
   }
   return people.get(client);
  };
  const tasks=new Map();
- for(const e of events){
+ for(const e of businessEvents){
   const p=person(e.client);p.pathUser??=pathUser(e);p.days.add(day(e.at));p.tasks.add(e.taskId);p.firstSeen??=e.at;p.lastSeen=e.at;p.events++;
   const key=e.client+':'+e.taskId;
   if(!tasks.has(key))tasks.set(key,{client:e.client,taskId:e.taskId,target:null,firstSeen:e.at,lastSeen:e.at,events:[],sources:new Set(),request:null});
@@ -66,7 +68,7 @@ export function buildReport(dataDir,{now=Date.now()}={}){
   }
   if(e.outcome==='success'&&e.operation==='save')p.saves++;
   if(e.outcome==='success'&&e.operation==='confirm')p.confirms++;
-  if(e.outcome==='error'){p.errors++;p.errorCodes[e.errorCode]=(p.errorCodes[e.errorCode]??0)+1;}
+  if(e.outcome==='error'){p.errors++;if(isWaiting(e))p.waiting++;else p.technicalErrors++;p.errorCodes[e.errorCode]=(p.errorCodes[e.errorCode]??0)+1;}
   if(e.details?.kind==='agent-turn')p.agentTurns++;
   if(e.details?.kind==='tool-call'&&e.outcome==='error')p.toolErrors++;
   const q=e.details?.kind==='ui-review'?e.details.payload.quality:null;if(typeof q?.accepted==='boolean')q.accepted?p.accepted++:p.rejected++;
@@ -75,7 +77,7 @@ export function buildReport(dataDir,{now=Date.now()}={}){
   const p=person(client);p.firstSeen??=entry.firstSeen??null;p.lastSeen??=entry.lastSeen??null;
  }
  for(const f of feedback){const p=person(f.client);p.feedback++;if(f.category==='blocked')p.blockedFeedback++;for(const url of links([f.description,f.expected]))p.sources.add(url);}
- const errorMessage=e=>{const d=e.details?.payload;return String(d?.error?.message??d?.error??d?.output?.stderr??e.errorCode??'').slice(0,300);};
+ const errorMessage=eventMessage;
  const taskRows=[...tasks.values()].map(t=>{
   const finishes=t.events.filter(e=>e.phase==='finish');
   const workflows=figmaWorkflows(t.events),workflowIssues=workflows.filter(w=>w.state!=='verified');
@@ -85,9 +87,16 @@ export function buildReport(dataDir,{now=Date.now()}={}){
   const blockedReport=feedback.some(f=>f.client===t.client&&f.taskId===t.taskId&&f.category==='blocked'&&!finishes.some(e=>recoverySuccess(e)&&e.at>f.at));
   const confirmed=finishes.some(e=>e.operation==='confirm'&&e.outcome==='success');
   const figmaBlocked=workflowIssues.some(w=>['blocked','unknown'].includes(w.state));
-  const status=figmaBlocked||trailing>=2||blockedReport?'阻塞':workflowIssues.length||trailing===1?'未恢复':confirmed?'已确认':'正常';
+  const latest=finishes.at(-1),lastWorkflow=[...workflows].sort((a,b)=>a.lastAt.localeCompare(b.lastAt)).at(-1);
+  const actionable=[...finishes].reverse().find(e=>!['status','diff'].includes(e.operation)&&figmaPayload(e)?.status!=='started');
+  const waiting=actionable?.outcome==='error'&&isWaiting(actionable);
+  const progressed=!workflowIssues.some(w=>w.state==='unknown')&&lastWorkflow?.stage==='preflight'&&lastWorkflow.status==='completed'&&lastError&&lastWorkflow.lastAt>lastError.at&&lastError.details?.payload?.stage==='preflight'&&['fileKey','confirmedVersion'].every(k=>lastError.details?.payload?.[k]!=null&&lastError.details.payload[k]===lastWorkflow[k]);
+  const status=waiting?(eventCategory(actionable)==='target_required'?'待提供目标':'待业务确认'):blockedReport?'阻塞':progressed?'待验证':figmaBlocked||trailing>=2?'阻塞':workflowIssues.length?'待验证':trailing===1?'未恢复':confirmed?'已确认':'正常';
   if(status==='阻塞')person(t.client).blockedTasks++;
   return {client:t.client,taskId:t.taskId,target:t.target,firstSeen:t.firstSeen,lastSeen:t.lastSeen,status,trailingErrors:trailing,figmaWorkflows:workflows,workflowIssues,
+   latestStage:lastWorkflow?.stage??latest?.operation??null,deliveryState:workflows.length?(workflowIssues.length?'unverified':'verified'):'not-recorded',
+   latestEventAt:latest?.at??null,latestEventVersion:latest?eventVersion(latest):null,
+   lastErrorAt:lastError?.at??null,lastErrorVersion:lastError?eventVersion(lastError):null,lastErrorCategory:lastError?eventCategory(lastError):null,
    commands:finishes.filter(e=>DRAFT_OPS.includes(e.operation)).length,saves:finishes.filter(e=>e.operation==='save'&&e.outcome==='success').length,
    errors:finishes.filter(e=>e.outcome==='error').length,version:Math.max(0,...t.events.map(e=>e.after)),lastError:lastError?errorMessage(lastError):null,
    sources:[...t.sources].map(url=>({url,kind:sourceKind(url)})),request:t.request};
@@ -96,17 +105,21 @@ export function buildReport(dataDir,{now=Date.now()}={}){
  const peopleRows=[...people.values()].map(p=>({client:p.client,name:name(p),deviceId:p.deviceId,revoked:p.revoked,
   osUser:p.profile?.osUser??p.pathUser,hostname:p.profile?.hostname??null,gitName:p.profile?.gitName??null,gitEmail:p.profile?.gitEmail??null,
   platform:p.profile?[p.profile.platform,p.profile.arch,p.profile.osRelease].filter(Boolean).join(' '):null,agent:agentLabel(p.profile?.agent),
-  skillVersion:p.profile?.skillVersion??null,connectFailures:p.profile?.connectFailures?.length??0,profileSeen:p.profileSeen,
+  skillVersion:p.profile?.skillVersion??null,uploadHealth:p.profile?.uploadHealth??null,connectFailures:p.profile?.connectFailures?.length??0,profileSeen:p.profileSeen,lastReceivedAt:json(join(dataDir,'ingestion',p.client+'.json'))?.lastReceivedAt??null,
   firstSeen:p.firstSeen,lastSeen:p.lastSeen,activeDays:p.days.size,tasks:p.tasks.size,commands:p.commands,commands7d:p.commands7d,week:p.week,
   saves:p.saves,confirms:p.confirms,
-  errors:p.errors,errorCodes:p.errorCodes,agentTurns:p.agentTurns,toolErrors:p.toolErrors,feedback:p.feedback,blockedFeedback:p.blockedFeedback,blockedTasks:p.blockedTasks,
+  errors:p.errors,technicalErrors:p.technicalErrors,waiting:p.waiting,errorCodes:p.errorCodes,agentTurns:p.agentTurns,toolErrors:p.toolErrors,feedback:p.feedback,blockedFeedback:p.blockedFeedback,blockedTasks:p.blockedTasks,
   accepted:p.accepted,rejected:p.rejected,requestRounds:p.requests.size,events:p.events,sources:{feishu:[...p.sources].filter(u=>sourceKind(u)==='飞书').length,figma:[...p.sources].filter(u=>sourceKind(u)==='Figma').length,other:[...p.sources].filter(u=>sourceKind(u)==='其他').length}}))
   .sort((a,b)=>String(b.lastSeen??'').localeCompare(String(a.lastSeen??'')));
  const daily=new Map();for(let i=29;i>=0;i--)daily.set(day(now-i*86400000),{date:day(now-i*86400000),commands:0,errors:0,people:new Set()});
- for(const e of events){const d=daily.get(day(e.at));if(!d||e.phase!=='finish')continue;d.people.add(e.client);if(DRAFT_OPS.includes(e.operation))d.commands++;if(e.outcome==='error')d.errors++;}
+ for(const e of businessEvents){const d=daily.get(day(e.at));if(!d||e.phase!=='finish')continue;d.people.add(e.client);if(DRAFT_OPS.includes(e.operation))d.commands++;if(e.outcome==='error')d.errors++;}
  const names=Object.fromEntries(peopleRows.map(p=>[p.client,p.name]));
  return {
   generatedAt:new Date(now).toISOString(),
+  metrics:{scope:'all-time',draftAttempts:businessEvents.filter(e=>e.phase==='finish'&&DRAFT_OPS.includes(e.operation)&&!isWaiting(e)).length,
+   draftFailures:businessEvents.filter(e=>e.phase==='finish'&&DRAFT_OPS.includes(e.operation)&&e.outcome==='error'&&!isWaiting(e)).length,
+   waitingEvents:businessEvents.filter(e=>e.phase==='finish'&&e.outcome==='error'&&isWaiting(e)).length,
+   deliveryWorkflows:taskRows.reduce((n,t)=>n+t.figmaWorkflows.length,0),verifiedWorkflows:taskRows.reduce((n,t)=>n+t.figmaWorkflows.filter(w=>w.state==='verified').length,0),ignoredHelpEvents:ignoredHelp.size},
   totals:{people:peopleRows.length,devices:Object.keys(devices).length,events:events.length,tasks:taskRows.length,
    commands:peopleRows.reduce((n,p)=>n+p.commands,0),commands7d:peopleRows.reduce((n,p)=>n+p.commands7d,0),
    saves:peopleRows.reduce((n,p)=>n+p.saves,0),confirms:peopleRows.reduce((n,p)=>n+p.confirms,0),
@@ -114,7 +127,7 @@ export function buildReport(dataDir,{now=Date.now()}={}){
   people:peopleRows,
   tasks:taskRows.map(t=>({...t,person:names[t.client]})),
   daily:[...daily.values()].map(d=>({date:d.date,commands:d.commands,errors:d.errors,people:d.people.size})),
-  recentErrors:events.filter(e=>e.phase==='finish'&&e.outcome==='error').slice(-50).reverse().map(e=>({at:e.at,person:names[e.client],taskId:e.taskId,operation:e.operation,errorCode:e.errorCode,message:errorMessage(e)})),
+  recentErrors:businessEvents.filter(e=>e.phase==='finish'&&e.outcome==='error').slice(-50).reverse().map(e=>({at:e.at,person:names[e.client],taskId:e.taskId,operation:e.context?.command??e.operation,errorCode:e.errorCode,category:eventCategory(e),version:eventVersion(e),message:errorMessage(e)})),
   sources:[...new Map(taskRows.flatMap(t=>t.sources.map(s=>[s.url,{...s,person:names[t.client],taskId:t.taskId,lastSeen:t.lastSeen}]))).values()].sort((a,b)=>b.lastSeen.localeCompare(a.lastSeen))
  };
 }
