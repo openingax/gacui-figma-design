@@ -1,9 +1,9 @@
 {
-  "version": "1.2.6",
+  "version": "1.2.7",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.2.6：新增项目范围的本机日志 hooks、直接拒绝候选诊断及显式草稿关联；修复状态查询成功误清除 Figma 阻断。原草稿、配置和日志关闭设置保留，升级不会自动注册 hooks 或打开采集。",
+  "notice": "V1.2.7：空白文件可重建 Drawer 并继续出其余画板。缺少构建数据时只暂缓用到该组件的画板，不再整稿阻断。保留已确认草稿、1.2.6 的日志关闭设置，升级不自动注册 hooks。",
   "delivery": "draft-and-figma",
   "figmaStatus": "on-demand-local-components"
 }

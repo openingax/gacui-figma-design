@@ -164,6 +164,8 @@ export async function sketchRuntime(figma, req, lib) {
       return n;
     };
     const choose = async (id, predicates) => {
+      if (f.choice) return replace(f.choice);
+      if (lib.formVariantQuery) { const q = lib.formVariantQuery(f); id = q.set; predicates = q.predicates; }
       const set = await figma.getNodeByIdAsync(id);
       const main = set.children.find(c => predicates.every(p => c.name.includes(p)));
       if (!main) throw Error(f.layer + '缺少现有变体');
@@ -171,13 +173,13 @@ export async function sketchRuntime(figma, req, lib) {
     };
     const filled = f.value != null && f.value !== '' && (!Array.isArray(f.value) || f.value.length > 0);
     if (['date','date-range'].includes(f.kind)) {
-      await choose('70:2', [`mode 类型=${f.kind === 'date' ? 'date 日期,' : 'dateRange 日期区间,'}`, 'state 状态=normal', `filled 填充=${filled}`, `disabled 禁用=${!!f.disabled}`]);
+      await choose();
       const ts = visibleTexts(control);
       if (filled) { await setText(ts[0], f.kind === 'date' ? String(f.value) : f.value[0]); if(f.kind==='date-range') await setText(ts[2], f.value[1]); }
     } else if (f.kind === 'switch') {
-      await choose('53:85', ['size 尺寸=medium', `checked 开关=${!!f.value}`, 'loading 加载=false', `disabled 禁用=${!!f.disabled}`, 'label标签=none']);
+      await choose();
     } else if (f.kind === 'select') {
-      await choose('77:76', ['state 状态=normal', `multiple 多选=${!!f.multiple}`, 'prefixIcon 前置图标=false', `filled 填充=${filled}`, `disabled 禁用=${!!f.disabled}`]);
+      await choose();
       if (f.multiple && filled) {
         control = control.detachInstance(); control.name = 'control';
         const tags = control.findOne(n => n.name === 'tag'), template = tags.children[0];
@@ -199,7 +201,7 @@ export async function sketchRuntime(figma, req, lib) {
 
     } else {
       if(f.disabled&&['textarea','time','number'].includes(f.kind)){await replace(f.kind==='textarea'?'436:2':f.kind==='time'?(filled?'436:39':'436:33'):(filled?'436:15':'436:5'));control.name=f.kind==='time'?'TimePicker-input 时间选择输入框':f.kind==='number'?'InputNumber数字输入框':'control';}
-      if (f.kind === 'input' && f.disabled) await choose('64:2',['state 状态=normal','prefixIcon 前置图标=off','clearable 清空=off','tips 提示=off','disabled 禁用=on']);
+      if (f.kind === 'input' && f.disabled) await choose();
       if (f.kind === 'number') {
         const suffix = control.children.find(n => n.name === 'label'); if(suffix) suffix.visible = false;
       }

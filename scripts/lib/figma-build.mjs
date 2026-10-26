@@ -9,7 +9,7 @@ export function generateFromData(data,definition,stage,target,state={}){
  if(!target.fileKey||target.fileKey===definition.source.fileKey||!/^\d+:\d+$/.test(target.pageId||''))throw Error('目标无效');
  const allowed=new Set(['COMPONENT_SET','COMPONENT','FRAME','INSTANCE','TEXT','VECTOR','RECTANGLE','ELLIPSE','LINE','BOOLEAN_OPERATION']);for(const n of data.nodes){if(!allowed.has(n.type))throw Error('尚未验证的节点类型 '+n.type);if(n.type==='BOOLEAN_OPERATION'&&!['UNION','INTERSECT','SUBTRACT','EXCLUDE'].includes(n.props.booleanOperation))throw Error('布尔运算类型缺失');if((n.props.fills||[]).some(p=>p.type==='IMAGE'))throw Error('图片需使用已验证的资产转移适配');}
  const range=stage.match(/^nodes-range:(\d+):(\d+)$/);let rangeNodes,rangeState;
- if(range){const offset=Number(range[1]),count=Number(range[2]),all=data.nodes.filter(n=>n.type!=='COMPONENT_SET');if(!Number.isSafeInteger(offset)||!Number.isSafeInteger(count)||count<1||offset+count>all.length)throw Error('节点范围无效');rangeNodes=all.slice(offset,offset+count);const needed=new Set(rangeNodes.flatMap(n=>[n.sourceId,n.parentSourceId]));rangeState={paintMap:state.paintMap??{},map:Object.fromEntries(Object.entries(state.map??{}).filter(([id])=>needed.has(id)))};}
+ if(range){const offset=Number(range[1]),count=Number(range[2]),all=data.nodes.filter(n=>n.type!=='COMPONENT_SET');if(!Number.isSafeInteger(offset)||!Number.isSafeInteger(count)||count<1||offset+count>all.length)throw Error('节点范围无效');rangeNodes=all.slice(offset,offset+count);const needed=new Set(rangeNodes.flatMap(n=>[n.sourceId,n.parentSourceId]));rangeState={...(state.fontFamily?{fontFamily:state.fontFamily}:{}),...(state.textStyleNamespace?{textStyleNamespace:state.textStyleNamespace}:{}),paintMap:state.paintMap??{},map:Object.fromEntries(Object.entries(state.map??{}).filter(([id])=>needed.has(id)))};}
  const pre=`const target=${JSON.stringify(target)};if(figma.fileKey!==target.fileKey)throw Error('目标文件不符');const page=await figma.getNodeByIdAsync(target.pageId);if(!page||page.type!=='PAGE')throw Error('Page不存在');await figma.setCurrentPageAsync(page);const state=${JSON.stringify(stage==='finish'||stage.startsWith('vectors:')?{}:(rangeState??state))};`;
  let code;
  if(stage==='start')code=`const definition=${JSON.stringify({name:definition.name,source:definition.source})};const styles=${JSON.stringify(data.styles)};${start.toString()};return await start(figma,page,definition,styles);`;
@@ -26,7 +26,8 @@ export function generateFromData(data,definition,stage,target,state={}){
   const keys=['x','y','relativeTransform','width','height','layoutMode','primaryAxisSizingMode','counterAxisSizingMode','layoutSizingHorizontal','layoutSizingVertical','layoutGrow','layoutAlign','layoutPositioning','textAutoResize'];
   const rows=data.nodes.map(n=>[state.map[n.sourceId]||null,n.type,...keys.map(k=>n.props[k]??null)]);
   const strokeRows=data.nodes.filter(n=>n.type!=='COMPONENT_SET').map(n=>[state.map[n.sourceId],n.strokeStyleName||null,n.strokeStyleName?null:(n.props.strokes||[])]);
-  code=`const definition=${JSON.stringify({name:definition.name,displayLayout:definition.displayLayout})};const keys=${JSON.stringify(keys)};const rows=${JSON.stringify(rows)};const records=rows.map(r=>({sourceId:r[0],type:r[1],props:Object.fromEntries(keys.map((k,i)=>[k,r[i+2]]).filter(([k,v])=>v!==null))}));const localState={map:Object.fromEntries(rows.filter(r=>r[0]).map(r=>[r[0],r[0]]))};${restoreTransform.toString()};${finish.toString()};${applyFinalStrokes.toString()};const result=await finish(figma,page,definition,records,null,localState);await applyFinalStrokes(figma,page,${JSON.stringify(strokeRows)});return {...result,strokeFinalized:true};`;
+  const overflowRows=data.nodes.filter(n=>n.type==='TEXT'&&n.props.textTruncation==='ENDING').map(n=>[state.map[n.sourceId],n.props.textTruncation,n.props.maxLines??null]);
+  code=`const definition=${JSON.stringify({name:definition.name,displayLayout:definition.displayLayout})};const keys=${JSON.stringify(keys)};const rows=${JSON.stringify(rows)};const records=rows.map(r=>({sourceId:r[0],type:r[1],props:Object.fromEntries(keys.map((k,i)=>[k,r[i+2]]).filter(([k,v])=>v!==null))}));const localState={map:Object.fromEntries(rows.filter(r=>r[0]).map(r=>[r[0],r[0]]))};${restoreTransform.toString()};${finish.toString()};${applyFinalStrokes.toString()};${overflowRows.length?applyFinalTextOverflow.toString():''};const result=await finish(figma,page,definition,records,null,localState);${overflowRows.length?`await applyFinalTextOverflow(figma,page,${JSON.stringify(overflowRows)});`:''}await applyFinalStrokes(figma,page,${JSON.stringify(strokeRows)});return {...result,strokeFinalized:true};`;
  }
  else if(stage==='plan')return JSON.stringify({nodeBatches:Math.ceil(data.nodes.filter(n=>n.type!=='COMPONENT_SET').length/8),vectors:Object.keys(data.vectors).length});
  else throw Error('未知阶段');
@@ -51,7 +52,7 @@ export async function buildNodes(figma,page,records,rootId,state){
   ids.push(n.id);
   if(r.type==='TEXT'){
    const font={family:state.fontFamily??'Noto Sans SC',style:r.font.style==='Medium'||r.font.style==='Semibold'?'Medium':'Regular'};await figma.loadFontAsync(n.fontName);await figma.loadFontAsync(font);n.fontName=font;
-   const name='UIAgent/临时字体/'+font.family+'/'+r.textStyle+'/'+font.style+'/'+p.fontSize+'/'+JSON.stringify(p.lineHeight);
+   const name=(state.textStyleNamespace??'UIAgent/临时字体')+'/'+font.family+'/'+r.textStyle+'/'+font.style+'/'+p.fontSize+'/'+JSON.stringify(p.lineHeight);
    let style=styles.find(s=>s.name===name);
    if(style&&style.fontName!==figma.mixed&&(style.fontName.family!==font.family||style.fontName.style!==font.style))throw Error('临时文字样式字体冲突 '+name);
    if(!style){style=figma.createTextStyle();style.name=name;style.fontName=font;style.fontSize=p.fontSize;style.lineHeight=clone(p.lineHeight);style.letterSpacing=clone(p.letterSpacing);styles.push(style);newStyles.push(style.id);}
@@ -60,6 +61,7 @@ export async function buildNodes(figma,page,records,rootId,state){
   const parentId=state.map[r.parentSourceId];const parent=parentId?await figma.getNodeByIdAsync(parentId):page;
   if(r.parentSourceId&&r.parentSourceId!==rootId&&!parentId)throw Error('父节点未创建');let owner=parent;while(owner&&owner.type!=='PAGE')owner=owner.parent;if(owner!==page)throw Error('父节点不在授权Page');parent.appendChild(n);n.name=r.name;
   n.resize(p.width,p.height);
+  if(r.type==='ELLIPSE'&&p.arcData)n.arcData=clone(p.arcData);
   if('layoutMode'in p){n.layoutMode=p.layoutMode;for(const k of ['layoutWrap','primaryAxisAlignItems','counterAxisAlignItems','paddingTop','paddingRight','paddingBottom','paddingLeft','itemSpacing','clipsContent'])if(k in p)n[k]=clone(p[k]);}
   for(const k of ['rotation','visible','opacity','blendMode','strokeWeight','strokeAlign','strokeCap','strokeJoin','strokeMiterLimit','dashPattern','cornerSmoothing','constraints','effects','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight','strokesIncludedInLayout'])if(k in p&&(k!=='strokesIncludedInLayout'||n.layoutMode!=='NONE'))n[k]=clone(p[k]);
   if(r.type!=='VECTOR'){if('cornerRadius'in p)n.cornerRadius=p.cornerRadius;for(const k of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'])if(k in p)n[k]=p[k];}
@@ -74,6 +76,13 @@ export async function buildNodes(figma,page,records,rootId,state){
   n.x=p.x;n.y=p.y;state.map[r.sourceId]=n.id;
  }
  return {mapDelta:Object.fromEntries(records.map(r=>[r.sourceId,state.map[r.sourceId]])),createdNodeIds:ids,createdStyleIds:newStyles};
+}
+// textAutoResize restoration can reset truncation; reapply only source-defined endings afterwards.
+export async function applyFinalTextOverflow(figma,page,rows){
+ const nodes=[];
+ for(const [id,truncation,maxLines]of rows){const n=await figma.getNodeByIdAsync(id);let owner=n;while(owner&&owner.type!=='PAGE')owner=owner.parent;if(!n||n.type!=='TEXT'||owner!==page)throw Error('省略文字不在目标Page');for(const s of n.getStyledTextSegments(['fontName']))await figma.loadFontAsync(s.fontName);nodes.push({n,truncation,maxLines});}
+ for(const {n,truncation,maxLines}of nodes){n.textTruncation=truncation;n.maxLines=maxLines;}
+ return nodes.map(x=>x.n.id);
 }
 export async function applyFinalStrokes(figma,page,rows){
  const styles=await figma.getLocalPaintStylesAsync();const nodes=[];

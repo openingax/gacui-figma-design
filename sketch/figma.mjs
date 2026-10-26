@@ -37,7 +37,8 @@ import {readFileSync, writeFileSync} from 'node:fs';
 import {loadVersions, loadChecklist} from './sketch.mjs';
 import {check, nodeTitle, resolvePage} from './core.mjs';
 import {verifyWorkbench, verifyForm, generationResult} from './verification.mjs';
-import {disabledButtonReferences} from '../scripts/figma/portable-references.mjs';
+import {disabledButtonReferences,formVariantReference} from '../scripts/figma/portable-references.mjs';
+import {formVariantQuery} from './form-variants.mjs';
 import {buildPortableShell} from '../scripts/figma/portable-shell.mjs';
 import {sketchRuntime} from './figma-runtime.mjs';
 import {buildTable, validate as validateTable} from '../components/table/generator.mjs';
@@ -309,9 +310,10 @@ export function code(dir, boardId, options = {}) {
   if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify((()=>{const config=(board.def.workbench??board.def).table.config,d=tableDependencies(config);if(options.portable){d.cells=Object.fromEntries(Object.entries(d.cells).filter(([k])=>k==='header'||config.columns.some(c=>c.kind===k)));if(!config.selection)d.checkbox={};if(!config.pagination)delete d.pagination;}return d;})())}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
     const hasFields=(board.def.drawer??board.def).rows.length>0;
-    fns = (hasFields?[fitFieldContent, composeForm, updateDrawer]:[updateDrawer]).map(f => f.toString()).join('\n');
+    const query=hasFields&&!options.portable;
+    fns = (hasFields?[fitFieldContent, composeForm, updateDrawer, ...(query?[formVariantQuery]:[])]:[updateDrawer]).map(f => f.toString()).join('\n');
     const {variants, titleProperty, footerIds, closeIds} = readJson('./maps/drawer.json');
-    lib = `{${hasFields?'composeForm, fitFieldContent, ':''}updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: buttonReactions()})}}`;
+    lib = `{${hasFields?'composeForm, fitFieldContent, ':''}${query?'formVariantQuery, ':''}updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: options.portable ? null : buttonReactions()})}}`;
   }
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
   if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
@@ -433,15 +435,22 @@ export function code(dir, boardId, options = {}) {
       runtime=runtime.replace(/  async function buttonDisabled\([\s\S]*?(?=  async function text\()/,`  async function buttonDisabled(n,disabled){if(!disabled)return;const main=await n.getMainComponentAsync();const ids=${JSON.stringify(disabled)};const target=ids[main.id];if(!target)throw Error('按钮禁用态未初始化');const label=n.componentProperties[Object.keys(n.componentProperties).find(k=>k.startsWith('label'))].value;n.swapComponent(await figma.getNodeByIdAsync(target));await normalize(n);await buttonLabel(n,label);}
 `);
     }
+    const portableDrawer=req.board.def.drawer??(req.board.kind==='drawer'?req.board.def:null),formRows=portableDrawer?.rows??[];
+    for(const f of formRows.flat()){const q=formVariantQuery(f);if(q)f.choice=formVariantReference(q,f.layer);}
+    if(portableDrawer){
+      const fields=formRows.flat(),has=(kind,disabled)=>fields.some(f=>f.kind===kind&&(!disabled||f.disabled));
+      const unused=[...(has('checkbox')?[]:['31:2','31:12','31:15','31:17']),...(has('radio')?[]:['436:24','436:28']),...(has('textarea',true)?[]:['436:2']),...(has('time',true)?[]:['436:33','436:39']),...(has('number',true)?[]:['436:5','436:15']),...((portableDrawer.buttons??[]).some(b=>b.loading)?[]:['107:250','107:254'])];
+      for(const id of unused)runtime=runtime.replaceAll("'"+id+"'","'unused:"+id+"'");
+    }
     const resolve=options.resolveReference;
     if(typeof resolve!=='function')throw Error('新文件必须提供已核验组件映射');
     // Transform compiler references only. Never search/replace the user's business text or snapshots.
-    const refs=source=>source.replace(/(['"])(\d+:\d+)\1/g,(_,q,id)=>JSON.stringify(resolve(id)));
+    const refs=source=>source.replace(/(['"])((?:0|[1-9]\d*):(?:0|[1-9]\d*))\1/g,(_,q,id)=>JSON.stringify(resolve(id)));
     fns=refs(fns);runtime=refs(runtime);lib=refs(lib);
     function mapFields(value,key=''){
       if(Array.isArray(value))return value.map(v=>mapFields(v,key));
       if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,mapFields(v,k)]));
-      return typeof value==='string'&&['mainId','variant','itemIds'].includes(key)&&/^\d+:\d+$/.test(value)?resolve(value):value;
+      return typeof value==='string'&&['mainId','variant','itemIds','choice'].includes(key)&&/^\d+:\d+$/.test(value)?resolve(value):value;
     }
     req.board=mapFields(req.board);
     req.board.notes=req.board.notes.filter(n=>!n.includes('沿用工单页基线'));
