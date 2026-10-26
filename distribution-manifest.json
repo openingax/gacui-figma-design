@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -103,7 +103,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "4ac5893827134ffde2c353c56df9c31bf7eedaaa7d33d23bb2f886d4765b7e17",
+      "sha256": "3421a01fe91711e5cfb3cf09f616824c0ff59324530c9bcb00f66c3ab27fbe9a",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -128,7 +128,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b24ab8cccdfdcc7c3e886eb18b148543c947c70f57d26c8e97c4c240fa7aed71",
+      "sha256": "498fa4ff52b204ebf90523ac3aa3129db5b60d136e1106f4feee40960d0821f5",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -2568,7 +2568,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "5e2a829ffb8d30fc8ad6ab4932aac4e13b39b2d16ef219e0db959816c6d5c75b",
+      "sha256": "6790dd258a5b273dad1d501f70b0f1aed7d02ce2d8c1718898322d468b06ddba",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2653,7 +2653,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "afbc697bd7f49912469740ad577a59e287df026320a1a4af2d6e867e8f0f00c7",
+      "sha256": "b4e5b30011cde9b747417c6c8a52c685b4cb6a2e51fa161589569b33aa2921f2",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -2893,7 +2893,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "f58a3ea1fc617046316809084ebc8bdabf48feb7176aba6a685e415bb5e8f7e4",
+      "sha256": "128c695564c7199c3da3a32aa32607446d7f13fa5b1fdc0f68714b45ffa4d148",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3008,7 +3008,7 @@
     },
     {
       "path": "support/public-dashboard/public/app.js",
-      "sha256": "7f2b8268d8053a85e4ebc26e9c876a972e28c444d779b9006285dc9f2b7b71f7",
+      "sha256": "7638e7416ce2341c13f95a03c266c3f144a5c581770efcf7cadbd0dd6a68c2e8",
       "upstreamSha256": null
     },
     {

@@ -420,7 +420,7 @@
   const i=issueItems().find(x=>x.id===id);if(!i)return;
   drawerClient=null;drawerIssue=id;
   const version=e=>e.version.skillVersion?'Skill '+e.version.skillVersion:'构建 '+(e.version.build||'未记录').slice(0,8);
-  $('#drawer').innerHTML=`<div class="drawer-head"><div><h3 id="drawer-title">${esc(i.number)}</h3><div class="sub">${esc(i.stateLabel)}${i.reopened?' · 关闭后再次失败':''} · ${i.kind==='followup'?'业务待跟进':'技术问题'}</div><button class="icon-btn" type="button" id="drawer-close" aria-label="关闭">${icon('close')}</button></div>
+  $('#drawer').innerHTML=`<div class="drawer-head"><div><h3 id="drawer-title">${esc(i.number)}</h3><div class="sub">${esc(i.stateLabel)}${i.reopened?' · 关闭后再次失败':''} · ${i.kind==='followup'?'业务待跟进':'技术问题'}</div></div><button class="icon-btn" type="button" id="drawer-close" aria-label="关闭">${icon('close')}</button></div>
    <div class="drawer-body"><p class="issue-message">${esc(i.message)}</p><dl class="kv"><dt>使用者 / 阶段</dt><dd>${esc(i.person)} / ${esc(i.stage||i.operation)}</dd><dt>任务日志状态</dt><dd>${esc(i.taskStatus)}（独立于问题处理）</dd><dt>任务标识</dt><dd><code>${esc(i.taskId)}</code></dd><dt>首次 / 最近</dt><dd>${esc(fmtFull(i.firstAt))}<br>${esc(fmtFull(i.lastAt))}</dd><dt>发生次数</dt><dd>${i.count}</dd></dl>
    ${i.reopened?'<p class="issue-notice">关闭后出现时间更晚的新失败，已重新打开；此前处理记录保留。</p>':''}
    ${i.closureSource==='workflow-receipt'?'<p class="issue-notice">已收到可关联的工作流验证回执，自动标记恢复；不代表用户验收。</p>':''}
