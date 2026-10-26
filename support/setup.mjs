@@ -20,7 +20,7 @@ try {
  } else if(cmd==='server') {
   if(fs.existsSync(target))throw Error('服务目录已存在，请使用审核后的发布流程更新，避免覆盖数据或配置');
   for(const dir of ['app','data','logs','private'])fs.mkdirSync(join(target,dir),{recursive:true,mode:0o700});
-  for(const name of ['server.mjs','protocol.mjs','manage.mjs','analyze.mjs','diagnose.mjs','workflow-state.mjs','event-semantics.mjs','report.mjs','dashboard.mjs','entry.mjs'])fs.copyFileSync(join(source,name),join(target,'app',name));
+  for(const name of ['server.mjs','protocol.mjs','manage.mjs','analyze.mjs','diagnose.mjs','workflow-state.mjs','event-semantics.mjs','issues.mjs','report.mjs','dashboard.mjs','entry.mjs'])fs.copyFileSync(join(source,name),join(target,'app',name));
   const token=randomBytes(32).toString('hex');let build='unknown';try{build=execFileSync('git',['rev-parse','HEAD'],{cwd:source,encoding:'utf8'}).trim()}catch{}
   write(join(target,'private','collector.json'),{dataDir:join(target,'data'),port:5186,tokenHashes:[createHash('sha256').update(token).digest('hex')],ticketSecret:randomBytes(32).toString('hex'),build,maxBytes:256*1024*1024});
   write(join(target,'private','first-client.json'),{endpoint:'http://127.0.0.1:5186',token});

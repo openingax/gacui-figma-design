@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import {join} from 'node:path';import {randomUUID} from 'node:crypto';
+import {buildIssues,updateIssue,issueSummary} from '../support/issues.mjs';
+const root=fs.mkdtempSync(join(os.tmpdir(),'gac-issues-'));const client='a'.repeat(64),taskId='b'.repeat(32);let n=0;
+const event=(extra={})=>({id:randomUUID(),taskId,client,runId:randomUUID(),at:new Date(1800000000000+n++*1000).toISOString(),phase:'finish',operation:'check',outcome:'error',errorCode:'unexpected',build:'unknown',context:{message:'missing node 203:17'},...extra});
+try{
+ const a=event(),b=event();let events=[a,b];let list=buildIssues(root,events);assert.equal(list.length,1);assert.equal(list[0].count,2);assert.equal(fs.existsSync(join(root,'issues')),false,'GET不得写入');
+ const id=list[0].id;const base={actor:'test',note:'verified with receipt',assignee:'test',evidence:'test receipt',state:'closed',resolution:'verified'};
+ assert.throws(()=>updateIssue(root,list,id,{...base,etag:'bad'}),e=>e.status===409);
+ assert.throws(()=>updateIssue(root,list,id,{...base,etag:list[0].etag,evidence:''}));
+ assert.throws(()=>updateIssue(root,list,id,{...base,etag:list[0].etag,resolution:'duplicate',duplicateOf:id}));
+ updateIssue(root,list,id,{...base,etag:list[0].etag});
+ assert.throws(()=>updateIssue(root,list,id,{...base,etag:list[0].etag}),e=>e.status===409,'旧写入不覆盖');
+ list=buildIssues(root,events);assert.equal(list[0].state,'closed');assert.equal(list[0].history.length,1);
+ const late={...event(),at:a.at};events.push(late);list=buildIssues(root,events);assert.equal(list[0].state,'closed','晚到旧事件不重新打开');
+ events.push(event());list=buildIssues(root,events);assert.equal(list[0].state,'open');assert.equal(list[0].reopened,true);assert.equal(list[0].history.length,1);
+ updateIssue(root,list,id,{...base,etag:list[0].etag,state:'in_progress'});list=buildIssues(root,events);assert.equal(list[0].state,'in_progress');
+ assert.throws(()=>updateIssue(root,list,id,{...base,etag:list[0].etag,state:'fixed_pending',evidence:'',fixVersion:''}));
+ updateIssue(root,list,id,{...base,etag:list[0].etag,state:'fixed_pending',fixVersion:'1.3.0'});assert.equal(buildIssues(root,events)[0].state,'fixed_pending');
+ assert.equal(buildIssues(root,[a,event({client:'c'.repeat(64)}),event({taskId:'d'.repeat(32)}),event({context:{message:'missing node 203:18'}})]).length,4,'不能跨设备任务或节点合并');
+ assert.equal(buildIssues(root,[event({context:{}}),event({context:{}})]).length,2,'仅unexpected不能合并');
+ const wait=event({context:{category:'target_required',message:'target required'}});assert.equal(issueSummary(buildIssues(root,[wait])).followup,1);
+ const wf=randomUUID();const f=event({operation:'tool',details:{kind:'tool-call',payload:{tool:'figma-workflow',workflowId:wf,stage:'preflight',status:'blocked',fileKey:'target',confirmedVersion:1}}});
+ const success=event({outcome:'success',details:{kind:'tool-call',payload:{...f.details.payload,stage:'verify',status:'completed',deliveryComplete:true}}});
+ assert.equal(buildIssues(root,[f,success])[0].state,'closed');
+ assert.equal(buildIssues(root,[f,event({outcome:'success',operation:'status'})])[0].state,'open');
+ const unrelated={...success,details:{kind:'tool-call',payload:{...success.details.payload,fileKey:'other'}}};assert.equal(buildIssues(root,[f,unrelated])[0].state,'open');
+ const h=event({phase:'start',context:{command:'--help'},operation:'unknown'});assert.equal(buildIssues(root,[h,event({runId:h.runId,operation:'unknown'})]).length,0);
+ console.log('PASS issues: stable conservative groups, waiting, immutable history, stale writes, closure evidence, recurrence/late uploads, verified workflow, help');
+}finally{fs.rmSync(root,{recursive:true,force:true});}

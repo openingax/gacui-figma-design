@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.2.8",
+  "version": "1.3.0",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -25,6 +25,7 @@
     "docs/platform-distribution.md",
     "docs/portable-figma.md",
     "docs/support/figma-logging.md",
+    "docs/support/issues.md",
     "docs/support/local-diagnostics.md",
     "docs/upgrade.md",
     "README.md",
@@ -54,8 +55,16 @@
     "support/hooks/capture.mjs",
     "support/hooks/configure.mjs",
     "support/hooks/report.mjs",
+    "support/issues.mjs",
     "support/profile.mjs",
     "support/protocol.mjs",
+    "support/public-dashboard/package.json",
+    "support/public-dashboard/prepare.mjs",
+    "support/public-dashboard/public/app.css",
+    "support/public-dashboard/public/app.js",
+    "support/public-dashboard/server.mjs",
+    "support/public-dashboard/snapshot.mjs",
+    "support/public-dashboard/ui.mjs",
     "support/report.mjs",
     "support/server.mjs",
     "support/setup.mjs",
@@ -68,6 +77,8 @@
     "tests/hook-bridge.test.mjs",
     "tests/hook-capture.test.mjs",
     "tests/hook-configure.test.mjs",
+    "tests/issues-api.test.mjs",
+    "tests/issues.test.mjs",
     "tests/log-client-semantics.test.mjs",
     "tests/log-semantics.test.mjs",
     "tests/portable-figma.test.mjs",
@@ -92,7 +103,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "dc493ed3c72e208f11889f7de4c7b1e8103528fd0aee68d6c0eb6e2c9e46de48",
+      "sha256": "4ac5893827134ffde2c353c56df9c31bf7eedaaa7d33d23bb2f886d4765b7e17",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -117,7 +128,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ba41baf706f2e9a6dda647cc57c5ce10f96b95d4ac3c5cabb58867bb9c0506b6",
+      "sha256": "b24ab8cccdfdcc7c3e886eb18b148543c947c70f57d26c8e97c4c240fa7aed71",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -2557,7 +2568,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "21e2e1d46af7771f382ec5ef4aa915d91ddfe43fe03e6aee6c52c671e7fb93c4",
+      "sha256": "5e2a829ffb8d30fc8ad6ab4932aac4e13b39b2d16ef219e0db959816c6d5c75b",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2588,6 +2599,11 @@
     {
       "path": "docs/support/figma-logging.md",
       "sha256": "cbc61c785bbeae9e3369bba62a3b086b22760c88340b2c5cc09f43d0087f0a42",
+      "upstreamSha256": null
+    },
+    {
+      "path": "docs/support/issues.md",
+      "sha256": "44e01899eeae090b39cf33a66657a36c2d339372105c6895377de124715ef56d",
       "upstreamSha256": null
     },
     {
@@ -2637,7 +2653,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "d47a6658015ea24746f2459b0c84624661f97acfcffbe1528bba1eb102acc8d5",
+      "sha256": "afbc697bd7f49912469740ad577a59e287df026320a1a4af2d6e867e8f0f00c7",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -2762,7 +2778,7 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "d9b90fa58983b6953c8064be01088dc989bfcf1497904b98a3aaa302e7f177dd",
+      "sha256": "1464fd43aa477fad25370ae5f63bcf73a289bf351ef3561ec115502810e75908",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
@@ -2877,7 +2893,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "e95807cb477cd670db1b46c8f7b59ac80d7450e0e72d64eb8b951d0dca478c1c",
+      "sha256": "f58a3ea1fc617046316809084ebc8bdabf48feb7176aba6a685e415bb5e8f7e4",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -2902,7 +2918,7 @@
     },
     {
       "path": "support/dashboard.mjs",
-      "sha256": "9f51e2051ee27cbec0ddfc1106a3404e4ebe67e4cb929f941d9424325853b39b",
+      "sha256": "f947490cfda09132cab83050c3ea0f0704b4f6395f497ac279f3d5185dd0e002",
       "upstreamSha256": "d30c43dfcefa8ac31d79e7ba3499fea51f167b66a720abaf3da6d6b1696996f7"
     },
     {
@@ -2917,7 +2933,7 @@
     },
     {
       "path": "support/event-semantics.mjs",
-      "sha256": "9889f4f815932aa87f15b5b9ed6676a4ce8acfbb2fe5a97d254a6b0365d5371a",
+      "sha256": "23eb52389b95f1a59be22a4c04a850e55948b1454e6196d9b32b9e4ccfde3151",
       "upstreamSha256": null
     },
     {
@@ -2951,6 +2967,11 @@
       "upstreamSha256": null
     },
     {
+      "path": "support/issues.mjs",
+      "sha256": "c6ed21c6cfd28419ffd40d95f03d612b8de01c8c0c2628ca49c5000e1a9eb964",
+      "upstreamSha256": null
+    },
+    {
       "path": "support/manage.mjs",
       "sha256": "b6bdeec8a693be6b3344b73eaa0687c188c1351ac6594654c13d88df43e36f2e",
       "upstreamSha256": "b6bdeec8a693be6b3344b73eaa0687c188c1351ac6594654c13d88df43e36f2e"
@@ -2971,8 +2992,43 @@
       "upstreamSha256": "60fd81a3d2755da5d3b5e16b66069dfd6c29e2c9529c6b40015e12a8a04a216b"
     },
     {
+      "path": "support/public-dashboard/package.json",
+      "sha256": "996e9886b0be0c7b1bc659168d05a583c886996e4517ae858887140a85511ae6",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/prepare.mjs",
+      "sha256": "80b7d463e2c606b90e86dcb5e2fad727fdc14212151b4cd14577063b9d82b49c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/public/app.css",
+      "sha256": "3ee564bab2e1eea04b8b1767fa6643d9d5ba1a8be49f1666d6940fe2b5fa4b5b",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/public/app.js",
+      "sha256": "7f2b8268d8053a85e4ebc26e9c876a972e28c444d779b9006285dc9f2b7b71f7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/server.mjs",
+      "sha256": "be35c1655687bf824b61f1e50461135e7af5d9424eb39fe5a4b6cddb28f07dc0",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/snapshot.mjs",
+      "sha256": "b591411a810eaf159d659dadb845b7037fef0e1e295842df7658bb50166b7a31",
+      "upstreamSha256": null
+    },
+    {
+      "path": "support/public-dashboard/ui.mjs",
+      "sha256": "3d146053af7d9fd77b882da8b8cc6a38ae3e89b66667585a8a2280d158fd8601",
+      "upstreamSha256": null
+    },
+    {
       "path": "support/report.mjs",
-      "sha256": "f517295e82c87c8d9a94da30bb1122abf1689d233d6694131d5a44245744f86d",
+      "sha256": "53e4c68eca87c18c0758869a26ad2e7726ff85775aff6561bac0bc26a6397aaa",
       "upstreamSha256": null
     },
     {
@@ -2982,7 +3038,7 @@
     },
     {
       "path": "support/setup.mjs",
-      "sha256": "54b86e2bc877c906a81e9869f9cb0b6915261f369d3f9be79efb16fa3dd57fba",
+      "sha256": "806cdcb1dfacd8ec3631308ccfb5dd38caff68df70aa7be4de05510a2846d4d1",
       "upstreamSha256": "a3ad6fdc0185fc12186ed502244aa04b4ddc06cacffc98220dc6f363025cf5c9"
     },
     {
@@ -3088,6 +3144,16 @@
     {
       "path": "tests/hook-configure.test.mjs",
       "sha256": "4d28d1e160f067bc322a1a9ca4e9523e5c45cfd6bd5b944dbdca41dc704f3752",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/issues-api.test.mjs",
+      "sha256": "4bc5d03f90118882d6aa8636c61299917fac8b4a6c639ce0a91b26cde59d5864",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/issues.test.mjs",
+      "sha256": "354d7e6d60a7324ab667dbc12b44e12dc2e3bba8e84fa6478e1f75362a1ef990",
       "upstreamSha256": null
     },
     {
