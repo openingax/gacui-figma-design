@@ -12,3 +12,23 @@ export function disabledButtonReferences(){
  }
  return out;
 }
+// A form field needs one variant of a component set; build that variant alone instead of the whole set.
+// A set's variants can be split across family files (e.g. Select normal states vs expanded states).
+let variantCache=null;
+function setVariants(index){
+ if(variantCache)return variantCache;variantCache=new Map();
+ for(const file of new Set(Object.values(index).filter(v=>!v.variant).map(v=>v.path))){
+  let data;try{data=JSON.parse(fs.readFileSync(new URL('../../'+file,import.meta.url)));}catch{continue;}
+  for(const n of data.nodes??[])if(n.type==='COMPONENT'&&n.parentSourceId){if(!variantCache.has(n.parentSourceId))variantCache.set(n.parentSourceId,new Map());variantCache.get(n.parentSourceId).set(n.sourceId,n.name);}
+ }
+ return variantCache;
+}
+export function formVariantReference(query,layer){
+ const index=JSON.parse(fs.readFileSync(new URL('./portable-index.json',import.meta.url))),set=index[query.set],who=layer??'字段';
+ if(!set||set.type!=='COMPONENT_SET')throw Error(who+'的组件集 '+query.set+' 暂无空白文件构建数据');
+ const matches=[...(setVariants(index).get(set.sourceId)??new Map())].filter(([,name])=>query.predicates.every(p=>name.includes(p)));
+ if(matches.length!==1)throw Error(who+(matches.length?'匹配到多个现有变体':'缺少现有变体'));
+ const ids=Object.keys(index).filter(k=>index[k].sourceId===matches[0][0]&&index[k].type==='COMPONENT').sort();
+ if(!ids.length)throw Error(who+'的变体暂无空白文件构建数据');
+ return ids[0];
+}

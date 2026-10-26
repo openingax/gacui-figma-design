@@ -1,0 +1,16 @@
+{
+  "drawer": {
+    "key": "drawer/library",
+    "label": "Drawer 抽屉",
+    "roles": {
+      "203:36": "variants.small",
+      "203:52": "variants.medium",
+      "203:68": "variants.large",
+      "203:17": "footerIds.left",
+      "203:25": "footerIds.right",
+      "203:2": "closeIds.normal",
+      "203:5": "closeIds.hover",
+      "203:8": "closeIds.active"
+    }
+  }
+}

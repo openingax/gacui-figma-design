@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -17,6 +17,7 @@
     "AGENTS.md",
     "CHANGELOG.md",
     "README.md",
+    "components/drawer/generator.mjs",
     "components/table/generator.mjs",
     "docs/figma-adapter.md",
     "docs/figma-output.md",
@@ -28,6 +29,9 @@
     "docs/support/local-diagnostics.md",
     "docs/upgrade.md",
     "scripts/distribution/build-gitee.mjs",
+    "scripts/figma/portable-composite.mjs",
+    "scripts/figma/portable-composites.json",
+    "scripts/figma/portable-gaps.json",
     "scripts/figma/portable-index.json",
     "scripts/figma/portable-references.mjs",
     "scripts/figma/portable-runtime.mjs",
@@ -35,7 +39,9 @@
     "scripts/figma/portable.mjs",
     "scripts/lib/figma-build.mjs",
     "scripts/verify.mjs",
+    "sketch/figma-runtime.mjs",
     "sketch/figma.mjs",
+    "sketch/form-variants.mjs",
     "skill-release.json",
     "support/client.mjs",
     "support/dashboard.mjs",
@@ -50,6 +56,7 @@
     "support/setup.mjs",
     "support/workflow-state.mjs",
     "tests/figma-logging.test.mjs",
+    "tests/fixtures/portable-metrics-drawer.json",
     "tests/fixtures/portable-metrics.json",
     "tests/gitee-distribution.test.mjs",
     "tests/hook-bridge.test.mjs",
@@ -62,7 +69,7 @@
   "files": [
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "379dedbb5fcafa19707572ef90a8fd4269597902bfe181eb5781fe1ddad7b243",
+      "sha256": "f51b10cd9f0342c4aa794896f220a703b2189287acfc470992be3cafb9529a11",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -102,7 +109,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b634e523f2a175117553910fd06e9e73a133e9518faea3778ca89704c2a73ce2",
+      "sha256": "7082c19e97e283d8b87784fe21a3acf13fd3279a636ced879924967aeb53ee0e",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -112,7 +119,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "1979a78da28e204179f9509d65203507144f99bc6f925d3ba3b845c1194725c5",
+      "sha256": "6848278d58378760c10ffc7462960ec5b684b909a9465e503cda6cce84004270",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -717,7 +724,7 @@
     },
     {
       "path": "components/drawer/generator.mjs",
-      "sha256": "c4a5766a389b50d9d07f74b17f0ef35e832d176b19fb1f42696a694715345e81",
+      "sha256": "032144ef71182ee3ace152b2e97ba8980c5b21734570bd3ff65d7e4e838c8eab",
       "upstreamSha256": "c4a5766a389b50d9d07f74b17f0ef35e832d176b19fb1f42696a694715345e81"
     },
     {
@@ -2552,7 +2559,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "1b3301685c7dcf98f7f7ab1998d642feba84d3681e6a5d3cabaf11134c514c71",
+      "sha256": "cd2a789c6b6ef9a7df0cd565a852964d293aeb204970cb3731a1b174dbaad0ac",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2567,7 +2574,7 @@
     },
     {
       "path": "docs/portable-figma.md",
-      "sha256": "c822d3d3c4150a0d6fbef23f75a4e9f53b864526b11d0662167b925266cf29ce",
+      "sha256": "f0300868e5a3b5f5f07bc79b3eefe0ce3d7f00346924d146a3139b908454f102",
       "upstreamSha256": null
     },
     {
@@ -2661,13 +2668,28 @@
       "upstreamSha256": "84effea460f8db9fb86707a52b792fcf32da129e7b902f8e9a97fbb4be888624"
     },
     {
+      "path": "scripts/figma/portable-composite.mjs",
+      "sha256": "36595f7bb6d70cfdee122793590cb9d3181482c4fac7c6a4052d9d442ed119a6",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/figma/portable-composites.json",
+      "sha256": "e828641c6ade2e0688778ae284b82d829a3c284a01c312dc53ebf8561924c202",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/figma/portable-gaps.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "upstreamSha256": null
+    },
+    {
       "path": "scripts/figma/portable-index.json",
-      "sha256": "56a85158bb209c21ef56fda38d90ab2b1c61ce39875d1464edda47ec1972acec",
+      "sha256": "f41afb967b6a2c5b483313f91c8483c22b30b717840038880ed7ed58bb7f8f4b",
       "upstreamSha256": null
     },
     {
       "path": "scripts/figma/portable-references.mjs",
-      "sha256": "1adea6fbb5eaeccbd162a8144455bb7025ebb7c1a4459d1dc7767b31114aabf1",
+      "sha256": "a8433a19aef176edc96e80e042436a9b74139e06ad8a0875a46841d02c41299a",
       "upstreamSha256": null
     },
     {
@@ -2682,7 +2704,7 @@
     },
     {
       "path": "scripts/figma/portable.mjs",
-      "sha256": "3b1c277f35fdf2d0f4124c286d72ca4cdf2c2c87e13addda154bc449ddca65f6",
+      "sha256": "c875ca95342858736016cd2d64453f8291b22da72abaebd6a65e009afd3ece50",
       "upstreamSha256": null
     },
     {
@@ -2707,7 +2729,7 @@
     },
     {
       "path": "scripts/lib/figma-build.mjs",
-      "sha256": "45221b67055984e57f61e99bf81c27d278e699114b75558164f7490dc34dd9f4",
+      "sha256": "eeeb6f6ef6002ba00068795c9a78d96af13158d42fbf5697049155da908bd869",
       "upstreamSha256": "6bc4a3af07c5e8dcf256dc3e5f42dc3512245014f402920e1bfbfc94155b0e75"
     },
     {
@@ -2752,13 +2774,18 @@
     },
     {
       "path": "sketch/figma-runtime.mjs",
-      "sha256": "b2a61758b03fa17a13238fd8287dcd2991af05bcdf84a0c9fe390a016a1bb8fa",
+      "sha256": "b373dd71159b0188ac37043ea00097cca1c236e8294bdd760e2becf6e00c4300",
       "upstreamSha256": "b2a61758b03fa17a13238fd8287dcd2991af05bcdf84a0c9fe390a016a1bb8fa"
     },
     {
       "path": "sketch/figma.mjs",
-      "sha256": "b9df2a6c837df63d0638380caaf79e99570456e087acad9e17961f874134b869",
+      "sha256": "ae12df7cdd5b95f01d43d472bf98dfbd85f0057ab57f803fd6330bcc763e4cf8",
       "upstreamSha256": "7de536f043886f111f7791050325f1ea5edc4cd00dd0a1f0a3322edae2bb38b8"
+    },
+    {
+      "path": "sketch/form-variants.mjs",
+      "sha256": "83d49b17672abc3d4ea142b9218e986f96196b8966d7ce2299a5410c20c94cc6",
+      "upstreamSha256": null
     },
     {
       "path": "sketch/maps/drawer.json",
@@ -2842,7 +2869,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "e31665569065c6a08f90802b4a01497a681312886435b00200a703288565d75f",
+      "sha256": "c9970707f6ceb7d03e826a1a396166efd8b5a893e4e3a4f66b072b7e03a079e8",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3016,6 +3043,11 @@
       "upstreamSha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599"
     },
     {
+      "path": "tests/fixtures/portable-metrics-drawer.json",
+      "sha256": "b79c45ec3f3e2edec52b08861bcbabd7628a870efa13f51551e1cf2301509743",
+      "upstreamSha256": null
+    },
+    {
       "path": "tests/fixtures/portable-metrics.json",
       "sha256": "d877739c1c0d91de7b5b03ee35cd57a657c9ae74f846e86e16bb554243df0186",
       "upstreamSha256": null
@@ -3052,7 +3084,7 @@
     },
     {
       "path": "tests/portable-figma.test.mjs",
-      "sha256": "3ccaeba28d5c0498442c6d12e8bb39088e6efc749ba398a44b751238a39e85e8",
+      "sha256": "905e5c1c1c22c8dba6481badf2b3c903871ddb978d4c83c7d4f034608050e9af",
       "upstreamSha256": null
     },
     {
