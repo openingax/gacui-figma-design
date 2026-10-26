@@ -11,7 +11,7 @@ try {
  const help=report([start,end]);assert.equal(help.tasks.length,0);assert.equal(help.totals.errors,0);assert.equal(help.metrics.ignoredHelpEvents,2);
  assert.equal(report([end]).tasks.length,1,'缺少 start 不猜是帮助');
  const waiting=event({outcome:'error',errorCode:'check_failed',details:{schema:1,kind:'draft-command',payload:{output:{stderr:'',stdout:'v2 有 1 个错误：\n- 确认出稿前：问题 roles 未回答'}}}});
- assert.match(eventMessage(waiting),/roles/);const wait=report([waiting]);assert.equal(wait.tasks[0].status,'待业务确认');assert.equal(wait.metrics.draftFailures,0);
+ assert.match(eventMessage(waiting),/roles/);const duplicated={...waiting,details:{schema:1,kind:'draft-command',payload:{output:{stderr:'',stdout:waiting.details.payload.output.stdout+'\n待产品回答：\n- 问题 roles 未回答'}}}};assert.equal(report([duplicated]).tasks[0].status,'待业务确认');const wait=report([waiting]);assert.equal(wait.tasks[0].status,'待业务确认');assert.equal(wait.metrics.draftFailures,0);
  const mixed={...waiting,id:randomUUID(),details:{schema:1,kind:'draft-command',payload:{output:{stdout:waiting.details.payload.output.stdout+'\n- 无效字段'}}}};assert.equal(report([mixed]).metrics.draftFailures,1,'混合结构错误不能隐藏');
  const blocked=figma('blocked',{reason:'尚无可移植构建数据：203:17'}),progress=figma('completed',{reason:'按需组件规划完成，尚未写入Figma'});const row=report([blocked,progress]).tasks[0];assert.equal(row.status,'待验证');assert.equal(row.deliveryState,'unverified');assert.equal(row.errors,1);assert.equal(row.lastErrorCategory,'component_unsupported');
  const failed=event({outcome:'error',errorCode:'unexpected'}),tool=figma('blocked');const metrics=report([failed,tool,event()]).metrics;assert.equal(metrics.draftAttempts,2);assert.equal(metrics.draftFailures,1,'工具错误不能除以草稿命令数');
