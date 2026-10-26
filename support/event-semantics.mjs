@@ -1,7 +1,7 @@
 // 事件事实与兼容投影；不修改原始日志，不把未知原因推断成已确认故障。
 export const CATEGORIES=['business_pending','target_required','component_unsupported','validation','execution'];
 const nonempty=(...values)=>values.find(v=>typeof v==='string'&&v.trim())??'';
-export function eventMessage(e){const p=e.details?.payload;return nonempty(e.context?.message,p?.error?.message,typeof p?.error==='string'?p.error:null,p?.output?.stderr,p?.output?.stdout,p?.reason,e.errorCode).slice(0,1200);}
+export function eventMessage(e,limit=1200){const p=e.details?.payload;return nonempty(e.context?.message,p?.error?.message,typeof p?.error==='string'?p.error:null,p?.output?.stderr,p?.output?.stdout,p?.reason,e.errorCode).slice(0,limit);}
 export function eventCategory(e){
  if(CATEGORIES.includes(e.context?.category))return e.context.category;
  const p=e.details?.payload;if(CATEGORIES.includes(p?.category))return p.category;
@@ -13,6 +13,7 @@ export function eventCategory(e){
  if(p?.tool==='figma-workflow'&&p.stage==='preflight'){
   if(/尚无可移植构建数据：/.test(message))return 'component_unsupported';
   if(/关键业务决策仍未回答/.test(message))return 'business_pending';
+  if(/^草稿 v\d+ 已通过最终校验，但尚未收到用户对具体版本 v\d+ 的确认，也未提供可编辑的 Figma Design 目标链接，因此暂不能确认或写入设计稿。[\s]*$/.test(message))return 'target_required';
  }
  return e.errorCode==='validation'?'validation':'execution';
 }

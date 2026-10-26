@@ -7,6 +7,7 @@ import {validEvent,validFeedback} from './protocol.mjs';
 import {figmaPayload,figmaWorkflows,recoverySuccess} from './workflow-state.mjs';
 
 import {eventMessage,eventCategory,eventVersion,helpEventIds,isWaiting} from './event-semantics.mjs';
+import {buildIssues,issueSummary} from './issues.mjs';
 const TZ='Asia/Shanghai';
 const DRAFT_OPS=['save','restore','label','star','confirm','recover','export','check','render','diff','status'];
 const day=at=>new Intl.DateTimeFormat('sv-SE',{timeZone:TZ}).format(new Date(at));
@@ -113,9 +114,11 @@ export function buildReport(dataDir,{now=Date.now()}={}){
   .sort((a,b)=>String(b.lastSeen??'').localeCompare(String(a.lastSeen??'')));
  const daily=new Map();for(let i=29;i>=0;i--)daily.set(day(now-i*86400000),{date:day(now-i*86400000),commands:0,errors:0,people:new Set()});
  for(const e of businessEvents){const d=daily.get(day(e.at));if(!d||e.phase!=='finish')continue;d.people.add(e.client);if(DRAFT_OPS.includes(e.operation))d.commands++;if(e.outcome==='error')d.errors++;}
+ const issues=buildIssues(dataDir,businessEvents);
  const names=Object.fromEntries(peopleRows.map(p=>[p.client,p.name]));
  return {
   generatedAt:new Date(now).toISOString(),
+  issueSummary:issueSummary(issues),issues:issues.map(i=>({...i,person:names[i.client],taskStatus:taskRows.find(t=>t.client===i.client&&t.taskId===i.taskId)?.status??null})),
   metrics:{scope:'all-time',draftAttempts:businessEvents.filter(e=>e.phase==='finish'&&DRAFT_OPS.includes(e.operation)&&!isWaiting(e)).length,
    draftFailures:businessEvents.filter(e=>e.phase==='finish'&&DRAFT_OPS.includes(e.operation)&&e.outcome==='error'&&!isWaiting(e)).length,
    waitingEvents:businessEvents.filter(e=>e.phase==='finish'&&e.outcome==='error'&&isWaiting(e)).length,
@@ -125,9 +128,9 @@ export function buildReport(dataDir,{now=Date.now()}={}){
    saves:peopleRows.reduce((n,p)=>n+p.saves,0),confirms:peopleRows.reduce((n,p)=>n+p.confirms,0),
    errors:peopleRows.reduce((n,p)=>n+p.errors,0),blockedTasks:taskRows.filter(t=>t.status==='阻塞').length,feedback:feedback.length,profileOnly:peopleRows.filter(p=>p.events===0).length},
   people:peopleRows,
-  tasks:taskRows.map(t=>({...t,person:names[t.client]})),
+  tasks:taskRows.map(t=>({...t,person:names[t.client],issueIds:issues.filter(i=>i.client===t.client&&i.taskId===t.taskId).map(i=>i.id)})),
   daily:[...daily.values()].map(d=>({date:d.date,commands:d.commands,errors:d.errors,people:d.people.size})),
-  recentErrors:businessEvents.filter(e=>e.phase==='finish'&&e.outcome==='error').slice(-50).reverse().map(e=>({at:e.at,person:names[e.client],taskId:e.taskId,operation:e.context?.command??e.operation,errorCode:e.errorCode,category:eventCategory(e),version:eventVersion(e),message:errorMessage(e)})),
+  recentErrors:businessEvents.filter(e=>e.phase==='finish'&&e.outcome==='error').slice(-50).reverse().map(e=>({issueId:issues.find(i=>i.client===e.client&&i.eventIds.includes(e.id))?.id??null,at:e.at,person:names[e.client],taskId:e.taskId,operation:e.context?.command??e.operation,errorCode:e.errorCode,category:eventCategory(e),version:eventVersion(e),message:errorMessage(e)})),
   sources:[...new Map(taskRows.flatMap(t=>t.sources.map(s=>[s.url,{...s,person:names[t.client],taskId:t.taskId,lastSeen:t.lastSeen}]))).values()].sort((a,b)=>b.lastSeen.localeCompare(a.lastSeen))
  };
 }

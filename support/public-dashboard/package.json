@@ -1,0 +1,13 @@
+{
+  "name": "gacui-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GACUIAgent 使用情况看板（Token 鉴权公网版）",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
