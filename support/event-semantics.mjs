@@ -7,7 +7,7 @@ export function eventCategory(e){
  const p=e.details?.payload;if(CATEGORIES.includes(p?.category))return p.category;
  const message=eventMessage(e);
  if(e.operation==='check'&&message.includes('确认出稿前：')&&/仍待决策|未回答/.test(message)){
-  const errors=message.split('\n').filter(s=>s.startsWith('- '));
+  const errors=message.split('待产品回答：')[0].split('\n').filter(s=>s.startsWith('- '));
   if(errors.length&&errors.every(s=>/确认出稿前：.*(?:仍待决策|未回答)$/.test(s)))return 'business_pending';
  }
  if(p?.tool==='figma-workflow'&&p.stage==='preflight'){

@@ -2877,7 +2877,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "31fbb3db6fbc022ee3714237d55d2a1087df48e26b9ce193f1f6251efcbeb9b0",
+      "sha256": "e95807cb477cd670db1b46c8f7b59ac80d7450e0e72d64eb8b951d0dca478c1c",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -2917,7 +2917,7 @@
     },
     {
       "path": "support/event-semantics.mjs",
-      "sha256": "9a3091f43b088d2d4892d5c73360ff7d030622050f69dcb7a0352c65d61a2ac4",
+      "sha256": "9889f4f815932aa87f15b5b9ed6676a4ce8acfbb2fe5a97d254a6b0365d5371a",
       "upstreamSha256": null
     },
     {
@@ -3102,7 +3102,7 @@
     },
     {
       "path": "tests/log-semantics.test.mjs",
-      "sha256": "9f11d195a84df54c07e9d4a8cfa46e89546f609f704f33f71e2eab342f993455",
+      "sha256": "b8b71fdb3aac7198c857b3eaa5a29553b570f0a989a4a6653f693c67085d7f70",
       "upstreamSha256": null
     },
     {
