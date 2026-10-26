@@ -157,6 +157,6 @@ if(isMain(import.meta.url)){
   const nothing=planned&&!planned.boardIds.length;
   const reason=failure?failure.message:nothing?'没有可在空白文件生成的画板：'+planned.notice:planned.notice?'按需组件规划完成（部分画板暂不生成），尚未写入Figma。'+planned.notice:'按需组件规划完成，尚未写入Figma';
   const receipt=planned?.skippedBoards.length?{boardIds:planned.boardIds,skippedBoards:planned.skippedBoards}:null;
-  try{const result=await logFigma(dir,{stage:'preflight',status:failure||nothing?'blocked':'completed',fileKey,reason,receipt});console.error('Figma日志 '+JSON.stringify(result));}catch{console.error('Figma日志记录失败；不改变规划结果。');}
+  try{const result=await logFigma(dir,{category:nothing||/尚无可移植构建数据|需拆分构建/.test(failure?.message??'')?'component_unsupported':failure?'validation':null,evidenceSource:'local-planner',stage:'preflight',status:failure||nothing?'blocked':'completed',fileKey,reason,receipt});console.error('Figma日志 '+JSON.stringify(result));}catch{console.error('Figma日志记录失败；不改变规划结果。');}
  }
 }

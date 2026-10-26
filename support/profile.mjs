@@ -4,7 +4,7 @@ import os from 'node:os';
 import {join,resolve,dirname} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {supportHome} from './client.mjs';
+import {supportHome,status} from './client.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const git=args=>{try{return execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','ignore'],timeout:2000}).trim()||null}catch{return null}};
 const read=file=>{try{return JSON.parse(fs.readFileSync(file,'utf8'))}catch{return null}};
@@ -32,6 +32,7 @@ export function collectProfile(){
   cpus:os.cpus().length,memoryGiB:Math.round(os.totalmem()/1073741824),locale:Intl.DateTimeFormat().resolvedOptions().locale,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone,
   node:process.version,skillVersion:read(join(root,'skill-release.json'))?.version??null,build:git(['rev-parse','HEAD']),
   agent:{envNames:names,processes:ancestors(),...Object.fromEntries(AGENT_VALUES.filter(k=>process.env[k]).map(k=>[k,String(process.env[k]).slice(0,100)]))},
+  uploadHealth:(()=>{const s=status();return {observedAt:new Date().toISOString(),pending:s.pending,expired:s.expired,state:s.state,autoUpload:s.autoUpload};})(),
   connectFailures:read(failureFile())??[]
  };
 }

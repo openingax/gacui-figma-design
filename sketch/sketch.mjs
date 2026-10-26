@@ -158,6 +158,7 @@ async function main([command, ...args], run) {
     const result=check(latest.data, loadChecklist(), {final});
     try { validateDraft(latest.data); } catch(e) { for(const error of e.message.split('\n')) if(!result.errors.includes(error)) result.errors.push(error); }
     const code=printCheck(result, 'v'+latest.v);
+    if(run&&code&&!(discussion&&!result.errors.length))run.diagnostic={category:!result.missing.length&&result.errors.length&&result.errors.every(e=>/^确认出稿前：.*(?:仍待决策|未回答)$/.test(e))?'business_pending':'validation',message:[...result.errors,...result.missing.map(m=>m.code+' 尚无结论')].join('\n')};
     if(discussion) {console.log('讨论稿允许保留未决问题和未覆盖清单；不代表已确认');return result.errors.length ? 1 : 0;}
     return code;
   }
@@ -203,7 +204,7 @@ async function main([command, ...args], run) {
 
 async function safeContext(target,run) {try{return await support.previewContext(target,run?.runId??null)}catch{return undefined}}
 if (isMain(import.meta.url)) {
-  const args=process.argv.slice(2);let run,error,output,code=1;
+  const args=process.argv.slice(2);const help=args.length===1&&['--help','-h','help'].includes(args[0]);if(help){await main(args);process.exit(0);}let run,error,output,code=1;
   try { run=support.begin(args[0],args[1]??'.',args.slice(1)); } catch { console.error('运行日志不可用；草稿操作继续。'); }
   const stopCapture=support.tuningEnabled()?captureConsole():null;
   try { code=await main(args,run); } catch(e) { error=e;console.error(e.message); } finally { output=stopCapture?.(); }

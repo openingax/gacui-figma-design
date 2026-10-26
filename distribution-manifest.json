@@ -2,21 +2,20 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
     "commit": "09a736c6ceaedf2dd5fdf6a3df6d675151744d58"
   },
   "differences": [
-    ".agents/skills/gacui-figma-design/SKILL.md",
     ".agents/skills/gacui-figma-design/references/workflow.md",
     ".agents/skills/gacui-figma-design/scripts/manage.mjs",
     ".agents/skills/gacui-figma-design/scripts/source.mjs",
+    ".agents/skills/gacui-figma-design/SKILL.md",
     ".gitignore",
     "AGENTS.md",
     "CHANGELOG.md",
-    "README.md",
     "components/drawer/generator.mjs",
     "components/table/generator.mjs",
     "docs/figma-adapter.md",
@@ -28,6 +27,7 @@
     "docs/support/figma-logging.md",
     "docs/support/local-diagnostics.md",
     "docs/upgrade.md",
+    "README.md",
     "scripts/distribution/build-gitee.mjs",
     "scripts/figma/portable-composite.mjs",
     "scripts/figma/portable-composites.json",
@@ -42,18 +42,24 @@
     "sketch/figma-runtime.mjs",
     "sketch/figma.mjs",
     "sketch/form-variants.mjs",
+    "sketch/sketch.mjs",
     "skill-release.json",
     "support/client.mjs",
     "support/dashboard.mjs",
     "support/diagnose.mjs",
+    "support/event-semantics.mjs",
     "support/figma-log.mjs",
     "support/hooks/analysis.mjs",
     "support/hooks/bridge.mjs",
     "support/hooks/capture.mjs",
     "support/hooks/configure.mjs",
     "support/hooks/report.mjs",
+    "support/profile.mjs",
+    "support/protocol.mjs",
     "support/report.mjs",
+    "support/server.mjs",
     "support/setup.mjs",
+    "support/tuning.mjs",
     "support/workflow-state.mjs",
     "tests/figma-logging.test.mjs",
     "tests/fixtures/portable-metrics-drawer.json",
@@ -62,16 +68,13 @@
     "tests/hook-bridge.test.mjs",
     "tests/hook-capture.test.mjs",
     "tests/hook-configure.test.mjs",
+    "tests/log-client-semantics.test.mjs",
+    "tests/log-semantics.test.mjs",
     "tests/portable-figma.test.mjs",
     "tests/upgrade-guidance.test.mjs",
     "tests/workflow-diagnostics.test.mjs"
   ],
   "files": [
-    {
-      "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "f51b10cd9f0342c4aa794896f220a703b2189287acfc470992be3cafb9529a11",
-      "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
-    },
     {
       "path": ".agents/skills/gacui-figma-design/references/workflow.md",
       "sha256": "116e8aa9058ff7910588b2e5d3d10abc540a13e617d226d6efe44a0bd81bd8ec",
@@ -86,6 +89,11 @@
       "path": ".agents/skills/gacui-figma-design/scripts/source.mjs",
       "sha256": "a978f1454d115a8ffb8f272f66fb09e5c868ef353a7baac99bcfef2690ca0194",
       "upstreamSha256": null
+    },
+    {
+      "path": ".agents/skills/gacui-figma-design/SKILL.md",
+      "sha256": "dc493ed3c72e208f11889f7de4c7b1e8103528fd0aee68d6c0eb6e2c9e46de48",
+      "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
       "path": ".gitattributes",
@@ -109,28 +117,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "7082c19e97e283d8b87784fe21a3acf13fd3279a636ced879924967aeb53ee0e",
+      "sha256": "ba41baf706f2e9a6dda647cc57c5ce10f96b95d4ac3c5cabb58867bb9c0506b6",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
-    },
-    {
-      "path": "PUBLIC_EXPORT_MANIFEST.json",
-      "sha256": "3119c3d0429546ecde6cdbdef51eec35d30010fb59c4538c1eda8b297d812d67",
-      "upstreamSha256": "3119c3d0429546ecde6cdbdef51eec35d30010fb59c4538c1eda8b297d812d67"
-    },
-    {
-      "path": "README.md",
-      "sha256": "6848278d58378760c10ffc7462960ec5b684b909a9465e503cda6cce84004270",
-      "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
-    },
-    {
-      "path": "components/README.md",
-      "sha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af",
-      "upstreamSha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af"
-    },
-    {
-      "path": "components/alert/README.md",
-      "sha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac",
-      "upstreamSha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac"
     },
     {
       "path": "components/alert/catalog.json",
@@ -278,9 +266,9 @@
       "upstreamSha256": "afb522d6117e2eec66c8ac893facd03315446ae014423f50cc90899c0e3d006c"
     },
     {
-      "path": "components/button-loading/README.md",
-      "sha256": "3db2a14df242dcca365ff7c03bdb74853b174addc420181ce943a1707e155c24",
-      "upstreamSha256": "3db2a14df242dcca365ff7c03bdb74853b174addc420181ce943a1707e155c24"
+      "path": "components/alert/README.md",
+      "sha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac",
+      "upstreamSha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac"
     },
     {
       "path": "components/button-loading/build-data.json",
@@ -293,9 +281,9 @@
       "upstreamSha256": "e4f803afe9a7d1c8595035cf65e442955b303cd4fd6a16cd0562d382967e749d"
     },
     {
-      "path": "components/button/README.md",
-      "sha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795",
-      "upstreamSha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795"
+      "path": "components/button-loading/README.md",
+      "sha256": "3db2a14df242dcca365ff7c03bdb74853b174addc420181ce943a1707e155c24",
+      "upstreamSha256": "3db2a14df242dcca365ff7c03bdb74853b174addc420181ce943a1707e155c24"
     },
     {
       "path": "components/button/build-data.json",
@@ -313,6 +301,11 @@
       "upstreamSha256": "a1cfc9608e5f6716c4f030066d46a1ee5dfd9885590d7b755642d6bc16d1f6e2"
     },
     {
+      "path": "components/button/README.md",
+      "sha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795",
+      "upstreamSha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795"
+    },
+    {
       "path": "components/button/recipes.json",
       "sha256": "6dcaf78f4f52d6540378da5e04a3208d4b4f241adf566185c9128950aa34e82e",
       "upstreamSha256": "6dcaf78f4f52d6540378da5e04a3208d4b4f241adf566185c9128950aa34e82e"
@@ -321,11 +314,6 @@
       "path": "components/button/resolve.mjs",
       "sha256": "698336696646a0836c839a1cfb0c1beb16be0986870a6cbd32dcd43388877c96",
       "upstreamSha256": "698336696646a0836c839a1cfb0c1beb16be0986870a6cbd32dcd43388877c96"
-    },
-    {
-      "path": "components/cascader-multi-child/README.md",
-      "sha256": "236b369f7b30b6d27f94e1b7768a8d3edce1aec0cdba94ffe35b6ef22e197d4b",
-      "upstreamSha256": "236b369f7b30b6d27f94e1b7768a8d3edce1aec0cdba94ffe35b6ef22e197d4b"
     },
     {
       "path": "components/cascader-multi-child/build-data.json",
@@ -338,9 +326,9 @@
       "upstreamSha256": "9dd9f1b542fcc519c1bb39c3583e15b62b8f0f6ee835522bf22c780eabdb6bf7"
     },
     {
-      "path": "components/cascader-multi-parent/README.md",
-      "sha256": "90c29b6392608443adf766c0ecb2fb41f41a2496355187a578acc4c6451805e4",
-      "upstreamSha256": "90c29b6392608443adf766c0ecb2fb41f41a2496355187a578acc4c6451805e4"
+      "path": "components/cascader-multi-child/README.md",
+      "sha256": "236b369f7b30b6d27f94e1b7768a8d3edce1aec0cdba94ffe35b6ef22e197d4b",
+      "upstreamSha256": "236b369f7b30b6d27f94e1b7768a8d3edce1aec0cdba94ffe35b6ef22e197d4b"
     },
     {
       "path": "components/cascader-multi-parent/build-data.json",
@@ -353,9 +341,9 @@
       "upstreamSha256": "fae4820b5c5c41e4509d77be367a93e70e0a8eac35d019f8aee999fc6802b21c"
     },
     {
-      "path": "components/cascader-single-child/README.md",
-      "sha256": "05d3b5070aff6b053fca2e43e572b24a0bcd19a96a0cf8832819e996eaad9547",
-      "upstreamSha256": "05d3b5070aff6b053fca2e43e572b24a0bcd19a96a0cf8832819e996eaad9547"
+      "path": "components/cascader-multi-parent/README.md",
+      "sha256": "90c29b6392608443adf766c0ecb2fb41f41a2496355187a578acc4c6451805e4",
+      "upstreamSha256": "90c29b6392608443adf766c0ecb2fb41f41a2496355187a578acc4c6451805e4"
     },
     {
       "path": "components/cascader-single-child/build-data.json",
@@ -368,9 +356,9 @@
       "upstreamSha256": "d666ca7c64396e451ae7dc22b19d2b7f5a603d977cf32b1487ecde3c3d2b5434"
     },
     {
-      "path": "components/cascader-single-parent/README.md",
-      "sha256": "a67457ef2c0c1b0b57a00a8522e71ab4a1af9ee42ceeeeea09d5287dd2e7835b",
-      "upstreamSha256": "a67457ef2c0c1b0b57a00a8522e71ab4a1af9ee42ceeeeea09d5287dd2e7835b"
+      "path": "components/cascader-single-child/README.md",
+      "sha256": "05d3b5070aff6b053fca2e43e572b24a0bcd19a96a0cf8832819e996eaad9547",
+      "upstreamSha256": "05d3b5070aff6b053fca2e43e572b24a0bcd19a96a0cf8832819e996eaad9547"
     },
     {
       "path": "components/cascader-single-parent/build-data.json",
@@ -383,9 +371,9 @@
       "upstreamSha256": "d4dbb5503277cce69fd53c487c0477f91f17420525c60aabf3e191614c795358"
     },
     {
-      "path": "components/cascader/README.md",
-      "sha256": "1c05e2eb5c4ffbb57fad185eee7b1eae843fc7e5d7d01d43c593bb064eb0f7b2",
-      "upstreamSha256": "1c05e2eb5c4ffbb57fad185eee7b1eae843fc7e5d7d01d43c593bb064eb0f7b2"
+      "path": "components/cascader-single-parent/README.md",
+      "sha256": "a67457ef2c0c1b0b57a00a8522e71ab4a1af9ee42ceeeeea09d5287dd2e7835b",
+      "upstreamSha256": "a67457ef2c0c1b0b57a00a8522e71ab4a1af9ee42ceeeeea09d5287dd2e7835b"
     },
     {
       "path": "components/cascader/build-data.json",
@@ -408,9 +396,9 @@
       "upstreamSha256": "c2dcb72e0b8d98edab482e8f5901bda72fe3da68900b228c61ba670dc0597013"
     },
     {
-      "path": "components/charging-sidebar/README.md",
-      "sha256": "68a6ee6932a218c32ccc14947360c042898ce5332888d2742dd93f8e025ed74c",
-      "upstreamSha256": "68a6ee6932a218c32ccc14947360c042898ce5332888d2742dd93f8e025ed74c"
+      "path": "components/cascader/README.md",
+      "sha256": "1c05e2eb5c4ffbb57fad185eee7b1eae843fc7e5d7d01d43c593bb064eb0f7b2",
+      "upstreamSha256": "1c05e2eb5c4ffbb57fad185eee7b1eae843fc7e5d7d01d43c593bb064eb0f7b2"
     },
     {
       "path": "components/charging-sidebar/build-data.json",
@@ -423,9 +411,9 @@
       "upstreamSha256": "3d832c4058df7085df72336d3ab6bb7fdce25ba73a1b97342b17858579454552"
     },
     {
-      "path": "components/checkbox/README.md",
-      "sha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff",
-      "upstreamSha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff"
+      "path": "components/charging-sidebar/README.md",
+      "sha256": "68a6ee6932a218c32ccc14947360c042898ce5332888d2742dd93f8e025ed74c",
+      "upstreamSha256": "68a6ee6932a218c32ccc14947360c042898ce5332888d2742dd93f8e025ed74c"
     },
     {
       "path": "components/checkbox/definition.json",
@@ -448,9 +436,9 @@
       "upstreamSha256": "a78823c4741e1ffecb8affd0269d71e7f0a87e83af430018acdbbcf50257bb59"
     },
     {
-      "path": "components/date-cell/README.md",
-      "sha256": "11256ab667bb19d638ba34024d16d6c0a51b23c2f1092af664f0059fb3aec0e6",
-      "upstreamSha256": "11256ab667bb19d638ba34024d16d6c0a51b23c2f1092af664f0059fb3aec0e6"
+      "path": "components/checkbox/README.md",
+      "sha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff",
+      "upstreamSha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff"
     },
     {
       "path": "components/date-cell/build-data.json",
@@ -463,9 +451,9 @@
       "upstreamSha256": "371155c4af4d80117df3365d0d1626935c5fe9451a4f6a4f1b454e3ed01881cb"
     },
     {
-      "path": "components/date-input/README.md",
-      "sha256": "964203296cc228b8b3e7ffb197cb5f667e1dfed552e7d22f93224e574e8a8d03",
-      "upstreamSha256": "964203296cc228b8b3e7ffb197cb5f667e1dfed552e7d22f93224e574e8a8d03"
+      "path": "components/date-cell/README.md",
+      "sha256": "11256ab667bb19d638ba34024d16d6c0a51b23c2f1092af664f0059fb3aec0e6",
+      "upstreamSha256": "11256ab667bb19d638ba34024d16d6c0a51b23c2f1092af664f0059fb3aec0e6"
     },
     {
       "path": "components/date-input/build-data.json",
@@ -478,9 +466,9 @@
       "upstreamSha256": "c16dee07e2a48144e10891a6dacaf242f29fdc8356d60d536778657cefec4b2a"
     },
     {
-      "path": "components/date-panel/README.md",
-      "sha256": "0a37d49ac803fef4cee566378c2335af549eb2f335f9b9b1e666cfb3038a65a1",
-      "upstreamSha256": "0a37d49ac803fef4cee566378c2335af549eb2f335f9b9b1e666cfb3038a65a1"
+      "path": "components/date-input/README.md",
+      "sha256": "964203296cc228b8b3e7ffb197cb5f667e1dfed552e7d22f93224e574e8a8d03",
+      "upstreamSha256": "964203296cc228b8b3e7ffb197cb5f667e1dfed552e7d22f93224e574e8a8d03"
     },
     {
       "path": "components/date-panel/build-data.json",
@@ -493,9 +481,9 @@
       "upstreamSha256": "226ee71010a33222ca533f7738f8d6c2c940cb01717d2ee327e67cdf33d84502"
     },
     {
-      "path": "components/date-range-cell/README.md",
-      "sha256": "fc503cc2f3f662965dced12b7666ae8ea4a0ad7a008c01788f983ee3f8b9dbd2",
-      "upstreamSha256": "fc503cc2f3f662965dced12b7666ae8ea4a0ad7a008c01788f983ee3f8b9dbd2"
+      "path": "components/date-panel/README.md",
+      "sha256": "0a37d49ac803fef4cee566378c2335af549eb2f335f9b9b1e666cfb3038a65a1",
+      "upstreamSha256": "0a37d49ac803fef4cee566378c2335af549eb2f335f9b9b1e666cfb3038a65a1"
     },
     {
       "path": "components/date-range-cell/build-data.json",
@@ -508,9 +496,9 @@
       "upstreamSha256": "eab94d8e9ac67616c229432ad80b2e990668ff9acd0bf6bdc987f70643e4e1ac"
     },
     {
-      "path": "components/datepicker-date-header/README.md",
-      "sha256": "357df4321401b1b1d3ecf80a8fa9f9c2fd3cd4bb2942ca0a26c28ee1bb005dc2",
-      "upstreamSha256": "357df4321401b1b1d3ecf80a8fa9f9c2fd3cd4bb2942ca0a26c28ee1bb005dc2"
+      "path": "components/date-range-cell/README.md",
+      "sha256": "fc503cc2f3f662965dced12b7666ae8ea4a0ad7a008c01788f983ee3f8b9dbd2",
+      "upstreamSha256": "fc503cc2f3f662965dced12b7666ae8ea4a0ad7a008c01788f983ee3f8b9dbd2"
     },
     {
       "path": "components/datepicker-date-header/build-data.json",
@@ -523,9 +511,9 @@
       "upstreamSha256": "28ad4e623888863e0215c0dacb8d007b3a38fc7a640e69c54370bb94cf5821f9"
     },
     {
-      "path": "components/datepicker-month-header/README.md",
-      "sha256": "d90d99090b5698cced235652687d37d3981038e778b8552dd20a3ddad713e0fe",
-      "upstreamSha256": "d90d99090b5698cced235652687d37d3981038e778b8552dd20a3ddad713e0fe"
+      "path": "components/datepicker-date-header/README.md",
+      "sha256": "357df4321401b1b1d3ecf80a8fa9f9c2fd3cd4bb2942ca0a26c28ee1bb005dc2",
+      "upstreamSha256": "357df4321401b1b1d3ecf80a8fa9f9c2fd3cd4bb2942ca0a26c28ee1bb005dc2"
     },
     {
       "path": "components/datepicker-month-header/build-data.json",
@@ -538,9 +526,9 @@
       "upstreamSha256": "ad49f6be990003923a5c367d1db0c5f84258d7749f0fac4fe84dc7c936b80c57"
     },
     {
-      "path": "components/datepicker-time-header/README.md",
-      "sha256": "4f69a9562c27567bdaf594a4a681d1a23d75b68ad3c53a196a85a2a9f5929aaf",
-      "upstreamSha256": "4f69a9562c27567bdaf594a4a681d1a23d75b68ad3c53a196a85a2a9f5929aaf"
+      "path": "components/datepicker-month-header/README.md",
+      "sha256": "d90d99090b5698cced235652687d37d3981038e778b8552dd20a3ddad713e0fe",
+      "upstreamSha256": "d90d99090b5698cced235652687d37d3981038e778b8552dd20a3ddad713e0fe"
     },
     {
       "path": "components/datepicker-time-header/build-data.json",
@@ -553,9 +541,9 @@
       "upstreamSha256": "7e0057e4d32575253ae4e8d04d7ca048ab74efdb0aaf9632b0b44384924a659a"
     },
     {
-      "path": "components/datepicker-year-header/README.md",
-      "sha256": "56ad6a4bada08286f38b4a579607e018985e4017f49e5b1df5f575a5c1ce4573",
-      "upstreamSha256": "56ad6a4bada08286f38b4a579607e018985e4017f49e5b1df5f575a5c1ce4573"
+      "path": "components/datepicker-time-header/README.md",
+      "sha256": "4f69a9562c27567bdaf594a4a681d1a23d75b68ad3c53a196a85a2a9f5929aaf",
+      "upstreamSha256": "4f69a9562c27567bdaf594a4a681d1a23d75b68ad3c53a196a85a2a9f5929aaf"
     },
     {
       "path": "components/datepicker-year-header/build-data.json",
@@ -568,9 +556,9 @@
       "upstreamSha256": "2e288b67d2b3662a0716a2c8e8a51dfcd59f77e0955f056c26ad7196b4d7e9dc"
     },
     {
-      "path": "components/datepicker/README.md",
-      "sha256": "be0d413827d0eb1e8a4920fb3d36abf2089235dcc5a3c71685c2dcc14e317485",
-      "upstreamSha256": "be0d413827d0eb1e8a4920fb3d36abf2089235dcc5a3c71685c2dcc14e317485"
+      "path": "components/datepicker-year-header/README.md",
+      "sha256": "56ad6a4bada08286f38b4a579607e018985e4017f49e5b1df5f575a5c1ce4573",
+      "upstreamSha256": "56ad6a4bada08286f38b4a579607e018985e4017f49e5b1df5f575a5c1ce4573"
     },
     {
       "path": "components/datepicker/coverage.json",
@@ -588,9 +576,9 @@
       "upstreamSha256": "1574b5405c5dc92fdae52a5e391d17cf9e65e21caf9229322d900f93bf4d6920"
     },
     {
-      "path": "components/datetime-range-cell/README.md",
-      "sha256": "ce2b66195f9e5c79e2b4e1bac20648ebbf358d18c7aa37c3c954b1980e13f85c",
-      "upstreamSha256": "ce2b66195f9e5c79e2b4e1bac20648ebbf358d18c7aa37c3c954b1980e13f85c"
+      "path": "components/datepicker/README.md",
+      "sha256": "be0d413827d0eb1e8a4920fb3d36abf2089235dcc5a3c71685c2dcc14e317485",
+      "upstreamSha256": "be0d413827d0eb1e8a4920fb3d36abf2089235dcc5a3c71685c2dcc14e317485"
     },
     {
       "path": "components/datetime-range-cell/build-data.json",
@@ -603,9 +591,9 @@
       "upstreamSha256": "89e7ca5afcd24352d976432927d7b343d58e452ebc199d1178df27e567bf441a"
     },
     {
-      "path": "components/descriptions/README.md",
-      "sha256": "15fe9439425b533c2c11b6b0d380ac1d3ea493d8dcb9b941d58cfffdf5754567",
-      "upstreamSha256": "15fe9439425b533c2c11b6b0d380ac1d3ea493d8dcb9b941d58cfffdf5754567"
+      "path": "components/datetime-range-cell/README.md",
+      "sha256": "ce2b66195f9e5c79e2b4e1bac20648ebbf358d18c7aa37c3c954b1980e13f85c",
+      "upstreamSha256": "ce2b66195f9e5c79e2b4e1bac20648ebbf358d18c7aa37c3c954b1980e13f85c"
     },
     {
       "path": "components/descriptions/build-data.json",
@@ -623,9 +611,9 @@
       "upstreamSha256": "2b6139d5777777af3513eb862fb817340b958416ca189a2f1aaaeb37ed6f8907"
     },
     {
-      "path": "components/dialog/README.md",
-      "sha256": "6cb0f66d3302aeb6160a951f4e6865b3d4dedb6f731f1848c746a5d33d191b92",
-      "upstreamSha256": "6cb0f66d3302aeb6160a951f4e6865b3d4dedb6f731f1848c746a5d33d191b92"
+      "path": "components/descriptions/README.md",
+      "sha256": "15fe9439425b533c2c11b6b0d380ac1d3ea493d8dcb9b941d58cfffdf5754567",
+      "upstreamSha256": "15fe9439425b533c2c11b6b0d380ac1d3ea493d8dcb9b941d58cfffdf5754567"
     },
     {
       "path": "components/dialog/build-data.json",
@@ -683,9 +671,9 @@
       "upstreamSha256": "8d158349d5029ef2337971e01fd00b9ee97f558c2bb43efd42e08226ce77e6ab"
     },
     {
-      "path": "components/divider/README.md",
-      "sha256": "252d7cade2978a34017708fd1be63a84a765fdd6108eeba7f422c67a64a2a422",
-      "upstreamSha256": "252d7cade2978a34017708fd1be63a84a765fdd6108eeba7f422c67a64a2a422"
+      "path": "components/dialog/README.md",
+      "sha256": "6cb0f66d3302aeb6160a951f4e6865b3d4dedb6f731f1848c746a5d33d191b92",
+      "upstreamSha256": "6cb0f66d3302aeb6160a951f4e6865b3d4dedb6f731f1848c746a5d33d191b92"
     },
     {
       "path": "components/divider/build-data.json",
@@ -703,9 +691,9 @@
       "upstreamSha256": "b3f7d1e74d28078209370bc38aaa5ede30c2eec61577860810072858539fad66"
     },
     {
-      "path": "components/drawer/README.md",
-      "sha256": "3861f3ce2a726d2775484dbf20ff26e40ccb915de03090b577593dc969ecda02",
-      "upstreamSha256": "3861f3ce2a726d2775484dbf20ff26e40ccb915de03090b577593dc969ecda02"
+      "path": "components/divider/README.md",
+      "sha256": "252d7cade2978a34017708fd1be63a84a765fdd6108eeba7f422c67a64a2a422",
+      "upstreamSha256": "252d7cade2978a34017708fd1be63a84a765fdd6108eeba7f422c67a64a2a422"
     },
     {
       "path": "components/drawer/assets/close.svg",
@@ -728,9 +716,9 @@
       "upstreamSha256": "c4a5766a389b50d9d07f74b17f0ef35e832d176b19fb1f42696a694715345e81"
     },
     {
-      "path": "components/feedback/README.md",
-      "sha256": "782d73660e62bd60bd520008610caef8f915958209f51004f76c9a71dbfda735",
-      "upstreamSha256": "782d73660e62bd60bd520008610caef8f915958209f51004f76c9a71dbfda735"
+      "path": "components/drawer/README.md",
+      "sha256": "3861f3ce2a726d2775484dbf20ff26e40ccb915de03090b577593dc969ecda02",
+      "upstreamSha256": "3861f3ce2a726d2775484dbf20ff26e40ccb915de03090b577593dc969ecda02"
     },
     {
       "path": "components/feedback/build-data.json",
@@ -758,9 +746,9 @@
       "upstreamSha256": "f06e1fccdd83f145b591cfe5384aaea9009f2e7882862a0eb95c021d6095e49c"
     },
     {
-      "path": "components/form-field/README.md",
-      "sha256": "2505835ee4ba53db9056a56477c1af5aeb9cdc70396d4fc7f847109eab013a40",
-      "upstreamSha256": "2505835ee4ba53db9056a56477c1af5aeb9cdc70396d4fc7f847109eab013a40"
+      "path": "components/feedback/README.md",
+      "sha256": "782d73660e62bd60bd520008610caef8f915958209f51004f76c9a71dbfda735",
+      "upstreamSha256": "782d73660e62bd60bd520008610caef8f915958209f51004f76c9a71dbfda735"
     },
     {
       "path": "components/form-field/build-data.json",
@@ -773,9 +761,9 @@
       "upstreamSha256": "6a1e9d683c519aa3a760b2ebcd2b1c0b3c61303d650124f500625f8ae32b6fe2"
     },
     {
-      "path": "components/form-help/README.md",
-      "sha256": "5a9d543b840b1768b9f83bae6a4a70a077b6d415a0000049b2c366b3852b4164",
-      "upstreamSha256": "5a9d543b840b1768b9f83bae6a4a70a077b6d415a0000049b2c366b3852b4164"
+      "path": "components/form-field/README.md",
+      "sha256": "2505835ee4ba53db9056a56477c1af5aeb9cdc70396d4fc7f847109eab013a40",
+      "upstreamSha256": "2505835ee4ba53db9056a56477c1af5aeb9cdc70396d4fc7f847109eab013a40"
     },
     {
       "path": "components/form-help/build-data.json",
@@ -788,9 +776,9 @@
       "upstreamSha256": "a2d4d30ae0cd2ed004dc274544a023a46e09612914ec75fc647efa7c169f9a3f"
     },
     {
-      "path": "components/form-top/README.md",
-      "sha256": "49d283a8646b3663fb15b879360627b24d0534d30230e770ef290c13917437e6",
-      "upstreamSha256": "49d283a8646b3663fb15b879360627b24d0534d30230e770ef290c13917437e6"
+      "path": "components/form-help/README.md",
+      "sha256": "5a9d543b840b1768b9f83bae6a4a70a077b6d415a0000049b2c366b3852b4164",
+      "upstreamSha256": "5a9d543b840b1768b9f83bae6a4a70a077b6d415a0000049b2c366b3852b4164"
     },
     {
       "path": "components/form-top/build-data.json",
@@ -803,9 +791,9 @@
       "upstreamSha256": "80b5f71a19bef23df942f099d74f8486a98e70f027e426b2cda30952eb5ac279"
     },
     {
-      "path": "components/form-validation/README.md",
-      "sha256": "68211d5ab7bfc59bf72f3c2320fefd0bac568bd394d77697e5b5b3a1e949e350",
-      "upstreamSha256": "68211d5ab7bfc59bf72f3c2320fefd0bac568bd394d77697e5b5b3a1e949e350"
+      "path": "components/form-top/README.md",
+      "sha256": "49d283a8646b3663fb15b879360627b24d0534d30230e770ef290c13917437e6",
+      "upstreamSha256": "49d283a8646b3663fb15b879360627b24d0534d30230e770ef290c13917437e6"
     },
     {
       "path": "components/form-validation/build-data.json",
@@ -818,9 +806,9 @@
       "upstreamSha256": "693fa583fbfed4b2d0b16518b0dce1147d53358d2dea5bdd47f246f4f984e8c6"
     },
     {
-      "path": "components/form/README.md",
-      "sha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573",
-      "upstreamSha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573"
+      "path": "components/form-validation/README.md",
+      "sha256": "68211d5ab7bfc59bf72f3c2320fefd0bac568bd394d77697e5b5b3a1e949e350",
+      "upstreamSha256": "68211d5ab7bfc59bf72f3c2320fefd0bac568bd394d77697e5b5b3a1e949e350"
     },
     {
       "path": "components/form/definition.json",
@@ -833,9 +821,9 @@
       "upstreamSha256": "d02b5b108ac53863c14e97743206d09258674a38d0c4db20a00c0ee0393433b7"
     },
     {
-      "path": "components/header-menu/README.md",
-      "sha256": "d88094892b684c6e43a615083469048af0c0000075ca1a956eef60851d071668",
-      "upstreamSha256": "d88094892b684c6e43a615083469048af0c0000075ca1a956eef60851d071668"
+      "path": "components/form/README.md",
+      "sha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573",
+      "upstreamSha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573"
     },
     {
       "path": "components/header-menu/build-data.json",
@@ -853,9 +841,9 @@
       "upstreamSha256": "2054ba88d6973edee4c0f47872ff20254ea9458ce8fe637a8898bca7c52ec743"
     },
     {
-      "path": "components/image-viewer/README.md",
-      "sha256": "cf53689bc6d23b9823639185dd7b9a92d827b2cc837acc23c1729e0a3c81ec67",
-      "upstreamSha256": "cf53689bc6d23b9823639185dd7b9a92d827b2cc837acc23c1729e0a3c81ec67"
+      "path": "components/header-menu/README.md",
+      "sha256": "d88094892b684c6e43a615083469048af0c0000075ca1a956eef60851d071668",
+      "upstreamSha256": "d88094892b684c6e43a615083469048af0c0000075ca1a956eef60851d071668"
     },
     {
       "path": "components/image-viewer/catalog.json",
@@ -938,9 +926,9 @@
       "upstreamSha256": "a7b8e7649e86324af789325aae6ff49cb45a347f4e8536243540abec9da3b87e"
     },
     {
-      "path": "components/input-addon/README.md",
-      "sha256": "8b1ccc9b0c015a827ce725c368073e553690e304a029aaddf6f32a4e0143c768",
-      "upstreamSha256": "8b1ccc9b0c015a827ce725c368073e553690e304a029aaddf6f32a4e0143c768"
+      "path": "components/image-viewer/README.md",
+      "sha256": "cf53689bc6d23b9823639185dd7b9a92d827b2cc837acc23c1729e0a3c81ec67",
+      "upstreamSha256": "cf53689bc6d23b9823639185dd7b9a92d827b2cc837acc23c1729e0a3c81ec67"
     },
     {
       "path": "components/input-addon/build-data.json",
@@ -953,9 +941,9 @@
       "upstreamSha256": "f254ce25cbd19b734aa1e3a7e2f53858a98c6a6fb1117ed57a3690ea89c4e16d"
     },
     {
-      "path": "components/input-focus/README.md",
-      "sha256": "114c9397cfa5335a9043a0636056ccba305c073ddd8a9abbe1b4e870bbf968fc",
-      "upstreamSha256": "114c9397cfa5335a9043a0636056ccba305c073ddd8a9abbe1b4e870bbf968fc"
+      "path": "components/input-addon/README.md",
+      "sha256": "8b1ccc9b0c015a827ce725c368073e553690e304a029aaddf6f32a4e0143c768",
+      "upstreamSha256": "8b1ccc9b0c015a827ce725c368073e553690e304a029aaddf6f32a4e0143c768"
     },
     {
       "path": "components/input-focus/build-data.json",
@@ -968,9 +956,9 @@
       "upstreamSha256": "d89526626cef02089a5a2c75cbaef95c7db796474419624f8af3225985fb62bd"
     },
     {
-      "path": "components/input-number/README.md",
-      "sha256": "b5bf0c4908c59a7a28413751b4b14e209a7940398aa03ffeb6f4f997124487e9",
-      "upstreamSha256": "b5bf0c4908c59a7a28413751b4b14e209a7940398aa03ffeb6f4f997124487e9"
+      "path": "components/input-focus/README.md",
+      "sha256": "114c9397cfa5335a9043a0636056ccba305c073ddd8a9abbe1b4e870bbf968fc",
+      "upstreamSha256": "114c9397cfa5335a9043a0636056ccba305c073ddd8a9abbe1b4e870bbf968fc"
     },
     {
       "path": "components/input-number/build-data.json",
@@ -993,9 +981,9 @@
       "upstreamSha256": "90bdcec1a67492174372262c44f24fe8244d2ebfae5391f3818d68f853770fdf"
     },
     {
-      "path": "components/input-password/README.md",
-      "sha256": "229c62ab9768df1c536b6aac107070732e85d5009d94e79b956c438018a8e28c",
-      "upstreamSha256": "229c62ab9768df1c536b6aac107070732e85d5009d94e79b956c438018a8e28c"
+      "path": "components/input-number/README.md",
+      "sha256": "b5bf0c4908c59a7a28413751b4b14e209a7940398aa03ffeb6f4f997124487e9",
+      "upstreamSha256": "b5bf0c4908c59a7a28413751b4b14e209a7940398aa03ffeb6f4f997124487e9"
     },
     {
       "path": "components/input-password/build-data.json",
@@ -1008,14 +996,9 @@
       "upstreamSha256": "08db1d29a79274066db350a9c38921fae3cf9ab881b1937fb29d482fcdf18eee"
     },
     {
-      "path": "components/input/FAMILY.md",
-      "sha256": "0f6ffeb99b7b94a7617950309f8583df2f9e0bb81c968123c8c5e6322c43cf53",
-      "upstreamSha256": "0f6ffeb99b7b94a7617950309f8583df2f9e0bb81c968123c8c5e6322c43cf53"
-    },
-    {
-      "path": "components/input/README.md",
-      "sha256": "71ffd38368f71627055acfdc92ee4ec19940484d31f8d154fc136400787ff841",
-      "upstreamSha256": "71ffd38368f71627055acfdc92ee4ec19940484d31f8d154fc136400787ff841"
+      "path": "components/input-password/README.md",
+      "sha256": "229c62ab9768df1c536b6aac107070732e85d5009d94e79b956c438018a8e28c",
+      "upstreamSha256": "229c62ab9768df1c536b6aac107070732e85d5009d94e79b956c438018a8e28c"
     },
     {
       "path": "components/input/build-data.json",
@@ -1033,14 +1016,19 @@
       "upstreamSha256": "22b9d1f1d9cb7d878977a8d2432431e3f7a7c0c0c9c9f164781971703d206c02"
     },
     {
+      "path": "components/input/FAMILY.md",
+      "sha256": "0f6ffeb99b7b94a7617950309f8583df2f9e0bb81c968123c8c5e6322c43cf53",
+      "upstreamSha256": "0f6ffeb99b7b94a7617950309f8583df2f9e0bb81c968123c8c5e6322c43cf53"
+    },
+    {
       "path": "components/input/family.mjs",
       "sha256": "203266ca49ee06d02cddcb7ef02cb5cb1f16c70e2f4dc939dcb3d8b0c1f49787",
       "upstreamSha256": "203266ca49ee06d02cddcb7ef02cb5cb1f16c70e2f4dc939dcb3d8b0c1f49787"
     },
     {
-      "path": "components/layout-header/README.md",
-      "sha256": "cd8bab3350d6a236b59e916b15c84ef4298ac9c66d0b42b8810a25bf9aee5cac",
-      "upstreamSha256": "cd8bab3350d6a236b59e916b15c84ef4298ac9c66d0b42b8810a25bf9aee5cac"
+      "path": "components/input/README.md",
+      "sha256": "71ffd38368f71627055acfdc92ee4ec19940484d31f8d154fc136400787ff841",
+      "upstreamSha256": "71ffd38368f71627055acfdc92ee4ec19940484d31f8d154fc136400787ff841"
     },
     {
       "path": "components/layout-header/build-data.json",
@@ -1053,9 +1041,9 @@
       "upstreamSha256": "7c2fb301bef527126c4681255e20d46da1c0ed3dacfeda7eb9826a730c7e4af5"
     },
     {
-      "path": "components/layout-sidebar/README.md",
-      "sha256": "c9a1671a166b547627042a3ab524044f0fe8cf0c17f05bb0c4b91981327c7f02",
-      "upstreamSha256": "c9a1671a166b547627042a3ab524044f0fe8cf0c17f05bb0c4b91981327c7f02"
+      "path": "components/layout-header/README.md",
+      "sha256": "cd8bab3350d6a236b59e916b15c84ef4298ac9c66d0b42b8810a25bf9aee5cac",
+      "upstreamSha256": "cd8bab3350d6a236b59e916b15c84ef4298ac9c66d0b42b8810a25bf9aee5cac"
     },
     {
       "path": "components/layout-sidebar/build-data.json",
@@ -1068,9 +1056,9 @@
       "upstreamSha256": "4eeb42e25a12c62b2c88ebc3f7ee8653e10b03454f4ad5667175e85d7006e95b"
     },
     {
-      "path": "components/layout/README.md",
-      "sha256": "405c687a475ce128819414376bb4513f4f60e1c570f216780342e6f42d6900fa",
-      "upstreamSha256": "405c687a475ce128819414376bb4513f4f60e1c570f216780342e6f42d6900fa"
+      "path": "components/layout-sidebar/README.md",
+      "sha256": "c9a1671a166b547627042a3ab524044f0fe8cf0c17f05bb0c4b91981327c7f02",
+      "upstreamSha256": "c9a1671a166b547627042a3ab524044f0fe8cf0c17f05bb0c4b91981327c7f02"
     },
     {
       "path": "components/layout/build-data.json",
@@ -1093,9 +1081,9 @@
       "upstreamSha256": "2bd92d78eff01b6d30a867e0bb87cb24bf2accd90163030f82277c4d9613bad7"
     },
     {
-      "path": "components/link/README.md",
-      "sha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b",
-      "upstreamSha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b"
+      "path": "components/layout/README.md",
+      "sha256": "405c687a475ce128819414376bb4513f4f60e1c570f216780342e6f42d6900fa",
+      "upstreamSha256": "405c687a475ce128819414376bb4513f4f60e1c570f216780342e6f42d6900fa"
     },
     {
       "path": "components/link/definition.json",
@@ -1113,9 +1101,9 @@
       "upstreamSha256": "2ca67632db949f42cf6d192b50c75eb348ba335a6c20c9a5d9a696f4ecc9b4b3"
     },
     {
-      "path": "components/loading/README.md",
-      "sha256": "4b5dc70cf8d0d18f10e900881498d760211bb7b558d44c10bb0e973d58af8944",
-      "upstreamSha256": "4b5dc70cf8d0d18f10e900881498d760211bb7b558d44c10bb0e973d58af8944"
+      "path": "components/link/README.md",
+      "sha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b",
+      "upstreamSha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b"
     },
     {
       "path": "components/loading/catalog.json",
@@ -1163,9 +1151,9 @@
       "upstreamSha256": "410ab29a3d7725329c7b52cc47a1220b40b3b1bab255db2469eb5cab2c1e52de"
     },
     {
-      "path": "components/message/README.md",
-      "sha256": "e12c1b19ef3cfd17ac22fb8ac4ac82a5f631b5ee0c85c772b72973d8de75cc61",
-      "upstreamSha256": "e12c1b19ef3cfd17ac22fb8ac4ac82a5f631b5ee0c85c772b72973d8de75cc61"
+      "path": "components/loading/README.md",
+      "sha256": "4b5dc70cf8d0d18f10e900881498d760211bb7b558d44c10bb0e973d58af8944",
+      "upstreamSha256": "4b5dc70cf8d0d18f10e900881498d760211bb7b558d44c10bb0e973d58af8944"
     },
     {
       "path": "components/message/catalog.json",
@@ -1213,9 +1201,9 @@
       "upstreamSha256": "8b5fd84ac2e0b6b257a10cd47c190362e345c84e034d8c7d194e198c413bfe4f"
     },
     {
-      "path": "components/month-cell/README.md",
-      "sha256": "5a2f3b75821b34fadece5298ae7eacac8c1804adeb0bf6affacd44b3f1f8f3f8",
-      "upstreamSha256": "5a2f3b75821b34fadece5298ae7eacac8c1804adeb0bf6affacd44b3f1f8f3f8"
+      "path": "components/message/README.md",
+      "sha256": "e12c1b19ef3cfd17ac22fb8ac4ac82a5f631b5ee0c85c772b72973d8de75cc61",
+      "upstreamSha256": "e12c1b19ef3cfd17ac22fb8ac4ac82a5f631b5ee0c85c772b72973d8de75cc61"
     },
     {
       "path": "components/month-cell/build-data.json",
@@ -1228,6 +1216,11 @@
       "upstreamSha256": "d57ee69ad3d2b354543e44832cf5e2868c27fa8b7361cc515d6004f14e668553"
     },
     {
+      "path": "components/month-cell/README.md",
+      "sha256": "5a2f3b75821b34fadece5298ae7eacac8c1804adeb0bf6affacd44b3f1f8f3f8",
+      "upstreamSha256": "5a2f3b75821b34fadece5298ae7eacac8c1804adeb0bf6affacd44b3f1f8f3f8"
+    },
+    {
       "path": "components/multi-option-rest/build-data.json",
       "sha256": "3e8b82b389fa26206968b9e75ccd72848f7bab78e9cfc5d3564a1115da30664e",
       "upstreamSha256": "3e8b82b389fa26206968b9e75ccd72848f7bab78e9cfc5d3564a1115da30664e"
@@ -1236,11 +1229,6 @@
       "path": "components/multi-option-rest/definition.json",
       "sha256": "d6fa979b6b09f51ca784d26785b7551e289cac9c7205b936d411e90d95237398",
       "upstreamSha256": "d6fa979b6b09f51ca784d26785b7551e289cac9c7205b936d411e90d95237398"
-    },
-    {
-      "path": "components/multi-option/README.md",
-      "sha256": "1ad5cf181fa055040b162954956e9ad10d16d90c0f337b0cdf6f44967e8fb47f",
-      "upstreamSha256": "1ad5cf181fa055040b162954956e9ad10d16d90c0f337b0cdf6f44967e8fb47f"
     },
     {
       "path": "components/multi-option/build-data.json",
@@ -1258,9 +1246,9 @@
       "upstreamSha256": "1cb1431ac2d4473a691cad91556878859f09045f9296912658fd941a189b6289"
     },
     {
-      "path": "components/notification/README.md",
-      "sha256": "74bed8aabe1a085c1bc396f19e9344b00868608512f450baaa5ca5f7c02844a0",
-      "upstreamSha256": "74bed8aabe1a085c1bc396f19e9344b00868608512f450baaa5ca5f7c02844a0"
+      "path": "components/multi-option/README.md",
+      "sha256": "1ad5cf181fa055040b162954956e9ad10d16d90c0f337b0cdf6f44967e8fb47f",
+      "upstreamSha256": "1ad5cf181fa055040b162954956e9ad10d16d90c0f337b0cdf6f44967e8fb47f"
     },
     {
       "path": "components/notification/catalog.json",
@@ -1308,6 +1296,11 @@
       "upstreamSha256": "1c7cdc83f345c1354b78febf88b9b9915961e8ca7c13da6bfe0169d6313c1d02"
     },
     {
+      "path": "components/notification/README.md",
+      "sha256": "74bed8aabe1a085c1bc396f19e9344b00868608512f450baaa5ca5f7c02844a0",
+      "upstreamSha256": "74bed8aabe1a085c1bc396f19e9344b00868608512f450baaa5ca5f7c02844a0"
+    },
+    {
       "path": "components/number-decrease/build-data.json",
       "sha256": "08a4cdecf4ba4fded6c9d7390d0ad219c46cb733f560921ff06fc5dc15ebc590",
       "upstreamSha256": "08a4cdecf4ba4fded6c9d7390d0ad219c46cb733f560921ff06fc5dc15ebc590"
@@ -1326,11 +1319,6 @@
       "path": "components/number-increase/definition.json",
       "sha256": "fe20355c933c7236aa3ca9e370b8a3c40be3638fd0a9a46676d7aaa338160772",
       "upstreamSha256": "fe20355c933c7236aa3ca9e370b8a3c40be3638fd0a9a46676d7aaa338160772"
-    },
-    {
-      "path": "components/pagination/README.md",
-      "sha256": "3772c77f14112caa1593143e87cf6f1c81e84f2d060d812caf6095ee93203aad",
-      "upstreamSha256": "3772c77f14112caa1593143e87cf6f1c81e84f2d060d812caf6095ee93203aad"
     },
     {
       "path": "components/pagination/build-data.json",
@@ -1408,9 +1396,9 @@
       "upstreamSha256": "031c245060ce696c0f6efcdfc13933f83f4cf0c9276a0aa84f29605213f8ce28"
     },
     {
-      "path": "components/popconfirm/README.md",
-      "sha256": "597663acb1f864bc74068f19ad86d11b64f49d395fb053d74842075159fd91e5",
-      "upstreamSha256": "597663acb1f864bc74068f19ad86d11b64f49d395fb053d74842075159fd91e5"
+      "path": "components/pagination/README.md",
+      "sha256": "3772c77f14112caa1593143e87cf6f1c81e84f2d060d812caf6095ee93203aad",
+      "upstreamSha256": "3772c77f14112caa1593143e87cf6f1c81e84f2d060d812caf6095ee93203aad"
     },
     {
       "path": "components/popconfirm/catalog.json",
@@ -1498,6 +1486,11 @@
       "upstreamSha256": "adad9094a2d68c319660be17b780576cad4d14dab663c08f5d7914f3c7df2723"
     },
     {
+      "path": "components/popconfirm/README.md",
+      "sha256": "597663acb1f864bc74068f19ad86d11b64f49d395fb053d74842075159fd91e5",
+      "upstreamSha256": "597663acb1f864bc74068f19ad86d11b64f49d395fb053d74842075159fd91e5"
+    },
+    {
       "path": "components/radio-button/build-data.json",
       "sha256": "20d60e314d90e1484d3118ec963c8e4fb00ba04664f59849321d90c4732d2800",
       "upstreamSha256": "20d60e314d90e1484d3118ec963c8e4fb00ba04664f59849321d90c4732d2800"
@@ -1528,11 +1521,6 @@
       "upstreamSha256": "5a893177b775bb4c2a19ff2160dcf5eeea1f8166adbe9a5c5e102afbb7379977"
     },
     {
-      "path": "components/radio/README.md",
-      "sha256": "a9a265fcf9b7df62ca154e26fa906d6e72dc76691b023ed8daa74f34b7f154a1",
-      "upstreamSha256": "a9a265fcf9b7df62ca154e26fa906d6e72dc76691b023ed8daa74f34b7f154a1"
-    },
-    {
       "path": "components/radio/definition.json",
       "sha256": "5a85d423c8673914f2fde0b307d09f0a0db02166b2841df70a781216105745a1",
       "upstreamSha256": "5a85d423c8673914f2fde0b307d09f0a0db02166b2841df70a781216105745a1"
@@ -1548,9 +1536,14 @@
       "upstreamSha256": "9d822cddd163ce4430dcc1e7ec6fec52bd2837f5ea63d277a032ccf2a7400c48"
     },
     {
-      "path": "components/readonly-states/README.md",
-      "sha256": "00aa7b3fe6fb3df27a18000f9383df08bf99e4997cddddf70b97869cacedee60",
-      "upstreamSha256": "00aa7b3fe6fb3df27a18000f9383df08bf99e4997cddddf70b97869cacedee60"
+      "path": "components/radio/README.md",
+      "sha256": "a9a265fcf9b7df62ca154e26fa906d6e72dc76691b023ed8daa74f34b7f154a1",
+      "upstreamSha256": "a9a265fcf9b7df62ca154e26fa906d6e72dc76691b023ed8daa74f34b7f154a1"
+    },
+    {
+      "path": "components/README.md",
+      "sha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af",
+      "upstreamSha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af"
     },
     {
       "path": "components/readonly-states/build-data.json",
@@ -1563,9 +1556,9 @@
       "upstreamSha256": "4e137122377f6ed7b0482a9baa9f1bc1f79471d6899ca794b7673fb7cbbd2073"
     },
     {
-      "path": "components/search-action/README.md",
-      "sha256": "6b8febc5c3f4e4b0f46f55b1908db33d460e9ee8c089f7e6346792610580a862",
-      "upstreamSha256": "6b8febc5c3f4e4b0f46f55b1908db33d460e9ee8c089f7e6346792610580a862"
+      "path": "components/readonly-states/README.md",
+      "sha256": "00aa7b3fe6fb3df27a18000f9383df08bf99e4997cddddf70b97869cacedee60",
+      "upstreamSha256": "00aa7b3fe6fb3df27a18000f9383df08bf99e4997cddddf70b97869cacedee60"
     },
     {
       "path": "components/search-action/build-data.json",
@@ -1578,9 +1571,9 @@
       "upstreamSha256": "4b3fa59a077a21d0483b5b9e32cda4d2c540b3e61fb2141cefad4bab48511376"
     },
     {
-      "path": "components/search-extra/README.md",
-      "sha256": "147d44cfecdc4061adbebd98d7a0034e0e2bb0f8388bae43aa5a004b88feab15",
-      "upstreamSha256": "147d44cfecdc4061adbebd98d7a0034e0e2bb0f8388bae43aa5a004b88feab15"
+      "path": "components/search-action/README.md",
+      "sha256": "6b8febc5c3f4e4b0f46f55b1908db33d460e9ee8c089f7e6346792610580a862",
+      "upstreamSha256": "6b8febc5c3f4e4b0f46f55b1908db33d460e9ee8c089f7e6346792610580a862"
     },
     {
       "path": "components/search-extra/build-data.json",
@@ -1593,9 +1586,9 @@
       "upstreamSha256": "4e075879adcf828dca6d8cd2753227c9943656e76a03b5caa9ff3553640e8633"
     },
     {
-      "path": "components/search-popup/README.md",
-      "sha256": "2fe4c4a18f84e7a4d8975bb4f7482c09627bfcca89e536a39f0f2775b1ac536a",
-      "upstreamSha256": "2fe4c4a18f84e7a4d8975bb4f7482c09627bfcca89e536a39f0f2775b1ac536a"
+      "path": "components/search-extra/README.md",
+      "sha256": "147d44cfecdc4061adbebd98d7a0034e0e2bb0f8388bae43aa5a004b88feab15",
+      "upstreamSha256": "147d44cfecdc4061adbebd98d7a0034e0e2bb0f8388bae43aa5a004b88feab15"
     },
     {
       "path": "components/search-popup/build-data.json",
@@ -1608,9 +1601,9 @@
       "upstreamSha256": "25cf9ad9a9f08da96fc1bb80a0f5762a3ce0eb131500052e268f79d94f416839"
     },
     {
-      "path": "components/search/README.md",
-      "sha256": "565a6d2ee8148f1dc053b5bf3b8edc45f1f03a95b20a9ce6a403f74b1669aa6b",
-      "upstreamSha256": "565a6d2ee8148f1dc053b5bf3b8edc45f1f03a95b20a9ce6a403f74b1669aa6b"
+      "path": "components/search-popup/README.md",
+      "sha256": "2fe4c4a18f84e7a4d8975bb4f7482c09627bfcca89e536a39f0f2775b1ac536a",
+      "upstreamSha256": "2fe4c4a18f84e7a4d8975bb4f7482c09627bfcca89e536a39f0f2775b1ac536a"
     },
     {
       "path": "components/search/build-data.json",
@@ -1628,6 +1621,11 @@
       "upstreamSha256": "6fae7bb26024f118cd7f06fb7ca77466746225b426b28e1a1619a47454479494"
     },
     {
+      "path": "components/search/README.md",
+      "sha256": "565a6d2ee8148f1dc053b5bf3b8edc45f1f03a95b20a9ce6a403f74b1669aa6b",
+      "upstreamSha256": "565a6d2ee8148f1dc053b5bf3b8edc45f1f03a95b20a9ce6a403f74b1669aa6b"
+    },
+    {
       "path": "components/select-expanded/build-data.json",
       "sha256": "ed7f5014080b371963ee988e260dbfcf170efcf07b7f05200cdf41bbd90e4ece",
       "upstreamSha256": "ed7f5014080b371963ee988e260dbfcf170efcf07b7f05200cdf41bbd90e4ece"
@@ -1636,11 +1634,6 @@
       "path": "components/select-expanded/definition.json",
       "sha256": "d5150e2056e9c6114c8b7c706ddd6021513a2c16826358aaf0a19f7242d2cfe3",
       "upstreamSha256": "d5150e2056e9c6114c8b7c706ddd6021513a2c16826358aaf0a19f7242d2cfe3"
-    },
-    {
-      "path": "components/select-focus/README.md",
-      "sha256": "057240922783290bb5505406309abdfec0ec0079f142b72e89d41b19513e81fb",
-      "upstreamSha256": "057240922783290bb5505406309abdfec0ec0079f142b72e89d41b19513e81fb"
     },
     {
       "path": "components/select-focus/build-data.json",
@@ -1653,9 +1646,9 @@
       "upstreamSha256": "d89a36f0df9a0bf5b72b4bfb9b8cba62a3ef22144c4537a5485dceef3aeea437"
     },
     {
-      "path": "components/select-option/README.md",
-      "sha256": "fe7cb5d90fca1aff7fc2df64cc1b5a7bb0f98d1d4172b6c319ab0f6c29b7184f",
-      "upstreamSha256": "fe7cb5d90fca1aff7fc2df64cc1b5a7bb0f98d1d4172b6c319ab0f6c29b7184f"
+      "path": "components/select-focus/README.md",
+      "sha256": "057240922783290bb5505406309abdfec0ec0079f142b72e89d41b19513e81fb",
+      "upstreamSha256": "057240922783290bb5505406309abdfec0ec0079f142b72e89d41b19513e81fb"
     },
     {
       "path": "components/select-option/build-data.json",
@@ -1668,14 +1661,9 @@
       "upstreamSha256": "163e4fe3ca56ef85f42f1466406d5fdef12f1a4506f7b743409ce18e76e526e3"
     },
     {
-      "path": "components/select/FAMILY.md",
-      "sha256": "0ac14614eccd7af4f2061b16eb3a29de72a206519eb6c6e93929bf4dc2a361e8",
-      "upstreamSha256": "0ac14614eccd7af4f2061b16eb3a29de72a206519eb6c6e93929bf4dc2a361e8"
-    },
-    {
-      "path": "components/select/README.md",
-      "sha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb",
-      "upstreamSha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb"
+      "path": "components/select-option/README.md",
+      "sha256": "fe7cb5d90fca1aff7fc2df64cc1b5a7bb0f98d1d4172b6c319ab0f6c29b7184f",
+      "upstreamSha256": "fe7cb5d90fca1aff7fc2df64cc1b5a7bb0f98d1d4172b6c319ab0f6c29b7184f"
     },
     {
       "path": "components/select/build-data.json",
@@ -1693,6 +1681,11 @@
       "upstreamSha256": "d2ee841d801403c9c90e8cd792430a379b58e4155126fe96362a59dd9d4bef19"
     },
     {
+      "path": "components/select/FAMILY.md",
+      "sha256": "0ac14614eccd7af4f2061b16eb3a29de72a206519eb6c6e93929bf4dc2a361e8",
+      "upstreamSha256": "0ac14614eccd7af4f2061b16eb3a29de72a206519eb6c6e93929bf4dc2a361e8"
+    },
+    {
       "path": "components/select/family.mjs",
       "sha256": "a3e8eab809077fa2289f7d6044030979ebbd0f87b84f3695836a792fcfffde24",
       "upstreamSha256": "a3e8eab809077fa2289f7d6044030979ebbd0f87b84f3695836a792fcfffde24"
@@ -1703,9 +1696,9 @@
       "upstreamSha256": "f7b343e55c7f405c6730a3c4657027fd158241aae6e3e67a41d7684c0f6ca952"
     },
     {
-      "path": "components/steps/README.md",
-      "sha256": "f99ca424a40083851f11e5ef63bc4013c38778724982e64fe1f03c8b72cb1037",
-      "upstreamSha256": "f99ca424a40083851f11e5ef63bc4013c38778724982e64fe1f03c8b72cb1037"
+      "path": "components/select/README.md",
+      "sha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb",
+      "upstreamSha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb"
     },
     {
       "path": "components/steps/catalog.json",
@@ -1863,9 +1856,9 @@
       "upstreamSha256": "d6f806f7660973bb656b568bc0f5a1f5d2015966815b4b7e206b30294ccd0ef6"
     },
     {
-      "path": "components/switch/README.md",
-      "sha256": "4be3f29bc5f1b1fca41fcce2b320fdd44e274ced4bae6309aa5f70df7cc00d31",
-      "upstreamSha256": "4be3f29bc5f1b1fca41fcce2b320fdd44e274ced4bae6309aa5f70df7cc00d31"
+      "path": "components/steps/README.md",
+      "sha256": "f99ca424a40083851f11e5ef63bc4013c38778724982e64fe1f03c8b72cb1037",
+      "upstreamSha256": "f99ca424a40083851f11e5ef63bc4013c38778724982e64fe1f03c8b72cb1037"
     },
     {
       "path": "components/switch/build-data.json",
@@ -1878,9 +1871,9 @@
       "upstreamSha256": "82daa8596944bca6ac5f3f7d28d6144e8ff2709e464084af3147a5827932b168"
     },
     {
-      "path": "components/table-cell/README.md",
-      "sha256": "1e1e3a8f7ceaf6670dca604ff2098e040c9ba3a071504733d2c683c70c3e3b42",
-      "upstreamSha256": "1e1e3a8f7ceaf6670dca604ff2098e040c9ba3a071504733d2c683c70c3e3b42"
+      "path": "components/switch/README.md",
+      "sha256": "4be3f29bc5f1b1fca41fcce2b320fdd44e274ced4bae6309aa5f70df7cc00d31",
+      "upstreamSha256": "4be3f29bc5f1b1fca41fcce2b320fdd44e274ced4bae6309aa5f70df7cc00d31"
     },
     {
       "path": "components/table-cell/build-data.json",
@@ -1893,9 +1886,9 @@
       "upstreamSha256": "bb133ae824ce3af538d5126d264b7c3823f423fa40863a5b57eff4ebaa5e8c97"
     },
     {
-      "path": "components/table/README.md",
-      "sha256": "5f48101e665083db7d20a4e60967e8d35f45b1e1087ac312263d7ca4b916b05d",
-      "upstreamSha256": "5f48101e665083db7d20a4e60967e8d35f45b1e1087ac312263d7ca4b916b05d"
+      "path": "components/table-cell/README.md",
+      "sha256": "1e1e3a8f7ceaf6670dca604ff2098e040c9ba3a071504733d2c683c70c3e3b42",
+      "upstreamSha256": "1e1e3a8f7ceaf6670dca604ff2098e040c9ba3a071504733d2c683c70c3e3b42"
     },
     {
       "path": "components/table/definition.json",
@@ -2008,14 +2001,14 @@
       "upstreamSha256": "9ebb40f51d113bbbc2dd7150f07393a1119be28dfd56d68b13dd5951e060faac"
     },
     {
+      "path": "components/table/README.md",
+      "sha256": "5f48101e665083db7d20a4e60967e8d35f45b1e1087ac312263d7ca4b916b05d",
+      "upstreamSha256": "5f48101e665083db7d20a4e60967e8d35f45b1e1087ac312263d7ca4b916b05d"
+    },
+    {
       "path": "components/table/verification-example.json",
       "sha256": "ae8c7ec0a012d0b60a7721b6b0befcc47a2b181570e96d35b3927b43ab3099ae",
       "upstreamSha256": "ae8c7ec0a012d0b60a7721b6b0befcc47a2b181570e96d35b3927b43ab3099ae"
-    },
-    {
-      "path": "components/tabs/README.md",
-      "sha256": "689a19db1473dc7a2b99743078942f442ed2c352289faff0d7806ea3f0ef84e2",
-      "upstreamSha256": "689a19db1473dc7a2b99743078942f442ed2c352289faff0d7806ea3f0ef84e2"
     },
     {
       "path": "components/tabs/build-data.json",
@@ -2083,9 +2076,9 @@
       "upstreamSha256": "0878826a2f03d496bf0f7081e4a71bf5c2c51d885c0b6b6df1c1aa0fd9a2d441"
     },
     {
-      "path": "components/tag/README.md",
-      "sha256": "830a836e127fa12a3deb4b70222f1f698e01bbb4487b1219ff8b70effb71c08f",
-      "upstreamSha256": "830a836e127fa12a3deb4b70222f1f698e01bbb4487b1219ff8b70effb71c08f"
+      "path": "components/tabs/README.md",
+      "sha256": "689a19db1473dc7a2b99743078942f442ed2c352289faff0d7806ea3f0ef84e2",
+      "upstreamSha256": "689a19db1473dc7a2b99743078942f442ed2c352289faff0d7806ea3f0ef84e2"
     },
     {
       "path": "components/tag/build-data.json",
@@ -2223,9 +2216,9 @@
       "upstreamSha256": "d13aba50fd4a71011946ac173ae489ff9242b28d96306c228d779282da95edee"
     },
     {
-      "path": "components/textarea/README.md",
-      "sha256": "e89a6e58d649946a2dac1b5fba820a1e0ecd080a180f82ee9c670fbbd92badc1",
-      "upstreamSha256": "e89a6e58d649946a2dac1b5fba820a1e0ecd080a180f82ee9c670fbbd92badc1"
+      "path": "components/tag/README.md",
+      "sha256": "830a836e127fa12a3deb4b70222f1f698e01bbb4487b1219ff8b70effb71c08f",
+      "upstreamSha256": "830a836e127fa12a3deb4b70222f1f698e01bbb4487b1219ff8b70effb71c08f"
     },
     {
       "path": "components/textarea/build-data.json",
@@ -2238,9 +2231,9 @@
       "upstreamSha256": "9bce91e307a130adea1776781c53ce0b2775c58a2dec196524e286787d58d443"
     },
     {
-      "path": "components/time-cell/README.md",
-      "sha256": "44918e05bdb44d805e87dcf71427374d8f794b73e3667ecae9c92247c4a73e01",
-      "upstreamSha256": "44918e05bdb44d805e87dcf71427374d8f794b73e3667ecae9c92247c4a73e01"
+      "path": "components/textarea/README.md",
+      "sha256": "e89a6e58d649946a2dac1b5fba820a1e0ecd080a180f82ee9c670fbbd92badc1",
+      "upstreamSha256": "e89a6e58d649946a2dac1b5fba820a1e0ecd080a180f82ee9c670fbbd92badc1"
     },
     {
       "path": "components/time-cell/build-data.json",
@@ -2253,9 +2246,9 @@
       "upstreamSha256": "c9963a3342e1d59c2c481685520510e2a2d5bac3685686523c6cd0c9e9f01da6"
     },
     {
-      "path": "components/time-picker-popup/README.md",
-      "sha256": "1a8bcd4fef49a534fcb54738ec7bdd6112440209e32b896ae2775b2c34d74847",
-      "upstreamSha256": "1a8bcd4fef49a534fcb54738ec7bdd6112440209e32b896ae2775b2c34d74847"
+      "path": "components/time-cell/README.md",
+      "sha256": "44918e05bdb44d805e87dcf71427374d8f794b73e3667ecae9c92247c4a73e01",
+      "upstreamSha256": "44918e05bdb44d805e87dcf71427374d8f794b73e3667ecae9c92247c4a73e01"
     },
     {
       "path": "components/time-picker-popup/build-data.json",
@@ -2268,9 +2261,9 @@
       "upstreamSha256": "80ef83a5749411f7c2876a5838be460dcfca7933978458feeb4f2a309dd41873"
     },
     {
-      "path": "components/time-picker/README.md",
-      "sha256": "62cadd17e05f2e9598d398ad43f5f048d8f3bf834c45d75b24d5f4887777c704",
-      "upstreamSha256": "62cadd17e05f2e9598d398ad43f5f048d8f3bf834c45d75b24d5f4887777c704"
+      "path": "components/time-picker-popup/README.md",
+      "sha256": "1a8bcd4fef49a534fcb54738ec7bdd6112440209e32b896ae2775b2c34d74847",
+      "upstreamSha256": "1a8bcd4fef49a534fcb54738ec7bdd6112440209e32b896ae2775b2c34d74847"
     },
     {
       "path": "components/time-picker/build-data.json",
@@ -2293,9 +2286,9 @@
       "upstreamSha256": "26f247b4b9383cf42c68551a7ee739deb1d16ee1d8e02200bb9875c25a736923"
     },
     {
-      "path": "components/time-range-cell/README.md",
-      "sha256": "3659b6bed0dfa97819657b10fc60d41cfb5a30f90a6c15b38cfedbb3e046b91b",
-      "upstreamSha256": "3659b6bed0dfa97819657b10fc60d41cfb5a30f90a6c15b38cfedbb3e046b91b"
+      "path": "components/time-picker/README.md",
+      "sha256": "62cadd17e05f2e9598d398ad43f5f048d8f3bf834c45d75b24d5f4887777c704",
+      "upstreamSha256": "62cadd17e05f2e9598d398ad43f5f048d8f3bf834c45d75b24d5f4887777c704"
     },
     {
       "path": "components/time-range-cell/build-data.json",
@@ -2308,14 +2301,14 @@
       "upstreamSha256": "64b48edeea27ef46db59ed7b1aad6e5e41ec3a7d8074c9f067f0e075df0ca188"
     },
     {
+      "path": "components/time-range-cell/README.md",
+      "sha256": "3659b6bed0dfa97819657b10fc60d41cfb5a30f90a6c15b38cfedbb3e046b91b",
+      "upstreamSha256": "3659b6bed0dfa97819657b10fc60d41cfb5a30f90a6c15b38cfedbb3e046b91b"
+    },
+    {
       "path": "components/time-range-group/generator.mjs",
       "sha256": "91dc0a601837d329e1209d51af594a81ccbd5057711a17a50a9d1030c9a570c6",
       "upstreamSha256": "91dc0a601837d329e1209d51af594a81ccbd5057711a17a50a9d1030c9a570c6"
-    },
-    {
-      "path": "components/timeline/README.md",
-      "sha256": "9ee0e06955c1b6fe6a4d3696713583a7f8271a7ee1dbe094b972b48bc6fe9976",
-      "upstreamSha256": "9ee0e06955c1b6fe6a4d3696713583a7f8271a7ee1dbe094b972b48bc6fe9976"
     },
     {
       "path": "components/timeline/dependencies.json",
@@ -2333,9 +2326,9 @@
       "upstreamSha256": "cef57b3bbc8441167dae1b58be7fad93115ca7b5c810d1a8127fc4271cf59bf1"
     },
     {
-      "path": "components/tooltip/README.md",
-      "sha256": "6caa46558cc2092699033f2863cdd3374831fabc949a815c9dcf3c986664c6ba",
-      "upstreamSha256": "6caa46558cc2092699033f2863cdd3374831fabc949a815c9dcf3c986664c6ba"
+      "path": "components/timeline/README.md",
+      "sha256": "9ee0e06955c1b6fe6a4d3696713583a7f8271a7ee1dbe094b972b48bc6fe9976",
+      "upstreamSha256": "9ee0e06955c1b6fe6a4d3696713583a7f8271a7ee1dbe094b972b48bc6fe9976"
     },
     {
       "path": "components/tooltip/catalog.json",
@@ -2413,9 +2406,9 @@
       "upstreamSha256": "a8aef09687fea0f85af89ec7c047b2f7470f03f5d298b5ebfbc9f2fa22a5391d"
     },
     {
-      "path": "components/transfer-control/README.md",
-      "sha256": "9905bfba41eeef647089ecf0b8fb0f048529ee70b5ab542a85b2423ef784d6b9",
-      "upstreamSha256": "9905bfba41eeef647089ecf0b8fb0f048529ee70b5ab542a85b2423ef784d6b9"
+      "path": "components/tooltip/README.md",
+      "sha256": "6caa46558cc2092699033f2863cdd3374831fabc949a815c9dcf3c986664c6ba",
+      "upstreamSha256": "6caa46558cc2092699033f2863cdd3374831fabc949a815c9dcf3c986664c6ba"
     },
     {
       "path": "components/transfer-control/build-data.json",
@@ -2428,9 +2421,9 @@
       "upstreamSha256": "f38ee2d89e7df55cf384b2a0adc0ab421f3723fba0cfe75535395bee2e10a1dc"
     },
     {
-      "path": "components/transfer-item/README.md",
-      "sha256": "3eb5dabf606a1522a7f0c9acdc3f8b06b2d1272e4f7f7e2fd90ad73afe79459d",
-      "upstreamSha256": "3eb5dabf606a1522a7f0c9acdc3f8b06b2d1272e4f7f7e2fd90ad73afe79459d"
+      "path": "components/transfer-control/README.md",
+      "sha256": "9905bfba41eeef647089ecf0b8fb0f048529ee70b5ab542a85b2423ef784d6b9",
+      "upstreamSha256": "9905bfba41eeef647089ecf0b8fb0f048529ee70b5ab542a85b2423ef784d6b9"
     },
     {
       "path": "components/transfer-item/build-data.json",
@@ -2443,9 +2436,9 @@
       "upstreamSha256": "708387aa4a78f768dc4613c308063205361652e5a652c543e628f1f314db5b8a"
     },
     {
-      "path": "components/transfer/README.md",
-      "sha256": "bad30b34eac1bee52a59875e6cab55f52d1f96864fae89a0a262d005c43826bc",
-      "upstreamSha256": "bad30b34eac1bee52a59875e6cab55f52d1f96864fae89a0a262d005c43826bc"
+      "path": "components/transfer-item/README.md",
+      "sha256": "3eb5dabf606a1522a7f0c9acdc3f8b06b2d1272e4f7f7e2fd90ad73afe79459d",
+      "upstreamSha256": "3eb5dabf606a1522a7f0c9acdc3f8b06b2d1272e4f7f7e2fd90ad73afe79459d"
     },
     {
       "path": "components/transfer/build-data.json",
@@ -2468,14 +2461,14 @@
       "upstreamSha256": "1a91090e3b8b2d542b2653eb23c6b9876bc8547ffd3e3fc8dd93d88a9b7b7b5a"
     },
     {
+      "path": "components/transfer/README.md",
+      "sha256": "bad30b34eac1bee52a59875e6cab55f52d1f96864fae89a0a262d005c43826bc",
+      "upstreamSha256": "bad30b34eac1bee52a59875e6cab55f52d1f96864fae89a0a262d005c43826bc"
+    },
+    {
       "path": "components/transfer/recipes.json",
       "sha256": "9ba6d1a6baad02140c2702f106b63f3771f8b2db38ac7de0b79158f2da7d9a8b",
       "upstreamSha256": "9ba6d1a6baad02140c2702f106b63f3771f8b2db38ac7de0b79158f2da7d9a8b"
-    },
-    {
-      "path": "components/upload/README.md",
-      "sha256": "644dfae11537c731a3d7b79878c4eeebefcd4b45920fc034c74635e42ab9c2c5",
-      "upstreamSha256": "644dfae11537c731a3d7b79878c4eeebefcd4b45920fc034c74635e42ab9c2c5"
     },
     {
       "path": "components/upload/build-data.json",
@@ -2503,9 +2496,9 @@
       "upstreamSha256": "54cef96d0eae5e840f394b333d7f67f359624a64933359140e18f7a04f8783bd"
     },
     {
-      "path": "components/year-cell/README.md",
-      "sha256": "1fe3229ac8a9b6eaae5fee42961b943125bc6a21072813c57f2f6c25d1116944",
-      "upstreamSha256": "1fe3229ac8a9b6eaae5fee42961b943125bc6a21072813c57f2f6c25d1116944"
+      "path": "components/upload/README.md",
+      "sha256": "644dfae11537c731a3d7b79878c4eeebefcd4b45920fc034c74635e42ab9c2c5",
+      "upstreamSha256": "644dfae11537c731a3d7b79878c4eeebefcd4b45920fc034c74635e42ab9c2c5"
     },
     {
       "path": "components/year-cell/build-data.json",
@@ -2516,6 +2509,11 @@
       "path": "components/year-cell/definition.json",
       "sha256": "8115e7af0ed2670a5e8931f9737a48fbb9d8aa5a06e11ed7dd1d50d4e3aed1aa",
       "upstreamSha256": "8115e7af0ed2670a5e8931f9737a48fbb9d8aa5a06e11ed7dd1d50d4e3aed1aa"
+    },
+    {
+      "path": "components/year-cell/README.md",
+      "sha256": "1fe3229ac8a9b6eaae5fee42961b943125bc6a21072813c57f2f6c25d1116944",
+      "upstreamSha256": "1fe3229ac8a9b6eaae5fee42961b943125bc6a21072813c57f2f6c25d1116944"
     },
     {
       "path": "config/figma-pages.json",
@@ -2559,7 +2557,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "cd2a789c6b6ef9a7df0cd565a852964d293aeb204970cb3731a1b174dbaad0ac",
+      "sha256": "21e2e1d46af7771f382ec5ef4aa915d91ddfe43fe03e6aee6c52c671e7fb93c4",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2588,19 +2586,19 @@
       "upstreamSha256": "2719242024c4567d35bdb1294a80d42bca66ec064f0994d01dcc40b846040d3c"
     },
     {
-      "path": "docs/support/README.md",
-      "sha256": "8beffdeffade97212187f472bd03755ec95e6eed437477c73e8bd3d98ecf6a41",
-      "upstreamSha256": "8beffdeffade97212187f472bd03755ec95e6eed437477c73e8bd3d98ecf6a41"
-    },
-    {
       "path": "docs/support/figma-logging.md",
-      "sha256": "eeb2330c79cc8426aa34e496ff22b8491b69e94d036ed6b54ed3a7b72782d364",
+      "sha256": "cbc61c785bbeae9e3369bba62a3b086b22760c88340b2c5cc09f43d0087f0a42",
       "upstreamSha256": null
     },
     {
       "path": "docs/support/local-diagnostics.md",
       "sha256": "0b4c6244055bbdb1270e7fe1aa23f097cc14ee510d3c3e0cf04cab9fc53a05d7",
       "upstreamSha256": null
+    },
+    {
+      "path": "docs/support/README.md",
+      "sha256": "8beffdeffade97212187f472bd03755ec95e6eed437477c73e8bd3d98ecf6a41",
+      "upstreamSha256": "8beffdeffade97212187f472bd03755ec95e6eed437477c73e8bd3d98ecf6a41"
     },
     {
       "path": "docs/timeline.md",
@@ -2631,6 +2629,16 @@
       "path": "pages/work-orders/build.mjs",
       "sha256": "6a492d4dacd799e2aa834cd398e92911d3455fa522b2535cb0cd143f4efcd189",
       "upstreamSha256": "6a492d4dacd799e2aa834cd398e92911d3455fa522b2535cb0cd143f4efcd189"
+    },
+    {
+      "path": "PUBLIC_EXPORT_MANIFEST.json",
+      "sha256": "3119c3d0429546ecde6cdbdef51eec35d30010fb59c4538c1eda8b297d812d67",
+      "upstreamSha256": "3119c3d0429546ecde6cdbdef51eec35d30010fb59c4538c1eda8b297d812d67"
+    },
+    {
+      "path": "README.md",
+      "sha256": "d47a6658015ea24746f2459b0c84624661f97acfcffbe1528bba1eb102acc8d5",
+      "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
       "path": "scripts/distribution/build-gitee.mjs",
@@ -2704,7 +2712,7 @@
     },
     {
       "path": "scripts/figma/portable.mjs",
-      "sha256": "c875ca95342858736016cd2d64453f8291b22da72abaebd6a65e009afd3ece50",
+      "sha256": "2724c940eb82c83a0521e659fd7bca8d62c6c5c6b1952f6fbe7697822cfaf274",
       "upstreamSha256": null
     },
     {
@@ -2754,7 +2762,7 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "bf5acc9fa4a68d10399f2569c4b3a8deceabec726203a40267e27a7989a265b9",
+      "sha256": "d9b90fa58983b6953c8064be01088dc989bfcf1497904b98a3aaa302e7f177dd",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
@@ -2854,7 +2862,7 @@
     },
     {
       "path": "sketch/sketch.mjs",
-      "sha256": "168949b338ebd7494295d1d75aeea65aed63d21bd081eeea306f567987d7c37f",
+      "sha256": "207524a940f80c92c4677f24e2ed416b7a92fc555a24a6bc01b63d32f625d2e7",
       "upstreamSha256": "168949b338ebd7494295d1d75aeea65aed63d21bd081eeea306f567987d7c37f"
     },
     {
@@ -2869,7 +2877,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "c9970707f6ceb7d03e826a1a396166efd8b5a893e4e3a4f66b072b7e03a079e8",
+      "sha256": "31fbb3db6fbc022ee3714237d55d2a1087df48e26b9ce193f1f6251efcbeb9b0",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -2884,7 +2892,7 @@
     },
     {
       "path": "support/client.mjs",
-      "sha256": "189059e71b2346dce8647f2e392c5adab978c66083e9377422aefb7262c8bf18",
+      "sha256": "793d525132fe9fe243546111ebd3fb615a0001cd79f5d61f6dfc1c3acff2be95",
       "upstreamSha256": "ae623b3622ed467ef7b4af676ad055c6aac01922303e0796033f65088654d3a1"
     },
     {
@@ -2899,7 +2907,7 @@
     },
     {
       "path": "support/diagnose.mjs",
-      "sha256": "7e5f10e7a251413e84de9cc5478531a8a44e8bbe9fe0275ba64352d5274cd5e3",
+      "sha256": "57900e27d49b9828d091a09aefb5f981e32aca4ad96714e3c4732f696dab3efe",
       "upstreamSha256": "cdaf9438302501948fce8e398521f8c360cacb4c25d6cdfbed8575e5c2b6b406"
     },
     {
@@ -2908,8 +2916,13 @@
       "upstreamSha256": "e4b7884cc8f7024d589cd87ee53c5eace8e7910d514f88bb1a0c8e2d89bab770"
     },
     {
+      "path": "support/event-semantics.mjs",
+      "sha256": "9a3091f43b088d2d4892d5c73360ff7d030622050f69dcb7a0352c65d61a2ac4",
+      "upstreamSha256": null
+    },
+    {
       "path": "support/figma-log.mjs",
-      "sha256": "764d37d4069659fb8451a45e6472fe25538ae9474c4d9e1d5580e988f716b9ec",
+      "sha256": "57b26a033240063d96f32977588f1af9b63ca356c89caa433822119b5631c3fa",
       "upstreamSha256": null
     },
     {
@@ -2949,37 +2962,37 @@
     },
     {
       "path": "support/profile.mjs",
-      "sha256": "889c1cd137b9133ad34b2e5c1cd02eab01df6c5eb6c3cfd9d7fc581252551cc5",
+      "sha256": "8388a96f06052234eee18487dee013f7d895e7415d40681f0a3a427e31b55138",
       "upstreamSha256": "889c1cd137b9133ad34b2e5c1cd02eab01df6c5eb6c3cfd9d7fc581252551cc5"
     },
     {
       "path": "support/protocol.mjs",
-      "sha256": "60fd81a3d2755da5d3b5e16b66069dfd6c29e2c9529c6b40015e12a8a04a216b",
+      "sha256": "3a7d37f356e3864fb5a3815f585ad95c411d7dc924eb3ec1bb8725f454e3a941",
       "upstreamSha256": "60fd81a3d2755da5d3b5e16b66069dfd6c29e2c9529c6b40015e12a8a04a216b"
     },
     {
       "path": "support/report.mjs",
-      "sha256": "4d0d8e2ca72cd872a8782bec0bb52587e10948f0e8553eb874e58eafc24f8620",
+      "sha256": "f517295e82c87c8d9a94da30bb1122abf1689d233d6694131d5a44245744f86d",
       "upstreamSha256": null
     },
     {
       "path": "support/server.mjs",
-      "sha256": "20027eeb9949ba21e10a3f90fa668660b8bb6fb8072565415175414860f19061",
+      "sha256": "d791983ef7e8314af0122b0ec9fb2bc5ec310824b505563430df59b03156ade2",
       "upstreamSha256": "20027eeb9949ba21e10a3f90fa668660b8bb6fb8072565415175414860f19061"
     },
     {
       "path": "support/setup.mjs",
-      "sha256": "9e551dd84d55dad2bd6290d9429748a268e61ef076b7620497672e2b825d3ab9",
+      "sha256": "54b86e2bc877c906a81e9869f9cb0b6915261f369d3f9be79efb16fa3dd57fba",
       "upstreamSha256": "a3ad6fdc0185fc12186ed502244aa04b4ddc06cacffc98220dc6f363025cf5c9"
     },
     {
       "path": "support/tuning.mjs",
-      "sha256": "61cb61fc4e738e46ae67feaa37b68a5f631d9888d6463d81cbb42708a06e5487",
+      "sha256": "c840c1e1e3f9330a462a5ecb98965727926bdd7929a0b87c5e9307e8efa484bc",
       "upstreamSha256": "61cb61fc4e738e46ae67feaa37b68a5f631d9888d6463d81cbb42708a06e5487"
     },
     {
       "path": "support/workflow-state.mjs",
-      "sha256": "d7b77ecbe483f62838b978bc57be6b11d4907640735e17075f3b3f9b7009a9b2",
+      "sha256": "0a2a1f54daa60392b2fc466c86bd920ae195af09d48f5d91f987602b12269a0d",
       "upstreamSha256": null
     },
     {
@@ -3078,9 +3091,19 @@
       "upstreamSha256": null
     },
     {
+      "path": "tests/log-client-semantics.test.mjs",
+      "sha256": "8a887b658bba17fdcfb8b912c9f26c9db9692c6d771dc0a75b6d680a6ed5b157",
+      "upstreamSha256": null
+    },
+    {
       "path": "tests/log-diagnostics.test.mjs",
       "sha256": "9ceb130a82e5356c2e41cd9bc3f8ae96a26d6fa4194f689488308948c4745bf3",
       "upstreamSha256": "9ceb130a82e5356c2e41cd9bc3f8ae96a26d6fa4194f689488308948c4745bf3"
+    },
+    {
+      "path": "tests/log-semantics.test.mjs",
+      "sha256": "9f11d195a84df54c07e9d4a8cfa46e89546f609f704f33f71e2eab342f993455",
+      "upstreamSha256": null
     },
     {
       "path": "tests/portable-figma.test.mjs",
@@ -3129,7 +3152,7 @@
     },
     {
       "path": "tests/workflow-diagnostics.test.mjs",
-      "sha256": "eaa45876e8fae7808b20c955c41f62a4923dd366f425b83cc2429a72ce7f4e0e",
+      "sha256": "216b83e6dcb06b29cae8d6cb1d7d1f757a943ff35b275e0b219a7846513406af",
       "upstreamSha256": null
     }
   ]

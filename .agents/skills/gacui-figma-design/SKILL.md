@@ -7,7 +7,9 @@ description: GACUIAgent Skill：根据业务需求和公司 B 端 Figma 规范�
 
 新增业务组合用法见运行目录 docs/business-compositions.md。
 
-版本：V1.2.7。支持范围和已知限制以随包文档为准。
+版本：V1.2.8
+
+日志按 docs/support/figma-logging.md 执行：业务等待与缺少目标分别标 category；脚本持久化同次 workflowId。规划成功不代表交付；旧问题只能通过明确事件关联与真实验证回执恢复。。支持范围和已知限制以随包文档为准。
 
 使用简体中文。首次调用或新会话开始，从本 skill 的真实路径运行：
 
