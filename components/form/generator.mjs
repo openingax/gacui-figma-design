@@ -15,6 +15,9 @@ export function validateSpec(spec){
 
 // 内容修改策略与源尺寸模板分开：只在真实实例修改时启用，同一规则覆盖所有字段类型。
 export async function fitFieldContent(figma,node,content){
+ const fieldWidth=content.width||node.width;
+ // 非同宽实例控件无法可靠 resize；在查源、字体加载及任何 setter 前拒绝，避免失败时留下半截修改。
+ if(content.controlWidth!==undefined&&Math.abs(content.controlWidth-fieldWidth)>=0.5)throw Error(`控件宽度 ${content.controlWidth} 不受支持，实例内只能与字段同宽（${fieldWidth}）或保留源宽`);
  const source=content.sourceComponentId?await figma.getNodeByIdAsync(content.sourceComponentId):node.type==='INSTANCE'?await node.getMainComponentAsync():null;
  for(const t of node.findAllWithCriteria({types:['TEXT']}))for(const s of t.getStyledTextSegments(['fontName']))await figma.loadFontAsync(s.fontName);
  const previousId=node.id;
