@@ -26,7 +26,7 @@ export async function initializeAsset(figma, request, buildNodes, restoreTransfo
   for(const [name,value] of Object.entries(asset.data.styles))if(!paintMap[name]){const s=figma.createPaintStyle();s.name=name;s.paints=clean(value);paintMap[name]=s.id;createdStyleIds.push(s.id);}
   const wrapper=figma.createFrame();page.appendChild(wrapper);wrapper.name=marker+' / building';wrapper.fills=[];wrapper.clipsContent=false;
   wrapper.x=Math.max(0,...page.children.filter(n=>n!==wrapper).map(n=>n.x+n.width))+80;wrapper.y=80;
-  const state={map:{},paintMap,fontFamily};
+  const state={map:{},paintMap,fontFamily,textStyleNamespace:'GACUI/portable/'+asset.hash};
   // Synthetic parent maps every root into this owned wrapper. The precise builder remains shared.
   const records=asset.data.nodes.map(n=>({...n,props:clean(n.props),parentSourceId:n.sourceId===asset.sourceId?'portable-parent':n.parentSourceId}));
   state.map['portable-parent']=wrapper.id;

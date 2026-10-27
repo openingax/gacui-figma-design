@@ -14,11 +14,11 @@ export async function buildPortableShell(figma, page, def, helpers) {
   const paints=await figma.getLocalPaintStylesAsync();const background=paints.find(s=>s.name==='Gray 中性/Gray1-浅色背景');if(background)await workspace.setFillStyleIdAsync(background.id);
   const tabs=autoFrame(workspace,'页签区','HORIZONTAL',outer);tabs.resize(outer,60);tabs.primaryAxisSizingMode='FIXED';tabs.counterAxisAlignItems='CENTER';
   const query=autoFrame(workspace,'查询条件','VERTICAL',outer);query.paddingTop=query.paddingBottom=query.paddingLeft=query.paddingRight=16;query.itemSpacing=16;query.fills=root.fills;query.cornerRadius=8;
-  const row=autoFrame(query,'查询行/模板','HORIZONTAL',width);row.itemSpacing=24;
+  const row=autoFrame(query,'查询行/模板','HORIZONTAL',width);row.itemSpacing=24;row.primaryAxisSizingMode='FIXED';row.counterAxisSizingMode='AUTO';
   if(def.search){
     const input=await instance('56:2',row,'筛选/工单编号');input.resize((width-48)/3,32);
     const select=await instance('72:35',row,'筛选/场站类型');select.resize((width-48)/3,32);
-    const actions=autoFrame(row,'查询操作','HORIZONTAL',(width-48)/3);
+    const actions=autoFrame(row,'查询操作','HORIZONTAL',(width-48)/3);actions.counterAxisSizingMode='AUTO';
     for(const [id,label] of [['107:86','查询'],['107:124','重置']]){const n=await instance(id,actions,label);await buttonLabel(n,label);n.primaryAxisSizingMode='AUTO';}
   }
   const spacer=autoFrame(workspace,'区块间距','VERTICAL',outer);spacer.resize(outer,16);spacer.primaryAxisSizingMode='FIXED';

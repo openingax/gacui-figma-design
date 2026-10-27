@@ -1,10 +1,10 @@
 {
-  "version": "1.3.1",
+  "version": "1.3.2",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.3.1 修复问题详情在窄窗口中的布局。包含1.3.0问题中心：处理记录、关闭依据和复发追踪。保留草稿、配置和日志关闭设置；问题关闭不代替任务交付验收。",
+  "notice": "V1.3.2：修复新文件Dialog、抽屉文件上传及文字模板链接依赖，修复多行查询重叠和文字样式冲突。升级后重新规划，保留草稿和日志偏好；图标链接等未覆盖范围仍明确提示。",
   "delivery": "draft-and-figma",
   "figmaStatus": "on-demand-local-components",
-  "sourceCommit": "02f2f76ebb629d2de61faa605362a28ab9061595"
+  "sourceCommit": "248ea25cbdeabe977a5fde5fea7d506d5363c34a"
 }

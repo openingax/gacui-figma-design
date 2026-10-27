@@ -1,0 +1,573 @@
+{
+  "format": 1,
+  "task": "抽屉上传与模板链接回归",
+  "request": {
+    "text": "纯合成组件回归，演示数据即测试输入，无业务待补信息",
+    "sources": [
+      {
+        "path": "合成测试",
+        "read": true
+      }
+    ]
+  },
+  "demo": "指标名称、数值和趋势均为结构演示，不代表真实业务数据或统计口径。",
+  "pages": [
+    {
+      "id": "metrics",
+      "type": "page",
+      "title": "统计指标",
+      "frame": "workbench",
+      "menu": "数据分析 / 统计指标",
+      "from": "用户:本轮需求",
+      "children": [
+        {
+          "id": "filters",
+          "type": "search",
+          "from": "推荐",
+          "fields": [
+            {
+              "id": "metricKeyword",
+              "label": "指标名称",
+              "kind": "input",
+              "placeholder": "请输入指标名称",
+              "from": "推荐"
+            },
+            {
+              "id": "metricGroup",
+              "label": "指标分类",
+              "kind": "select",
+              "value": "全部",
+              "options": [
+                "全部",
+                "业务规模",
+                "效率质量",
+                "成本收益"
+              ],
+              "from": "推荐"
+            },
+            {
+              "id": "period",
+              "label": "统计周期",
+              "kind": "date-range",
+              "from": "推荐"
+            }
+          ]
+        },
+        {
+          "id": "toolbar",
+          "type": "actions",
+          "from": "推荐",
+          "buttons": [
+            {
+              "id": "viewSummary",
+              "label": "查看统计说明",
+              "opens": "metricDetail",
+              "from": "推荐"
+            }
+          ]
+        },
+        {
+          "id": "records",
+          "type": "table",
+          "from": "推荐",
+          "selection": false,
+          "pagination": true,
+          "rows": 4,
+          "columns": [
+            {
+              "id": "name",
+              "title": "指标名称",
+              "from": "推荐"
+            },
+            {
+              "id": "group",
+              "title": "指标分类",
+              "from": "推荐"
+            },
+            {
+              "id": "value",
+              "title": "当前值",
+              "from": "推荐"
+            },
+            {
+              "id": "unit",
+              "title": "单位",
+              "from": "推荐"
+            },
+            {
+              "id": "period",
+              "title": "统计周期",
+              "from": "推荐"
+            },
+            {
+              "id": "updatedAt",
+              "title": "更新时间",
+              "from": "推荐"
+            },
+            {
+              "id": "actions",
+              "title": "操作",
+              "kind": "operations",
+              "from": "推荐"
+            }
+          ],
+          "data": [
+            {
+              "name": "演示指标 A",
+              "group": "业务规模",
+              "value": "12,480",
+              "unit": "次",
+              "period": "本月",
+              "updatedAt": "2026-10-21 10:30"
+            },
+            {
+              "name": "演示指标 B",
+              "group": "效率质量",
+              "value": "96.8",
+              "unit": "%",
+              "period": "本月",
+              "updatedAt": "2026-10-21 10:30"
+            },
+            {
+              "name": "演示指标 C",
+              "group": "成本收益",
+              "value": "¥86,500",
+              "unit": "元",
+              "period": "本季度",
+              "updatedAt": "2026-10-21 10:30"
+            },
+            {
+              "name": "演示指标 D",
+              "group": "业务规模",
+              "value": "328",
+              "unit": "个",
+              "period": "昨日",
+              "updatedAt": "2026-10-21 10:30"
+            }
+          ],
+          "rowActionRules": [
+            {
+              "labels": [
+                "查看"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "confirm",
+          "type": "dialog",
+          "theme": "info",
+          "closable": true,
+          "title": "确认操作",
+          "message": "确认更新当前记录？",
+          "confirm": "确定",
+          "cancel": "取消",
+          "visible": false,
+          "from": "演示"
+        },
+        {
+          "id": "message",
+          "type": "message",
+          "theme": "info",
+          "text": "请查看处理结果",
+          "visible": false,
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "metricDetail",
+      "type": "page",
+      "title": "统计指标说明",
+      "frame": "drawer",
+      "over": "metrics",
+      "width": 500,
+      "from": "推荐",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 1,
+          "from": "演示",
+          "fields": [
+            {
+              "id": "method",
+              "label": "更新方式",
+              "kind": "radio",
+              "value": "导入文件",
+              "options": [
+                "导入文件",
+                "按分组"
+              ],
+              "from": "演示"
+            },
+            {
+              "id": "file",
+              "label": "文件",
+              "kind": "upload",
+              "required": true,
+              "help": "文件限制沿用系统现行规则。",
+              "visibleWhen": {
+                "field": "metricDetail/form/method",
+                "equals": "导入文件"
+              },
+              "from": "演示"
+            },
+            {
+              "id": "scope",
+              "label": "分组",
+              "kind": "select",
+              "value": "全部",
+              "options": [
+                "全部",
+                "分组A",
+                "分组B"
+              ],
+              "visibleWhen": {
+                "field": "metricDetail/form/method",
+                "equals": "按分组"
+              },
+              "from": "演示"
+            },
+            {
+              "id": "sites",
+              "label": "选择项目",
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                "演示A",
+                "演示B"
+              ],
+              "visibleWhen": {
+                "field": "metricDetail/form/method",
+                "equals": "按分组"
+              },
+              "from": "演示"
+            }
+          ]
+        },
+        {
+          "id": "template",
+          "type": "link",
+          "text": "下载导入模板",
+          "from": "演示"
+        },
+        {
+          "id": "footer",
+          "type": "actions",
+          "footer": true,
+          "from": "演示",
+          "buttons": [
+            {
+              "id": "save",
+              "label": "确定",
+              "primary": true,
+              "from": "演示"
+            },
+            {
+              "id": "cancel",
+              "label": "取消",
+              "from": "演示"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "import",
+      "page": "metricDetail",
+      "title": "导入文件",
+      "codes": [],
+      "patch": {}
+    },
+    {
+      "id": "groups",
+      "page": "metricDetail",
+      "title": "按分组",
+      "codes": [],
+      "patch": {
+        "metricDetail/form/method": {
+          "value": "按分组"
+        }
+      }
+    },
+    {
+      "id": "confirm",
+      "page": "metrics",
+      "title": "二次确认",
+      "codes": [],
+      "patch": {
+        "metrics/confirm": {
+          "visible": true
+        }
+      }
+    },
+    {
+      "id": "result",
+      "page": "metrics",
+      "title": "提交结果",
+      "codes": [],
+      "patch": {
+        "metrics/message": {
+          "visible": true
+        }
+      }
+    }
+  ],
+  "questions": [],
+  "decisions": [
+    {
+      "code": "G1",
+      "text": "本轮交付静态草稿，真实查询、权限和数据接口不实现；指标使用演示数据。",
+      "decision": "已确认",
+      "from": "产品:本轮确认"
+    },
+    {
+      "code": "G2",
+      "text": "指标数据使用演示值，待需求文档正文可读后替换。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "N1",
+      "text": "采用统计指标工作台与右侧说明抽屉两个页面。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L1",
+      "text": "支持按指标名称、分类和统计周期查询。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L4",
+      "text": "无结果显示暂无符合条件的统计指标。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L6",
+      "text": "查询失败保留筛选条件并提供重试入口。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L8",
+      "text": "列表分页，演示展示四条指标。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F1",
+      "text": "指标说明使用右侧抽屉表单展示。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F3",
+      "text": "说明字段默认填入演示值且只读。",
+      "decision": "已确认",
+      "from": "产品:本轮确认"
+    },
+    {
+      "code": "F7",
+      "text": "本轮不制作编辑校验状态。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "S1",
+      "text": "指标分类和统计周期使用单选下拉。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "S4",
+      "text": "统计周期使用日期区间筛选。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F2",
+      "text": "说明抽屉使用500宽，满足当前字段展示。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F4",
+      "text": "本轮说明表单为只读，不做必填校验。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F5",
+      "text": "本轮不设置编辑字段字数上限。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F6",
+      "text": "本轮不做提交校验。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F8",
+      "text": "本轮无字段联动。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F9",
+      "text": "本轮不展示提交中状态。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F10",
+      "text": "本轮无提交成功流程。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F11",
+      "text": "本轮无提交失败流程。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F12",
+      "text": "抽屉关闭不保留编辑内容；当前为只读表单，不需要二次确认。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F13",
+      "text": "抽屉内容区可滚动，底栏固定。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F14",
+      "text": "抽屉标题使用短文案。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L2",
+      "text": "查询后回到第1页并清空选择；当前列表不可选择。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L3",
+      "text": "重置清空文本条件，分类回到全部。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L5",
+      "text": "首次无数据时使用暂无符合条件的统计指标，不增加引导按钮。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L7",
+      "text": "加载失败保留条件并提供重试入口。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L9",
+      "text": "指标名称等长内容单行省略，详情承载完整内容。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L12",
+      "text": "每行仅显示查看操作。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L13",
+      "text": "无权限操作隐藏；本轮未配置权限差异。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L14",
+      "text": "当前列控制在主要信息范围内，详情承载补充信息。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "L15",
+      "text": "本轮无修改操作，不表达操作后列表变化。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "N2",
+      "text": "本轮无内容页签。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "N3",
+      "text": "查看操作打开右侧抽屉。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "S2",
+      "text": "筛选分类默认全部；只读说明表单展示演示值。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "S3",
+      "text": "分类与统计周期均为单选。",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "U1",
+      "text": "演示：沿用系统现行规则",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "U2",
+      "text": "演示：沿用系统现行规则",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "U3",
+      "text": "演示：沿用系统现行规则",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "U4",
+      "text": "演示：沿用系统现行规则",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "U5",
+      "text": "演示：沿用系统现行规则",
+      "decision": "按推荐",
+      "from": "推荐"
+    }
+  ],
+  "gaps": [],
+  "judgments": [
+    "由于飞书正文当前不可读，先按最小可讨论结构生成工作台和说明抽屉。",
+    "统计指标优先采用表格行展示，指标说明采用只读表单，便于后续映射真实字段。"
+  ]
+}

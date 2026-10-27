@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {portableLinkDependencies,renderPortableLink} from '../components/link/portable.mjs';
 import {renderTimelineExtended,updateTimelineExtended} from '../components/timeline/extension-data/runtime.mjs';
 import {validateTableLoading,updateTableLoading,inspectTableLoading} from '../components/table/loading.mjs';
 import {validateTimeRangeGroup,renderTimeRangeGroup,updateTimeRangeGroup,inspectTimeRangeGroup} from '../components/time-range-group/generator.mjs';
@@ -349,7 +350,11 @@ export function code(dir, boardId, options = {}) {
     if(!used.some(s=>s.kind!=='buttonGroup'))deps.single={};
     fns+='\n'+[validateRadio,renderRadio].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderRadio,radioDeps:'+JSON.stringify(deps)+'}';
   }
-  if(wd?.links?.length||fd?.links?.length){fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const STYLE='+JSON.stringify(STYLE)+';const LINK_IDS='+JSON.stringify(LINK_IDS)+';\n'+[validateLink,linkVariant,linkStyleName,propertyKey,recolorIcons,updateLink,renderLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink}';}
+  if(wd?.links?.length||fd?.links?.length){if(options.portable){
+    const specs=[...(wd?.links??[]),...(fd?.links??[])];
+    if(wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length)))throw Error('列表内Link尚未支持新文件初始化');
+    fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const PORTABLE_LINK_IDS='+JSON.stringify(portableLinkDependencies(specs))+';\n'+[validateLink,linkVariant,renderPortableLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink:renderPortableLink}';
+  }else{fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const STYLE='+JSON.stringify(STYLE)+';const LINK_IDS='+JSON.stringify(LINK_IDS)+';\n'+[validateLink,linkVariant,linkStyleName,propertyKey,recolorIcons,updateLink,renderLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink}';}}
   if(wd?.layout){fns+='\n'+[validateLayout,composeLayout].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',composeLayout}';}
   if(wd?.timelines?.some(s=>s.extended)){const d=readJson('../components/timeline/dependencies.json');fns+='\n'+[renderTimelineExtended,updateTimelineExtended].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTimelineExtended,timelineDeps:'+JSON.stringify({layouts:d.layouts,icons:d.icons})+'}';}
   if(wd?.timelines?.length){fns+='\n'+renderTimeline.toString()+'\n'+updateTimelineItem.toString()+'\n'+verifyTimelines.toString();lib=lib.slice(0,-1)+',renderTimeline,verifyTimelines}';}
@@ -360,7 +365,10 @@ export function code(dir, boardId, options = {}) {
     fns+='\n'+[renderComposedDialog,updateComposedDialog,updateDialogContent,buildTable,updateTableContents,applyTableExtensions,renderDescriptions].map(f=>f.toString()).filter(x=>!fns.includes(x)).join('\n');
     lib=lib.slice(0,-1)+',renderComposedDialog,updateDialogContent,buildTable,updateTableContents,renderDescriptions,descriptionData:'+JSON.stringify(descriptionRuntimeData())+'}';
   }
-  if(board.dialogs.length) {fns+='\n'+dialogMainId.toString()+'\n'+renderDialog.toString()+'\n'+updateDialog.toString()+'\n'+verifyDialogs.toString();lib=lib.slice(0,-1)+',renderDialog,verifyDialogs,dialogDeps:'+JSON.stringify((()=>{const d=readJson('../components/dialog/dependencies.json');return {...d,main:Object.fromEntries(board.dialogs.filter(s=>!s.fullscreen).map(s=>{const k=(s.theme??'default')+'/'+(s.closable??s.closeBtn??false)+'/'+!!s.divider;return [k,d.main[k]];}))};})())+'}';}
+  if(board.dialogs.length) {fns+='\n'+dialogMainId.toString()+'\n'+renderDialog.toString()+'\n'+updateDialog.toString()+'\n'+verifyDialogs.toString();lib=lib.slice(0,-1)+',renderDialog,verifyDialogs,dialogDeps:'+JSON.stringify((()=>{const d=readJson('../components/dialog/dependencies.json');const main=Object.fromEntries(board.dialogs.filter(s=>!s.fullscreen).map(s=>{const k=(s.theme??'default')+'/'+(s.closable??s.closeBtn??false)+'/'+!!s.divider;return [k,d.main[k]];}));
+      if(!options.portable)return {...d,main};
+      // Only runtime dependencies belong to the new file; historical page/file metadata is not an asset.
+      return {main,close:Object.fromEntries(board.dialogs.filter(s=>s.closable??s.closeBtn??!!s.fullscreen).map(s=>{const k=s.closeState??'normal';return [k,d.close[k]];})),fullscreen:Object.fromEntries(board.dialogs.filter(s=>s.fullscreen).map(s=>{const k=String(!!s.divider);return [k,d.fullscreen[k]];}))};})())+'}';}
   if(board.notices?.length){fns+='\n'+[updateMessage,renderMessage,inspectMessage,verifyMessage].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderMessage,inspectMessage,verifyMessage}';}
   if(board.notifications?.length){fns+='\n'+[updateNotification,renderNotification,inspectNotification,verifyNotification].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderNotification,inspectNotification,verifyNotification}';}
   if(board.popconfirms?.length){fns+='\n'+[updatePopconfirm,renderPopconfirm,inspectPopconfirm,verifyPopconfirm].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderPopconfirm,inspectPopconfirm,verifyPopconfirm}';}
@@ -442,10 +450,15 @@ export function code(dir, boardId, options = {}) {
       const unused=[...(has('checkbox')?[]:['31:2','31:12','31:15','31:17']),...(has('radio')?[]:['436:24','436:28']),...(has('textarea',true)?[]:['436:2']),...(has('time',true)?[]:['436:33','436:39']),...(has('number',true)?[]:['436:5','436:15']),...((portableDrawer.buttons??[]).some(b=>b.loading)?[]:['107:250','107:254'])];
       for(const id of unused)runtime=runtime.replaceAll("'"+id+"'","'unused:"+id+"'");
     }
+    if(portableDrawer&&formRows.flat().some(f=>f.kind==='upload')){
+      runtime=runtime.replaceAll("item.children.find(n=>n.type==='INSTANCE')","item.children.find(n=>n.name==='Button 按钮')").replaceAll("item.children.find(n => n.type === 'INSTANCE')","item.children.find(n => n.name === 'Button 按钮')").replaceAll("failure.children.find(n=>n.type==='INSTANCE');await buttonLabel(retry,'重新上传')","failure.children.find(n=>n.name==='Button 按钮');await setText(retry.findOne(n=>n.type==='TEXT'),'重新上传')");
+    }
     const resolve=options.resolveReference;
     if(typeof resolve!=='function')throw Error('新文件必须提供已核验组件映射');
     // Transform compiler references only. Never search/replace the user's business text or snapshots.
     const refs=source=>source.replace(/(['"])((?:0|[1-9]\d*):(?:0|[1-9]\d*))\1/g,(_,q,id)=>JSON.stringify(resolve(id)));
+    // Portable rendering always supplies dialogDeps. The legacy no-deps fallback is unreachable.
+    fns=fns.replace("deps?dialogMainId(s,deps):'415:9'","dialogMainId(s,deps)");
     fns=refs(fns);runtime=refs(runtime);lib=refs(lib);
     function mapFields(value,key=''){
       if(Array.isArray(value))return value.map(v=>mapFields(v,key));
