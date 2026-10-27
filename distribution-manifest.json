@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -17,7 +17,10 @@
     "AGENTS.md",
     "CHANGELOG.md",
     "components/drawer/generator.mjs",
+    "components/link/portable.mjs",
+    "components/link/text-portable/build-data.json",
     "components/table/generator.mjs",
+    "components/upload/form-portable/build-data.json",
     "docs/figma-adapter.md",
     "docs/figma-output.md",
     "docs/maintenance.md",
@@ -73,6 +76,7 @@
     "tests/figma-logging.test.mjs",
     "tests/fixtures/portable-metrics-drawer.json",
     "tests/fixtures/portable-metrics.json",
+    "tests/fixtures/portable-upload-drawer.json",
     "tests/gitee-distribution.test.mjs",
     "tests/hook-bridge.test.mjs",
     "tests/hook-capture.test.mjs",
@@ -81,7 +85,9 @@
     "tests/issues.test.mjs",
     "tests/log-client-semantics.test.mjs",
     "tests/log-semantics.test.mjs",
+    "tests/portable-dialog.test.mjs",
     "tests/portable-figma.test.mjs",
+    "tests/portable-upload-drawer.test.mjs",
     "tests/upgrade-guidance.test.mjs",
     "tests/workflow-diagnostics.test.mjs"
   ],
@@ -103,7 +109,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "3421a01fe91711e5cfb3cf09f616824c0ff59324530c9bcb00f66c3ab27fbe9a",
+      "sha256": "ae0b05021f0e9a74dd0d1cb4fd8f388f1e5e0881b5dd5b2a0cef6bb1311201fa",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -128,7 +134,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "498fa4ff52b204ebf90523ac3aa3129db5b60d136e1106f4feee40960d0821f5",
+      "sha256": "94e992becb9d702811f66f90dddb43049b7a0147cb4862244d729521fb6b0acc",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -1112,9 +1118,19 @@
       "upstreamSha256": "2ca67632db949f42cf6d192b50c75eb348ba335a6c20c9a5d9a696f4ecc9b4b3"
     },
     {
+      "path": "components/link/portable.mjs",
+      "sha256": "761213bd8e2c447c4c332430ca0f20172286c7f6949f6ebead8f8d262b2482ff",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/link/README.md",
       "sha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b",
       "upstreamSha256": "035114e19bd55bca65281af2d23d86856b3b0b9a907eb0073c7e618d6835322b"
+    },
+    {
+      "path": "components/link/text-portable/build-data.json",
+      "sha256": "8912d923b4b4bdaa5d7d07b1e0b6a243fa5d48cb52e815fdaf29baa159b2345f",
+      "upstreamSha256": null
     },
     {
       "path": "components/loading/catalog.json",
@@ -2497,6 +2513,11 @@
       "upstreamSha256": "8b0b169b5be58ec979cbd2e1fab438d543cd2e07c54967dc5f47e7808feaba0b"
     },
     {
+      "path": "components/upload/form-portable/build-data.json",
+      "sha256": "c895fbf7114519242d80c5f7f6cc3b91e828c407b9acb23dcae85a022c7f6fcb",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/upload/generator.mjs",
       "sha256": "7b8b74038f7537473bc5bd3be800de1d1806bfed73a9536a98b906796192b453",
       "upstreamSha256": "7b8b74038f7537473bc5bd3be800de1d1806bfed73a9536a98b906796192b453"
@@ -2568,7 +2589,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "6790dd258a5b273dad1d501f70b0f1aed7d02ce2d8c1718898322d468b06ddba",
+      "sha256": "82db71f2456778da3acc2e6ac0786fe11df75b0a2875d091e4a657a54a3b52f0",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2583,7 +2604,7 @@
     },
     {
       "path": "docs/portable-figma.md",
-      "sha256": "f0300868e5a3b5f5f07bc79b3eefe0ce3d7f00346924d146a3139b908454f102",
+      "sha256": "2b4ff8755a8f49a2a30247cc9c3e2779edd2dd586eb0ccdc2336e4248021449f",
       "upstreamSha256": null
     },
     {
@@ -2653,7 +2674,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "b4e5b30011cde9b747417c6c8a52c685b4cb6a2e51fa161589569b33aa2921f2",
+      "sha256": "1a6776deb57f6a8e5a21fce517fbc3c5818ed1f3f9ff9ed3ce3df277e18c2d65",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -2708,7 +2729,7 @@
     },
     {
       "path": "scripts/figma/portable-index.json",
-      "sha256": "f41afb967b6a2c5b483313f91c8483c22b30b717840038880ed7ed58bb7f8f4b",
+      "sha256": "af222a94fd9744ecac2e9eb02db720412af460b943cfcb50e8b1e4a1a1de8593",
       "upstreamSha256": null
     },
     {
@@ -2718,12 +2739,12 @@
     },
     {
       "path": "scripts/figma/portable-runtime.mjs",
-      "sha256": "55948bf10cf489e45df79dcc4e7a9413e4259b1afcd26d9381bce32a952abfeb",
+      "sha256": "1d3e5befa816e2fb5139599439ff95c44353853ece114bca42a775b94648c2c2",
       "upstreamSha256": null
     },
     {
       "path": "scripts/figma/portable-shell.mjs",
-      "sha256": "26e891595eae868c416ecc63b8f399fe5ce0d43af2f14a7678e1aa2f25345d87",
+      "sha256": "756226f3c4677d7b56422e88d16aedb8dc83f11c979ffd7f206d8647d3d3e5ee",
       "upstreamSha256": null
     },
     {
@@ -2778,7 +2799,7 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "1464fd43aa477fad25370ae5f63bcf73a289bf351ef3561ec115502810e75908",
+      "sha256": "25f3b722466afafb6e2fc81ead8b3c1d8a7189c6500aeed62becb4230a47a0b2",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
@@ -2803,7 +2824,7 @@
     },
     {
       "path": "sketch/figma.mjs",
-      "sha256": "ae12df7cdd5b95f01d43d472bf98dfbd85f0057ab57f803fd6330bcc763e4cf8",
+      "sha256": "9e7f264e35ddd44946e4125e80ea48b2c78407f57edf3cfed6f112ad280d7fc6",
       "upstreamSha256": "7de536f043886f111f7791050325f1ea5edc4cd00dd0a1f0a3322edae2bb38b8"
     },
     {
@@ -2893,7 +2914,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "128c695564c7199c3da3a32aa32607446d7f13fa5b1fdc0f68714b45ffa4d148",
+      "sha256": "a4417d150ef0929b5f968f93701ab4c9e6503c8b32561500e9adadbc8ef432df",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3122,6 +3143,11 @@
       "upstreamSha256": null
     },
     {
+      "path": "tests/fixtures/portable-upload-drawer.json",
+      "sha256": "847c8ed38382d1125edd7fbd0dd7f1720d41f808bd450efc7060ac3f1019c0e7",
+      "upstreamSha256": null
+    },
+    {
       "path": "tests/gitee-distribution.test.mjs",
       "sha256": "341a85885c6f43a6c7bf0fa70142972c928070c8ce24b16833b807eac66c6c5a",
       "upstreamSha256": null
@@ -3172,8 +3198,18 @@
       "upstreamSha256": null
     },
     {
+      "path": "tests/portable-dialog.test.mjs",
+      "sha256": "594b8bcadbeea8348211d86b2f44868a5b2c6ae7d58a26ca87035517759c42cd",
+      "upstreamSha256": null
+    },
+    {
       "path": "tests/portable-figma.test.mjs",
-      "sha256": "905e5c1c1c22c8dba6481badf2b3c903871ddb978d4c83c7d4f034608050e9af",
+      "sha256": "2d7064d13e4cb4b3d7fd6e43cd9678f9590c83cae293246537b2638b7995d7b9",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/portable-upload-drawer.test.mjs",
+      "sha256": "4579260002aae43476b60123160adb217b434bf18ebef5de3b3c7c4dbc493592",
       "upstreamSha256": null
     },
     {

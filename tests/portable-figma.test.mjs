@@ -74,8 +74,9 @@ assert.ok(checkCode(mp,mixedReceipts).includes('920:'));new AsyncFunction(checkC
 const missingRole=mixedReceipts.map(r=>r.kind?{...r,map:{...r.map,'footerIds.left':undefined}}:r);assert.throws(()=>mapping(mp,missingRole),/回执.*footerIds\.left/);
 assert.throws(()=>mapping(mp,mixedReceipts.map(r=>r.kind?{...r,nodeCount:0}:r)),/回执/);
 assert.throws(()=>outputCode(mixedDraft,mp,mixedReceipts,'nope'),/没有画板/);
-// A still-unsupported family (Drawer upload field) skips only its boards, with a readable notice.
+// An unsupported icon Link skips only its boards; upload fields are now portable.
 const withUpload=structuredClone(mixed);withUpload.pages[1].children[0].fields.push({id:'attachments',label:'附件',kind:'upload',from:'演示',help:'演示：上传说明附件。'});
+withUpload.pages[1].children.push({id:'iconLink',type:'link',text:'演示链接',prefix:true,from:'演示'});
 for(const code of ['U1','U2','U3','U4','U5'])withUpload.decisions.push({code,text:'演示：上传规则按推荐处理。',decision:'按推荐',from:'推荐'});
 saveDraft(withUpload,'含抽屉降级验证');
 const up=portablePlan(mixedDraft,target);
