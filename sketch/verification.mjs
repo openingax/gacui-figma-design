@@ -69,11 +69,13 @@ export function verifyForm(def, actual) {
     for(const value of [f.label,f.help,f.error].filter(Boolean)) require(a.texts.some(t=>t.includes(value)),f.layer+' 文字缺失：'+value);
     if(f.disabled&&['textarea','time','number','radio'].includes(f.kind))require(a.readonlyVisual===true,f.layer+' 禁用视觉未匹配规范');
     if(f.kind==='switch') require(a.checked===String(!!f.value),f.layer+' 开关状态不符');
-    else if(['radio','checkbox'].includes(f.kind)) {
-      const expected=f.kind==='radio'?(f.value==null?[]:[f.value]):f.value??[];
+    else if(f.kind==='password'){require(a.controlName==='Password 密码输入',f.layer+' 密码控件错误');require(a.passwordDots===Array.from(f.value??'').length,f.layer+' 遮罩数量错误');require(a.passwordVisualMatches===true,f.layer+' 密码视觉未匹配源变体');if(f.value)require(!a.texts.includes(f.value),f.layer+' 密码示意值不应明文显示');}
+    else if(['radio','checkbox','radioButton'].includes(f.kind)) {
+      const expected=f.kind!=='checkbox'?(f.value==null?[]:[f.value]):f.value??[];
       require(JSON.stringify([...(a.selected??[])].sort())===JSON.stringify([...expected].sort()),f.layer+' 选中项不符');
       for(const o of f.options??[]) require(a.texts.includes(typeof o==='string'?o:o.label),f.layer+' 选项丢失');
     } else if(f.value!=null) for(const value of Array.isArray(f.value)?f.value:[f.value]) require(a.texts.includes(String(value)),f.layer+' 值丢失：'+value);
+    if(f.kind==='radioButton'){require(a.controlName==='Radio-Button 单选按钮组',f.layer+' 按钮组类型错误');require(JSON.stringify(a.radioButtonOptions)===JSON.stringify(f.options.map(o=>({label:typeof o==='string'?o:o.label,disabled:!!f.disabled||!!o.disabled}))),f.layer+' 选项禁用状态错误');}
     if(f.kind==='number') require(a.controlName==='InputNumber数字输入框',f.layer+' 数字控件类型错误');
     if(f.kind==='time') require(a.controlName==='TimePicker-input 时间选择输入框',f.layer+' 时间控件类型错误');
     if(f.kind==='upload') for(const [i,name] of (Array.isArray(f.value)?f.value:[]).entries()) {

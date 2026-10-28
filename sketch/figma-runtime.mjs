@@ -163,21 +163,33 @@ export async function sketchRuntime(figma, req, lib) {
       if (['input','textarea','time','number','date','date-range','select'].includes(f.kind)) n.resize(f.kind==='number'?width:f.width, n.height);
       return n;
     };
-    const choose = async (id, predicates) => {
+    // Blank-file plans resolve the variant at compile time (f.choice); other targets look it up in the set.
+    const choose = async () => {
       if (f.choice) return replace(f.choice);
-      if (lib.formVariantQuery) { const q = lib.formVariantQuery(f); id = q.set; predicates = q.predicates; }
-      const set = await figma.getNodeByIdAsync(id);
-      const main = set.children.find(c => predicates.every(p => c.name.includes(p)));
+      const q = lib.formVariantQuery(f), set = await figma.getNodeByIdAsync(q.set);
+      const main = set.children.find(c => q.predicates.every(p => c.name.includes(p)));
       if (!main) throw Error(f.layer + '缺少现有变体');
       return replace(main.id);
     };
     const filled = f.value != null && f.value !== '' && (!Array.isArray(f.value) || f.value.length > 0);
-    if (['date','date-range'].includes(f.kind)) {
+    if(false){
+    // FORM_VALUE_RADIO_BUTTON_START
+    } else if(f.kind==='radioButton'){const parent=control.parent,index=parent.children.findIndex(c=>c.id===control.id),replacement=await lib.renderRadio(figma,parent,f.radioSpec,lib.radioDeps);parent.insertChild(index,replacement);control.remove();control=replacement;control.name='Radio-Button 单选按钮组';
+    // FORM_VALUE_RADIO_BUTTON_END
+    // FORM_VALUE_PASSWORD_START
+    } else if(f.kind==='password'){const parent=control.parent,index=parent.children.findIndex(c=>c.id===control.id);const replacement=await lib.renderInputField(figma,parent,f.inputSpec,lib.inputFieldDeps);parent.insertChild(index,replacement);control.remove();control=replacement;control.name='Password 密码输入';
+    // FORM_VALUE_PASSWORD_END
+    // FORM_VALUE_DATE_START
+    } else if (['date','date-range'].includes(f.kind)) {
       await choose();
       const ts = visibleTexts(control);
       if (filled) { await setText(ts[0], f.kind === 'date' ? String(f.value) : f.value[0]); if(f.kind==='date-range') await setText(ts[2], f.value[1]); }
+    // FORM_VALUE_DATE_END
+    // FORM_VALUE_SWITCH_START
     } else if (f.kind === 'switch') {
       await choose();
+    // FORM_VALUE_SWITCH_END
+    // FORM_VALUE_SELECT_START
     } else if (f.kind === 'select') {
       await choose();
       if (f.multiple && filled) {
@@ -186,6 +198,8 @@ export async function sketchRuntime(figma, req, lib) {
         for (const value of f.value) { const tag = template.clone(); tags.appendChild(tag); await setText(visibleTexts(tag)[0], value); }
         for (const old of [...tags.children].slice(0,3)) old.remove();
       } else await setText(visibleTexts(control)[0], filled ? String(f.value) : f.placeholder ?? '请选择');
+    // FORM_VALUE_SELECT_END
+    // FORM_VALUE_OPTIONS_START
     } else if (['radio','checkbox'].includes(f.kind)) {
       const templates = [...control.children];
       for (const raw of f.options ?? [f.label]) {
@@ -199,6 +213,7 @@ export async function sketchRuntime(figma, req, lib) {
       for (const old of templates) old.remove();
       control.name = f.kind === 'radio' ? 'Radio-Group 单选组' : 'Checkbox-Group 多选组';
 
+    // FORM_VALUE_OPTIONS_END
     } else {
       if(f.disabled&&['textarea','time','number'].includes(f.kind)){await replace(f.kind==='textarea'?'436:2':f.kind==='time'?(filled?'436:39':'436:33'):(filled?'436:15':'436:5'));control.name=f.kind==='time'?'TimePicker-input 时间选择输入框':f.kind==='number'?'InputNumber数字输入框':'control';}
       if (f.kind === 'input' && f.disabled) await choose();
@@ -226,6 +241,64 @@ export async function sketchRuntime(figma, req, lib) {
   }
 
   // ---------- 工作台页面：复制工单页基线后替换业务内容 ----------
+  async function buildFormBody(parent, def, name = '正文内容') {
+    // 输入类控件铺满字段；开关、多选保留组件固有宽度，否则开关会被拉成整行。
+    const STRETCH = ['input', 'password', 'textarea', 'select', 'date', 'date-range', 'time'];
+    const body = autoFrame(parent, name, 'VERTICAL', def.formWidth);
+    const created = [];
+    for (const [i, row] of def.rows.entries()) {
+      for(const d of def.inserts??[])if(d.beforeRow===i){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
+      for (const g of def.groups ?? []) if (g.beforeRow === i) {
+        const title = await text(body, g.layer, g.title, 'body', def.formWidth);
+        title.fontName = await pick({family:'PingFang SC',style:'Medium'});
+        title.layoutSizingVertical = 'HUG';
+      }
+      // DRAWER_UPLOAD_START
+      if (row[0].kind === 'upload') {
+        const f = row[0], block = autoFrame(body, f.layer, 'VERTICAL', f.width);
+        const label = await text(block, 'label', (f.required ? '* ' : '') + f.label, 'body');
+        if (f.required) label.setRangeFills(0, 1, copy(paints.find(p => p.name === C.error).paints));
+        const entry = await instance(f.disabled ? '222:25':'222:19', block, '上传入口');
+        const tips = entry.findOne(n => n.type === 'TEXT' && n.name === 'tips');
+        if (f.help) await setText(tips, f.help); else tips.visible = false;
+        if (f.value?.length) {
+          await uploadFiles(block, Array.isArray(f.value) ? f.value : [f.value], f);
+          if(f.disabled) {for(const item of block.children.filter(n=>n.name.startsWith('附件/'))) {const file=item.children.find(n=>n.name==='file'); for(const c of file?.children??[]) if(!visibleTexts(c).length) c.visible=false;}}
+        }
+        if (f.error && !Object.values(f.fileStates??{}).includes('fail')) {
+          const failure=await instance('222:85',block,'上传失败');
+          await setText(failure.findOne(n=>n.type==='TEXT'&&n.name==='tips'),f.error);
+          const retry=failure.children.find(n=>n.type==='INSTANCE');await buttonLabel(retry,'重新上传');
+          unsupported.push(f.layer+'：逐文件状态未指定，失败信息已表达但无法确定失败行，原需求未完成');
+        }
+        block.paddingBottom = 24;
+        continue;
+      }
+      // DRAWER_UPLOAD_END
+      const spec = {name: '表单行/' + (i + 1), layout: row.length > 1 ? 'HORIZONTAL' : 'VERTICAL', width: def.formWidth, fieldGap: 24,
+        fields: row.map(f => ({componentId: f.variant, width: f.width, name: f.layer, content: {label: f.label, width: f.width, ...(STRETCH.includes(f.kind) ? {controlWidth: f.width} : {}), ...(f.help ? {help: f.help} : {})}}))};
+      const r = await lib.composeForm(figma, body, spec, created, lib.protectedIds);
+      for (const [j, id] of r.fields.entries()) {
+        const f = row[j];
+        let node = await figma.getNodeByIdAsync(id); node.name = f.layer;
+        node = await formValue(node, f);
+      }
+    }
+    for(const d of def.inserts??[])if(d.beforeRow===def.rows.length){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
+    return body;
+  }
+  // FORM_POPUP_START
+  async function buildFormPopups(root, def) {
+    // DRAWER_POPUP_START
+    for(const f of def.rows.flat().filter(f=>f.open)){
+      let control=fieldControl(root.findOne(n=>n.name===f.layer));if(control.type==='INSTANCE')control=control.detachInstance();
+      control.strokes=copy(lib.focusRules.strokes);control.effects=copy(lib.focusRules.effects);const arrow=control.children.find(n=>/chevron|箭头/i.test(n.name));if(arrow){const up=(await figma.getNodeByIdAsync('85:85')).clone();const index=control.children.indexOf(arrow);control.insertChild(index,up);arrow.remove();}
+      const popup=await lib.renderMultiPopup(figma,root,{id:f.layer,width:f.width,options:f.options.map(o=>typeof o==='string'?{label:o,selected:(f.value??[]).includes(o)}:{...o,selected:(f.value??[]).includes(o.label)})},lib.multiRules,{autoFrame,instance,setText});if(root.layoutMode&&root.layoutMode!=='NONE')popup.layoutPositioning='ABSOLUTE';popup.x=control.absoluteBoundingBox.x-root.absoluteBoundingBox.x;popup.y=control.absoluteBoundingBox.y-root.absoluteBoundingBox.y+control.height+4;
+    }
+    // DRAWER_POPUP_END
+  }
+  // FORM_POPUP_END
+
   async function buildWorkbench(def) {
     const source = await figma.getNodeByIdAsync('180:3');
     if (!source) throw Error('工单页基线 180:3 不存在');
@@ -426,7 +499,8 @@ export async function sketchRuntime(figma, req, lib) {
         box.paddingLeft=box.paddingRight=box.paddingTop=box.paddingBottom=16;
         await box.setFillStyleIdAsync(styleId(C.white));
         const move=name=>{const n=optional(name);if(n)box.appendChild(n);return n;};
-        if(b.type==='divider'){
+        if(b.type==='form'){await buildFormBody(box,def.forms.find(f=>f.id===b.id),'表单/'+b.id);}
+        else if(b.type==='divider'){
           const s=def.dividers.find(s=>s.id===b.id);
           await lib.renderDivider(figma,box,{...s,length:s.length??(s.orientation==='vertical'?40:CONTENT_WIDTH)});
         }
@@ -526,56 +600,7 @@ export async function sketchRuntime(figma, req, lib) {
     content.layoutMode = 'VERTICAL'; content.primaryAxisSizingMode = 'FIXED'; content.counterAxisSizingMode = 'FIXED';
     content.paddingLeft = content.paddingRight = content.paddingTop = content.paddingBottom = 24; content.itemSpacing = 0; content.clipsContent = true; content.overflowDirection = 'VERTICAL';
     if(def.buttons.some(b=>b.business))lib.fitButtonFooter(panel,footer,content);
-    // 输入类控件铺满字段；开关、多选保留组件固有宽度，否则开关会被拉成整行。
-    const STRETCH = ['input', 'textarea', 'select', 'date', 'date-range', 'time'];
-    const body = autoFrame(content, '正文内容', 'VERTICAL', def.formWidth);
-    const created = [];
-    for (const [i, row] of def.rows.entries()) {
-      for(const d of def.inserts??[])if(d.beforeRow===i){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
-      for (const g of def.groups ?? []) if (g.beforeRow === i) {
-        const title = await text(body, g.layer, g.title, 'body', def.formWidth);
-        title.fontName = await pick({family:'PingFang SC',style:'Medium'});
-        title.layoutSizingVertical = 'HUG';
-      }
-      // DRAWER_UPLOAD_START
-      if (row[0].kind === 'upload') {
-        const f = row[0], block = autoFrame(body, f.layer, 'VERTICAL', f.width);
-        const label = await text(block, 'label', (f.required ? '* ' : '') + f.label, 'body');
-        if (f.required) label.setRangeFills(0, 1, copy(paints.find(p => p.name === C.error).paints));
-        const entry = await instance(f.disabled ? '222:25':'222:19', block, '上传入口');
-        const tips = entry.findOne(n => n.type === 'TEXT' && n.name === 'tips');
-        if (f.help) await setText(tips, f.help); else tips.visible = false;
-        if (f.value?.length) {
-          await uploadFiles(block, Array.isArray(f.value) ? f.value : [f.value], f);
-          if(f.disabled) {for(const item of block.children.filter(n=>n.name.startsWith('附件/'))) {const file=item.children.find(n=>n.name==='file'); for(const c of file?.children??[]) if(!visibleTexts(c).length) c.visible=false;}}
-        }
-        if (f.error && !Object.values(f.fileStates??{}).includes('fail')) {
-          const failure=await instance('222:85',block,'上传失败');
-          await setText(failure.findOne(n=>n.type==='TEXT'&&n.name==='tips'),f.error);
-          const retry=failure.children.find(n=>n.type==='INSTANCE');await buttonLabel(retry,'重新上传');
-          unsupported.push(f.layer+'：逐文件状态未指定，失败信息已表达但无法确定失败行，原需求未完成');
-        }
-        block.paddingBottom = 24;
-        continue;
-      }
-      // DRAWER_UPLOAD_END
-      const spec = {name: '表单行/' + (i + 1), layout: row.length > 1 ? 'HORIZONTAL' : 'VERTICAL', width: def.formWidth, fieldGap: 24,
-        fields: row.map(f => ({componentId: f.variant, width: f.width, name: f.layer, content: {label: f.label, width: f.width, ...(STRETCH.includes(f.kind) ? {controlWidth: f.width} : {}), ...(f.help ? {help: f.help} : {})}}))};
-      const r = await lib.composeForm(figma, body, spec, created);
-      for (const [j, id] of r.fields.entries()) {
-        const f = row[j];
-        let node = await figma.getNodeByIdAsync(id); node.name = f.layer;
-        node = await formValue(node, f);
-      }
-    }
-    for(const d of def.inserts??[])if(d.beforeRow===def.rows.length){const n=await (d.type==='feedback'?lib.renderFeedback:d.type==='cascader'?lib.renderCascader:d.type==='timeRangeGroup'?lib.renderTimeRangeGroup:d.type==='timePicker'?lib.renderTimePicker:d.type==='selectField'?lib.renderSelect:d.type==='inputField'?lib.renderInputField:d.type==='number'?lib.renderInputNumber:d.type==='checkbox'?lib.renderCheckbox:d.type==='radio'?lib.renderRadio:d.type==='link'?lib.renderLink:lib.renderDivider)(figma,body,d,d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:d.type==='cascader'?lib.cascaderDeps:d.type==='timeRangeGroup'?lib.timeGroupDeps:d.type==='timePicker'?lib.timePickerDeps:d.type==='selectField'?lib.selectDeps:d.type==='inputField'?lib.inputFieldDeps:d.type==='number'?lib.numberDeps:d.type==='checkbox'?lib.checkboxDeps:lib.radioDeps);if(n.width>def.formWidth)throw Error('正文插入组件超出抽屉宽度');}
-    // DRAWER_POPUP_START
-    for(const f of def.rows.flat().filter(f=>f.open)){
-      let control=fieldControl(root.findOne(n=>n.name===f.layer));if(control.type==='INSTANCE')control=control.detachInstance();
-      control.strokes=copy(lib.focusRules.strokes);control.effects=copy(lib.focusRules.effects);const arrow=control.children.find(n=>/chevron|箭头/i.test(n.name));if(arrow){const up=(await figma.getNodeByIdAsync('85:85')).clone();const index=control.children.indexOf(arrow);control.insertChild(index,up);arrow.remove();}
-      const popup=await lib.renderMultiPopup(figma,root,{id:f.layer,width:f.width,options:f.options.map(o=>typeof o==='string'?{label:o,selected:(f.value??[]).includes(o)}:{...o,selected:(f.value??[]).includes(o.label)})},lib.multiRules,{autoFrame,instance,setText});popup.x=control.absoluteBoundingBox.x-root.absoluteBoundingBox.x;popup.y=control.absoluteBoundingBox.y-root.absoluteBoundingBox.y+control.height+4;
-    }
-    // DRAWER_POPUP_END
+    await buildFormBody(content, def);
     for (const n of walk(root)) if ('strokes' in n) { if (n.strokeStyleId) await n.setStrokeStyleIdAsync(n.strokeStyleId); else n.strokes = copy(n.strokes); }
     return root;
     } catch(error) { if(!root.removed)root.remove();throw error; }
@@ -595,6 +620,10 @@ export async function sketchRuntime(figma, req, lib) {
   if (board.kind === 'workbench') root = await buildWorkbench(board.def);
   else if (board.kind === 'drawer') root = await buildDrawer(board.def);
   else root = await buildState(board.def);
+  // FORM_POPUP_CALL_START
+  const formSpecs = board.def.workbench?.forms ?? (board.kind==='workbench'?board.def.forms:null) ?? [board.def.drawer ?? board.def];
+  for(const f of formSpecs)if(f.rows?.flat().some(f=>f.open))await buildFormPopups(root,f);
+  // FORM_POPUP_CALL_END
   const dialogs=[];
   for(const s of board.dialogs??[])dialogs.push(await (s.children?.length?lib.renderComposedDialog:lib.renderDialog)(figma,root,s,{normalize,setText,buttonLabel,deps:lib.dialogDeps,...(s.children?.length?{autoFrame,pick,...lib}:{})}));
   // MESSAGE_BUILD_START
@@ -636,22 +665,23 @@ export async function sketchRuntime(figma, req, lib) {
     };
   }
   // WORKBENCH_SNAPSHOT_END
-  const form = board.def.drawer ?? (board.kind === 'drawer' ? board.def : null);
+  const form = board.def.drawer ?? (board.kind === 'drawer' ? board.def : def?.forms ? {rows:def.forms.flatMap(f=>f.rows),groups:def.forms.flatMap(f=>f.groups),buttons:[]} : null);
   if(form) {
-    snapshot = {groups:visibleTexts(root).filter(n=>n.name.startsWith('分组/')).map(n=>({name:n.name,text:n.characters})), fields:[], buttons:[], texts, fieldNames:walk(root).filter(n=>n.name.startsWith('字段/')).map(n=>n.name)};
+    snapshot = {...snapshot,groups:visibleTexts(root).filter(n=>n.name.startsWith('分组/')).map(n=>({name:n.name,text:n.characters})), fields:[], buttons:snapshot?.buttons??[], texts, fieldNames:walk(root).filter(n=>n.name.startsWith('字段/')).map(n=>n.name)};
     for(const f of form.rows.flat()) {
       const matches = walk(root).filter(n=>n.name===f.layer), node = matches[0];
       const control = node && fieldControl(node);
       const props = control?.type==='INSTANCE' ? control.componentProperties : {};
-      let readonlyVisual=null;
+      let readonlyVisual=null,passwordVisualMatches=null;if(f.kind==='password'){const recipe=lib.inputFieldDeps.families['input-password'].find(r=>r.name===f.inputSpec.variant),main=await figma.getNodeByIdAsync(recipe.id);passwordVisualMatches=JSON.stringify(control.fills)===JSON.stringify(main.fills);}
       if(f.disabled&&['textarea','time','number','radio'].includes(f.kind)){
         if(f.kind==='radio')readonlyVisual=control.children.every(n=>n.type==='INSTANCE'&&n.componentProperties['disable 禁用']?.value==='true');
         else {const ref=await figma.getNodeByIdAsync(f.kind==='textarea'?'436:2':f.kind==='time'?(f.value?'436:39':'436:33'):(f.value!=null?'436:15':'436:5'));readonlyVisual=JSON.stringify(control.fills)===JSON.stringify(ref.fills)&&JSON.stringify(visibleTexts(control)[0].fills)===JSON.stringify(visibleTexts(ref)[0].fills);}
       }
-      snapshot.fields.push({name:f.layer,readonlyVisual,count:matches.length,texts:node?visibleTexts(node).map(t=>t.characters):[], controlName:control?.name,
+      snapshot.fields.push({name:f.layer,readonlyVisual,count:matches.length,texts:node?visibleTexts(node).map(t=>t.characters):[], controlName:control?.name,passwordDots:f.kind==='password'?control.findAll(n=>n.type==='ELLIPSE'&&n.visible).length:null,passwordVisualMatches,radioButtonOptions:f.kind==='radioButton'?control.children.map(n=>({label:visibleTexts(n)[0]?.characters,disabled:n.componentProperties['disabled 禁用']?.value==='true'})):null,
         checked:props['checked 开关']?.value, mode:props['mode 类型']?.value,
         uploads:f.kind==='upload'?await Promise.all(node.children.filter(n=>n.name.startsWith('附件/')).map(async n=>({name:n.name,variant:(await n.getMainComponentAsync())?.name,retry:visibleTexts(n).some(t=>t.characters==='重新上传')}))):[],
-        selected:control && ['radio','checkbox'].includes(f.kind) ? control.children.filter(item=>{
+        selected:control && ['radio','checkbox','radioButton'].includes(f.kind) ? control.children.filter(item=>{
+          if(f.kind==='radioButton')return item.componentProperties['state 状态']?.value==='select已选';
           if(f.kind==='checkbox') return item.children.find(n=>n.name==='selection')?.componentProperties['checked 已选']?.value==='true';
           if(item.type==='INSTANCE'&&item.componentProperties['checked 已选'])return item.componentProperties['checked 已选'].value==='true';const dot=item.findOne(n=>n.name==='Ellipse 7');return dot?.fills?.some(p=>p.type==='SOLID' && p.color.b>p.color.r+0.3);
         }).map(n=>visibleTexts(n)[0]?.characters) : null});
@@ -674,6 +704,7 @@ export async function sketchRuntime(figma, req, lib) {
   feedbackSpecs.push(...(form?.feedbacks??[]),...(def?.feedbacks??[]),...(def?.imageViewers??[]).filter(s=>s.emptyFeedback&&!s.items.length).map(s=>({id:s.id+'-empty',kind:'empty',message:'暂无附件',variant:s.emptyFeedback.variant??'compact'})));
   if(hasFeedback)snapshot.feedback=await Promise.all(walk(form?root.children.find(n=>n.name.startsWith('抽屉 / ')):root).filter(n=>n.name.startsWith('反馈/')).map(async b=>{const v=b.children.find(n=>n.name==='反馈视觉'),m=await v.getMainComponentAsync(),t=v.findOne(n=>n.type==='TEXT'),a=b.children.find(n=>n.name==='反馈操作');return {id:b.name.slice(3),message:t.characters,action:a?a.findOne(n=>n.type==='TEXT').characters:null,mainId:m.id,mainKey:m.key,closeVisible:!!v.findOne(n=>n.name==='item/closeBtn'&&n.visible),fits:t.height<=v.height&&b.absoluteBoundingBox.y+b.height<=root.absoluteBoundingBox.y+root.height};}));
   const semanticErrors = def ? verifyWorkbench(def, snapshot) : form ? verifyForm(form,snapshot) : ['缺少页面语义校验'];
+  if(def&&form)semanticErrors.push(...verifyForm(form,snapshot));
   // PAGINATION_VERIFY_START
   if(def?.table?.pagination?.mainId&&def.table.config.rows.length){snapshot.pagination=await lib.inspectPagination(root.findOne(n=>n.name==='分页'));semanticErrors.push(...lib.verifyPagination(def.table.pagination,snapshot.pagination));}
   // PAGINATION_VERIFY_END

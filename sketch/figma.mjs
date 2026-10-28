@@ -54,7 +54,9 @@ import {buildPortableShell} from '../scripts/figma/portable-shell.mjs';
 import {sketchRuntime} from './figma-runtime.mjs';
 import {buildTable, validate as validateTable} from '../components/table/generator.mjs';
 import {tableDependencies} from '../pages/work-orders/build.mjs';
-import {composeForm, fitFieldContent} from '../components/form/generator.mjs';
+import {composeForm,serializedFormCreation,createFormBoard} from '../components/form/generator.mjs';
+import {prepareFormFields} from './form-fields.mjs';
+import {packJson,unpackJson,packJsonValues as packNativeButtonData,unpackJsonValues as unpackDatePickerData} from '../scripts/lib/pack-json.mjs';
 import {updateDrawer, buttonReactions} from '../components/drawer/generator.mjs';
 import {isMain} from '../support/entry.mjs';
 
@@ -65,7 +67,7 @@ const readJson = path => JSON.parse(readFileSync(new URL(path, import.meta.url),
 // 组件分类页和历史页面一律不写；任务 Page 由 versions.json 的 figmaPage 指定。
 const PROTECTED = [...targetConfig().pages.map(p => p.name),
   '工单工作台 [UIAgent测试]', '创建工单 [UIAgent测试]', '对账未完成 [UIAgent测试]', '工单自主出稿试用 20261013'];
-const FORM_TOP = {input: 'input', textarea: 'textarea', select: 'select', date: 'datePicker', 'date-range':'datePicker', time:'timePicker', number:'inputNumber', radio:'radio', switch: 'switch', checkbox: 'checkbox'};
+const FORM_TOP = {input: 'input', password:'inputPassword', radioButton:'radioButton', textarea: 'textarea', select: 'select', date: 'datePicker', 'date-range':'datePicker', time:'timePicker', number:'inputNumber', radio:'radio', switch: 'switch', checkbox: 'checkbox'};
 const LIST_WIDTH = 1192, SELECTION_WIDTH = 44;
 const PLACEHOLDER = {input: '请输入', textarea: '请输入', select: '请选择', date: '请选择日期'};
 
@@ -160,7 +162,6 @@ function workbenchDef(page, layers) {
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
   const of = type => (page.children ?? []).filter(n => n.type === type && n.visible !== false);
-  for (const type of ['form']) if (of(type).length) throw Error(`工作台页面里的 ${type} 本轮不支持生成 Figma`);
   for (const type of ['search', 'table', 'tabs']) if (of(type).length > 1) throw Error(`工作台页面最多一个 ${type}`);
   const [search] = of('search'), [table] = of('table'), [tabs] = of('tabs');
   for (const f of search?.fields ?? []) if (!['input', 'select', 'date', 'date-range'].includes(f.kind)) throw Error(`查询区字段 ${f.label}：Figma 出稿暂不支持 ${f.kind}，可改为 date-range 或写成缺口`);
@@ -188,7 +189,8 @@ function workbenchDef(page, layers) {
     radios: of('radio').map(validateRadio),
     links: of('link').map(validateLink),
     dividers: of('divider').map(validateDivider),
-    blocks: !(of('statistic').length||of('progress').length||of('list').length||of('collapse').length||of('timeRangeGroup').length||of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','badge','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
+    ...(of('form').length?{forms:of('form').map(form=>({id:form.id,formWidth:contentWidth,...prepareFormFields(form,{pageId:page.id,formWidth:contentWidth,layers,placeholders:PLACEHOLDER,formVariant})}))}:{}),
+    blocks: !(of('form').length||of('statistic').length||of('progress').length||of('list').length||of('collapse').length||of('timeRangeGroup').length||of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','badge','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
     ...(of('statistic').length?{statistics:of('statistic').map(validateStatistic)}:{}),
     ...(of('progress').length?{progresses:of('progress').map(validateProgress)}:{}),
     ...(of('list').length?{lists:of('list').map(n=>{const s=validateList(n);if(s.pagination)s.pagination=paginationSpec(s.pagination);for(const p of s.items)if(p.image?.base64)p.image={...p.image,expectedHash:createHash('sha1').update(Buffer.from(p.image.base64,'base64')).digest('hex')};return s;})}:{}),
@@ -207,6 +209,7 @@ function workbenchDef(page, layers) {
 }
 
 function drawerDef(page, layers, overName) {
+  if(page.children?.some(n=>n.type==='datePicker'&&n.visible!==false))throw Error('独立DatePicker抽屉接入未验证');
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
   for (const n of page.children ?? []) if (!['badge','form', 'actions', 'note', 'gap', 'dialog','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','timeRangeGroup','cascader'].includes(n.type)) throw Error(`抽屉里的 ${n.type} 本轮不支持生成 Figma`);
@@ -225,20 +228,10 @@ function drawerDef(page, layers, overName) {
     if(form.type==='radio'){const item={...validateRadio(form),beforeRow:rows.length};radios.push(item);inserts.push({type:'radio',...item});continue;}
     if(form.type==='link'){const item={...validateLink(form),beforeRow:rows.length};links.push(item);inserts.push({type:'link',...item});continue;}
     if(form.type==='divider'){validateDivider(form);if((form.orientation??'horizontal')==='horizontal'&&(form.length??formWidth)>formWidth)throw Error('分割线超过抽屉正文宽度');const item={...form,beforeRow:rows.length,length:form.length??(form.orientation==='vertical'?40:formWidth)};dividers.push(item);inserts.push({type:'divider',...item});continue;}
-    if (form.title && !form.fields.some(f=>f.label===form.title) && form.fields.some(f => f.visible !== false)) groups.push({title:form.title, layer:'分组/'+form.id, beforeRow:rows.length});
-    let pending = null;
-    for (const f of form.fields) {
-      if (f.visible === false) continue;
-      const d = {...f, context:'form', layer:layers.get(`${page.id}/${form.id}/${f.id}`).layer};
-      d.placeholder ??= PLACEHOLDER[f.kind];
-      const wide = form.cols !== 2 || ['textarea', 'upload'].includes(f.kind);
-      if (wide) { if (pending) { rows.push([pending]); pending = null; } d.width = formWidth; rows.push([d]); }
-      else if (pending) { d.width = pending.width; rows.push([pending, d]); pending = null; }
-      else { d.width = (formWidth - 24) / 2; pending = d; }
-    }
-    if (pending) rows.push([pending]);
+    const prepared = prepareFormFields(form, {pageId:page.id, formWidth, layers, placeholders:PLACEHOLDER, formVariant});
+    groups.push(...prepared.groups.map(g=>({...g,beforeRow:g.beforeRow+rows.length})));
+    rows.push(...prepared.rows);
   }
-  for (const row of rows) for (const d of row) if (d.kind !== 'upload') d.variant = formVariant(d.kind, d.required, d.help);
   const footer = page.children.filter(n => n.type === 'actions' && n.footer).flatMap(n => n.buttons.filter(b => b.visible !== false).map(b => ({...b, layer:layers.get(`${page.id}/${n.id}/${b.id}`).layer})));
   for(const b of footer)if(needsBusinessButton({...b,loading:false}))b.business=prepareButton(b);
   if (page.children.some(n => n.type === 'actions' && !n.footer)) throw Error('抽屉正文里的按钮本轮不支持，底栏按钮请写 footer: true');
@@ -262,7 +255,7 @@ function unexpressed(page, patches = {}) {
     if (n.type === 'table' && n.rowActions?.some(a => a.when) && !n.rowActionRules) issues.push(`${page.id}/${n.id}：自然语言when未执行，仅按样例行序分配操作`);
     for (const f of n.fields ?? []) if (n.type === 'search' && ((f.kind === 'date-range' && f.value != null) || f.error || f.disabled || f.visible === false)) issues.push(`${page.id}/${n.id}/${f.id}：查询字段值或状态未支持`);
   }
-  const allowed = {statistic:['visible','title','value','unit','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','note'],progress:['visible','theme','status','size','percent','width','note'],list:['visible','pagination','items','size','kind','stripe','split','width','note'],collapse:['visible','items','placement','borderless','width','note'],badge:['visible','size','shape','dot','text','anchor','offset','note'],timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading','label','appearance','theme','size','shape','icon','iconName','state','width','loadingTone'], field:['value','note','visible','disabled','error','fileStates','open','options']};
+  const allowed = {form:['visible','note'],statistic:['visible','title','value','unit','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','note'],progress:['visible','theme','status','size','percent','width','note'],list:['visible','pagination','items','size','kind','stripe','split','width','note'],collapse:['visible','items','placement','borderless','width','note'],badge:['visible','size','shape','dot','text','anchor','offset','note'],timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading','label','appearance','theme','size','shape','icon','iconName','state','width','loadingTone'], field:['value','note','visible','disabled','error','fileStates','open','options']};
   for (const [path, props] of Object.entries(patches)) {
     const [, id, child] = path.split('/'), n = page.children.find(n => n.id === id);
     const kind = child ? n?.buttons?.some(b => b.id === child) ? 'button' : 'field' : n?.type;
@@ -312,12 +305,13 @@ export function plan(dir) {
 }
 
 // 仅序列化本画板使用的构建分支，避免详情扩展把无关表单代码挤过工具长度上限。
-export function runtimeSource(drawer) {
+export function runtimeSource(drawer, workbenchForms = false) {
  const src=sketchRuntime.toString(), work=src.indexOf('  async function buildWorkbench('), form=src.indexOf('  async function buildDrawer('), state=src.indexOf('  async function buildState(');
  if(!(work>0&&form>work&&state>form))throw Error('运行时构建分支边界变化');
  const formHelpers=src.indexOf('  async function detach(');
  if(formHelpers<0||formHelpers>work)throw Error('表单辅助边界变化');
  if(drawer)return src.slice(0,work)+src.slice(form);
+ if(workbenchForms)return src.slice(0,form)+src.slice(state);
  const workbench=src.slice(0,formHelpers)+src.slice(work,form)+src.slice(state),a=workbench.indexOf('  const form = board.def.drawer'),b=workbench.indexOf('  if(def?.timelines?.length)snapshot.timelines');
  if(a<0||b<a)throw Error('表单回读边界变化');
  return workbench.slice(0,a)+'  const form = null;\n'+workbench.slice(b);
@@ -336,14 +330,17 @@ export function code(dir, boardId, options = {}) {
   if ((board.def.workbench??(board.kind==='workbench'?board.def:null))?.table) { fns = buildTable.toString(); lib = `{buildTable, tableDeps: ${JSON.stringify((()=>{const config=(board.def.workbench??board.def).table.config,d=tableDependencies(config);if(options.portable){d.cells=Object.fromEntries(Object.entries(d.cells).filter(([k])=>k==='header'||config.columns.some(c=>c.kind===k)));if(!config.selection)d.checkbox={};if(!config.pagination)delete d.pagination;}return d;})())}}`; }
   if (board.kind === 'drawer' || board.def.drawer) {
     const hasFields=(board.def.drawer??board.def).rows.length>0;
+    // Blank-file plans pick form variants at compile time, so the set lookup is not shipped there.
     const query=hasFields&&!options.portable;
-    fns = (hasFields?[fitFieldContent, composeForm, updateDrawer, ...(query?[formVariantQuery]:[])]:[updateDrawer]).map(f => f.toString()).join('\n');
+    fns = (hasFields?serializedFormCreation()+'\n':'')+[updateDrawer,...(query?[formVariantQuery]:[])].map(f=>f.toString()).join('\n');
     const {variants, titleProperty, footerIds, closeIds} = readJson('./maps/drawer.json');
-    lib = `{${hasFields?'composeForm, fitFieldContent, ':''}${query?'formVariantQuery, ':''}updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: options.portable ? null : buttonReactions()})}}`;
+    lib = `{${hasFields?'composeForm, ':''}${query?'formVariantQuery, ':''}updateDrawer, drawer: ${JSON.stringify({variants, titleProperty, footerIds, closeIds, buttonReactions: options.portable ? null : buttonReactions()})}}`;
   }
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
-  if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
   const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
+  const fieldRows=fd?.rows??wd?.forms?.flatMap(f=>f.rows)??[];
+  if(wd?.forms?.length){const trimmed={...(req.board.def.workbench??req.board.def),forms:wd.forms.map(f=>({...f,rows:f.rows.map(row=>row.map(({from,visibleWhen,...field})=>field))}))};req.board={...req.board,def:req.board.def.workbench?{...req.board.def,workbench:trimmed}:trimmed};fns+='\n'+serializedFormCreation()+'\n'+verifyForm.toString()+(!options.portable?'\n'+formVariantQuery.toString():'');lib=(lib==='{}'?'{':lib.slice(0,-1)+',')+'composeForm'+(!options.portable?',formVariantQuery':'')+'}';}
+  if(fieldRows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
   const businessButtons=[...(wd?.buttons??[]),...(fd?.buttons??[])],hasBusinessButtons=businessButtons.some(b=>b.business);
   if(fd?.buttons.some(b=>b.business)){fns+='\n'+fitButtonFooter.toString();lib=lib.slice(0,-1)+',fitButtonFooter}';}
   if(hasBusinessButtons&&!options.portable)throw Error('Button扩展请使用portable规划和真实资产回执');
@@ -369,18 +366,18 @@ export function code(dir, boardId, options = {}) {
   }
   if(wd?.timePickers?.length||fd?.timePickers?.length){const deps=readJson('../components/time-picker/dependencies.json'),used=[...(wd?.timePickers??[]),...(fd?.timePickers??[])];deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('format 格式='+(s.range?'timeRange 时间区间':'time 时间'))&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('disabled 禁用='+s.disabled)));fns+='\n'+[validateTimePicker,renderTimePicker].map(f=>f.toString()).filter(x=>!fns.includes(x)).join('\n');lib=lib.slice(0,-1)+',renderTimePicker,timePickerDeps:'+JSON.stringify(deps)+'}';}
   if(wd?.selectFields?.length||fd?.selectFields?.length){const used=[...(wd?.selectFields??[]),...(fd?.selectFields??[])],deps=readJson('../components/select/family-dependencies.json');deps.inputs=deps.inputs.filter(r=>used.some(s=>r.name.includes('multiple 多选='+s.multiple)&&r.name.includes('expand 展开='+s.open)&&r.name.includes('filled 填充='+s.filled)&&r.name.includes('prefixIcon 前置图标='+s.prefixIcon)&&r.name.includes('disabled 禁用='+s.disabled)));delete deps.multi;if(!used.some(s=>!s.multiple&&s.open)){deps.single=[];delete deps.singleRules;}fns+='\n'+[validateSelect,selectHelpers,renderSelect,...(used.some(s=>!s.multiple&&s.open)?[updateSingleOption,renderSinglePopup]:[])].map(f=>f.toString()).join('\n');if(used.some(s=>s.multiple&&s.open)&&!fns.includes('function renderMultiPopup('))fns+='\n'+[updateMultiOption,renderMultiPopup].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderSelect,selectDeps:'+JSON.stringify(deps)+'}';}
-  if(wd?.inputFields?.length||fd?.inputFields?.length){const used=[...(wd?.inputFields??[]),...(fd?.inputFields??[])],deps=readJson('../components/input/family-dependencies.json');deps.families=Object.fromEntries(Object.entries(deps.families).map(([k,rows])=>[k,rows.filter(r=>used.some(s=>s.family===k&&s.variant===r.name))]));fns+='\n'+[validateInputField,renderInputField].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderInputField,inputFieldDeps:'+JSON.stringify(deps)+'}';}
+  if(wd?.inputFields?.length||fd?.inputFields?.length||fieldRows.flat().some(f=>f.inputSpec)){const used=[...(wd?.inputFields??[]),...(fd?.inputFields??[]),...fieldRows.flat().filter(f=>f.inputSpec).map(f=>f.inputSpec)],deps=readJson('../components/input/family-dependencies.json');if(options.portable){deps.fileKey=req.fileKey;delete deps.pageId;}deps.families=Object.fromEntries(Object.entries(deps.families).map(([k,rows])=>[k,rows.filter(r=>used.some(s=>s.family===k&&s.variant===r.name))]));fns+='\n'+serializedFormCreation('input');lib=lib.slice(0,-1)+',renderInputField,inputFieldDeps:'+JSON.stringify(deps)+'}';}
   if(wd?.numbers?.length||fd?.numbers?.length){fns+='\n'+[validateInputNumber,renderInputNumber].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderInputNumber,numberDeps:'+JSON.stringify(readJson('../components/input-number/dependencies.json'))+'}';}
   if(wd?.checkboxes?.length||fd?.checkboxes?.length){fns+='\n'+[validateCheckbox,renderCheckbox].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderCheckbox,checkboxDeps:'+JSON.stringify(readJson('../components/checkbox/dependencies.json'))+'}';}
-  if(wd?.radios?.length||fd?.radios?.length){
-    const used=[...(wd?.radios??[]),...(fd?.radios??[])],deps=readJson('../components/radio/dependencies.json');
+  if(wd?.radios?.length||fd?.radios?.length||fieldRows.flat().some(f=>f.radioSpec)){
+    const used=[...(wd?.radios??[]),...(fd?.radios??[]),...fieldRows.flat().filter(f=>f.radioSpec).map(f=>f.radioSpec)],deps=readJson('../components/radio/dependencies.json');
+    if(options.portable){deps.fileKey=req.fileKey;delete deps.pageId;}
     const appearances={'outline':'outline描边','default-filled':'default-filled默认填充','primary-filled':'primary-filled品牌填充'};
     deps.button=Object.fromEntries(Object.entries(deps.button).filter(([name])=>used.some(s=>s.kind==='buttonGroup'&&name.includes('variants 类型='+appearances[s.variant]))));
     if(!used.some(s=>s.kind!=='buttonGroup'))deps.single={};
-    fns+='\n'+[validateRadio,renderRadio].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderRadio,radioDeps:'+JSON.stringify(deps)+'}';
+    fns+='\n'+serializedFormCreation('radio');lib=lib.slice(0,-1)+',renderRadio,radioDeps:'+JSON.stringify(deps)+'}';
   }
   if(wd?.links?.length||fd?.links?.length||wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length))){if(options.portable){
-    if(wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length)))throw Error('列表内Link尚未支持新文件初始化');
     const specs=[...(wd?.links??[]),...(fd?.links??[])];
     if(wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length)))throw Error('列表内Link尚未支持新文件初始化');
     fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const PORTABLE_LINK_IDS='+JSON.stringify(portableLinkDependencies(specs))+';\n'+[validateLink,linkVariant,renderPortableLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink:renderPortableLink}';
@@ -409,12 +406,13 @@ export function code(dir, boardId, options = {}) {
   if(board.badges?.length){fns+='\n'+[positionBadge,updateBadge,renderBadge,inspectBadge,verifyBadge].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderBadge,inspectBadge,verifyBadge}';}
   if(board.tooltips?.length){fns+='\n'+[positionTooltip,updateTooltip,renderTooltip,inspectTooltip,verifyTooltip].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTooltip,inspectTooltip,verifyTooltip}';}
   lib=lib.replace(/^\{,/,'{');
-  let runtime=runtimeSource(board.kind==='drawer'||!!board.def.drawer);
+  let runtime=runtimeSource(board.kind==='drawer'||!!board.def.drawer,!!wd?.forms?.length);
   if(!board.dialogs.some(s=>s.children?.length)){
     runtime=runtime.replace('(s.children?.length?lib.renderComposedDialog:lib.renderDialog)','lib.renderDialog').replace(',...(s.children?.length?{autoFrame,pick,...lib}:{})','').replace('  for(const d of dialogs)if(d.composition)semanticErrors.push(...d.composition.errors);\n','');
   }
   // 仅裁剪当前画板不可达的段落；实际构建和语义校验代码保持原样。
   const omit = marker => { runtime=runtime.replace(new RegExp('^[ \t]*// '+marker+'_START[\\s\\S]*?^[ \t]*// '+marker+'_END\\n','m'),''); };
+  if(!wd?.forms?.length)runtime=runtime.replace('  if(def&&form)semanticErrors.push(...verifyForm(form,snapshot));\n','');
   if(!hasBusinessButtons)runtime=runtime.replace(/^      buttons: await Promise.all\(walk\(root\).*businessErrors.*$/m,"      buttons: walk(root).filter(n => n.type === 'INSTANCE' && n.name.startsWith('按钮/') && n.visible).map(n => ({name:n.name, disabled:n.componentProperties['disabled 禁用']?.value === 'true'})),");
   if(!hasBusinessButtons)runtime=runtime.replace(/if\(b.business\)\{const n=await lib.renderBusinessButton[^\n]*?\}else\{([^}]+)\}/,'$1');
   if(!wd?.table||!(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){omit('TABLE_EXT_VERIFY');}
@@ -425,6 +423,8 @@ export function code(dir, boardId, options = {}) {
   if(!wd?.loadings?.length){omit('LOADING_BUILD');omit('LOADING_VERIFY');}
   if(!board.notifications?.length){omit('NOTIFICATION_BUILD');omit('NOTIFICATION_VERIFY');runtime=runtime.replace('notifications:notificationReceipts,','');}
   if(!board.popconfirms?.length){omit('POPCONFIRM_BUILD');omit('POPCONFIRM_VERIFY');runtime=runtime.replace('popconfirms:popconfirmReceipts,','');}
+  if(!wd?.datePickers?.length){omit('DATEPICKER_BUILD');runtime=runtime.replace('def.datePickers?.length||','').replace("datePicker:'日期选择/',",'');}
+  if(!wd?.uploads?.length){omit('UPLOAD_BUILD');runtime=runtime.replace('def.uploads?.length||','').replace("upload:'上传/',",'');}
   if(!wd?.statistics?.length){omit('STATISTIC_BUILD');runtime=runtime.replace('def.statistics?.length||','').replace("statistic:'统计/',",'');}
   if(!wd?.progresses?.length){omit('PROGRESS_BUILD');runtime=runtime.replace('def.progresses?.length||','').replace("progress:'进度/',",'');}
   if(!wd?.lists?.length){omit('LIST_BUILD');runtime=runtime.replace('def.lists?.length||','').replace("list:'列表/',",'');}
@@ -439,13 +439,13 @@ export function code(dir, boardId, options = {}) {
   if(fd)omit('WORKBENCH_SNAPSHOT');
   if(wd&&!wd.headings?.length&&!wd.tagThemes?.length)omit('TAG_HELPER');
   if(wd&&!wd.search)omit('SEARCH_BUILD');
-  if(wd&&!wd.search?.length){omit('SEARCH_FIELDS');runtime=runtime.replace(/  function fieldControl\([\s\S]*?(?=  async function buildWorkbench)/,'');}
+  if(wd&&!wd.search?.length&&!wd.forms?.length){omit('SEARCH_FIELDS');runtime=runtime.replace(/  function fieldControl\([\s\S]*?(?=  async function buildWorkbench)/,'');}
   if(wd&&!wd.table){omit('TABLE_BUILD');omit('TABLE_EMPTY');}
   if(wd?.table?.config.rows.length)omit('TABLE_EMPTY');
   if(wd?.table&&(!wd.table.pagination||!wd.table.config.rows.length))omit('PAGINATION_BUILD');
   if(!fd?.feedbacks?.length&&!wd?.table?.feedback&&!wd?.feedbacks?.length&&!wd?.imageViewers?.some(s=>s.emptyFeedback))runtime=runtime.replace(/  const hasFeedback=[\s\S]*?(?=  const semanticErrors)/,'  const hasFeedback=false,feedbackSpecs=[];\n');
   for(const name of ['links','dividers'])if(!wd?.[name]?.length&&!fd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(\\(def\\?\\?form\\)\\?\\.'+name+'[^\\n]*\\n','gm'),'');
-  for(const name of ['statistics','progresses','lists','collapses','timelines','imageViewers','descriptions'])if(!wd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(def\\?\\.'+name+'[^\\n]*\\n','gm'),'');
+  for(const name of ['datePickers','uploads','statistics','progresses','lists','collapses','timelines','imageViewers','descriptions'])if(!wd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(def\\?\\.'+name+'[^\\n]*\\n','gm'),'');
 
   if(!fd?.feedbacks?.length)runtime=runtime.replaceAll("d.type==='feedback'?lib.renderFeedback:",'').replaceAll("d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:",'').replace("form?.feedbacks?.length||",'').replace("...(form?.feedbacks??[]),",'').replace("form?root.children.find(n=>n.name.startsWith('抽屉 / ')):root",'root');
   if(!wd?.cascaders?.length&&!fd?.cascaders?.length)runtime=runtime.replace(/        \/\/ CASCADER_START[\s\S]*?        \/\/ CASCADER_END\n/,'');
@@ -464,18 +464,31 @@ export function code(dir, boardId, options = {}) {
   if(!wd?.radios?.length&&!fd?.radios?.length)runtime=runtime.replace(/^.*if\(\(def\?\?form\)\?\.radios\?\.length\).*\n/gm,'');
   if(wd?.tabs?.placement!=='content')runtime=runtime.replace(/    \/\/ CONTENT_TABS_START[\s\S]*?    \/\/ CONTENT_TABS_END\n/,'');
   if(!wd?.layout)runtime=runtime.replace(/    \/\/ LAYOUT_SHELL_START[\s\S]*?    \/\/ LAYOUT_SHELL_END\n/,'').replace(/      \/\/ LAYOUT_FONT_START[\s\S]*?      \/\/ LAYOUT_FONT_END\n/,'').replace(', preservedFontRoots = new Set()','');
-  if(!wd?.timeRangeGroups?.length&&!wd?.dividers?.length&&!wd?.links?.length&&!wd?.radios?.length&&!wd?.checkboxes?.length&&!wd?.numbers?.length&&!wd?.inputFields?.length&&!wd?.selectFields?.length&&!wd?.timePickers?.length&&!wd?.cascaders?.length)runtime=runtime.replace(/    \/\/ DIVIDER_ORDER_START[\s\S]*?    \/\/ DIVIDER_ORDER_END\n/,'');
+  if(!wd?.forms?.length&&!wd?.timeRangeGroups?.length&&!wd?.dividers?.length&&!wd?.links?.length&&!wd?.radios?.length&&!wd?.checkboxes?.length&&!wd?.numbers?.length&&!wd?.inputFields?.length&&!wd?.selectFields?.length&&!wd?.timePickers?.length&&!wd?.cascaders?.length)runtime=runtime.replace(/    \/\/ DIVIDER_ORDER_START[\s\S]*?    \/\/ DIVIDER_ORDER_END\n/,'');
   if(!fd?.inserts?.length)runtime=runtime.replace(/^.*for\(const d of def.inserts.*\n/gm,'');
-  if(fd&&!fd.rows.flat().some(f=>f.kind==='upload'))runtime=runtime.replace(/  async function uploadFiles\([\s\S]*?(?=  async function formValue)/,'').replace(/      \/\/ DRAWER_UPLOAD_START[\s\S]*?      \/\/ DRAWER_UPLOAD_END\n/,'');
-  if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
-  if(fd&&!fd.rows.flat().some(f=>f.open))runtime=runtime.replace(/    \/\/ DRAWER_POPUP_START[\s\S]*?    \/\/ DRAWER_POPUP_END\n/,'');
+  if((fd||wd?.forms?.length)&&!fieldRows.flat().some(f=>f.kind==='upload'))runtime=runtime.replace(/  async function uploadFiles\([\s\S]*?(?=  async function formValue)/,'').replace(/      \/\/ DRAWER_UPLOAD_START[\s\S]*?      \/\/ DRAWER_UPLOAD_END\n/,'');
+  if(fd||wd?.forms?.length&&!wd.search?.length)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
+  if(!fieldRows.flat().some(f=>f.open)){omit('FORM_POPUP');omit('FORM_POPUP_CALL');}
+  if(wd?.forms?.length){
+    const kinds=new Set(fieldRows.flat().map(f=>f.kind));
+    for(const [name,values]of Object.entries({RADIO_BUTTON:['radioButton'],PASSWORD:['password'],DATE:['date','date-range'],SWITCH:['switch'],SELECT:['select'],OPTIONS:['radio','checkbox']}))if(!values.some(k=>kinds.has(k)))omit('FORM_VALUE_'+name);
+    if(!wd.search?.length)omit('SEARCH_FIELDS');
+    if(!fieldRows.flat().some(f=>f.max))runtime=runtime.replace(/  async function counter\([\s\S]*?(?=  async function (?:uploadFiles|formValue))/,'').replace(/^    if \(f.max &&.*\n/m,'');
+    if(!fieldRows.flat().some(f=>f.disabled&&['textarea','time','number','radio'].includes(f.kind)))runtime=runtime.replace(/      if\(f.disabled&&\['textarea','time','number','radio'\].includes\(f.kind\)\)\{[\s\S]*?\n      \}\n/,'');
+    runtime=runtime.replace(/^    if \(desc.context === 'search'\) \{ unsupported.push\(desc.layer \+ '：查询区字段不支持错误态'\); return field; \}\n/m,'');
+    if(!kinds.has('upload'))runtime=runtime.replace(/^    if \(desc.kind === 'upload'\).*\n/m,'').replace(/^        uploads:f.kind==='upload'.*\n/m,'        uploads:[],\n');
+
+    if(!wd.table){
+      runtime=runtime.replace(/^    const rowData =.*\n/m,'').replace(/^      table: table \?.*\n/m,'      table:table?{unexpected:true}:null,\n');
+    }
+  }
   if(options.portable){
-    if(wd?.collapses?.length||wd?.lists?.length||wd?.progresses?.length||wd?.statistics?.length)throw Error('Collapse/List/Progress/Statistic 已支持草稿及已适配目标构建；新文件原生依赖迁移尚未验证');
     if(!/^[a-zA-Z0-9]{22,128}$/.test(req.fileKey??'')||req.fileKey==='jNf9icrxfw8B7QkSQa9g33')throw Error('需要独立授权目标，规范源只读');
     const old="const source = await figma.getNodeByIdAsync('180:3');\n    if (!source) throw Error('工单页基线 180:3 不存在');\n    const root = source.clone(); page.appendChild(root); root.name = board.name; place(root);";
     if(!runtime.includes(old)&&board.kind==='workbench')throw Error('页面构建分支已变化');
     runtime=runtime.replace(old,"const root = await buildPortableShell(figma,page,def,{autoFrame,text,instance,buttonLabel}); root.name=board.name; place(root);");
     if(board.kind==='workbench'||board.def.workbench)fns+='\n'+buildPortableShell.toString();
+    const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
     if(wd&&!wd.search?.length)fns=fns.replace(/  if\(def.search\)\{[\s\S]*?\n  \}/,'');
     if(wd?.search&&!wd.search.some(f=>f.kind==='date'))runtime=runtime.replace(/          else if \(slot.kind === 'date'\) \{[\s\S]*?          \}\n          else if \(slot.kind === 'date-range'\)/,"          else if (slot.kind === 'date-range')");
     if(wd?.search&&!wd.search.some(f=>f.kind==='date-range'))runtime=runtime.replace(/          else if \(slot.kind === 'date-range'\) \{[\s\S]*?          \} else throw Error/,"          else throw Error");
@@ -485,12 +498,14 @@ export function code(dir, boardId, options = {}) {
       runtime=runtime.replace(/  async function buttonDisabled\([\s\S]*?(?=  async function text\()/,`  async function buttonDisabled(n,disabled){if(!disabled)return;const main=await n.getMainComponentAsync();const ids=${JSON.stringify(disabled)};const target=ids[main.id];if(!target)throw Error('按钮禁用态未初始化');const label=n.componentProperties[Object.keys(n.componentProperties).find(k=>k.startsWith('label'))].value;n.swapComponent(await figma.getNodeByIdAsync(target));await normalize(n);await buttonLabel(n,label);}
 `);
     }
-    const portableDrawer=req.board.def.drawer??(req.board.kind==='drawer'?req.board.def:null),formRows=portableDrawer?.rows??[];
+    const portableDrawer=req.board.def.drawer??(req.board.kind==='drawer'?req.board.def:null),formRows=portableDrawer?.rows??(req.board.def.workbench??req.board.def).forms?.flatMap(f=>f.rows)??[];
     for(const f of formRows.flat()){const q=formVariantQuery(f);if(q)f.choice=formVariantReference(q,f.layer);}
+    // Drawer branches this draft cannot reach keep a non-id marker, so a blank file does not build their
+    // components; reaching one would fail loudly at getNodeByIdAsync instead of drawing a wrong control.
     if(portableDrawer){
       const fields=formRows.flat(),has=(kind,disabled)=>fields.some(f=>f.kind===kind&&(!disabled||f.disabled));
       const unused=[...(has('checkbox')?[]:['31:2','31:12','31:15','31:17']),...(has('radio')?[]:['436:24','436:28']),...(has('textarea',true)?[]:['436:2']),...(has('time',true)?[]:['436:33','436:39']),...(has('number',true)?[]:['436:5','436:15']),...((portableDrawer.buttons??[]).some(b=>b.loading)?[]:['107:250','107:254'])];
-      for(const id of unused)runtime=runtime.replaceAll("'"+id+"'","'unused:"+id+"'");
+      for(const id of unused)runtime=runtime.replaceAll(`'${id}'`,`'unused:${id}'`);
     }
     if(portableDrawer&&formRows.flat().some(f=>f.kind==='upload')){
       runtime=runtime.replaceAll("item.children.find(n=>n.type==='INSTANCE')","item.children.find(n=>n.name==='Button 按钮')").replaceAll("item.children.find(n => n.type === 'INSTANCE')","item.children.find(n => n.name === 'Button 按钮')").replaceAll("failure.children.find(n=>n.type==='INSTANCE');await buttonLabel(retry,'重新上传')","failure.children.find(n=>n.name==='Button 按钮');await setText(retry.findOne(n=>n.type==='TEXT'),'重新上传')");
@@ -498,7 +513,8 @@ export function code(dir, boardId, options = {}) {
     const resolve=options.resolveReference;
     if(typeof resolve!=='function')throw Error('新文件必须提供已核验组件映射');
     // Transform compiler references only. Never search/replace the user's business text or snapshots.
-    const refs=source=>source.replace(/(['"])((?:0|[1-9]\d*):(?:0|[1-9]\d*))\1/g,(_,q,id)=>JSON.stringify(resolve(id)));
+    // Node ids never carry a leading zero, so time literals such as '00:00' stay untouched.
+    const refs=source=>source.replace(/(['"])((?:0|[1-9]\d*):(?:0|[1-9]\d*))\1/g,(m,q,id,offset)=>/"sourceId":$/.test(source.slice(Math.max(0,offset-12),offset))?m:JSON.stringify(resolve(id)));
     // Portable rendering always supplies dialogDeps. The legacy no-deps fallback is unreachable.
     fns=fns.replace("deps?dialogMainId(s,deps):'415:9'","dialogMainId(s,deps)");
     fns=refs(fns);runtime=refs(runtime);lib=refs(lib);
@@ -518,7 +534,19 @@ export function code(dir, boardId, options = {}) {
     if(hasBusinessButtons){const first=businessButtons.find(b=>b.business).business;lib=lib.replace('__BUTTON_PORTABLE_CATALOG__',JSON.stringify({fileKey:req.fileKey,pageId:resolve(first.mainId+'#page'),bindStyles:true}));}
     req.board.notes=req.board.notes.filter(n=>!n.includes('沿用工单页基线'));
   }
-  let generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
+  const hasFormCreation=fieldRows.length>0;
+
+  const workbenchVerification=wd?.forms?.length&&!wd.table?verifyWorkbench.toString().split('  const c = def.table.config,')[0]+'  return errors;\n}':verifyWorkbench.toString();
+  let requestSource=JSON.stringify(req);
+  if(hasFormCreation){
+    const choices=[
+      {text:unpackJson.name+'('+JSON.stringify(packJson(req))+')',decoder:unpackJson},
+      {text:unpackDatePickerData.name+'('+JSON.stringify(packNativeButtonData(req))+')',decoder:unpackDatePickerData}
+    ].sort((a,b)=>(a.text.length+a.decoder.toString().length)-(b.text.length+b.decoder.toString().length));
+    const best=choices[0];
+    if(best.text.length+best.decoder.toString().length<requestSource.length){fns+='\n'+best.decoder.toString();requestSource=best.text;}
+  }
+  let generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm.toString() : workbenchVerification).replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await ${hasFormCreation?'createFormBoard':'sketchRuntime'}(figma, ${requestSource}, ${lib}${hasFormCreation?',sketchRuntime':''});`;
   if(!extendedTabs)generated=generated.replace(/^if\(def.tabs\?\.mainId\).*\n/gm,'');
   if(!hasBusinessButtons)generated=generated.replace(/^if \(found\[0\]\) \{if\(b.business\).*$/m,"if (found[0]) require(found[0].disabled === !!b.disabled, b.layer + ' 禁用状态不符');");
   if(!fd?.buttons.some(b=>b.business))generated=generated.replace(/^[ \t]*if\(def.buttons.some\(b=>b.business\)\)lib.fitButtonFooter[^\n]*\n/gm,'');
@@ -527,7 +555,7 @@ export function code(dir, boardId, options = {}) {
     generated=generated.replace("if(matches[0]&&b.business){require(!!matches[0].business&&verifyBusinessButton(b.business,matches[0].business).length===0,b.layer+' 按钮实际配方或内容不符');}\nelse if(matches[0])",'if(matches[0])');
     generated=generated.replace("if(!def)snapshot.buttons = await Promise.all(walk(root).filter(n=>['INSTANCE','FRAME'].includes(n.type)&&n.name.startsWith('按钮/')&&form.buttons.some(b=>b.layer===n.name)).map(async n=>{const b=form.buttons.find(b=>b.layer===n.name);if(b.business)return {name:n.name,business:await lib.inspectBusinessButton(n)};return {name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'};}));", "if(!def)snapshot.buttons = walk(root).filter(n=>n.type==='INSTANCE'&&n.name.startsWith('按钮/')).map(n=>({name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'}));");
   }
-  const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET', FILE_KEY);
+  const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET',FILE_KEY);
   if (out.length > 50000) throw Error(`生成代码 ${out.length} 字符，超过 use_figma 上限 50000`);
   return out;
 }

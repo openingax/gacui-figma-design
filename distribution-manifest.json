@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -56,7 +56,9 @@
     "components/collapse/parts/74387-226695/definition.json",
     "components/collapse/README.md",
     "components/drawer/generator.mjs",
+    "components/form/creation-runtime.json",
     "components/form/generator.mjs",
+    "components/form/README.md",
     "components/link/portable.mjs",
     "components/link/text-portable/build-data.json",
     "components/list/catalog.json",
@@ -103,6 +105,7 @@
     "docs/figma-adapter.md",
     "docs/figma-output.md",
     "docs/form-edit-boundaries.md",
+    "docs/form-release.md",
     "docs/maintenance.md",
     "docs/onboarding.md",
     "docs/platform-distribution.md",
@@ -123,12 +126,35 @@
     "scripts/figma/portable-runtime.mjs",
     "scripts/figma/portable-shell.mjs",
     "scripts/figma/portable.mjs",
+    "scripts/lib/compact-figma-code.mjs",
     "scripts/lib/figma-build.mjs",
+    "scripts/lib/pack-json.mjs",
+    "scripts/vendor/uglify-js/lib/ast.js",
+    "scripts/vendor/uglify-js/lib/compress.js",
+    "scripts/vendor/uglify-js/lib/minify.js",
+    "scripts/vendor/uglify-js/lib/mozilla-ast.js",
+    "scripts/vendor/uglify-js/lib/output.js",
+    "scripts/vendor/uglify-js/lib/parse.js",
+    "scripts/vendor/uglify-js/lib/propmangle.js",
+    "scripts/vendor/uglify-js/lib/scope.js",
+    "scripts/vendor/uglify-js/lib/sourcemap.js",
+    "scripts/vendor/uglify-js/lib/transform.js",
+    "scripts/vendor/uglify-js/lib/utils.js",
+    "scripts/vendor/uglify-js/LICENSE",
+    "scripts/vendor/uglify-js/package.json",
+    "scripts/vendor/uglify-js/tools/domprops.html",
+    "scripts/vendor/uglify-js/tools/domprops.json",
+    "scripts/vendor/uglify-js/tools/exports.js",
+    "scripts/vendor/uglify-js/tools/node.js",
+    "scripts/vendor/uglify-js/tools/tty.js",
     "scripts/verify.mjs",
     "sketch/core.mjs",
     "sketch/figma-runtime.mjs",
     "sketch/figma.mjs",
+    "sketch/form-fields.mjs",
     "sketch/form-variants.mjs",
+    "sketch/maps/form-top/inputPassword.json",
+    "sketch/maps/form-top/radioButton.json",
     "sketch/preview.css",
     "sketch/preview.js",
     "sketch/sketch.mjs",
@@ -164,9 +190,12 @@
     "tests/candidate-components.test.mjs",
     "tests/figma-logging.test.mjs",
     "tests/fixtures/button-release.json",
+    "tests/fixtures/form-fields-release.json",
+    "tests/fixtures/form-release.json",
     "tests/fixtures/portable-metrics-drawer.json",
     "tests/fixtures/portable-metrics.json",
     "tests/fixtures/portable-upload-drawer.json",
+    "tests/form-release.test.mjs",
     "tests/form-width-preflight.test.mjs",
     "tests/gitee-distribution.test.mjs",
     "tests/hook-bridge.test.mjs",
@@ -201,7 +230,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "6b00d6dafaaf68d7e6502d3e85c2614f357f106c7ecf2119dae32d81d9e8d789",
+      "sha256": "256779f4d1162d2501149ff90900e0f4a3e090f98abadbe4223e06bd10e7d598",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -226,7 +255,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0a8689cc4d2e5b562586d4886584e79f2ec84db0cfe9466b388c3ffd38f03272",
+      "sha256": "48531bca9cc273fc8d635f3576df80fbd29ba70d846f5c937e7785fd89c1a1de",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -1110,18 +1139,23 @@
       "upstreamSha256": "68211d5ab7bfc59bf72f3c2320fefd0bac568bd394d77697e5b5b3a1e949e350"
     },
     {
+      "path": "components/form/creation-runtime.json",
+      "sha256": "18c9bc585872168cf4718f12c7704563b09c874d6e877d219342632b002d5c84",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/form/definition.json",
       "sha256": "6de40245ae013d15bcbd578452f72ff1582c76acdeacd519aa738fd026153b92",
       "upstreamSha256": "6de40245ae013d15bcbd578452f72ff1582c76acdeacd519aa738fd026153b92"
     },
     {
       "path": "components/form/generator.mjs",
-      "sha256": "e49561ad6b5a373a6f96345d91b4ca2ec66e8151a1f7d4bf30246af2ef52756e",
+      "sha256": "772ec5650e6a62c15dcd5fdc19203f8a4a4bbf1fb59c738d04c8d26f3b4b049d",
       "upstreamSha256": "d02b5b108ac53863c14e97743206d09258674a38d0c4db20a00c0ee0393433b7"
     },
     {
       "path": "components/form/README.md",
-      "sha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573",
+      "sha256": "b73a41ee5796d7f3a5d990d213f3bc1a7182997ba433d1acb7d37667ed387146",
       "upstreamSha256": "2449c1dd9bd51336ad12a40777bb795c4926f9f5e81bf0f4cf11244242933573"
     },
     {
@@ -1951,7 +1985,7 @@
     },
     {
       "path": "components/README.md",
-      "sha256": "c125893f80d7f1bb2cf053a032eea1544fa46f38e05d68ad5bc4f05cefaf437c",
+      "sha256": "94799c83f9486ad6bcec6c3316b93cb5781caaed341a26b00635aab0e45cff19",
       "upstreamSha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af"
     },
     {
@@ -3051,7 +3085,12 @@
     },
     {
       "path": "docs/form-edit-boundaries.md",
-      "sha256": "e8be01bc29b9212dab635e1d14fdb227218b01d80c55f0e3174e0c93c4715cad",
+      "sha256": "b72cc67cd98a67e625d98440460ec9edef5d9d95d58f0a76e1af283fba917411",
+      "upstreamSha256": null
+    },
+    {
+      "path": "docs/form-release.md",
+      "sha256": "ec99eab1b3c47a513ce96709783f3d8178f46a977cba6ca952739376267edb26",
       "upstreamSha256": null
     },
     {
@@ -3151,7 +3190,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "a197f44cacc1916b32c114113c609c3e405564fc46afbd75a43818e285bd0125",
+      "sha256": "e7c398fb0cf5130bb21611f246c16a9e4765c3892aa36daf99c7a48b154d76c8",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -3216,7 +3255,7 @@
     },
     {
       "path": "scripts/figma/portable-runtime.mjs",
-      "sha256": "0860a860b57df66a69db5a11008d167460731a977c01527b7faeeb6fad97baf7",
+      "sha256": "a6f2b2478bdb736e6f177a2ec2fa58a4e0846039e4a3ca0ef2763e62107969da",
       "upstreamSha256": null
     },
     {
@@ -3226,7 +3265,7 @@
     },
     {
       "path": "scripts/figma/portable.mjs",
-      "sha256": "20638fa9005a039ca407687e1682c2f77196666b463821dd417e616fbe29a3df",
+      "sha256": "9555ac494d97416bd43725794c8a0755aa62477f64e9702e01ba019de3880645",
       "upstreamSha256": null
     },
     {
@@ -3238,6 +3277,11 @@
       "path": "scripts/figma/target.mjs",
       "sha256": "0a2b9a7c844b2e33094c956e93bde2ce20c6d8e89fa1e81fd53eb81be0a510d4",
       "upstreamSha256": "0a2b9a7c844b2e33094c956e93bde2ce20c6d8e89fa1e81fd53eb81be0a510d4"
+    },
+    {
+      "path": "scripts/lib/compact-figma-code.mjs",
+      "sha256": "a4396ee7882943adeb435630d952dc917af2d63497b653fac5c444d9af2a2d10",
+      "upstreamSha256": null
     },
     {
       "path": "scripts/lib/export-node-range.js",
@@ -3270,18 +3314,113 @@
       "upstreamSha256": "d8523b42a228d7756f4d85e895181c4594390f83fc171137f50041d45af5f5a4"
     },
     {
+      "path": "scripts/lib/pack-json.mjs",
+      "sha256": "84cac77fb4d8e3e3eb23cdf5a0d37133a63d9e5b3b9d1af1d6986faf77a2037e",
+      "upstreamSha256": null
+    },
+    {
       "path": "scripts/lib/restore-text-layout.mjs",
       "sha256": "933f0a1f59077cf8de470989b2fb247e61e6921f25bc1c3a754dded7580892db",
       "upstreamSha256": "933f0a1f59077cf8de470989b2fb247e61e6921f25bc1c3a754dded7580892db"
     },
     {
+      "path": "scripts/vendor/uglify-js/lib/ast.js",
+      "sha256": "ad8c4bf530f144fcd79687d518f6ccf5eda9767cdcc29f3000d68d6c43a04fd4",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/compress.js",
+      "sha256": "52e96fcca1a6ad9988c5c0fd35f1d3451c02f31dd695867fcf978c615029e6fc",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/minify.js",
+      "sha256": "2207935b2d0c9191ff6eadac8fe8751b94704f4b72a84d983a6ff3025e3f50be",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/mozilla-ast.js",
+      "sha256": "1d17d118518e28143d87234226639dcf4045c070cd6855e8185a143b629237df",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/output.js",
+      "sha256": "5c6c5668deeb8ebe0b08587922cb3ba304e8a7c40639db57650b237863cf931c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/parse.js",
+      "sha256": "6c3fe2ab9ffd38253d036e579d2258d914ce2b1e59bccefb9f4d6344a1079133",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/propmangle.js",
+      "sha256": "93cb0a0d170d65b3b96e4cf849c29d5167ecc9814fe601e63cea1026233e9d2f",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/scope.js",
+      "sha256": "929db106ee1e2696fc2a3b5b1d8d61828078009cfe741d908b631149db987670",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/sourcemap.js",
+      "sha256": "78f33bdc59b9e321bfbc14a994a7ac9bb6212d95299cf1ee7a16005c68c7a74b",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/transform.js",
+      "sha256": "13192f62904caed015955350c82dd2fe22fc977ad6ffaed95ba1af1751ef2db7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/lib/utils.js",
+      "sha256": "6d5cbbc2ecb652f4f98c56e49f64c61c63938d9a16634f80bbfe06e4992a6285",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/LICENSE",
+      "sha256": "422ee8d0b531a3e3c3c730b4dbd6f590ff786853897b9992888e34fcdacbe526",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/package.json",
+      "sha256": "4e7908267a1b0dfd5af0004dba63e8392ffc509ae986d5931017a55d7d65167d",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/tools/domprops.html",
+      "sha256": "7d960eb051e2f8c55bab4b76970c3606211516a9ec614e1bf4caed7db7f03be5",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/tools/domprops.json",
+      "sha256": "181cf4986ae50444fefa19e883c4cafd17f3c99636e712037140d78c8453b83c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/tools/exports.js",
+      "sha256": "baa7db50f2201902d716bf33e28a9a1b3e1c0624976bd7117e5fe4766af6a1cc",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/tools/node.js",
+      "sha256": "043d758abdf62ecc8fd1dd33e0d941663a77fefa26eab432f82eccfc1ed83d18",
+      "upstreamSha256": null
+    },
+    {
+      "path": "scripts/vendor/uglify-js/tools/tty.js",
+      "sha256": "9928dc9c9812d1cae83d7d2fb35e679a77c8ee90a1defd9809a12a1f1b48aabe",
+      "upstreamSha256": null
+    },
+    {
       "path": "scripts/verify.mjs",
-      "sha256": "15b2f892396a917f88f55ebfc7c3c0c5e64a512213d2d5878995f127176c4c1e",
+      "sha256": "4756b7521404e012560d9657120814e9c0c39a4f22301b9d9b2afae4febf651a",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
       "path": "sketch/core.mjs",
-      "sha256": "877ff8c35ab738f96b88921679fe071d0d88a6ed7c5ca23e5ef0fab389813dad",
+      "sha256": "1be212a0910232c0af7b94d3855d219158034ebb2d8e7eb659225b1eb2154b7d",
       "upstreamSha256": "065eea3ed26b5577fd5416590cc42c4f8144fb8600d7ac88e45d0f1c71ca0a7b"
     },
     {
@@ -3296,13 +3435,18 @@
     },
     {
       "path": "sketch/figma-runtime.mjs",
-      "sha256": "2ae2d018b0803e747be760acb9748c09639b0a227c3330c5c2bbe911a937e2ab",
+      "sha256": "a1c280b027e21fad80ee4cc3bcf17939cdaa27b164e1b15cb1d03efcfa74d4e1",
       "upstreamSha256": "b2a61758b03fa17a13238fd8287dcd2991af05bcdf84a0c9fe390a016a1bb8fa"
     },
     {
       "path": "sketch/figma.mjs",
-      "sha256": "3d5d3f172945f37985b744ecc0f65fe02c688ab12b9c9d06fa707556f82f8049",
+      "sha256": "ad9a6b2bdad88d5be72da3f99b45d36e12cfdfb80c7e59c9e392f70bea6d2e0d",
       "upstreamSha256": "7de536f043886f111f7791050325f1ea5edc4cd00dd0a1f0a3322edae2bb38b8"
+    },
+    {
+      "path": "sketch/form-fields.mjs",
+      "sha256": "9b7c0a5f7a586cd8074d3491ddae24afe3a3d31c6ffd0abe856f70ac272782cc",
+      "upstreamSha256": null
     },
     {
       "path": "sketch/form-variants.mjs",
@@ -3335,9 +3479,19 @@
       "upstreamSha256": "502cbc944507a284fe474a94ee51811fb1a1dacbded7f368c715e31c9e1afe90"
     },
     {
+      "path": "sketch/maps/form-top/inputPassword.json",
+      "sha256": "b290ab453e383b0d48db428ddcc053b1f9a7e7574d01a1aada7b4c04e00e8e6e",
+      "upstreamSha256": null
+    },
+    {
       "path": "sketch/maps/form-top/radio.json",
       "sha256": "0493e6d3ee980b49b5841d3b50d445ac743b1abe9d1be7cadcb9adf95b35c23f",
       "upstreamSha256": "0493e6d3ee980b49b5841d3b50d445ac743b1abe9d1be7cadcb9adf95b35c23f"
+    },
+    {
+      "path": "sketch/maps/form-top/radioButton.json",
+      "sha256": "6ae4f0d26bff267c82a0b80f3c62a7e2048519b1844de08ecd220c2b58b60ad5",
+      "upstreamSha256": null
     },
     {
       "path": "sketch/maps/form-top/select.json",
@@ -3371,7 +3525,7 @@
     },
     {
       "path": "sketch/preview.js",
-      "sha256": "800d38d8b2e08c36f6efcbe27282f5c81fe742d2b749da55f30834f9cadbaa2e",
+      "sha256": "d3f3a0d7ff5057197ba5cb031e73fc16644feeed645fc80334c6906872a423f8",
       "upstreamSha256": "9139e0d8eb1dd7c931220225bc8561006a7caef39b80cea332c1715354dd8107"
     },
     {
@@ -3386,12 +3540,12 @@
     },
     {
       "path": "sketch/verification.mjs",
-      "sha256": "c45454116e26078eb2d06d33027e28e00cf21102b0e6246a805f34e81564deaa",
+      "sha256": "bffbe2f50fe5648283a0fe55c08b681074e062c849fab045f1d4f22c18ad0659",
       "upstreamSha256": "f80db5bead045240e7cf2b0f62cbabca80bb78ba8c089504e8d6b534ba4dbfd8"
     },
     {
       "path": "skill-release.json",
-      "sha256": "1467148c1951f5bd5e86f833a978ed79cdd1934be7362eb93fd2d681e9801953",
+      "sha256": "d2736b29864943329e5cec73199ac86117a6c4163887a4cae39fa84efede14ea",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3615,6 +3769,16 @@
       "upstreamSha256": null
     },
     {
+      "path": "tests/fixtures/form-fields-release.json",
+      "sha256": "3ad70b69d6c6081589a1659b26b8f2d7501875afc8eb8699b02ed9e44f8405da",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/fixtures/form-release.json",
+      "sha256": "520c7116b32169af9fdb70943d2332b41e06c9d75fbc78af5a9abd966a4bc577",
+      "upstreamSha256": null
+    },
+    {
       "path": "tests/fixtures/legacy-manage.mjs",
       "sha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599",
       "upstreamSha256": "ee0e62ebba366c15ed9119963e0e3343e38f7c833d41c8d6c9a04efb25f8d599"
@@ -3632,6 +3796,11 @@
     {
       "path": "tests/fixtures/portable-upload-drawer.json",
       "sha256": "847c8ed38382d1125edd7fbd0dd7f1720d41f808bd450efc7060ac3f1019c0e7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/form-release.test.mjs",
+      "sha256": "a9d1ff71680c951b4d28cb9ccf8c2e8f797afd51ffa05471ba5e5d8da177990e",
       "upstreamSha256": null
     },
     {
@@ -3746,7 +3915,7 @@
     },
     {
       "path": "tests/verified-components.test.mjs",
-      "sha256": "26825d3d12af9f3cb087dd3bb5202876b16d6771df5bc690a4b4be7b1f64dc27",
+      "sha256": "5b14236210474e4be197fd723066a5e5cceaa9bda324c38a26134093655ac616",
       "upstreamSha256": null
     },
     {

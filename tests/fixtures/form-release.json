@@ -1,0 +1,265 @@
+{
+  "format": 1,
+  "task": "Form公开合成验证",
+  "pages": [
+    {
+      "id": "mixed",
+      "title": "账户设置技术验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "title": "账户信息",
+          "cols": 2,
+          "fields": [
+            {
+              "id": "name",
+              "kind": "input",
+              "label": "名称",
+              "value": "演示账户",
+              "required": true,
+              "from": "演示"
+            },
+            {
+              "id": "secret",
+              "kind": "password",
+              "label": "演示密码",
+              "value": "演示🔑A1",
+              "from": "演示"
+            },
+            {
+              "id": "scope",
+              "kind": "radioButton",
+              "label": "权限范围",
+              "options": [
+                "全部",
+                "我的",
+                {
+                  "label": "团队",
+                  "disabled": true
+                }
+              ],
+              "value": "我的",
+              "from": "演示"
+            },
+            {
+              "id": "enabled",
+              "kind": "switch",
+              "label": "启用补充信息",
+              "value": false,
+              "from": "演示"
+            },
+            {
+              "id": "detail",
+              "kind": "textarea",
+              "label": "补充信息",
+              "value": "条件满足时显示",
+              "visibleWhen": {
+                "field": "mixed/form/enabled",
+                "equals": true
+              },
+              "from": "演示"
+            }
+          ],
+          "from": "演示"
+        },
+        {
+          "id": "actions",
+          "type": "actions",
+          "buttons": [
+            {
+              "id": "save",
+              "label": "保存示意",
+              "primary": true,
+              "from": "演示"
+            }
+          ],
+          "from": "演示"
+        },
+        {
+          "id": "extra",
+          "type": "form",
+          "title": "补充说明",
+          "fields": [
+            {
+              "id": "note",
+              "kind": "input",
+              "label": "备注",
+              "value": "第二个表单区块",
+              "from": "演示"
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "shown",
+      "page": "mixed",
+      "title": "条件显示",
+      "patch": {
+        "mixed/form/enabled": {
+          "value": true
+        }
+      }
+    },
+    {
+      "id": "disabled",
+      "page": "mixed",
+      "title": "禁用与错误",
+      "patch": {
+        "mixed/form/secret": {
+          "value": "",
+          "disabled": true
+        },
+        "mixed/form/scope": {
+          "disabled": true
+        },
+        "mixed/form/name": {
+          "error": "请核对演示名称"
+        }
+      }
+    },
+    {
+      "id": "hidden",
+      "page": "mixed",
+      "title": "隐藏附加表单",
+      "patch": {
+        "mixed/extra": {
+          "visible": false
+        }
+      }
+    }
+  ],
+  "questions": [],
+  "decisions": [
+    {
+      "code": "G1",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "G2",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N1",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N2",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N3",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "F1",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F2",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F3",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F4",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F5",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F6",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F7",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F8",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F9",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F10",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F11",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F12",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F13",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F14",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    }
+  ],
+  "gaps": [],
+  "demo": "合成数据；仅技术验证，非用户验收；Noto替代待桌面苹方复核",
+  "request": {
+    "text": "合成静态表单测试，不涉及真实业务和验收",
+    "sources": []
+  }
+}

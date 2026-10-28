@@ -56,6 +56,8 @@
     else if (kind === 'time') box = `<span class="box">${esc(value ?? '请选择时间')}<b>◷</b></span>`;
     else if (kind === 'number') box = `<span class="box">−　${esc(value ?? '请输入')}　＋</span>`;
     else if (kind === 'checkbox' || kind === 'radio') box = `<span class="checks">${(f.options ?? [f.label]).map(o => `<span>${(Array.isArray(value)?value.includes(typeof o==='string'?o:o.label):value===(typeof o==='string'?o:o.label)) ? (kind==='radio'?'◉':'☑') : (kind==='radio'?'○':'☐')} ${esc(typeof o==='string'?o:o.label)}</span>`).join('')}</span>`;
+    else if(kind==='radioButton')box=`<span class="sketch-radio buttons">${f.options.map(o=>typeof o==='string'?{label:o}:o).map(o=>`<span role="radio" aria-checked="${o.label===value}" aria-disabled="${!!p.disabled||!!o.disabled}" class="${o.label===value?'selected':''} ${p.disabled||o.disabled?'off':''}">${esc(o.label)}</span>`).join('')}</span>`;
+    else if (kind === 'password') box = `<span class="box${value?'':' ph'}">${value?'●'.repeat(Array.from(String(value)).length):p.disabled?'':esc(f.placeholder??'请输入密码')}</span>`;
     else if (kind === 'upload') box = `<span class="upload">＋ 上传文件</span>${(Array.isArray(value) ? value : []).map(n => `<span class="file">${esc(n)} ${p.fileStates?.[n]==='fail'?'（失败） 重新上传 · 移除':p.disabled?'':'✕'}</span>`).join('')}`;
     else box = `<span class="box${value ? '' : ' ph'}${kind === 'textarea' ? ' tall' : ''}">${esc(text)}${f.max ? `<em class="count">${[...String(value ?? '')].length}/${f.max}</em>` : ''}</span>`;
     if (['input','select'].includes(kind)) {

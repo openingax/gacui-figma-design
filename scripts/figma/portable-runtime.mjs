@@ -24,7 +24,7 @@ export async function initializeAsset(figma, request, buildNodes, restoreTransfo
   }
   const createdStyleIds=[];
   for(const [name,value] of Object.entries(asset.data.styles))if(!paintMap[name]){const s=figma.createPaintStyle();s.name=name;s.paints=clean(value);paintMap[name]=s.id;createdStyleIds.push(s.id);}
-  const wrapper=figma.createFrame();page.appendChild(wrapper);wrapper.name=marker+' / building';wrapper.fills=[];wrapper.clipsContent=false;
+  let wrapper=figma.createFrame();page.appendChild(wrapper);wrapper.name=marker+' / building';wrapper.fills=[];wrapper.clipsContent=false;
   wrapper.x=Math.max(0,...page.children.filter(n=>n!==wrapper).map(n=>n.x+n.width))+80;wrapper.y=80;
   const state={map:{},paintMap,fontFamily,textStyleNamespace:'GACUI/portable/'+asset.hash};
   // Synthetic parent maps every root into this owned wrapper. The precise builder remains shared.
@@ -48,6 +48,13 @@ export async function initializeAsset(figma, request, buildNodes, restoreTransfo
   const root=await figma.getNodeByIdAsync(state.map[asset.sourceId]);root.x=root.y=0;
   if(asset.button){const key=root.addComponentProperty('label','TEXT','按钮');for(const t of root.findAllWithCriteria({types:['TEXT']})){for(const s of t.getStyledTextSegments(['fontName']))await figma.loadFontAsync(s.fontName);t.componentPropertyReferences={characters:key};}}
   await applyFinalStrokes(figma,page,records.map(r=>[state.map[r.sourceId],r.strokeStyleName??null,clean(r.props.strokes??[])]));
+  const removedNodeIds=[];
+  if(asset.variantSet){
+    // 保留规范变体名的原生VARIANT属性；普通FRAME包装不会暴露选中/禁用等状态。
+    const old=wrapper,x=old.x,y=old.y;
+    wrapper=figma.combineAsVariants([root],page);wrapper.fills=[];wrapper.strokes=[];wrapper.x=x;wrapper.y=y;root.x=0;root.y=0;
+    removedNodeIds.push(old.id);old.remove();
+  }
   wrapper.resize(root.width,root.height);wrapper.name=marker;
-  return {status:'created',fileKey,pageId,key:asset.key,hash:asset.hash,rootId:root.id,wrapperId:wrapper.id,type:root.type,nodeCount:records.length,fontFallback:fontFamily==='PingFang SC'?null:fontFamily,createdNodeIds:[wrapper.id,...result.createdNodeIds],createdStyleIds:[...createdStyleIds,...result.createdStyleIds]};
+  return {status:'created',fileKey,pageId,key:asset.key,hash:asset.hash,rootId:root.id,wrapperId:wrapper.id,type:root.type,nodeCount:records.length,fontFallback:fontFamily==='PingFang SC'?null:fontFamily,createdNodeIds:[wrapper.id,...result.createdNodeIds],removedNodeIds,createdStyleIds:[...createdStyleIds,...result.createdStyleIds]};
 }

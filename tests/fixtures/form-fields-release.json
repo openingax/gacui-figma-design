@@ -1,0 +1,556 @@
+{
+  "format": 1,
+  "task": "Form公开合成验证",
+  "pages": [
+    {
+      "id": "select",
+      "title": "Form select 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "select",
+              "label": "演示select",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "华南",
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ]
+            },
+            {
+              "id": "disabled",
+              "kind": "select",
+              "label": "禁用select",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "华南",
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ],
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "title": "Form date 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "date",
+              "label": "演示date",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "2026-10-25"
+            },
+            {
+              "id": "disabled",
+              "kind": "date",
+              "label": "禁用date",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "2026-10-25",
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "date-range",
+      "title": "Form date-range 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "date-range",
+              "label": "演示date-range",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "2026-10-25",
+                "2026-10-31"
+              ]
+            },
+            {
+              "id": "disabled",
+              "kind": "date-range",
+              "label": "禁用date-range",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "2026-10-25",
+                "2026-10-31"
+              ],
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "title": "Form time 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "time",
+              "label": "演示time",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "09:30:00"
+            },
+            {
+              "id": "disabled",
+              "kind": "time",
+              "label": "禁用time",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "09:30:00",
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "number",
+      "title": "Form number 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "number",
+              "label": "演示number",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": 12
+            },
+            {
+              "id": "disabled",
+              "kind": "number",
+              "label": "禁用number",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": 12,
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "radio",
+      "title": "Form radio 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "radio",
+              "label": "演示radio",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "华南",
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ]
+            },
+            {
+              "id": "disabled",
+              "kind": "radio",
+              "label": "禁用radio",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": "华南",
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ],
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "checkbox",
+      "title": "Form checkbox 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "checkbox",
+              "label": "演示checkbox",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "华南"
+              ],
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ]
+            },
+            {
+              "id": "disabled",
+              "kind": "checkbox",
+              "label": "禁用checkbox",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "华南"
+              ],
+              "options": [
+                "华南",
+                "华东",
+                "华北"
+              ],
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "upload",
+      "title": "Form upload 工作台验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "cols": 2,
+          "title": "字段与禁用态",
+          "fields": [
+            {
+              "id": "value",
+              "kind": "upload",
+              "label": "演示upload",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "演示附件.txt"
+              ]
+            },
+            {
+              "id": "disabled",
+              "kind": "upload",
+              "label": "禁用upload",
+              "from": "演示",
+              "required": true,
+              "help": "规范字段技术验证",
+              "value": [
+                "演示附件.txt"
+              ],
+              "disabled": true
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    },
+    {
+      "id": "popup",
+      "title": "Form多选展开验证",
+      "frame": "workbench",
+      "children": [
+        {
+          "id": "form",
+          "type": "form",
+          "fields": [
+            {
+              "id": "choice",
+              "kind": "select",
+              "multiple": true,
+              "label": "多选区域",
+              "options": [
+                "华南",
+                {
+                  "label": "华东",
+                  "disabled": true
+                },
+                "华北"
+              ],
+              "value": [
+                "华南",
+                "华北"
+              ],
+              "open": true,
+              "from": "演示"
+            }
+          ],
+          "from": "演示"
+        }
+      ]
+    }
+  ],
+  "states": [],
+  "questions": [],
+  "decisions": [
+    {
+      "code": "G1",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "G2",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N1",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N2",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "N3",
+      "decision": "本轮不做",
+      "note": "组件技术验证，不是业务页面验收",
+      "from": "需求:任务授权工作台技术验证",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "F1",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F2",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F3",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F4",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F5",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F6",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F7",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F8",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F9",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F10",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F11",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F12",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F13",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "F14",
+      "text": "合成技术验证，不执行业务交互",
+      "decision": "按推荐",
+      "from": "推荐"
+    },
+    {
+      "code": "S1",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "S2",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "S3",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "S4",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "U1",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "U2",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "U3",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "U4",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    },
+    {
+      "code": "U5",
+      "decision": "本轮不做",
+      "note": "仅技术验证，不执行真实业务提交",
+      "from": "推荐",
+      "text": "合成技术验证，不执行业务交互"
+    }
+  ],
+  "gaps": [],
+  "demo": "合成数据；仅技术验证，非用户验收；Noto替代待桌面苹方复核",
+  "request": {
+    "text": "合成静态表单测试，不涉及真实业务和验收",
+    "sources": []
+  }
+}

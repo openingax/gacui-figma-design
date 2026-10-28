@@ -1,10 +1,10 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "protocol": 1,
   "nodeMajor": 20,
   "channel": "stable",
-  "notice": "V1.5.0 纳入Button完整业务配方、真实回执迁移与工作台/抽屉底栏。Loading为静态视觉；其他未完成扩展继续隔离。保留草稿、配置及日志关闭偏好。",
+  "notice": "V1.6.0纳入Form静态字段、工作台/抽屉与真实恢复，保留草稿、配置和日志偏好。独立Upload下一批完成。",
   "delivery": "draft-and-figma",
   "figmaStatus": "on-demand-local-components",
-  "sourceCommit": "06fab7ea96fb681285ec2302f0b88071e9cc6deb"
+  "sourceCommit": "b0fbfdf9b32cbfcd9f9bfe2f3a488a6d2ee73dd5"
 }

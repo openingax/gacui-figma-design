@@ -63,3 +63,5 @@ Upload新增独立离线开发预览，复用62源状态选择器；不影响既
 V1.4.0：Badge/Collapse/List/Progress/Statistic 已纳入，具体入口与未完成的新文件迁移见 [组件说明](../docs/verified-components.md)。本表较早版本的“未纳入”记录由该范围说明更新。
 
 V1.5.0已补齐[Button](button/README.md)的回执迁移、工作台与抽屉底栏。未完成扩展按原说明隔离，不以Button发布扩大其他组件能力。
+
+V1.6.0已纳入Form工作台/抽屉、密码及单选按钮组字段、长内容与恢复，详见[Form](form/README.md)。独立Upload另批完成。

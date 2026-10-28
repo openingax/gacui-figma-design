@@ -17,7 +17,7 @@ for(const [i,s] of cases.entries()){
 const dir=path.join(tmp,String(i));fs.mkdirSync(dir);base.pages=[{id:'page',type:'page',title:'合成页面',frame:'workbench',from:'判断',children:[{id:'actions',type:'actions',from:'判断',buttons:[{id:'a',label:'查看详情',kind:'default'}]},{id:'sample',from:'判断',...s}]}];
 fs.writeFileSync(path.join(dir,'v1.json'),JSON.stringify({...base,v:1}));fs.writeFileSync(path.join(dir,'versions.json'),JSON.stringify({confirmed:1,figmaPage:'合成验证',validationOnly:true,versions:[{v:1,label:'合成'}]}));
 assert.equal(plan(dir).boards.length,1);const js=code(dir,'page');new Function('return async function(){'+js+'}');assert.ok(js.length<48000,s.type+' length '+js.length);maximum=Math.max(maximum,js.length);assert.ok(!js.includes('UNCONFIGURED_FIGMA_TARGET'));
-const html=renderHtml(loadVersions(dir));new Function(html.match(/<script>([\s\S]*)<\/script>/)[1]);const portable=portablePlan(dir,key);if(s.type==='badge')assert.equal(portable.complete,true,JSON.stringify(portable.skippedBoards));else {assert.equal(portable.complete,false);assert.match(portable.notice,/尚未验证|尚未支持/);}
+const html=renderHtml(loadVersions(dir));new Function(html.match(/<script>([\s\S]*)<\/script>/)[1]);const portable=portablePlan(dir,key);if(s.type==='badge')assert.equal(portable.complete,true,JSON.stringify(portable.skippedBoards));else {assert.equal(portable.complete,false);assert.match(portable.notice,/尚未验证|尚未支持|暂未支持/);}
 }
 for(const r of read('badge'))assert.equal(assetFor(r.id).type,'COMPONENT');
 for(const f of ['components/menu','components/form/workbench-roundtrip.mjs','components/upload/workbench.mjs'])assert.ok(!fs.existsSync(f));

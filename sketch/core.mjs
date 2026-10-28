@@ -36,7 +36,7 @@ import {validateTag} from '../components/tag/generator.mjs';
 export const NODE_TITLES = {statistic:'统计数值',progress:'进度条',list:'列表',collapse:'折叠面板',badge:'徽标',timeRangeGroup:'时段组',notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
 export const FIELD_KINDS = {
   search: ['input', 'select', 'date', 'date-range'],
-  form: ['input', 'textarea', 'select', 'date', 'date-range', 'switch', 'checkbox', 'upload', 'time', 'number', 'radio'],
+  form: ['input','password','radioButton', 'textarea', 'select', 'date', 'date-range', 'switch', 'checkbox', 'upload', 'time', 'number', 'radio'],
 };
 export const COLUMN_KINDS = ['text', 'textTag', 'state', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
@@ -475,6 +475,9 @@ export function resolvePage(page, patch = {}) {
     if(f.open&&!f.options?.length)throw Error('展开多选需要非空options');
     if (f.kind === 'switch' && f.value != null && typeof f.value !== 'boolean') throw Error(`字段 ${f.id} 开关值必须为布尔值`);
     if ((f.multiple || f.kind === 'checkbox') && f.value != null && !Array.isArray(f.value)) throw Error(`字段 ${f.id} 多选值必须为数组`);
+    if(f.kind==='password'&&f.value!=null&&typeof f.value!=='string')throw Error('密码示意值必须为文字');
+    if(f.kind==='radioButton'){if(!Array.isArray(f.options)||!f.options.length)throw Error('单选按钮组需要选项');if(f.value!=null&&typeof f.value!=='string')throw Error('单选按钮值必须为文字');}
+    if(f.kind==='password'&&f.max!==undefined)throw Error('密码字段暂不支持计数');
     if (f.kind === 'number' && f.value != null && typeof f.value !== 'number') throw Error(`字段 ${f.id} 数字值必须为数值`);
     if (f.fileStates && Object.entries(f.fileStates).some(([name,state])=>!Array.isArray(f.value)||!f.value.includes(name)||!['success','fail'].includes(state))) throw Error(`字段 ${f.id} 文件状态无效`);
     if (f.options) {
