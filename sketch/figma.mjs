@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+import {needsBusinessButton} from '../components/button/business-spec.mjs';
+import {prepareButton,buttonBusinessCatalog} from '../components/button/business-data.mjs';
+import {buttonEqual,preflightBusinessButton,applyButtonPaint,applyBusinessButton,inspectBusinessButton,verifyBusinessButton,removeUnusedButtonIcon,renderBusinessButton} from '../components/button/business.mjs';
+import {fitButtonFooter} from '../components/button/footer.mjs';
 import {validateStatistic,statisticSlots,renderStatistic,applyStatistic,inspectStatistic,verifyStatistic,verifyStatistics} from '../components/statistic/generator.mjs';
 import {validateProgress,renderProgress,applyProgress,inspectProgress,verifyProgress,verifyProgresses} from '../components/progress/generator.mjs';
 import {createHash} from 'node:crypto';
@@ -197,7 +201,7 @@ function workbenchDef(page, layers) {
     messages: of('actions').filter(n => n.message).map(n => ({layer:'操作说明/'+n.id, text:n.message})),
     menuLeaf: page.menu ? page.menu.split('/').pop().trim() : page.title,
     search: search ? search.fields.map(f => ({...f, context: 'search', layer: layers.get(`${page.id}/${search.id}/${f.id}`).layer})) : null,
-    buttons: page.children.filter(n => n.type === 'actions').flatMap(n => n.buttons.map(b => ({label: b.label, primary: !!b.primary, disabled: !!b.disabled, selectionSummary: b.selectionSummary, visible: n.visible !== false && b.visible !== false, layer: layers.get(`${page.id}/${n.id}/${b.id}`).layer}))),
+    buttons: page.children.filter(n => n.type === 'actions').flatMap(n => n.buttons.map(b => ({label: b.label, primary: !!b.primary, disabled: !!b.disabled, selectionSummary: b.selectionSummary, visible: n.visible !== false && b.visible !== false, layer: layers.get(`${page.id}/${n.id}/${b.id}`).layer,...(needsBusinessButton(b)?{business:prepareButton(b)}:{})}))),
     table: table ? {pagination: paginationSpec(table.pagination), feedback: table.feedback, emptyText: table.emptyText, error: table.error, retryLabel: table.retryLabel, loading: tableLoadingSpec(table.loading), config: tableConfig(table, tableLayer, table.renderRows ?? Math.min(table.rows ?? 10, 10),contentWidth-(tabs?.orientation==='left'?160:0))} : null,
   };
 }
@@ -236,6 +240,7 @@ function drawerDef(page, layers, overName) {
   }
   for (const row of rows) for (const d of row) if (d.kind !== 'upload') d.variant = formVariant(d.kind, d.required, d.help);
   const footer = page.children.filter(n => n.type === 'actions' && n.footer).flatMap(n => n.buttons.filter(b => b.visible !== false).map(b => ({...b, layer:layers.get(`${page.id}/${n.id}/${b.id}`).layer})));
+  for(const b of footer)if(needsBusinessButton({...b,loading:false}))b.business=prepareButton(b);
   if (page.children.some(n => n.type === 'actions' && !n.footer)) throw Error('抽屉正文里的按钮本轮不支持，底栏按钮请写 footer: true');
   return {title: page.title, width, size, formWidth, rows, groups, dividers, links, radios, checkboxes, cascaders:cascaders.length?cascaders:undefined, timeRangeGroups,timePickers,selectFields,inputFields,numbers, feedbacks:feedbacks.length?feedbacks:undefined, inserts, buttons:footer, over: overName,
     confirm: footer.find(b => b.primary)?.label ?? null, cancel: footer.find(b => !b.primary)?.label ?? null};
@@ -243,7 +248,7 @@ function drawerDef(page, layers, overName) {
 
 function expectedWorkbench(def) {
   return [...def.tabs.items, ...(def.messages ?? []).map(m=>m.text), ...(def.headings??[]).flatMap(h=>[h.title,h.subtitle,h.status.label].filter(Boolean)), ...(def.search ?? []).flatMap(f => [f.label, f.value == null ? null : String(f.value)].filter(Boolean)),
-    ...def.buttons.filter(b => b.visible).flatMap(b => [b.label, b.selectionSummary].filter(Boolean)),
+    ...def.buttons.filter(b => b.visible).flatMap(b => [b.business&&!b.business.text?null:b.label, b.selectionSummary].filter(Boolean)),
     ...(def.table?.config.columns.map(c => c.title) ?? []),
     ...(def.table?.config.rows.flatMap(row => Object.values(row).map(String)) ?? []),
     ...(def.table?.config.rowActions?.flatMap(a => a.labels) ?? []),
@@ -253,12 +258,11 @@ function expectedWorkbench(def) {
 function unexpressed(page, patches = {}) {
   const issues = [];
   for (const n of page.children ?? []) {
-    if (page.frame==='workbench') for(const b of n.buttons??[]) if(b.loading) issues.push(`${page.id}/${n.id}/${b.id}：工作台按钮加载态未支持`);
     if (n.type === 'table' && n.rows > 10) issues.push(`${page.id}/${n.id}：超过10行，当前画板仅展示前10条`);
     if (n.type === 'table' && n.rowActions?.some(a => a.when) && !n.rowActionRules) issues.push(`${page.id}/${n.id}：自然语言when未执行，仅按样例行序分配操作`);
     for (const f of n.fields ?? []) if (n.type === 'search' && ((f.kind === 'date-range' && f.value != null) || f.error || f.disabled || f.visible === false)) issues.push(`${page.id}/${n.id}/${f.id}：查询字段值或状态未支持`);
   }
-  const allowed = {statistic:['visible','title','value','unit','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','note'],progress:['visible','theme','status','size','percent','width','note'],list:['visible','pagination','items','size','kind','stripe','split','width','note'],collapse:['visible','items','placement','borderless','width','note'],badge:['visible','size','shape','dot','text','anchor','offset','note'],timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
+  const allowed = {statistic:['visible','title','value','unit','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','note'],progress:['visible','theme','status','size','percent','width','note'],list:['visible','pagination','items','size','kind','stripe','split','width','note'],collapse:['visible','items','placement','borderless','width','note'],badge:['visible','size','shape','dot','text','anchor','offset','note'],timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading','label','appearance','theme','size','shape','icon','iconName','state','width','loadingTone'], field:['value','note','visible','disabled','error','fileStates','open','options']};
   for (const [path, props] of Object.entries(patches)) {
     const [, id, child] = path.split('/'), n = page.children.find(n => n.id === id);
     const kind = child ? n?.buttons?.some(b => b.id === child) ? 'button' : 'field' : n?.type;
@@ -340,6 +344,10 @@ export function code(dir, boardId, options = {}) {
   const fd=board.def.drawer??(board.kind==='drawer'?board.def:null);
   if(fd?.rows.flat().some(f=>f.open)){fns+='\n'+renderMultiPopup.toString()+'\n'+updateMultiOption.toString()+'\n'+verifyMultiPopup.toString();lib=lib.slice(0,-1)+',renderMultiPopup,verifyMultiPopup,multiRules:'+JSON.stringify(Object.fromEntries(['fills','strokes','strokeWeight','cornerRadius','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[1][k]])))+',focusRules:'+JSON.stringify(Object.fromEntries(['strokes','effects'].map(k=>[k,readJson('./maps/select-open-rules.json')[1].children[0][k]])))+'}';}
   const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
+  const businessButtons=[...(wd?.buttons??[]),...(fd?.buttons??[])],hasBusinessButtons=businessButtons.some(b=>b.business);
+  if(fd?.buttons.some(b=>b.business)){fns+='\n'+fitButtonFooter.toString();lib=lib.slice(0,-1)+',fitButtonFooter}';}
+  if(hasBusinessButtons&&!options.portable)throw Error('Button扩展请使用portable规划和真实资产回执');
+  if(hasBusinessButtons){fns+='\n'+[buttonEqual,preflightBusinessButton,applyButtonPaint,applyBusinessButton,inspectBusinessButton,verifyBusinessButton,removeUnusedButtonIcon,renderBusinessButton].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderBusinessButton,inspectBusinessButton,verifyBusinessButton,buttonCatalog:'+(options.portable?'__BUTTON_PORTABLE_CATALOG__':JSON.stringify({fileKey:buttonBusinessCatalog.fileKey,pageId:buttonBusinessCatalog.pageId}))+'}';}
   if(wd?.table&&(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){fns+='\n'+[applyTableExtensions,inspectTableExtensions,verifyTableExtensions].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',inspectTableExtensions,verifyTableExtensions}';}
   if(wd?.alerts?.length){fns+='\n'+[updateAlert,renderAlert,inspectAlert,verifyAlerts].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderAlert,inspectAlert,verifyAlerts}';}
   if(wd?.steps?.length){fns+='\n'+[updateSteps,renderSteps,inspectSteps,verifySteps].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderSteps,inspectSteps,verifySteps}';}
@@ -407,6 +415,8 @@ export function code(dir, boardId, options = {}) {
   }
   // 仅裁剪当前画板不可达的段落；实际构建和语义校验代码保持原样。
   const omit = marker => { runtime=runtime.replace(new RegExp('^[ \t]*// '+marker+'_START[\\s\\S]*?^[ \t]*// '+marker+'_END\\n','m'),''); };
+  if(!hasBusinessButtons)runtime=runtime.replace(/^      buttons: await Promise.all\(walk\(root\).*businessErrors.*$/m,"      buttons: walk(root).filter(n => n.type === 'INSTANCE' && n.name.startsWith('按钮/') && n.visible).map(n => ({name:n.name, disabled:n.componentProperties['disabled 禁用']?.value === 'true'})),");
+  if(!hasBusinessButtons)runtime=runtime.replace(/if\(b.business\)\{const n=await lib.renderBusinessButton[^\n]*?\}else\{([^}]+)\}/,'$1');
   if(!wd?.table||!(wd.table.config.selectionMode||wd.table.config.resizableColumns||wd.table.config.columns.some(c=>c.maxLines||['textTag','state'].includes(c.kind)))){omit('TABLE_EXT_VERIFY');}
   if(!wd?.imageViewers?.some(s=>s.extended)){omit('IMAGE_VIEWER_EXT_VERIFY');runtime=runtime.replace(',imageViewerDeps:lib.imageViewerDeps','');}
   if(!wd?.alerts?.length){omit('ALERT_BUILD');omit('ALERT_VERIFY');}
@@ -493,15 +503,30 @@ export function code(dir, boardId, options = {}) {
     fns=fns.replace("deps?dialogMainId(s,deps):'415:9'","dialogMainId(s,deps)");
     fns=refs(fns);runtime=refs(runtime);lib=refs(lib);
     function mapFields(value,key=''){
+      if(key==='business'&&value?.spec){
+        const result=structuredClone(value);result.mainId=resolve(value.mainId);result.setId=resolve(value.mainId+'#owner');
+        if(result.icon){result.icon.mainId=resolve(value.icon.mainId);result.icon.parentId=resolve(value.icon.mainId+'#owner');}
+        // 源样式ID不是可迁移资产；记录名称，执行时从当前文件的精确同名样式绑定。
+        for(const r of [result.root,result.text,result.icon,...(result.icon?.vectors??[])].filter(Boolean))for(const k of ['fill','stroke'])if(r[k+'StyleId']){const name=Object.keys(buttonBusinessCatalog.paintMap).find(n=>buttonBusinessCatalog.paintMap[n]===r[k+'StyleId']);if(!name)throw Error('Button样式来源缺失');r[k+'StyleName']=name;delete r[k+'StyleId'];}
+        return result;
+      }
       if(Array.isArray(value))return value.map(v=>mapFields(v,key));
       if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,mapFields(v,k)]));
       return typeof value==='string'&&['mainId','variant','itemIds','choice'].includes(key)&&/^\d+:\d+$/.test(value)?resolve(value):value;
     }
     req.board=mapFields(req.board);
+    if(hasBusinessButtons){const first=businessButtons.find(b=>b.business).business;lib=lib.replace('__BUTTON_PORTABLE_CATALOG__',JSON.stringify({fileKey:req.fileKey,pageId:resolve(first.mainId+'#page'),bindStyles:true}));}
     req.board.notes=req.board.notes.filter(n=>!n.includes('沿用工单页基线'));
   }
   let generated = `${fns.replace(/^\s*\/\/[^\n]*$/gm,'').replace(/^[ \t]+/gm,'')}\n${(board.kind === 'drawer' || board.def.drawer ? verifyForm : verifyWorkbench).toString().replace(/^[ \t]+/gm,'')}\n${generationResult.toString().replace(/^[ \t]+/gm,'')}\n${runtime.replace(/^\s*\/\/[^\n]*$/gm, '').replace(/^[ \t]+/gm, '')}\nreturn await sketchRuntime(figma, ${JSON.stringify(req)}, ${lib});`;
   if(!extendedTabs)generated=generated.replace(/^if\(def.tabs\?\.mainId\).*\n/gm,'');
+  if(!hasBusinessButtons)generated=generated.replace(/^if \(found\[0\]\) \{if\(b.business\).*$/m,"if (found[0]) require(found[0].disabled === !!b.disabled, b.layer + ' 禁用状态不符');");
+  if(!fd?.buttons.some(b=>b.business))generated=generated.replace(/^[ \t]*if\(def.buttons.some\(b=>b.business\)\)lib.fitButtonFooter[^\n]*\n/gm,'');
+  if(!hasBusinessButtons){
+    generated=generated.replace("if(b.business){const n=await lib.renderBusinessButton(figma,footer,b.business,lib.buttonCatalog);n.name=b.layer;n.layoutPositioning='AUTO';continue;}\n",'');
+    generated=generated.replace("if(matches[0]&&b.business){require(!!matches[0].business&&verifyBusinessButton(b.business,matches[0].business).length===0,b.layer+' 按钮实际配方或内容不符');}\nelse if(matches[0])",'if(matches[0])');
+    generated=generated.replace("if(!def)snapshot.buttons = await Promise.all(walk(root).filter(n=>['INSTANCE','FRAME'].includes(n.type)&&n.name.startsWith('按钮/')&&form.buttons.some(b=>b.layer===n.name)).map(async n=>{const b=form.buttons.find(b=>b.layer===n.name);if(b.business)return {name:n.name,business:await lib.inspectBusinessButton(n)};return {name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'};}));", "if(!def)snapshot.buttons = walk(root).filter(n=>n.type==='INSTANCE'&&n.name.startsWith('按钮/')).map(n=>({name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'}));");
+  }
   const out = generated.replace(/\n{2,}/g,'\n').replaceAll('UNCONFIGURED_FIGMA_TARGET', FILE_KEY);
   if (out.length > 50000) throw Error(`生成代码 ${out.length} 字符，超过 use_figma 上限 50000`);
   return out;

@@ -1,0 +1,460 @@
+{
+  "fileKey": "PORTABLE_BUTTON_RECEIPTS_REQUIRED",
+  "pageId": "0:1",
+  "templateSetId": "1064:51",
+  "templates": [
+    {
+      "sourceId": "22709:33461",
+      "id": "1064:2",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:32357",
+      "id": "1064:4",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "prefixIcon 前置图标"
+      }
+    },
+    {
+      "sourceId": "22709:32393",
+      "id": "1064:7",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "prefixIcon 前置图标"
+      }
+    },
+    {
+      "sourceId": "22709:32429",
+      "id": "1064:10",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "prefixIcon 前置图标"
+      }
+    },
+    {
+      "sourceId": "22709:32465",
+      "id": "1064:14",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "suffixIcon 后置图标"
+      }
+    },
+    {
+      "sourceId": "22709:32501",
+      "id": "1064:17",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "suffixIcon 后置图标"
+      }
+    },
+    {
+      "sourceId": "22709:32537",
+      "id": "1064:20",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "suffixIcon 后置图标"
+      }
+    },
+    {
+      "sourceId": "22709:33437",
+      "id": "1064:23",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:33485",
+      "id": "1064:25",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "rectangle 矩形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:33952",
+      "id": "1064:27",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:33976",
+      "id": "1064:29",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:34000",
+      "id": "1064:31",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    },
+    {
+      "sourceId": "22709:34024",
+      "id": "1064:33",
+      "layout": {
+        "size 尺寸": "small 小尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    },
+    {
+      "sourceId": "22709:34063",
+      "id": "1064:35",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:34087",
+      "id": "1064:37",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:34111",
+      "id": "1064:39",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    },
+    {
+      "sourceId": "22709:34135",
+      "id": "1064:41",
+      "layout": {
+        "size 尺寸": "medium 中尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    },
+    {
+      "sourceId": "22709:34174",
+      "id": "1064:43",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:34198",
+      "id": "1064:45",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "false",
+        "⬑icon type 图标类型": "n/a"
+      }
+    },
+    {
+      "sourceId": "22709:34222",
+      "id": "1064:47",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "square 方形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    },
+    {
+      "sourceId": "22709:34246",
+      "id": "1064:49",
+      "layout": {
+        "size 尺寸": "large 大尺寸",
+        "shape 形状": "circle 圆形",
+        "icon 图标": "true",
+        "⬑icon type 图标类型": "singleIcon 独立图标"
+      }
+    }
+  ],
+  "icons": [
+    {
+      "sourceId": "75:2128",
+      "id": "1072:55",
+      "vectorIds": [
+        "1072:56"
+      ],
+      "name": "download"
+    },
+    {
+      "sourceId": "76:2203",
+      "id": "1072:57",
+      "vectorIds": [
+        "1072:58"
+      ],
+      "name": "chevron-down"
+    },
+    {
+      "sourceId": "76:2148",
+      "id": "1072:59",
+      "vectorIds": [
+        "1072:60"
+      ],
+      "name": "search"
+    }
+  ],
+  "loadingSetId": "1079:284",
+  "loading": [
+    {
+      "sourceId": "97937:158105",
+      "id": "1079:245",
+      "name": "appearance 外观=base, theme 主题=primary, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "base",
+        "theme 主题": "primary",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158101",
+      "id": "1079:248",
+      "name": "appearance 外观=base, theme 主题=default, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "base",
+        "theme 主题": "default",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158109",
+      "id": "1079:251",
+      "name": "appearance 外观=base, theme 主题=danger, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "base",
+        "theme 主题": "danger",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158186",
+      "id": "1079:254",
+      "name": "appearance 外观=outline, theme 主题=primary, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "outline",
+        "theme 主题": "primary",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158191",
+      "id": "1079:257",
+      "name": "appearance 外观=text, theme 主题=primary, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "text",
+        "theme 主题": "primary",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158205",
+      "id": "1079:260",
+      "name": "appearance 外观=outline, theme 主题=default, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "outline",
+        "theme 主题": "default",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158209",
+      "id": "1079:263",
+      "name": "appearance 外观=text, theme 主题=default, tone 色阶=dark-text, loading 加载=true",
+      "props": {
+        "appearance 外观": "text",
+        "theme 主题": "default",
+        "tone 色阶": "dark-text",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158213",
+      "id": "1079:266",
+      "name": "appearance 外观=outline, theme 主题=danger, tone 色阶=muted, loading 加载=true",
+      "props": {
+        "appearance 外观": "outline",
+        "theme 主题": "danger",
+        "tone 色阶": "muted",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158221",
+      "id": "1079:269",
+      "name": "appearance 外观=text, theme 主题=danger, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "text",
+        "theme 主题": "danger",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158227",
+      "id": "1079:272",
+      "name": "appearance 外观=ghost, theme 主题=primary, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "ghost",
+        "theme 主题": "primary",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158230",
+      "id": "1079:275",
+      "name": "appearance 外观=ghost, theme 主题=default, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "ghost",
+        "theme 主题": "default",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158233",
+      "id": "1079:278",
+      "name": "appearance 外观=ghost, theme 主题=danger, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "ghost",
+        "theme 主题": "danger",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    },
+    {
+      "sourceId": "97937:158251",
+      "id": "1079:281",
+      "name": "appearance 外观=text, theme 主题=default, tone 色阶=normal, loading 加载=true",
+      "props": {
+        "appearance 外观": "text",
+        "theme 主题": "default",
+        "tone 色阶": "normal",
+        "loading 加载": "true"
+      }
+    }
+  ],
+  "loadingIcons": [
+    {
+      "sourceId": "97937:158106",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158102",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158113",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158187",
+      "id": "1078:28521"
+    },
+    {
+      "sourceId": "97937:158192",
+      "id": "1078:28521"
+    },
+    {
+      "sourceId": "97937:158206",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158210",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158214",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158222",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158228",
+      "id": "1078:28521"
+    },
+    {
+      "sourceId": "97937:158231",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158234",
+      "id": "1078:245"
+    },
+    {
+      "sourceId": "97937:158252",
+      "id": "1078:245"
+    }
+  ],
+  "paintMap": {
+    "Brand 品牌/Brand5-Normal": "S:a339d6b484d69dc7ba10b17313190b0c855dee17,",
+    "Gray 中性/Gray0-白色背景": "S:b7926b1a438a0347e32ae9b619549d63dcf42bb6,",
+    "Brand 品牌/Brand4-Hover": "S:255a7b2c34a2173e4555908a21852d65e8a2f51a,",
+    "Brand 品牌/Brand6-Click": "S:a91244552684489e083f6140b676e579e3fa70e4,",
+    "Brand 品牌/Brand3-Disabled": "S:1a6a66b6c1f81bc2407b6cf270237a8f43102c80,",
+    "Gray 中性/Gray3-分割线": "S:d8520b35afe349bcfb05d3fbc2f8d649bef686b9,",
+    "Gray 中性/Gray9-强调\\正文": "S:37ed223f4992c7ca3362eaf483c4b8975e5bf3b7,",
+    "Gray 中性/Gray4-边框": "S:9436f63964a1d6a07f1cd14372756e174ac0569e,",
+    "Gray 中性/Gray5-禁用": "S:9468e97a73da44469a2657776ec795cf2fc7f206,",
+    "Gray 中性/Gray2": "S:73c7d9ad1340259dc19dbc47a24a6b8605699a49,",
+    "Error 错误/Error5-Normal": "S:a82ca7122668a326230c68feaaabe6457505553c,",
+    "Error 错误/Error4-Hover": "S:b53a3a04fa7e38c67e8a62ae9641d30e0d73d211,",
+    "Error 错误/Error6-Click": "S:8dbeccf396aa3d98edce80758f2ecd9bcb0caaf0,",
+    "Error 错误/Error3-Disabled": "S:2a41d68b60491742113ba407a4dfb6aa0e017b60,",
+    "Gray 中性/Gray1-浅色背景": "S:8172e41e420f108f10da27d322d9033628da6a8d,"
+  }
+}

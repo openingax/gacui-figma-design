@@ -1,3 +1,4 @@
+import {validateButton} from '../components/button/business-spec.mjs';
 import {validateStatistic} from '../components/statistic/generator.mjs';
 import {validateProgress} from '../components/progress/generator.mjs';
 import {validateList} from '../components/list/generator.mjs';
@@ -40,7 +41,7 @@ export const FIELD_KINDS = {
 export const COLUMN_KINDS = ['text', 'textTag', 'state', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
-export const PATCH_PROPS = ['formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','unit','percent','stripe','split','borderless','dot','shape','offset','min','max','inputWidth','addLabel','removeLabel','children','gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
+export const PATCH_PROPS = ['appearance','iconName','loadingTone','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','unit','percent','stripe','split','borderless','dot','shape','offset','min','max','inputWidth','addLabel','removeLabel','children','gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
 // 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
 const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo','request'];
 const REQUEST_KEYS = ['text','sources'];
@@ -226,6 +227,7 @@ export function check(sketch, checklist, {final = false} = {}) {
       if (['search', 'form'].includes(node.type) && !node.fields?.length) err(where, `${node.type} 缺少 fields`);
       if (node.type === 'table' && !node.columns?.length) err(where, 'table 缺少 columns');
       if (node.type === 'actions' && !node.buttons?.length) err(where, 'actions 缺少 buttons');
+      if(node.type==='actions')for(const b of node.buttons??[])try{validateButton(b);}catch(e){err(where+'/'+b.id,e.message);}
       if (node.type === 'table') {
         try{validateTableLoading(node.loading);}catch(e){err(where,e.message);}
         for (const key of ['selectedRows', 'disabledRows']) if (node[key] !== undefined && (!Array.isArray(node[key]) || new Set(node[key]).size !== node[key].length || node[key].some(i => !Number.isInteger(i) || i < 0 || i >= (node.rows ?? 10)))) err(where, key + ' 必须为有效且不重复的行索引');
@@ -482,5 +484,6 @@ export function resolvePage(page, patch = {}) {
       if (values.some(v => !options.some(o => o.label === v && !o.disabled))) throw Error(`字段 ${f.id} 包含不存在或禁用的选项`);
     }
   }
+  for(const n of out.children??[])if(n.type==='actions')for(const b of n.buttons??[])validateButton(b);
   return out;
 }

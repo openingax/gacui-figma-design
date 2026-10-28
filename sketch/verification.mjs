@@ -1,10 +1,11 @@
+import {verifyBusinessButton} from '../components/button/business.mjs';
 // 使用实际图层摘要核对业务语义；同一函数用于生成回执与离线故障注入回归。
 export function verifyWorkbench(def, actual) {
   const errors = [], require = (ok, message) => { if (!ok) errors.push(message); };
   for (const b of def.buttons) {
     const found = actual.buttons.filter(n => n.name === b.layer);
     require(found.length === (b.visible ? 1 : 0), b.layer + ' 可见性不符');
-    if (found[0]) require(found[0].disabled === !!b.disabled, b.layer + ' 禁用状态不符');
+    if (found[0]) {if(b.business)require(!!found[0].business&&verifyBusinessButton(b.business,found[0].business).length===0,b.layer+' 按钮实际配方或内容不符');else require(found[0].disabled === !!b.disabled, b.layer + ' 禁用状态不符');}
   }
   for (const f of def.search ?? []) if (f.value != null) require(actual.texts.some(t => t.includes(String(f.value))), f.layer + ' 查询值不符');
   for (const b of def.buttons.filter(b => b.visible && b.selectionSummary)) require(actual.texts.includes(b.selectionSummary), b.layer + ' 选择数量说明缺失');
@@ -85,7 +86,8 @@ export function verifyForm(def, actual) {
   for(const b of def.buttons) {
     const matches=actual.buttons.filter(n=>n.name===b.layer);
     require(matches.length===1,b.layer+' 按钮缺失或重复');
-    if(matches[0]) { require(!!matches[0].loading===!!b.loading,b.layer+' 加载状态不符'); if(!b.loading) require(matches[0].disabled===!!b.disabled,b.layer+' 按钮禁用不符'); }
+    if(matches[0]&&b.business){require(!!matches[0].business&&verifyBusinessButton(b.business,matches[0].business).length===0,b.layer+' 按钮实际配方或内容不符');}
+    else if(matches[0]) { require(!!matches[0].loading===!!b.loading,b.layer+' 加载状态不符'); if(!b.loading) require(matches[0].disabled===!!b.disabled,b.layer+' 按钮禁用不符'); }
   }
   return errors;
 }

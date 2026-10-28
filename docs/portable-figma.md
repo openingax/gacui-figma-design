@@ -7,7 +7,7 @@
 1. 读取真实草稿 `status`，使用用户已确认的版本。用户已经确认的 v5 不需要重建或另存为 v1；不可改写旧快照或伪造确认。仅在用户已明确要求出 Figma 后，用 `node sketch/sketch.mjs figma DRAFT VERSION PAGE_NAME` 记录出稿请求。
 2. 创建本机 `.local/`，执行 `node scripts/figma/portable.mjs plan DRAFT TARGET > .local/portable-plan.json`。规划逐个画板检查构建数据、目标保护与工具长度限制。**某个组件家族暂不支持时只跳过用到它的画板（及画在它上面的状态画板），不阻断其余画板**：`boardIds` 是本次可出的画板，`skippedBoards` 列出暂缓画板及原因，stderr 的“提示：”与 plan 的 `notice` 是给用户看的一句话说明。Agent 继续出 `boardIds` 中的画板，把 `notice` 原样告知用户，不能把暂缓画板说成已完成，也不能改写或删减草稿中的需求。只有整份草稿的问题（未确认、目标无效）或一个画板都出不了时，规划才以退出码 1 结束并记为 blocked。
 3. `node scripts/figma/portable.mjs setup-code .local/portable-plan.json` 生成代码，交给 `use_figma`。它复用或创建独立的 `GACUI · 本文件组件` Page 和必要颜色样式，保留默认 Page 与现有业务内容。保存真实返回的 `pageId`。
-4. 先执行 `node scripts/figma/portable.mjs reuse-code .local/portable-plan.json PAGE_ID`（只读），把返回的 `receipts` 存入 `.local/portable-receipts.json`；`missing` 是本文件还缺的资产序号，`readback` 非空时先回读处理。对缺的普通资产执行 `batch-plan PLAN PAGE_ID 序号,序号…` 得到分批，再逐批执行 `batch-code PLAN PAGE_ID 序号,…`，把返回的每个回执追加进回执文件；也可以逐个用 `asset-code PLAN PAGE_ID INDEX`。组合资产（`kind` 为 `drawer-library`，总排在最后）只能单独执行 `asset-code`，它在本文件按包装名查找已建好的 Button，再构建 Drawer 组件库并在回执 `map` 中返回各角色的真实 ID。同一资产再次返回 `reused` 时更新原条目，不追加重复项。不要手写成功回执。
+4. 先执行 `node scripts/figma/portable.mjs reuse-code .local/portable-plan.json PAGE_ID`（只读），把返回的 `receipts` 存入 `.local/portable-receipts.json`；`missing` 是本文件还缺的资产序号，`readback` 非空时先回读处理。对缺的普通资产执行 `batch-plan PLAN PAGE_ID 序号,序号…` 得到分批，再逐批执行 `batch-code PLAN PAGE_ID 序号,…`，把返回的每个回执追加进回执文件；也可以逐个用 `asset-code PLAN PAGE_ID INDEX RECEIPTS_JSON`。组合资产（`kind` 为 `drawer-library`，总排在最后）只能单独执行 `asset-code`，它在本文件按包装名查找已建好的 Button，再构建 Drawer 组件库并在回执 `map` 中返回各角色的真实 ID。同一资产再次返回 `reused` 时更新原条目，不追加重复项。不要手写成功回执。
 5. `node scripts/figma/portable.mjs check-code .local/portable-plan.json .local/portable-receipts.json` 生成只读复核代码并执行；核对目标、主组件类型、包装节点归属、版本标识和节点数量。
 6. `node scripts/figma/portable.mjs code .local/portable-plan.json DRAFT .local/portable-receipts.json BOARD_ID` 输出整页代码，只按 plan.boardIds 的依赖顺序（暂缓画板会返回说明而不生成）交给 `use_figma`。写入前还会再次回读组件，随后在任务独立 Page 生成页面。`exists` 只表示同名画板存在，必须回读，不能据此报告设计通过。
 7. 检查 `complete`、缺失文字、语义错误、损坏实例与未表达项，实际查看截图。保留目标链接、映射、回执、截图与字体替代说明。任务文件原位修改后复查，设计质量由用户验收。
@@ -40,3 +40,5 @@
 - 覆盖测试用仓库内全部已确认草稿规划，保证任何单个组件都不能让整份规划失败，并输出各家族缺口统计。
 
 V1.4.0：Badge/Collapse/List/Progress/Statistic 已纳入，具体入口与未完成的新文件迁移见 [组件说明](verified-components.md)。本表较早版本的“未纳入”记录由该范围说明更新。
+
+V1.5.0：Button图标资产先于普通/Loading模板；`asset-code PLAN PAGE_ID INDEX RECEIPTS_JSON`必须传入累计真实回执，每个key只保留一个有效条目。按plan列出的依赖顺序执行，不手写rootId/ownerId或复制其他目标回执。普通单资产与Drawer组合继续兼容。

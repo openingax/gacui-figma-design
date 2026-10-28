@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -21,6 +21,18 @@
     "components/badge/definition.json",
     "components/badge/generator.mjs",
     "components/badge/README.md",
+    "components/button/business-catalog.json",
+    "components/button/business-data.mjs",
+    "components/button/business-spec.mjs",
+    "components/button/business.mjs",
+    "components/button/footer.mjs",
+    "components/button/offline-candidate.mjs",
+    "components/button/portable-data.json",
+    "components/button/portable-runtime.mjs",
+    "components/button/portable.mjs",
+    "components/button/preview-assets.json",
+    "components/button/README.md",
+    "components/button/source-paint-styles.json",
     "components/collapse/catalog.json",
     "components/collapse/generator.mjs",
     "components/collapse/import-plan.json",
@@ -120,6 +132,7 @@
     "sketch/preview.css",
     "sketch/preview.js",
     "sketch/sketch.mjs",
+    "sketch/verification.mjs",
     "skill-release.json",
     "support/client.mjs",
     "support/dashboard.mjs",
@@ -146,7 +159,11 @@
     "support/setup.mjs",
     "support/tuning.mjs",
     "support/workflow-state.mjs",
+    "tests/business-compositions.test.mjs",
+    "tests/button-release.test.mjs",
+    "tests/candidate-components.test.mjs",
     "tests/figma-logging.test.mjs",
+    "tests/fixtures/button-release.json",
     "tests/fixtures/portable-metrics-drawer.json",
     "tests/fixtures/portable-metrics.json",
     "tests/fixtures/portable-upload-drawer.json",
@@ -184,7 +201,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "4970f329fc871135b53ea0b0deffdf92e1a07b039e0f44a85f5b5b88e56863f0",
+      "sha256": "6b00d6dafaaf68d7e6502d3e85c2614f357f106c7ecf2119dae32d81d9e8d789",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -209,7 +226,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "6385c6b6185aacfb49ca9a248257f997d4817655016b8737cd2ce97be814f526",
+      "sha256": "0a8689cc4d2e5b562586d4886584e79f2ec84db0cfe9466b388c3ffd38f03272",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -408,9 +425,34 @@
       "upstreamSha256": "8d6cfb69407c55b8b4af86d609519a8a02053edc3031b70b6478afe64e9d6562"
     },
     {
+      "path": "components/button/business-catalog.json",
+      "sha256": "764555853038776ece7433a7b9e1b9a3a6728ba9d30b54567af51b110ffafcb7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/business-data.mjs",
+      "sha256": "5d03257883c230c1aea270a162b375be3aa64cb81795109415986537b1551be7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/business-spec.mjs",
+      "sha256": "7c2c8a78196486da7f44b5a964856308be57e42cefc9dd91aabcf344ad3c8ddb",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/business.mjs",
+      "sha256": "519c2fa777c4d352c7759098f8a788fb13bf005efe557ce7019fe29864cdaa34",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/button/definition.json",
       "sha256": "5b99817e1eae116b43b135966e6f93ea748f272cb4b4c73c41b37c4ebda3f135",
       "upstreamSha256": "5b99817e1eae116b43b135966e6f93ea748f272cb4b4c73c41b37c4ebda3f135"
+    },
+    {
+      "path": "components/button/footer.mjs",
+      "sha256": "6aa23bc65b5fbc7f2115777c2529caea26f26b13fd051e0c2022f59a4aab9b94",
+      "upstreamSha256": null
     },
     {
       "path": "components/button/generator.mjs",
@@ -418,8 +460,33 @@
       "upstreamSha256": "a1cfc9608e5f6716c4f030066d46a1ee5dfd9885590d7b755642d6bc16d1f6e2"
     },
     {
+      "path": "components/button/offline-candidate.mjs",
+      "sha256": "c4fda4bd37e4e8f8aa39368e8e34b5a890667e1d22b9c4c79187f7a5d457cbbc",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/portable-data.json",
+      "sha256": "128a63e55aa691e5311a4ea0377ee4ac55f8f6ff559ba91280e65c6c37078280",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/portable-runtime.mjs",
+      "sha256": "ecfe74a0c8cf98b3174acfa2a6b3e0797761ea9f31f3050af3dbd79161b194d6",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/portable.mjs",
+      "sha256": "830aff65ed4ad1ac9fa95c112122ee07a40494c5b10f883477e407dca5511500",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/button/preview-assets.json",
+      "sha256": "8ead7ed4ef69596c4ca572ea1885600b985fbe0ff8b7f44733f3963c3ee03fa1",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/button/README.md",
-      "sha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795",
+      "sha256": "18f7fc7f5b2f1283cd78fe691752364badf64f024b2a7d0c5fe2a60d1706e8a4",
       "upstreamSha256": "e3aca973e482ad95d012d5e7a8c04fcb50d6c6049cff1f73050a0dba65fdd795"
     },
     {
@@ -431,6 +498,11 @@
       "path": "components/button/resolve.mjs",
       "sha256": "698336696646a0836c839a1cfb0c1beb16be0986870a6cbd32dcd43388877c96",
       "upstreamSha256": "698336696646a0836c839a1cfb0c1beb16be0986870a6cbd32dcd43388877c96"
+    },
+    {
+      "path": "components/button/source-paint-styles.json",
+      "sha256": "b396846224dd96625e3129a41ff85c004461581ef1642971b099e0fb7a733699",
+      "upstreamSha256": null
     },
     {
       "path": "components/cascader-multi-child/build-data.json",
@@ -1879,7 +1951,7 @@
     },
     {
       "path": "components/README.md",
-      "sha256": "c60acbcbf0adea53f8ea84b3c6ecfb68261ca7012ce8643a4ba8a5445f4c73a0",
+      "sha256": "c125893f80d7f1bb2cf053a032eea1544fa46f38e05d68ad5bc4f05cefaf437c",
       "upstreamSha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af"
     },
     {
@@ -3004,7 +3076,7 @@
     },
     {
       "path": "docs/portable-figma.md",
-      "sha256": "792f39288f1e348edbbfa405a2785f14019cba17b0d865b2b8198f3e7c94a576",
+      "sha256": "5b86799b144236a80458452084980b59f7f5438ac093bb4b2dc7c9fd002b6d14",
       "upstreamSha256": null
     },
     {
@@ -3079,7 +3151,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "df23220ceba10189023ece07492d154c98099c101c23b2d3fd9749ee9104a5c0",
+      "sha256": "a197f44cacc1916b32c114113c609c3e405564fc46afbd75a43818e285bd0125",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -3144,7 +3216,7 @@
     },
     {
       "path": "scripts/figma/portable-runtime.mjs",
-      "sha256": "1d3e5befa816e2fb5139599439ff95c44353853ece114bca42a775b94648c2c2",
+      "sha256": "0860a860b57df66a69db5a11008d167460731a977c01527b7faeeb6fad97baf7",
       "upstreamSha256": null
     },
     {
@@ -3154,7 +3226,7 @@
     },
     {
       "path": "scripts/figma/portable.mjs",
-      "sha256": "2724c940eb82c83a0521e659fd7bca8d62c6c5c6b1952f6fbe7697822cfaf274",
+      "sha256": "20638fa9005a039ca407687e1682c2f77196666b463821dd417e616fbe29a3df",
       "upstreamSha256": null
     },
     {
@@ -3204,12 +3276,12 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "9817437c9fd45527fa936275b5f9791edaa03ee12c4bee71bd6d993adb588312",
+      "sha256": "15b2f892396a917f88f55ebfc7c3c0c5e64a512213d2d5878995f127176c4c1e",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
       "path": "sketch/core.mjs",
-      "sha256": "496792522f2c7f0b458b60574c4a1657db66e9bd15bf9c8fe31abe1647b1bc57",
+      "sha256": "877ff8c35ab738f96b88921679fe071d0d88a6ed7c5ca23e5ef0fab389813dad",
       "upstreamSha256": "065eea3ed26b5577fd5416590cc42c4f8144fb8600d7ac88e45d0f1c71ca0a7b"
     },
     {
@@ -3224,12 +3296,12 @@
     },
     {
       "path": "sketch/figma-runtime.mjs",
-      "sha256": "737ebb75768d52ba18e0f05bf88a9fe67bd07be069fa5b917c765cc8acfb627f",
+      "sha256": "2ae2d018b0803e747be760acb9748c09639b0a227c3330c5c2bbe911a937e2ab",
       "upstreamSha256": "b2a61758b03fa17a13238fd8287dcd2991af05bcdf84a0c9fe390a016a1bb8fa"
     },
     {
       "path": "sketch/figma.mjs",
-      "sha256": "608f930dd8a6b74921ebe3f6d94dd91f1fe1a548f620d54d14c72e5067dc3094",
+      "sha256": "3d5d3f172945f37985b744ecc0f65fe02c688ab12b9c9d06fa707556f82f8049",
       "upstreamSha256": "7de536f043886f111f7791050325f1ea5edc4cd00dd0a1f0a3322edae2bb38b8"
     },
     {
@@ -3299,12 +3371,12 @@
     },
     {
       "path": "sketch/preview.js",
-      "sha256": "e552073d8e222123afbd67733f0f9d3a889243ab4ad194784d87c0259182ad4b",
+      "sha256": "800d38d8b2e08c36f6efcbe27282f5c81fe742d2b749da55f30834f9cadbaa2e",
       "upstreamSha256": "9139e0d8eb1dd7c931220225bc8561006a7caef39b80cea332c1715354dd8107"
     },
     {
       "path": "sketch/sketch.mjs",
-      "sha256": "da92f542b5dc761ba6677f806948cf0ea4274cb56e720bd7010a1b09fde7e294",
+      "sha256": "6f3b7b487aa3977cf3d2c7166c262d3d571bbd5a5a1e673b858de739b0b9b608",
       "upstreamSha256": "168949b338ebd7494295d1d75aeea65aed63d21bd081eeea306f567987d7c37f"
     },
     {
@@ -3314,12 +3386,12 @@
     },
     {
       "path": "sketch/verification.mjs",
-      "sha256": "f80db5bead045240e7cf2b0f62cbabca80bb78ba8c089504e8d6b534ba4dbfd8",
+      "sha256": "c45454116e26078eb2d06d33027e28e00cf21102b0e6246a805f34e81564deaa",
       "upstreamSha256": "f80db5bead045240e7cf2b0f62cbabca80bb78ba8c089504e8d6b534ba4dbfd8"
     },
     {
       "path": "skill-release.json",
-      "sha256": "cc035dcda2c7f7ecee6646d4486f8d5196fca51922d26f13b9e76287cea8f675",
+      "sha256": "1467148c1951f5bd5e86f833a978ed79cdd1934be7362eb93fd2d681e9801953",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3479,8 +3551,13 @@
     },
     {
       "path": "tests/business-compositions.test.mjs",
-      "sha256": "bba9e8870a1f8ea932f556054965e60251c0827a3763e486d5c035715804f023",
+      "sha256": "d7d2ae12b7bab659c3ea0559a2c94daa4807dd75f2b4569f693b8d37b1c77a0b",
       "upstreamSha256": "bba9e8870a1f8ea932f556054965e60251c0827a3763e486d5c035715804f023"
+    },
+    {
+      "path": "tests/button-release.test.mjs",
+      "sha256": "ea425c6456119d198d0eb47cb9b261263b45ad89a4c72cb4b03f60ac1895ebd0",
+      "upstreamSha256": null
     },
     {
       "path": "tests/candidate-adapter.test.mjs",
@@ -3489,7 +3566,7 @@
     },
     {
       "path": "tests/candidate-components.test.mjs",
-      "sha256": "67e2c4d39384e6f5e5a5b3611b5d4ee8c5a717a2d323e8405d2d21944ecb101b",
+      "sha256": "7e74af6a49b18bc5e5c1f642b652ed6a6a497a701309b82d483d4e99ae76f246",
       "upstreamSha256": "67e2c4d39384e6f5e5a5b3611b5d4ee8c5a717a2d323e8405d2d21944ecb101b"
     },
     {
@@ -3531,6 +3608,11 @@
       "path": "tests/figma-output.test.mjs",
       "sha256": "d9d4ab263841f3ce9255f6c28b10faa5b92d3a2df40788d974362a900ef30951",
       "upstreamSha256": "d9d4ab263841f3ce9255f6c28b10faa5b92d3a2df40788d974362a900ef30951"
+    },
+    {
+      "path": "tests/fixtures/button-release.json",
+      "sha256": "1ada968fc766b8b79eecdb8b5522b38fd99dcd26eef03426c32c607f99f357c6",
+      "upstreamSha256": null
     },
     {
       "path": "tests/fixtures/legacy-manage.mjs",

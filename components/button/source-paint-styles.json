@@ -1,0 +1,428 @@
+{
+  "S:9a15aecb924b4050e35ad03385f6ce9131b4d2db,": {
+    "id": "S:9a15aecb924b4050e35ad03385f6ce9131b4d2db,",
+    "name": "Brand 品牌/Brand5-Normal",
+    "type": "PAINT",
+    "description": "@brand-color",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:adcd1cc8be0d77fff194171f7d1572d7315e036e,": {
+    "id": "S:adcd1cc8be0d77fff194171f7d1572d7315e036e,",
+    "name": "Body/Medium",
+    "type": "TEXT",
+    "description": "@font-size-bodyMedium",
+    "fontName": {
+      "__figmaMixed": true
+    },
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 22
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "paragraphSpacing": 0,
+    "textCase": "ORIGINAL",
+    "textDecoration": "NONE"
+  },
+  "S:167607a900ac20ccf8e8b5f16fe33592910de6dd,": {
+    "id": "S:167607a900ac20ccf8e8b5f16fe33592910de6dd,",
+    "name": "Body/Small",
+    "type": "TEXT",
+    "description": "@font-size-bodySmall",
+    "fontName": {
+      "__figmaMixed": true
+    },
+    "fontSize": 12,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 20
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "paragraphSpacing": 0,
+    "textCase": "ORIGINAL",
+    "textDecoration": "NONE"
+  },
+  "S:7e19484990414c1fdec4886233289317279d2b1c,": {
+    "id": "S:7e19484990414c1fdec4886233289317279d2b1c,",
+    "name": "Body/Large",
+    "type": "TEXT",
+    "description": "@font-size-bodyLarge",
+    "fontName": {
+      "__figmaMixed": true
+    },
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 24
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "paragraphSpacing": 0,
+    "textCase": "ORIGINAL",
+    "textDecoration": "NONE"
+  },
+  "S:92a2aa9236a800fe0f731148dd1992517dfbf5ac,": {
+    "id": "S:92a2aa9236a800fe0f731148dd1992517dfbf5ac,",
+    "name": "Brand 品牌/Brand3-Disabled",
+    "type": "PAINT",
+    "description": "@brand-color-disabled",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.6392157077789307,
+          "g": 0.8313725590705872,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:babfd61c0801ad45c9979c358af7deb03cb732a5,": {
+    "id": "S:babfd61c0801ad45c9979c358af7deb03cb732a5,",
+    "name": "Gray 中性/Gray2",
+    "type": "PAINT",
+    "description": "1.默认页面底层背景@bg-color-page\n2.次要容器背景hover@bg-color-secondarycontainer-hover\n3.组件背景disabled/主要容器之上组件背景disabled@bg-color-component-disabled",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9450980424880981,
+          "g": 0.9450980424880981,
+          "b": 0.9450980424880981
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:9cacc212cef573cdd03db88f3277260be4657643,": {
+    "id": "S:9cacc212cef573cdd03db88f3277260be4657643,",
+    "name": "Gray 中性/Gray4-边框",
+    "type": "PAINT",
+    "description": "1.默认边框@component-border\n2.次要容器背景click@bg-color-secondarycontainer-active\n3.组件背景hover/主要容器之上组件背景hover@bg-color-component-hover",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.8627451062202454,
+          "g": 0.8666666746139526,
+          "b": 0.8705882430076599
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:8cda0729b363bff23bfef9d8411a0b1655e3c9c4,": {
+    "id": "S:8cda0729b363bff23bfef9d8411a0b1655e3c9c4,",
+    "name": "Gray 中性/Gray0-白色背景",
+    "type": "PAINT",
+    "description": "主要容器背景/次要层级页面背景@bg-color-container",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:6010cfeb55abf050f479e7078fb3c27837288dec,": {
+    "id": "S:6010cfeb55abf050f479e7078fb3c27837288dec,",
+    "name": "Brand 品牌/Brand6-Click",
+    "type": "PAINT",
+    "description": "@brand-color-active",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.30980393290519714,
+          "b": 0.8509804010391235
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:7a9798c575db9a6eb63d5b06f680da68da8382a9,": {
+    "id": "S:7a9798c575db9a6eb63d5b06f680da68da8382a9,",
+    "name": "Gray 中性/Gray3-分割线",
+    "type": "PAINT",
+    "description": "1.组件背景/主要容器之上组件背景@bg-color-component\n2.默认组件分割线@component-stroke\n3.主要容器背景click/次要层级页面背景click@bg-color-container-active",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9137254953384399,
+          "g": 0.9215686321258545,
+          "b": 0.9333333373069763
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:9dcafe1970e5f1f894d00b8273de30bc473fd15a,": {
+    "id": "S:9dcafe1970e5f1f894d00b8273de30bc473fd15a,",
+    "name": "Error 错误/Error6-Click",
+    "type": "PAINT",
+    "description": "@error-color-active",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7960784435272217,
+          "g": 0.14901961386203766,
+          "b": 0.20392157137393951
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:de2b74c3632f807c21fef0297f23709084f49e47,": {
+    "id": "S:de2b74c3632f807c21fef0297f23709084f49e47,",
+    "name": "Brand 品牌/Brand4-Hover",
+    "type": "PAINT",
+    "description": "@brand-color-hover",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.16078431904315948,
+          "g": 0.5254902243614197,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:ddf8188229779b03b54186862f4c4bf6696a70f9,": {
+    "id": "S:ddf8188229779b03b54186862f4c4bf6696a70f9,",
+    "name": "Gray 中性/Gray1-浅色背景",
+    "type": "PAINT",
+    "description": "1.次要容器背景@bg-color-secondarycontainer\n2.主要容器背景hover/次要层级页面背景hover@bg-color-container-hover",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.95686274766922,
+          "g": 0.9647058844566345,
+          "b": 0.9725490212440491
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:e000d6adf78241e4544f3cc5fd18223079f657f9,": {
+    "id": "S:e000d6adf78241e4544f3cc5fd18223079f657f9,",
+    "name": "Error 错误/Error4-Hover",
+    "type": "PAINT",
+    "description": "@error-color-hover",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9686274528503418,
+          "g": 0.3960784375667572,
+          "b": 0.3764705955982208
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:7cf12b4015804cfdc72a8e6625ae690c0790ffa3,": {
+    "id": "S:7cf12b4015804cfdc72a8e6625ae690c0790ffa3,",
+    "name": "Error 错误/Error5-Normal",
+    "type": "PAINT",
+    "description": "@error-color",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9607843160629272,
+          "g": 0.24705882370471954,
+          "b": 0.24705882370471954
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:2f6029290bdd8004d12cd5efeb36ea9fdb4d696e,": {
+    "id": "S:2f6029290bdd8004d12cd5efeb36ea9fdb4d696e,",
+    "name": "Gray 中性/Gray5-禁用",
+    "type": "PAINT",
+    "description": "",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.7254902124404907,
+          "g": 0.7372549176216125,
+          "b": 0.7450980544090271
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:e3440f182ad23423685bb6267753c790b1048ef1,": {
+    "id": "S:e3440f182ad23423685bb6267753c790b1048ef1,",
+    "name": "Error 错误/Error3-Disabled",
+    "type": "PAINT",
+    "description": "@error-color-disabled",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9843137264251709,
+          "g": 0.6745098233222961,
+          "b": 0.6392157077789307
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:f1982379283b049d266df7a6558468e871cba834,": {
+    "id": "S:f1982379283b049d266df7a6558468e871cba834,",
+    "name": "Gray 中性/Gray9-强调\\正文",
+    "type": "PAINT",
+    "description": "",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.09019608050584793,
+          "g": 0.12156862765550613,
+          "b": 0.14901961386203766
+        },
+        "boundVariables": {}
+      }
+    ]
+  },
+  "S:cedcf7d9673d775643d6fec7c3f199083fc0d655,": {
+    "id": "S:cedcf7d9673d775643d6fec7c3f199083fc0d655,",
+    "name": "Title/ExtraLarge",
+    "type": "TEXT",
+    "description": "@font-size-titleExtraLarge",
+    "fontName": {
+      "family": "PingFang SC",
+      "style": "Semibold"
+    },
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 28
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "paragraphSpacing": 0,
+    "textCase": "ORIGINAL",
+    "textDecoration": "NONE"
+  },
+  "S:33c698bcd8864a7f5b0bd0f38efcb69bb136e796,": {
+    "id": "S:33c698bcd8864a7f5b0bd0f38efcb69bb136e796,",
+    "name": "Headline/Large",
+    "type": "TEXT",
+    "description": "@font-size-headlineLarge",
+    "fontName": {
+      "__figmaMixed": true
+    },
+    "fontSize": 36,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 44
+    },
+    "letterSpacing": {
+      "unit": "PERCENT",
+      "value": 0
+    },
+    "paragraphSpacing": 0,
+    "textCase": "ORIGINAL",
+    "textDecoration": "NONE"
+  },
+  "S:39454ec5b1ff4e4af5ead5f695fa5b645e87e220,3:36": {
+    "id": "S:39454ec5b1ff4e4af5ead5f695fa5b645e87e220,3:36",
+    "name": "蓝色-6-常规",
+    "type": "PAINT",
+    "description": "主题色",
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0,
+          "g": 0.40784314274787903,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  }
+}

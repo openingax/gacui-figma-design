@@ -1,0 +1,393 @@
+{
+  "format": 1,
+  "task": "Button完整迁移与抽屉验证",
+  "request": {
+    "text": "验证按钮外观、主题、状态、图标及长内容；技术验证不代替用户验收",
+    "sources": [
+      {
+        "url": "https://www.figma.com/design/jNf9icrxfw8B7QkSQa9g33/?node-id=22709-32356",
+        "read": true
+      }
+    ]
+  },
+  "pages": [
+    {
+      "id": "button",
+      "title": "操作处理",
+      "frame": "workbench",
+      "from": "判断",
+      "children": [
+        {
+          "id": "actions",
+          "type": "actions",
+          "from": "判断",
+          "buttons": [
+            {
+              "id": "save",
+              "label": "保存记录",
+              "from": "判断",
+              "appearance": "base",
+              "theme": "primary",
+              "icon": "prefix"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "buttonDrawer",
+      "title": "按钮底栏验证",
+      "frame": "drawer",
+      "size": "large",
+      "from": "判断",
+      "children": [
+        {
+          "id": "footer",
+          "type": "actions",
+          "footer": true,
+          "from": "判断",
+          "buttons": [
+            {
+              "id": "cancel",
+              "label": "取消",
+              "appearance": "outline",
+              "theme": "default",
+              "from": "判断"
+            },
+            {
+              "id": "save",
+              "label": "提交审批",
+              "appearance": "base",
+              "theme": "primary",
+              "icon": "suffix",
+              "from": "判断"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "outline",
+      "title": "outline",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "appearance": "outline",
+          "theme": "danger"
+        }
+      }
+    },
+    {
+      "id": "text",
+      "title": "text",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "appearance": "text",
+          "theme": "default"
+        }
+      }
+    },
+    {
+      "id": "ghost",
+      "title": "ghost",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "appearance": "ghost",
+          "theme": "primary"
+        }
+      }
+    },
+    {
+      "id": "disabled",
+      "title": "disabled",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "disabled": true
+        }
+      }
+    },
+    {
+      "id": "hover",
+      "title": "hover",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "state": "hover"
+        }
+      }
+    },
+    {
+      "id": "active",
+      "title": "active",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "state": "active"
+        }
+      }
+    },
+    {
+      "id": "loading",
+      "title": "loading",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "loading": true
+        }
+      }
+    },
+    {
+      "id": "loading-text",
+      "title": "loading-text",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "appearance": "text",
+          "theme": "default",
+          "loading": true,
+          "loadingTone": "dark-text"
+        }
+      }
+    },
+    {
+      "id": "suffix",
+      "title": "suffix",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "icon": "suffix",
+          "iconName": "search"
+        }
+      }
+    },
+    {
+      "id": "square",
+      "title": "square",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "shape": "square",
+          "icon": "only"
+        }
+      }
+    },
+    {
+      "id": "circle",
+      "title": "circle",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "shape": "circle",
+          "icon": "only"
+        }
+      }
+    },
+    {
+      "id": "small",
+      "title": "small",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "size": "small"
+        }
+      }
+    },
+    {
+      "id": "large",
+      "title": "large",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "size": "large"
+        }
+      }
+    },
+    {
+      "id": "hidden",
+      "title": "hidden",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "id": "width",
+      "title": "width",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "width": 240
+        }
+      }
+    },
+    {
+      "id": "long",
+      "title": "long",
+      "page": "button",
+      "from": "判断",
+      "patch": {
+        "button/actions/save": {
+          "label": "保存本次跨区域组件更新结果"
+        }
+      }
+    },
+    {
+      "id": "drawerLarge",
+      "title": "drawerLarge",
+      "page": "buttonDrawer",
+      "from": "判断",
+      "patch": {
+        "buttonDrawer/footer/save": {
+          "size": "large"
+        }
+      }
+    },
+    {
+      "id": "drawerSmall",
+      "title": "drawerSmall",
+      "page": "buttonDrawer",
+      "from": "判断",
+      "patch": {
+        "buttonDrawer/footer/save": {
+          "size": "small"
+        }
+      }
+    },
+    {
+      "id": "drawerLoading",
+      "title": "drawerLoading",
+      "page": "buttonDrawer",
+      "from": "判断",
+      "patch": {
+        "buttonDrawer/footer/save": {
+          "loading": true
+        }
+      }
+    },
+    {
+      "id": "drawerDisabled",
+      "title": "drawerDisabled",
+      "page": "buttonDrawer",
+      "from": "判断",
+      "patch": {
+        "buttonDrawer/footer/save": {
+          "disabled": true
+        }
+      }
+    },
+    {
+      "id": "drawerLong",
+      "title": "drawerLong",
+      "page": "buttonDrawer",
+      "from": "判断",
+      "patch": {
+        "buttonDrawer/footer/save": {
+          "label": "提交当前审批并通知相关负责人",
+          "width": 360
+        }
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "code": "G1",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "G2",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L5",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L6",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L7",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L8",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L9",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L14",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "L15",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "N1",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "N2",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "本稿验证按钮静态状态及真实修改恢复，未接业务服务、权限或导航。"
+    },
+    {
+      "code": "N3",
+      "decision": "本轮不做",
+      "from": "判断",
+      "text": "独立静态底栏测试画板，无业务导航或打开交互，不代表真实业务页面验收。"
+    }
+  ],
+  "questions": [],
+  "gaps": [],
+  "judgments": [
+    "Loading使用静态配方；浏览器圆环仅为CSS示意，Figma保留精确原生图标。",
+    "默认主次按钮保持既有映射，扩展样式按现行规范；桌面字体与用户验收待完成。"
+  ]
+}

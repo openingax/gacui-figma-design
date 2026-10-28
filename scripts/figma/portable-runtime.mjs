@@ -3,7 +3,7 @@ export async function initializeAsset(figma, request, buildNodes, restoreTransfo
   const {fileKey,pageId,asset}=request;
   if(figma.fileKey!==fileKey||fileKey==='jNf9icrxfw8B7QkSQa9g33')throw Error('目标文件不符或规范源只读');
   const page=await figma.getNodeByIdAsync(pageId);if(page?.type!=='PAGE')throw Error('组件Page不存在');
-  await figma.setCurrentPageAsync(page);
+  if(figma.currentPage?.id!==page.id)await figma.setCurrentPageAsync(page);
   const marker='GACUI / '+asset.key+' / '+asset.hash;
   const existing=page.children.filter(n=>n.name===marker||n.name===marker+' / building');
   if(existing.length){

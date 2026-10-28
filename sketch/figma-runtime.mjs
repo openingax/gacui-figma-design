@@ -292,7 +292,7 @@ export async function sketchRuntime(figma, req, lib) {
     const toolbar=one('列表工具栏'),mainActions=one('主要操作');
     one('列设置').remove();
     for (const c of [...mainActions.children]) c.remove();
-    for(const b of def.buttons.filter(b=>b.visible!==false)){const n=await instance(b.primary?'107:86':'107:124',mainActions,b.layer);await buttonLabel(n,b.label);await buttonDisabled(n,b.disabled);n.primaryAxisSizingMode='AUTO';if(b.selectionSummary)await text(mainActions,b.layer+'/选择说明',b.selectionSummary);}
+    for(const b of def.buttons.filter(b=>b.visible!==false)){if(b.business){const n=await lib.renderBusinessButton(figma,mainActions,b.business,lib.buttonCatalog);n.name=b.layer;}else{const n=await instance(b.primary?'107:86':'107:124',mainActions,b.layer);await buttonLabel(n,b.label);await buttonDisabled(n,b.disabled);n.primaryAxisSizingMode='AUTO';}if(b.selectionSummary)await text(mainActions,b.layer+'/选择说明',b.selectionSummary);}
     if(!def.buttons.some(b=>b.visible!==false)){toolbar.remove();one('工具栏下间距').remove();}
 
     const list = one('工单结果');
@@ -496,6 +496,7 @@ export async function sketchRuntime(figma, req, lib) {
   // ---------- 抽屉页面 ----------
   async function buildDrawer(def) {
     const root = figma.createFrame(); page.appendChild(root); root.name = board.name; root.fills = []; root.clipsContent = true;
+    try {
     let height = 932;
     if (def.over) {
       const bg = page.children.find(n => n.name === def.over);
@@ -516,6 +517,7 @@ export async function sketchRuntime(figma, req, lib) {
     footer.layoutMode='HORIZONTAL'; footer.primaryAxisSizingMode='FIXED'; footer.counterAxisSizingMode='FIXED'; footer.primaryAxisAlignItems='MAX'; footer.counterAxisAlignItems='CENTER'; footer.paddingLeft=footer.paddingRight=24; footer.paddingTop=footer.paddingBottom=12; footer.itemSpacing=8;
     footer.visible = def.buttons.length > 0;
     for(const b of def.buttons) {
+      if(b.business){const n=await lib.renderBusinessButton(figma,footer,b.business,lib.buttonCatalog);n.name=b.layer;n.layoutPositioning='AUTO';continue;}
       const n = await instance(b.loading ? (b.primary ? '107:250':'107:254') : b.primary ? '107:86' : '107:124', footer, b.layer);
       n.layoutPositioning='AUTO';
       await buttonLabel(n,b.label); if (!b.loading) await buttonDisabled(n,b.disabled); else await n.setReactionsAsync([]); n.primaryAxisSizingMode='AUTO';
@@ -523,6 +525,7 @@ export async function sketchRuntime(figma, req, lib) {
     const content = panel.children.find(n => n.name === 'content');
     content.layoutMode = 'VERTICAL'; content.primaryAxisSizingMode = 'FIXED'; content.counterAxisSizingMode = 'FIXED';
     content.paddingLeft = content.paddingRight = content.paddingTop = content.paddingBottom = 24; content.itemSpacing = 0; content.clipsContent = true; content.overflowDirection = 'VERTICAL';
+    if(def.buttons.some(b=>b.business))lib.fitButtonFooter(panel,footer,content);
     // 输入类控件铺满字段；开关、多选保留组件固有宽度，否则开关会被拉成整行。
     const STRETCH = ['input', 'textarea', 'select', 'date', 'date-range', 'time'];
     const body = autoFrame(content, '正文内容', 'VERTICAL', def.formWidth);
@@ -575,6 +578,7 @@ export async function sketchRuntime(figma, req, lib) {
     // DRAWER_POPUP_END
     for (const n of walk(root)) if ('strokes' in n) { if (n.strokeStyleId) await n.setStrokeStyleIdAsync(n.strokeStyleId); else n.strokes = copy(n.strokes); }
     return root;
+    } catch(error) { if(!root.removed)root.remove();throw error; }
   }
 
   // ---------- 状态：复制默认画板后按 patch 修改 ----------
@@ -626,7 +630,7 @@ export async function sketchRuntime(figma, req, lib) {
       headings: walk(root).filter(n=>n.name.startsWith('详情标题/')).map(n=>({name:n.name,texts:visibleTexts(n).map(t=>t.characters)})),
       tags: await Promise.all(walk(root).filter(n=>n.type==='INSTANCE'&&n.name==='状态标签').map(async n=>({parent:n.parent.name,text:visibleTexts(n)[0]?.characters,mainId:(await n.getMainComponentAsync()).id,theme:(await n.getMainComponentAsync()).name.match(/theme 主题=(\w+)/)?.[1]}))),
       tabs: await Promise.all((def.tabs.placement === 'content' ? unique(root, '内容页签') : unique(root, '页签区')).children.filter(n=>n.type==='INSTANCE').map(async n=>({text:visibleTexts(n)[0]?.characters, selected:(await n.getMainComponentAsync()).name.includes('state 状态=select 选中')}))),
-      buttons: walk(root).filter(n => n.type === 'INSTANCE' && n.name.startsWith('按钮/') && n.visible).map(n => ({name:n.name, disabled:n.componentProperties['disabled 禁用']?.value === 'true'})),
+      buttons: await Promise.all(walk(root).filter(n => ['INSTANCE','FRAME'].includes(n.type) && n.name.startsWith('按钮/') && n.visible && def.buttons.some(b=>b.layer===n.name)).map(async n => {const b=def.buttons.find(b=>b.layer===n.name);if(b.business){const actual=await lib.inspectBusinessButton(n);return {name:n.name,business:actual,businessErrors:lib.verifyBusinessButton(b.business,actual)};}return {name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true'};})),
       table: table ? {headerSelection: props(table.children.find(n => n.name === 'header')?.children.find(n => n.name === 'selection')?.children[0]), rows: table.children.filter(n => n.name.startsWith('row/')).map(rowData)} : null,
       texts, retry: walk(root).some(n => (n.name === '重试'||n.name==='反馈操作') && n.visible), paginationVisible: walk(root).some(n => n.name === '分页' && n.visible),
     };
@@ -653,7 +657,7 @@ export async function sketchRuntime(figma, req, lib) {
         }).map(n=>visibleTexts(n)[0]?.characters) : null});
     }
     if(form.rows.flat().some(f=>f.open))snapshot.multiPopups=walk(root).filter(n=>n.name.startsWith('多选展开/')).map(p=>({name:p.name.slice(5),options:p.children.map(r=>{const ck=r.findOne(n=>n.name==='selection'),t=r.findOne(n=>n.type==='TEXT');return {label:t.characters,selected:ck.componentProperties['checked 已选'].value==='true',disabled:ck.componentProperties['disabled 禁用'].value==='true',disabledLabel:t.fills.some(p=>p.type==='SOLID'&&Math.abs(p.color.r-0.592156887)<0.0001),fits:t.width>0&&t.height<=r.height};})}));
-    snapshot.buttons = walk(root).filter(n=>n.type==='INSTANCE'&&n.name.startsWith('按钮/')).map(n=>({name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'}));
+    if(!def)snapshot.buttons = await Promise.all(walk(root).filter(n=>['INSTANCE','FRAME'].includes(n.type)&&n.name.startsWith('按钮/')&&form.buttons.some(b=>b.layer===n.name)).map(async n=>{const b=form.buttons.find(b=>b.layer===n.name);if(b.business)return {name:n.name,business:await lib.inspectBusinessButton(n)};return {name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'};}));
   }
   if(def?.timelines?.length)snapshot.timelines=walk(root).filter(n=>n.name.startsWith('日志时间线/')).map(b=>({id:b.name.slice(6),items:b.children.filter(n=>n.name.startsWith('日志项/')).map(n=>({id:n.name.slice(4),title:n.findOne(t=>t.name==='title')?.characters,time:n.findOne(t=>t.name==='date')?.characters,detail:n.findOne(t=>t.name==='日志说明')?.characters,line:!!n.findOne(t=>(t.name==='divider'||t.name==='连接线后')&&t.visible),fits:n.absoluteBoundingBox.y+n.height<=root.absoluteBoundingBox.y+root.height}))}));
   if(def?.statistics?.length)snapshot.statistics=await Promise.all(def.statistics.map(s=>{const n=walk(root).find(n=>n.name==='统计/'+s.id);return n?lib.inspectStatistic(n):null;}));
