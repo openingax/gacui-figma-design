@@ -59,3 +59,5 @@ Upload新增独立离线开发预览，复用62源状态选择器；不影响既
 后续按业务影响优先级（内部验证资料未随公开包分发）推进：暂停全量顺序导入，低频能力保留缺口并按真实需求恢复。
 
 2026-10-20 规范源各家族新增“结构解析说明板”，已抽取并与本目录逐家族核对，见说明板对照（内部验证资料未随公开包分发）。组件集未漂移；草稿内容页签容器按整栏 normalTabs 修正；Tabs 整栏、Pagination、Tag、Dialog、Alert、Transfer 仍为部分覆盖，Steps/Notification/Popconfirm 未导入。颜色以本地颜色样式为准（Gray7=#8B8B8B），说明板与组件数据冲突处列为待UI确认。
+
+V1.4.0：Badge/Collapse/List/Progress/Statistic 已纳入，具体入口与未完成的新文件迁移见 [组件说明](../docs/verified-components.md)。本表较早版本的“未纳入”记录由该范围说明更新。

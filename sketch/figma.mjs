@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+import {validateStatistic,statisticSlots,renderStatistic,applyStatistic,inspectStatistic,verifyStatistic,verifyStatistics} from '../components/statistic/generator.mjs';
+import {validateProgress,renderProgress,applyProgress,inspectProgress,verifyProgress,verifyProgresses} from '../components/progress/generator.mjs';
+import {createHash} from 'node:crypto';
+import {validateList,fitListRow,assertListFits,renderList,inspectList,verifyLists} from '../components/list/generator.mjs';
+import {validateCollapse,renderCollapse,inspectCollapse,verifyCollapses} from '../components/collapse/generator.mjs';
 import {portableLinkDependencies,renderPortableLink} from '../components/link/portable.mjs';
 import {renderTimelineExtended,updateTimelineExtended} from '../components/timeline/extension-data/runtime.mjs';
 import {validateTableLoading,updateTableLoading,inspectTableLoading} from '../components/table/loading.mjs';
@@ -12,6 +17,7 @@ import {validateNotification,updateNotification,renderNotification,inspectNotifi
 import {validatePopconfirm,updatePopconfirm,renderPopconfirm,inspectPopconfirm,verifyPopconfirm} from '../components/popconfirm/generator.mjs';
 import {validateSteps,updateSteps,renderSteps,inspectSteps,verifySteps} from '../components/steps/generator.mjs';
 import {validateLoading,updateLoading,renderLoading,inspectLoading,verifyLoading} from '../components/loading/generator.mjs';
+import {validateBadge,badgeKey,renderBadge,updateBadge,positionBadge,inspectBadge,verifyBadge} from '../components/badge/generator.mjs';
 import {validateTooltip,renderTooltip,positionTooltip,updateTooltip,inspectTooltip,verifyTooltip} from '../components/tooltip/generator.mjs';
 import {validateMessage,renderMessage,updateMessage,inspectMessage,verifyMessage} from '../components/message/generator.mjs';
 import {validateTabs,tabsKey,renderTabs,updateTabs,inspectTabs,arrangeLeftTabs,renderTopTabs} from '../components/tabs/generator.mjs';
@@ -130,6 +136,14 @@ function tagSpec(input) {
   return {label:s.label,theme:s.theme,mainId:row.id,...(closeId?{closeId}: {})};
 }
 
+function badgeSpec(node,page){
+ const s=validateBadge(node),layers=layerMap(page),link=page.children.find(n=>n.type==='link'&&n.visible!==false&&page.id+'/'+n.id===s.anchor);
+ const button=page.children.filter(n=>n.type==='actions'&&n.visible!==false).some(n=>n.buttons.some(b=>b.visible!==false&&page.id+'/'+n.id+'/'+b.id===s.anchor));
+ if(!link&&!button)throw Error('Badge锚点必须是本页可见的操作按钮或链接路径');
+ const row=readJson('../components/badge/catalog.json').find(r=>r.key===badgeKey(s));if(!row?.id)throw Error('Badge依赖映射缺失');
+ return {...s,anchorLayer:link?'链接/'+link.id:layers.get(s.anchor).layer,mainId:row.id};
+}
+
 function tableLoadingSpec(input){const s=validateTableLoading(input);return s?{...s,mainId:readJson('../components/loading/catalog.json').find(r=>r.key===s.size+'|'+s.variant).id}:undefined;}
 
 function dialogSpec(node){
@@ -147,6 +161,9 @@ function workbenchDef(page, layers) {
   const [search] = of('search'), [table] = of('table'), [tabs] = of('tabs');
   for (const f of search?.fields ?? []) if (!['input', 'select', 'date', 'date-range'].includes(f.kind)) throw Error(`查询区字段 ${f.label}：Figma 出稿暂不支持 ${f.kind}，可改为 date-range 或写成缺口`);
   const contentWidth=page.layout?(page.layout==='top'?1336:1136):1192;
+  for(const c of of('progress'))if((c.width??520)>contentWidth)throw Error('Progress超过工作台正文宽度');
+  for(const c of of('list'))if((c.width??contentWidth)>contentWidth)throw Error('List 超过工作台正文宽度');
+  for(const c of of('collapse'))if((c.width??contentWidth)>contentWidth)throw Error('Collapse 超过工作台正文宽度');
   for(const d of of('divider'))if(d.orientation!=='vertical'&&(d.length??contentWidth)>contentWidth)throw Error('分割线超过工作台正文宽度');
   const tableLayer = table && layers.get(`${page.id}/${table.id}`).layer;
   return {
@@ -167,7 +184,11 @@ function workbenchDef(page, layers) {
     radios: of('radio').map(validateRadio),
     links: of('link').map(validateLink),
     dividers: of('divider').map(validateDivider),
-    blocks: !(of('timeRangeGroup').length||of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
+    blocks: !(of('statistic').length||of('progress').length||of('list').length||of('collapse').length||of('timeRangeGroup').length||of('cascader').length||of('timePicker').length||of('selectField').length||of('inputField').length||of('number').length||of('checkbox').length||of('divider').length||of('link').length||of('radio').length)?undefined:(page.children??[]).filter(n=>n.visible!==false&&!['note','gap','badge','dialog','message','tooltip','popconfirm','notification'].includes(n.type)).map(n=>({id:n.id,type:n.type,layer:layers.get(`${page.id}/${n.id}`)?.layer,buttons:(n.buttons??[]).filter(b=>b.visible!==false).map(b=>layers.get(`${page.id}/${n.id}/${b.id}`).layer),navigation:n.type==='tabs'&&(n.placement??'navigation')==='navigation'})),
+    ...(of('statistic').length?{statistics:of('statistic').map(validateStatistic)}:{}),
+    ...(of('progress').length?{progresses:of('progress').map(validateProgress)}:{}),
+    ...(of('list').length?{lists:of('list').map(n=>{const s=validateList(n);if(s.pagination)s.pagination=paginationSpec(s.pagination);for(const p of s.items)if(p.image?.base64)p.image={...p.image,expectedHash:createHash('sha1').update(Buffer.from(p.image.base64,'base64')).digest('hex')};return s;})}:{}),
+    ...(of('collapse').length?{collapses:of('collapse').map(validateCollapse)}:{}),
     timelines: of('timeline').map(validateTimeline),
     imageViewers: of('imageViewer').map(n=>{const s=validateImageViewer(n);return s.gallery||s.showThumbnails||s.openError!==undefined||s.closeState||s.items.some(i=>i.ratio)||s.open&&s.items.find(i=>i.id===s.open)?.state==='error'?{...s,extended:true}:s;}),
     descriptions: of('descriptions').map(validateDescriptions),
@@ -184,7 +205,7 @@ function workbenchDef(page, layers) {
 function drawerDef(page, layers, overName) {
   if(page.children?.some(n=>n.type==='upload'&&n.visible!==false))throw Error('独立Upload仅支持离线开发预览，Figma草稿接入未验证');
   if(page.children?.some(n=>n.type==='transfer'&&n.visible!==false))throw Error('Transfer仅支持离线开发预览，Figma导入与验证未完成');
-  for (const n of page.children ?? []) if (!['form', 'actions', 'note', 'gap', 'dialog','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','timeRangeGroup','cascader'].includes(n.type)) throw Error(`抽屉里的 ${n.type} 本轮不支持生成 Figma`);
+  for (const n of page.children ?? []) if (!['badge','form', 'actions', 'note', 'gap', 'dialog','feedback','divider','link','radio','checkbox','number','inputField','selectField','timePicker','timeRangeGroup','cascader'].includes(n.type)) throw Error(`抽屉里的 ${n.type} 本轮不支持生成 Figma`);
   const width = page.width ?? 500, formWidth = width - 48;
   const size = width <= 300 ? 'small' : width <= 500 ? 'medium' : 'large';
   const rows = [], groups = [], dividers = [], links = [], radios = [], checkboxes = [], cascaders = [], timeRangeGroups = [], timePickers = [], selectFields = [], inputFields = [], numbers = [], feedbacks = [], inserts = [];
@@ -237,7 +258,7 @@ function unexpressed(page, patches = {}) {
     if (n.type === 'table' && n.rowActions?.some(a => a.when) && !n.rowActionRules) issues.push(`${page.id}/${n.id}：自然语言when未执行，仅按样例行序分配操作`);
     for (const f of n.fields ?? []) if (n.type === 'search' && ((f.kind === 'date-range' && f.value != null) || f.error || f.disabled || f.visible === false)) issues.push(`${page.id}/${n.id}/${f.id}：查询字段值或状态未支持`);
   }
-  const allowed = {timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
+  const allowed = {statistic:['visible','title','value','unit','formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','note'],progress:['visible','theme','status','size','percent','width','note'],list:['visible','pagination','items','size','kind','stripe','split','width','note'],collapse:['visible','items','placement','borderless','width','note'],badge:['visible','size','shape','dot','text','anchor','offset','note'],timeRangeGroup:['visible','title','items','min','max','disabled','format','width','inputWidth','addLabel','removeLabel'],notification:['visible','title','description','cancel','confirm','theme','icon','footerBtn'],popconfirm:['visible','title','description','cancel','confirm','anchor','theme','placement','showArrow'],steps:['visible','items','orientation','theme'],tooltip:['visible','text','theme','anchor','placement'],loading:['visible','variant','size','label'],message:['visible','text','theme','closable'],cascader:['visible','multiple','open','prefixIcon','disabled','state','width','columnWidth','value','columns','note'],timePicker:['visible','range','open','disabled','format','state','value','display','rangeState','columns','width','note'],selectField:['visible','multiple','open','prefixIcon','value','options','state','disabled','width','placeholder','note'],inputField:['visible','family','variant','value','placeholder','tips','prepend','append','width','limit','note'],number:['visible','theme','state','value','disabled','width','placeholder','increase','decrease','note'],checkbox:['visible','kind','options','checked','indeterminate','hover','disabled','width','label','note'],radio:['visible','kind','variant','options','value','checked','hover','disabled','width','label','note'],link:['visible','text','size','state','disabled','prefix','suffix','prefixIcon','suffixIcon','note'],divider:['visible','orientation','dashed','text','align','length','note'],feedback:['visible','message','kind','action','note','theme','icon','showTitle','closable','description','operation','collapse','expandText'],timeline:['visible','items','note','layout','align','mode'],imageViewer:['visible','items','open','note','emptyFeedback','gallery','showThumbnails','openError','closeState','previousState','nextState'],descriptions:['visible','items','title','note'],dialog:['children','visible','title','message','confirm','cancel','note','theme','closable','closeBtn','divider','fullscreen','closeState','width'], heading:['title','status','visible','note'], table: ['selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','columns','pagination','feedback','rows','emptyText','selected','selectedRows','disabledRows','disabledWhen','selection','rowActions','rowActionRules','data','error','retryLabel','note','visible','loading'], actions:['visible','note','message'], tabs:['note','active','visible','items','orientation','icon'], gap:['note'], note:['note'], button:['visible','disabled','note','loading'], field:['value','note','visible','disabled','error','fileStates','open','options']};
   for (const [path, props] of Object.entries(patches)) {
     const [, id, child] = path.split('/'), n = page.children.find(n => n.id === id);
     const kind = child ? n?.buttons?.some(b => b.id === child) ? 'button' : 'field' : n?.type;
@@ -283,7 +304,7 @@ export function plan(dir) {
       notes: [`草图 v${v} · ${page.title} · 状态 ${st.id} ${st.title}${st.codes?.length ? `（${st.codes.join(' ')}）` : ''}`, ...Object.entries(st.patch??{}).filter(([,p])=>p.note).map(([path,p])=>`${path}：${p.note}`)],
       expectTexts: resolved ? expectedWorkbench(resolved) : drawer ? [drawer.title, ...drawer.groups.map(g=>g.title), ...drawer.rows.flat().map(f=>f.label), ...drawer.buttons.map(b=>b.label)] : Object.values(st.patch ?? {}).flatMap(p => [p.error, p.emptyText, ...(Array.isArray(p.value) ? p.value : typeof p.value === 'string' ? [p.value] : [])].filter(Boolean))});
   }
-  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(dialogSpec); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); const notices=pg.children.filter(n=>n.type==='message'&&n.visible!==false).map(n=>{const s=validateMessage(n);return {...s,mainId:readJson('../components/message/catalog.json').find(r=>r.key===s.theme+'|'+s.closable).id};});if(notices.length>1)throw Error('每个状态画板最多一个全局提示');const tooltips=pg.children.filter(n=>n.type==='tooltip'&&n.visible!==false).map(n=>{const s=validateTooltip(n);return {...s,mainId:readJson('../components/tooltip/catalog.json').find(r=>r.key===s.placement+'|'+s.theme).id};});if(tooltips.length>1)throw Error('每画板最多一个悬停Tooltip');const popconfirms=pg.children.filter(n=>n.type==='popconfirm'&&n.visible!==false).map(n=>{const s=validatePopconfirm(n);return {...s,mainId:readJson('../components/popconfirm/catalog.json').find(r=>r.key===[s.placement,s.theme,s.showArrow].join('|')).id};});if(popconfirms.length>1)throw Error('每画板最多一个气泡确认');const notifications=pg.children.filter(n=>n.type==='notification'&&n.visible!==false).map(n=>{const s=validateNotification(n);return {...s,mainId:readJson('../components/notification/catalog.json').find(r=>r.key===[s.theme,s.icon,s.footerBtn].join('|')).id};});if(notifications.length>1)throw Error('每画板最多一个消息通知');return {...rest,slot,dialogs,...(notifications.length?{notifications}:{}),...(popconfirms.length?{popconfirms}:{}),...(tooltips.length?{tooltips}:{}),...(notices.length?{notices}:{})}; })};
+  return {version: v, pageName: bundle.figmaPage, boards: boards.map((b, slot) => { const {layers, ...rest} = b; const st=sketch.states?.find(s=>s.id===b.id); const pg=resolvePage(byId[st?.page??b.id],st?.patch??{}); const badges=pg.children.filter(n=>n.type==='badge'&&n.visible!==false).map(n=>badgeSpec(n,pg)); const dialogs=pg.children.filter(n=>n.type==='dialog'&&n.visible!==false).map(dialogSpec); if(dialogs.length>1)throw Error('每张画板最多一个确认弹窗'); const notices=pg.children.filter(n=>n.type==='message'&&n.visible!==false).map(n=>{const s=validateMessage(n);return {...s,mainId:readJson('../components/message/catalog.json').find(r=>r.key===s.theme+'|'+s.closable).id};});if(notices.length>1)throw Error('每个状态画板最多一个全局提示');const tooltips=pg.children.filter(n=>n.type==='tooltip'&&n.visible!==false).map(n=>{const s=validateTooltip(n);return {...s,mainId:readJson('../components/tooltip/catalog.json').find(r=>r.key===s.placement+'|'+s.theme).id};});if(tooltips.length>1)throw Error('每画板最多一个悬停Tooltip');const popconfirms=pg.children.filter(n=>n.type==='popconfirm'&&n.visible!==false).map(n=>{const s=validatePopconfirm(n);return {...s,mainId:readJson('../components/popconfirm/catalog.json').find(r=>r.key===[s.placement,s.theme,s.showArrow].join('|')).id};});if(popconfirms.length>1)throw Error('每画板最多一个气泡确认');const notifications=pg.children.filter(n=>n.type==='notification'&&n.visible!==false).map(n=>{const s=validateNotification(n);return {...s,mainId:readJson('../components/notification/catalog.json').find(r=>r.key===[s.theme,s.icon,s.footerBtn].join('|')).id};});if(notifications.length>1)throw Error('每画板最多一个消息通知');return {...rest,slot,dialogs,...(badges.length?{badges}:{}),...(notifications.length?{notifications}:{}),...(popconfirms.length?{popconfirms}:{}),...(tooltips.length?{tooltips}:{}),...(notices.length?{notices}:{})}; })};
 }
 
 // 仅序列化本画板使用的构建分支，避免详情扩展把无关表单代码挤过工具长度上限。
@@ -326,7 +347,7 @@ export function code(dir, boardId, options = {}) {
   if(wd?.table?.loading){fns+='\n'+[updateTableLoading,inspectTableLoading].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',updateTableLoading,inspectTableLoading}';}
   const extendedTabs=!!wd?.tabs?.mainId;
   if(extendedTabs){fns+='\n'+(wd.tabs.orientation==='top'&&!wd.tabs.icon?[renderTopTabs,inspectTabs]:[updateTabs,renderTabs,inspectTabs,arrangeLeftTabs]).map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+(wd.tabs.orientation==='top'&&!wd.tabs.icon?',renderTabs:renderTopTabs,inspectTabs}':',renderTabs,inspectTabs,arrangeLeftTabs}');}
-  const extendedPagination=!!wd?.table?.pagination?.mainId;
+  const extendedPagination=!!wd?.table?.pagination?.mainId||wd?.lists?.some(s=>s.pagination?.mainId);
   if(extendedPagination){fns+='\n'+[updatePagination,renderPagination,inspectPagination,verifyPagination].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderPagination,inspectPagination,verifyPagination}';}
   const extendedTags=wd?.headings?.some(h=>h.status.mainId)||wd?.tagThemes?.some(m=>Object.values(m.specs??{}).some(s=>s.mainId));
   if(extendedTags){fns+='\n'+updateTag.toString()+'\n'+renderTag.toString();lib=lib.slice(0,-1)+',renderTag}';}
@@ -350,11 +371,16 @@ export function code(dir, boardId, options = {}) {
     if(!used.some(s=>s.kind!=='buttonGroup'))deps.single={};
     fns+='\n'+[validateRadio,renderRadio].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderRadio,radioDeps:'+JSON.stringify(deps)+'}';
   }
-  if(wd?.links?.length||fd?.links?.length){if(options.portable){
+  if(wd?.links?.length||fd?.links?.length||wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length))){if(options.portable){
+    if(wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length)))throw Error('列表内Link尚未支持新文件初始化');
     const specs=[...(wd?.links??[]),...(fd?.links??[])];
     if(wd?.lists?.some(s=>s.items.some(p=>p.actions?.length))||wd?.collapses?.some(s=>s.items.some(p=>p.actions?.length)))throw Error('列表内Link尚未支持新文件初始化');
     fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const PORTABLE_LINK_IDS='+JSON.stringify(portableLinkDependencies(specs))+';\n'+[validateLink,linkVariant,renderPortableLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink:renderPortableLink}';
   }else{fns+='\nconst SIZE='+JSON.stringify(SIZE)+';const STATE='+JSON.stringify(STATE)+';const STYLE='+JSON.stringify(STYLE)+';const LINK_IDS='+JSON.stringify(LINK_IDS)+';\n'+[validateLink,linkVariant,linkStyleName,propertyKey,recolorIcons,updateLink,renderLink].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderLink}';}}
+  if(wd?.statistics?.length){fns+='\n'+[validateStatistic,statisticSlots,renderStatistic,applyStatistic,inspectStatistic,verifyStatistic,verifyStatistics].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderStatistic,inspectStatistic,verifyStatistics,statisticCatalog:'+JSON.stringify(readJson('../components/statistic/catalog.json'))+'}';}
+  if(wd?.progresses?.length){fns+='\n'+[validateProgress,renderProgress,applyProgress,inspectProgress,verifyProgress,verifyProgresses].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderProgress,inspectProgress,verifyProgresses,progressCatalog:'+JSON.stringify(readJson('../components/progress/catalog.json'))+'}';}
+  if(wd?.lists?.length){if(wd.lists.some(s=>s.pagination))fns+='\n'+validatePagination.toString();fns+='\n'+[validateList,fitListRow,assertListFits,renderList,inspectList,verifyLists].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderList,inspectList,verifyLists,listDeps:'+JSON.stringify(readJson('../components/list/catalog.json'))+'}';}
+  if(wd?.collapses?.length){fns+='\n'+[renderCollapse,inspectCollapse,verifyCollapses].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderCollapse,inspectCollapse,verifyCollapses,collapseDeps:'+JSON.stringify(readJson('../components/collapse/catalog.json'))+'}';}
   if(wd?.layout){fns+='\n'+[validateLayout,composeLayout].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',composeLayout}';}
   if(wd?.timelines?.some(s=>s.extended)){const d=readJson('../components/timeline/dependencies.json');fns+='\n'+[renderTimelineExtended,updateTimelineExtended].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTimelineExtended,timelineDeps:'+JSON.stringify({layouts:d.layouts,icons:d.icons})+'}';}
   if(wd?.timelines?.length){fns+='\n'+renderTimeline.toString()+'\n'+updateTimelineItem.toString()+'\n'+verifyTimelines.toString();lib=lib.slice(0,-1)+',renderTimeline,verifyTimelines}';}
@@ -372,6 +398,7 @@ export function code(dir, boardId, options = {}) {
   if(board.notices?.length){fns+='\n'+[updateMessage,renderMessage,inspectMessage,verifyMessage].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderMessage,inspectMessage,verifyMessage}';}
   if(board.notifications?.length){fns+='\n'+[updateNotification,renderNotification,inspectNotification,verifyNotification].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderNotification,inspectNotification,verifyNotification}';}
   if(board.popconfirms?.length){fns+='\n'+[updatePopconfirm,renderPopconfirm,inspectPopconfirm,verifyPopconfirm].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderPopconfirm,inspectPopconfirm,verifyPopconfirm}';}
+  if(board.badges?.length){fns+='\n'+[positionBadge,updateBadge,renderBadge,inspectBadge,verifyBadge].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderBadge,inspectBadge,verifyBadge}';}
   if(board.tooltips?.length){fns+='\n'+[positionTooltip,updateTooltip,renderTooltip,inspectTooltip,verifyTooltip].map(f=>f.toString()).join('\n');lib=lib.slice(0,-1)+',renderTooltip,inspectTooltip,verifyTooltip}';}
   lib=lib.replace(/^\{,/,'{');
   let runtime=runtimeSource(board.kind==='drawer'||!!board.def.drawer);
@@ -388,6 +415,11 @@ export function code(dir, boardId, options = {}) {
   if(!wd?.loadings?.length){omit('LOADING_BUILD');omit('LOADING_VERIFY');}
   if(!board.notifications?.length){omit('NOTIFICATION_BUILD');omit('NOTIFICATION_VERIFY');runtime=runtime.replace('notifications:notificationReceipts,','');}
   if(!board.popconfirms?.length){omit('POPCONFIRM_BUILD');omit('POPCONFIRM_VERIFY');runtime=runtime.replace('popconfirms:popconfirmReceipts,','');}
+  if(!wd?.statistics?.length){omit('STATISTIC_BUILD');runtime=runtime.replace('def.statistics?.length||','').replace("statistic:'统计/',",'');}
+  if(!wd?.progresses?.length){omit('PROGRESS_BUILD');runtime=runtime.replace('def.progresses?.length||','').replace("progress:'进度/',",'');}
+  if(!wd?.lists?.length){omit('LIST_BUILD');runtime=runtime.replace('def.lists?.length||','').replace("list:'列表/',",'');}
+  if(!wd?.collapses?.length){omit('COLLAPSE_BUILD');runtime=runtime.replace('def.collapses?.length||','').replace("collapse:'折叠面板/',",'');}
+  if(!board.badges?.length){omit('BADGE_BUILD');omit('BADGE_VERIFY');runtime=runtime.replace('badges:badgeReceipts,','');}
   if(!board.tooltips?.length){omit('TOOLTIP_BUILD');omit('TOOLTIP_VERIFY');runtime=runtime.replace('tooltips:tooltipReceipts,','');}
   if(!board.notices?.length){omit('MESSAGE_BUILD');omit('MESSAGE_VERIFY');runtime=runtime.replace('notices:messageReceipts,','');}
   if(!extendedTags)runtime=runtime.replace('      if(spec?.mainId)return lib.renderTag(figma,parent,spec);\n','').replace('mainId:(await n.getMainComponentAsync()).id,','');
@@ -403,7 +435,7 @@ export function code(dir, boardId, options = {}) {
   if(wd?.table&&(!wd.table.pagination||!wd.table.config.rows.length))omit('PAGINATION_BUILD');
   if(!fd?.feedbacks?.length&&!wd?.table?.feedback&&!wd?.feedbacks?.length&&!wd?.imageViewers?.some(s=>s.emptyFeedback))runtime=runtime.replace(/  const hasFeedback=[\s\S]*?(?=  const semanticErrors)/,'  const hasFeedback=false,feedbackSpecs=[];\n');
   for(const name of ['links','dividers'])if(!wd?.[name]?.length&&!fd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(\\(def\\?\\?form\\)\\?\\.'+name+'[^\\n]*\\n','gm'),'');
-  for(const name of ['timelines','imageViewers','descriptions'])if(!wd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(def\\?\\.'+name+'[^\\n]*\\n','gm'),'');
+  for(const name of ['statistics','progresses','lists','collapses','timelines','imageViewers','descriptions'])if(!wd?.[name]?.length)runtime=runtime.replace(new RegExp('^  if\\(def\\?\\.'+name+'[^\\n]*\\n','gm'),'');
 
   if(!fd?.feedbacks?.length)runtime=runtime.replaceAll("d.type==='feedback'?lib.renderFeedback:",'').replaceAll("d.type==='feedback'?{autoFrame,normalize,setText,instance,buttonLabel,width:def.formWidth}:",'').replace("form?.feedbacks?.length||",'').replace("...(form?.feedbacks??[]),",'').replace("form?root.children.find(n=>n.name.startsWith('抽屉 / ')):root",'root');
   if(!wd?.cascaders?.length&&!fd?.cascaders?.length)runtime=runtime.replace(/        \/\/ CASCADER_START[\s\S]*?        \/\/ CASCADER_END\n/,'');
@@ -428,12 +460,12 @@ export function code(dir, boardId, options = {}) {
   if(fd)runtime=runtime.replace(/  async function setFieldValue\([\s\S]*?(?=  async function detach)/,'');
   if(fd&&!fd.rows.flat().some(f=>f.open))runtime=runtime.replace(/    \/\/ DRAWER_POPUP_START[\s\S]*?    \/\/ DRAWER_POPUP_END\n/,'');
   if(options.portable){
+    if(wd?.collapses?.length||wd?.lists?.length||wd?.progresses?.length||wd?.statistics?.length)throw Error('Collapse/List/Progress/Statistic 已支持草稿及已适配目标构建；新文件原生依赖迁移尚未验证');
     if(!/^[a-zA-Z0-9]{22,128}$/.test(req.fileKey??'')||req.fileKey==='jNf9icrxfw8B7QkSQa9g33')throw Error('需要独立授权目标，规范源只读');
     const old="const source = await figma.getNodeByIdAsync('180:3');\n    if (!source) throw Error('工单页基线 180:3 不存在');\n    const root = source.clone(); page.appendChild(root); root.name = board.name; place(root);";
     if(!runtime.includes(old)&&board.kind==='workbench')throw Error('页面构建分支已变化');
     runtime=runtime.replace(old,"const root = await buildPortableShell(figma,page,def,{autoFrame,text,instance,buttonLabel}); root.name=board.name; place(root);");
     if(board.kind==='workbench'||board.def.workbench)fns+='\n'+buildPortableShell.toString();
-    const wd=board.def.workbench??(board.kind==='workbench'?board.def:null);
     if(wd&&!wd.search?.length)fns=fns.replace(/  if\(def.search\)\{[\s\S]*?\n  \}/,'');
     if(wd?.search&&!wd.search.some(f=>f.kind==='date'))runtime=runtime.replace(/          else if \(slot.kind === 'date'\) \{[\s\S]*?          \}\n          else if \(slot.kind === 'date-range'\)/,"          else if (slot.kind === 'date-range')");
     if(wd?.search&&!wd.search.some(f=>f.kind==='date-range'))runtime=runtime.replace(/          else if \(slot.kind === 'date-range'\) \{[\s\S]*?          \} else throw Error/,"          else throw Error");

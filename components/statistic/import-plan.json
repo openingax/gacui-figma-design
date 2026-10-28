@@ -1,0 +1,255 @@
+[
+  {
+    "key": "91863-157229",
+    "kind": "statistic/parts/91863-157229",
+    "sourceId": "91863:157229",
+    "variants": [
+      {
+        "id": "91863:157228",
+        "formal": "percent",
+        "trendPlacement": "left",
+        "color": "black",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157358",
+        "formal": "percent",
+        "trendPlacement": "right",
+        "color": "black",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157314",
+        "formal": "percent",
+        "trendPlacement": "-",
+        "color": "black",
+        "width": 97,
+        "height": 66
+      },
+      {
+        "id": "91863:157227",
+        "formal": "text",
+        "trendPlacement": "left",
+        "color": "black",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157380",
+        "formal": "text",
+        "trendPlacement": "right",
+        "color": "black",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157292",
+        "formal": "text",
+        "trendPlacement": "-",
+        "color": "black",
+        "width": 112,
+        "height": 66
+      },
+      {
+        "id": "91863:157483",
+        "formal": "percent",
+        "trendPlacement": "left",
+        "color": "blue",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157491",
+        "formal": "percent",
+        "trendPlacement": "right",
+        "color": "blue",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157499",
+        "formal": "percent",
+        "trendPlacement": "-",
+        "color": "blue",
+        "width": 97,
+        "height": 66
+      },
+      {
+        "id": "91863:157505",
+        "formal": "text",
+        "trendPlacement": "left",
+        "color": "blue",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157513",
+        "formal": "text",
+        "trendPlacement": "right",
+        "color": "blue",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157521",
+        "formal": "text",
+        "trendPlacement": "-",
+        "color": "blue",
+        "width": 112,
+        "height": 66
+      },
+      {
+        "id": "91863:157545",
+        "formal": "percent",
+        "trendPlacement": "left",
+        "color": "red",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157553",
+        "formal": "percent",
+        "trendPlacement": "right",
+        "color": "red",
+        "width": 120,
+        "height": 66
+      },
+      {
+        "id": "91863:157561",
+        "formal": "percent",
+        "trendPlacement": "-",
+        "color": "red",
+        "width": 97,
+        "height": 66
+      },
+      {
+        "id": "91863:157567",
+        "formal": "text",
+        "trendPlacement": "left",
+        "color": "red",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157575",
+        "formal": "text",
+        "trendPlacement": "right",
+        "color": "red",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157583",
+        "formal": "text",
+        "trendPlacement": "-",
+        "color": "red",
+        "width": 112,
+        "height": 66
+      },
+      {
+        "id": "91863:157669",
+        "formal": "percent",
+        "trendPlacement": "left",
+        "color": "orange",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157677",
+        "formal": "percent",
+        "trendPlacement": "right",
+        "color": "orange",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157685",
+        "formal": "percent",
+        "trendPlacement": "-",
+        "color": "orange",
+        "width": 97,
+        "height": 66
+      },
+      {
+        "id": "91863:157691",
+        "formal": "text",
+        "trendPlacement": "left",
+        "color": "orange",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157699",
+        "formal": "text",
+        "trendPlacement": "right",
+        "color": "orange",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157707",
+        "formal": "text",
+        "trendPlacement": "-",
+        "color": "orange",
+        "width": 112,
+        "height": 66
+      },
+      {
+        "id": "91863:157607",
+        "formal": "percent",
+        "trendPlacement": "left",
+        "color": "green",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157615",
+        "formal": "percent",
+        "trendPlacement": "right",
+        "color": "green",
+        "width": 125,
+        "height": 66
+      },
+      {
+        "id": "91863:157623",
+        "formal": "percent",
+        "trendPlacement": "-",
+        "color": "green",
+        "width": 97,
+        "height": 66
+      },
+      {
+        "id": "91863:157629",
+        "formal": "text",
+        "trendPlacement": "left",
+        "color": "green",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157637",
+        "formal": "text",
+        "trendPlacement": "right",
+        "color": "green",
+        "width": 140,
+        "height": 66
+      },
+      {
+        "id": "91863:157645",
+        "formal": "text",
+        "trendPlacement": "-",
+        "color": "green",
+        "width": 112,
+        "height": 66
+      }
+    ],
+    "nodes": 261,
+    "vectors": 20,
+    "status": "native-built-audit-partial",
+    "nativeInstances": "restored-with-private-color-masters",
+    "targetPageId": "1050:2",
+    "targetSetId": "1050:28348"
+  }
+]

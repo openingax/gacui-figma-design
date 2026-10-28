@@ -1,6 +1,6 @@
 # Skill 维护、审核与发布
 
-对外发布仓库为 https://gitee.com/xieliying/gacui-figma-design.git。当前版本V1.3.3，标签skill-v1.3.3；V1.0.0为首个正式版本；文件中的版本标识不能代替远程标签及Release存在性核对。
+对外发布仓库为 https://gitee.com/xieliying/gacui-figma-design.git。当前版本V1.4.0，标签skill-v1.4.0；V1.0.0为首个正式版本；文件中的版本标识不能代替远程标签及Release存在性核对。
 
 1. 在独立分支修改实现、文档及使用范围，保持已确认行为和未完成能力隔离，不修改用户任务。
 2. 运行node scripts/verify.mjs；涉及UI时核对真实Figma回执、截图和必要修改验证。检查不代替用户验收。

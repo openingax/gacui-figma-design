@@ -398,12 +398,24 @@ export async function sketchRuntime(figma, req, lib) {
     // TIMEGROUP_BUILD_END
     for(const s of def.feedbacks??[])await lib.renderFeedback(figma,list,s,{autoFrame,normalize,setText,instance,buttonLabel,width:CONTENT_WIDTH});
 
+    // STATISTIC_BUILD_START
+    for(const s of def.statistics??[]){const n=await lib.renderStatistic(figma,list,s,lib.statisticCatalog);if(n.width>CONTENT_WIDTH)throw Error('Statistic超过工作台正文宽度');}
+    // STATISTIC_BUILD_END
+    // PROGRESS_BUILD_START
+    for(const s of def.progresses??[])await lib.renderProgress(figma,list,s,lib.progressCatalog);
+    // PROGRESS_BUILD_END
+    // LIST_BUILD_START
+    for(const s of def.lists??[])await lib.renderList(figma,list,s,{normalize,renderLink:lib.renderLink,listDeps:lib.listDeps,width:CONTENT_WIDTH,renderPagination:lib.renderPagination,inspectPagination:lib.inspectPagination,verifyPagination:lib.verifyPagination});
+    // LIST_BUILD_END
+    // COLLAPSE_BUILD_START
+    for(const s of def.collapses??[])await lib.renderCollapse(figma,list,s,{normalize,renderLink:lib.renderLink,collapseDeps:lib.collapseDeps,width:CONTENT_WIDTH});
+    // COLLAPSE_BUILD_END
     for(const s of def.timelines??[])await lib.renderTimeline(figma,list,s,{autoFrame,text,normalize,setText,width:CONTENT_WIDTH,renderTimelineExtended:lib.renderTimelineExtended,timelineDeps:lib.timelineDeps});
     for(const s of def.imageViewers??[])await lib.renderImageViewer(figma,root,list,s,{autoFrame,text,instance,normalize,setText,buttonLabel,renderFeedback:lib.renderFeedback,imageViewerDeps:lib.imageViewerDeps,width:CONTENT_WIDTH});
     // TABS_LAYOUT_START
     if(def.tabs?.orientation==='left'){lib.arrangeLeftTabs(figma,list,CONTENT_WIDTH);list.primaryAxisSizingMode='AUTO';}
     // TABS_LAYOUT_END
-    if(def.timeRangeGroups?.length||def.alerts?.length||def.steps?.length||def.loadings?.length||def.headings?.length||def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
+    if(def.statistics?.length||def.progresses?.length||def.lists?.length||def.collapses?.length||def.timeRangeGroups?.length||def.alerts?.length||def.steps?.length||def.loadings?.length||def.headings?.length||def.dividers?.length||def.feedbacks?.length||def.table?.feedback||def.imageViewers?.length||def.timelines?.length){list.primaryAxisSizingMode='AUTO';const bottom=list.absoluteBoundingBox.y+list.height-root.absoluteBoundingBox.y+32,delta=Math.max(0,bottom-root.height);if(delta)for(const n of [root,one('页面主体'),one('运维菜单'),one('工作区')])n.resize(n.width,n.height+delta);}
     // DIVIDER_ORDER_START
     if(def.blocks?.length){
       const workspace=one('工作区'),ordered=autoFrame(workspace,'草稿内容顺序','VERTICAL',OUTER_WIDTH);
@@ -454,7 +466,7 @@ export async function sketchRuntime(figma, req, lib) {
         }else if(b.type==='table'){
           for(const name of [def.table?.loading?'表格区域/'+b.layer:b.layer,'分页','反馈/table','加载失败','空结果'])move(name);
         }else{
-          const prefix={timeRangeGroup:'时段组/',heading:'详情标题/',descriptions:'基本信息/',feedback:'反馈/',timeline:'日志时间线/',imageViewer:'图片查看/'};
+          const prefix={statistic:'统计/',progress:'进度/',list:'列表/',collapse:'折叠面板/',timeRangeGroup:'时段组/',heading:'详情标题/',descriptions:'基本信息/',feedback:'反馈/',timeline:'日志时间线/',imageViewer:'图片查看/'};
           const n=move(b.type==='tabs'?'内容页签':prefix[b.type]+b.id);
           if(!n)throw Error('草稿区块未表达：'+b.id);
         }
@@ -590,6 +602,9 @@ export async function sketchRuntime(figma, req, lib) {
   // POPCONFIRM_BUILD_START
   const popconfirmReceipts=[];for(const s of board.popconfirms??[]){const n=await lib.renderPopconfirm(figma,root,s);popconfirmReceipts.push(await lib.inspectPopconfirm(n));}
   // POPCONFIRM_BUILD_END
+  // BADGE_BUILD_START
+  const badgeReceipts=[];for(const s of board.badges??[]){const n=await lib.renderBadge(figma,root,s);badgeReceipts.push(await lib.inspectBadge(n,s,root.findOne(a=>a.name===s.anchorLayer)));}
+  // BADGE_BUILD_END
   // TOOLTIP_BUILD_START
   const tooltipReceipts=[];for(const s of board.tooltips??[]){const n=await lib.renderTooltip(figma,root,s);tooltipReceipts.push(await lib.inspectTooltip(n));}
   // TOOLTIP_BUILD_END
@@ -641,6 +656,10 @@ export async function sketchRuntime(figma, req, lib) {
     snapshot.buttons = walk(root).filter(n=>n.type==='INSTANCE'&&n.name.startsWith('按钮/')).map(n=>({name:n.name,disabled:n.componentProperties['disabled 禁用']?.value==='true',loading:n.componentProperties['loading 加载']?.value==='true'}));
   }
   if(def?.timelines?.length)snapshot.timelines=walk(root).filter(n=>n.name.startsWith('日志时间线/')).map(b=>({id:b.name.slice(6),items:b.children.filter(n=>n.name.startsWith('日志项/')).map(n=>({id:n.name.slice(4),title:n.findOne(t=>t.name==='title')?.characters,time:n.findOne(t=>t.name==='date')?.characters,detail:n.findOne(t=>t.name==='日志说明')?.characters,line:!!n.findOne(t=>(t.name==='divider'||t.name==='连接线后')&&t.visible),fits:n.absoluteBoundingBox.y+n.height<=root.absoluteBoundingBox.y+root.height}))}));
+  if(def?.statistics?.length)snapshot.statistics=await Promise.all(def.statistics.map(s=>{const n=walk(root).find(n=>n.name==='统计/'+s.id);return n?lib.inspectStatistic(n):null;}));
+  if(def?.progresses?.length)snapshot.progresses=def.progresses.map(s=>{const n=walk(root).find(n=>n.name==='进度/'+s.id);return n?lib.inspectProgress(n,s):null;});
+  if(def?.lists?.length)snapshot.lists=walk(root).filter(n=>n.name.startsWith('列表/')).map(n=>lib.inspectList(n));
+  if(def?.collapses?.length)snapshot.collapses=await Promise.all(walk(root).filter(n=>n.name.startsWith('折叠面板/')).map(n=>lib.inspectCollapse(n)));
   if(def?.imageViewers?.length)snapshot.imageViewers=def.imageViewers.map(s=>{const b=root.findOne(n=>n.name==='图片查看/'+s.id);return {id:s.id,open:root.findOne(n=>n.name==='图片大图/'+s.id)?s.open:null,items:b?b.findAll(n=>n.name.startsWith('图片项/')).map(n=>({id:n.name.slice(4),filename:n.findOne(t=>t.name==='文件名')?.characters,error:!!n.findOne(t=>t.type==='TEXT'&&t.characters==='图片加载失败'),fits:n.absoluteBoundingBox.y+n.height<=root.absoluteBoundingBox.y+root.height})):[]};});
   if(def?.descriptions) snapshot.descriptions=walk(root).filter(n=>n.name.startsWith('基本信息/')).map(n=>({id:n.name.slice(5),title:n.findOne(t=>t.type==='TEXT'&&t.name==='标题')?.characters,items:n.findAll(x=>x.name.startsWith('信息项/')).map(x=>{const a=x.findOne(t=>t.type==='TEXT'&&t.name==='label'),v=x.findOne(t=>t.type==='TEXT'&&t.name==='value');return {id:x.name.slice(4),label:a?.characters,value:v?.characters,fits:!!v&&v.width<=x.width&&v.height<=x.height};})}));
   // TABS_VERIFY_START
@@ -661,6 +680,10 @@ export async function sketchRuntime(figma, req, lib) {
   if((def??form)?.radios?.length)for(const s of (def??form).radios){const n=root.findOne(x=>x.name==='单选/'+s.id);if(!n||n.children.length!==s.options.length||s.options.some(o=>!n.findOne(t=>t.type==='TEXT'&&t.characters===o.label)))semanticErrors.push('单选组缺失或文字不符');}
   if((def??form)?.links?.length)for(const s of (def??form).links){const n=root.findOne(x=>x.name==='链接/'+s.id),t=n?.findOne(x=>x.type==='TEXT');if(!n||t?.characters!==(s.text??'跳转链接'))semanticErrors.push('链接缺失或文字不符');}
   if((def??form)?.dividers?.length)for(const s of (def??form).dividers){const n=root.findOne(x=>x.name==='分割线/'+s.id),t=n?.findOne(x=>x.type==='TEXT');if(!n||(s.text!==undefined&&t?.characters!==s.text))semanticErrors.push('分割线缺失或文字不符');}
+  if(def?.statistics?.length)semanticErrors.push(...lib.verifyStatistics(def.statistics,snapshot.statistics,lib.statisticCatalog));
+  if(def?.progresses?.length)semanticErrors.push(...lib.verifyProgresses(def.progresses,snapshot.progresses));
+  if(def?.lists?.length)semanticErrors.push(...lib.verifyLists(def.lists,snapshot.lists));
+  if(def?.collapses?.length)semanticErrors.push(...lib.verifyCollapses(def.collapses,snapshot.collapses));
   if(def?.timelines?.length)semanticErrors.push(...lib.verifyTimelines(def.timelines,snapshot.timelines));
   if(def?.imageViewers?.length)semanticErrors.push(...lib.verifyImageViewers(def.imageViewers,snapshot.imageViewers));
   if(def?.descriptions?.length)semanticErrors.push(...lib.verifyDescriptions(def.descriptions,snapshot.descriptions));
@@ -696,11 +719,14 @@ export async function sketchRuntime(figma, req, lib) {
   // POPCONFIRM_VERIFY_START
   for(const [i,s]of (board.popconfirms??[]).entries())semanticErrors.push(...lib.verifyPopconfirm(s,popconfirmReceipts[i]));
   // POPCONFIRM_VERIFY_END
+  // BADGE_VERIFY_START
+  for(const [i,s]of (board.badges??[]).entries())semanticErrors.push(...lib.verifyBadge(s,badgeReceipts[i]));
+  // BADGE_VERIFY_END
   // TOOLTIP_VERIFY_START
   for(const [i,s]of (board.tooltips??[]).entries())semanticErrors.push(...lib.verifyTooltip(s,tooltipReceipts[i]));
   // TOOLTIP_VERIFY_END
   const result = generationResult({missingTexts, brokenInstances: broken, unsupported, semanticErrors});
   return {...result, createdNodeIds: [...walk(root).map(n=>n.id), ...(note?[note.id]:[])], snapshot, dialogs, pageId: page.id, boardId: root.id, boardName: root.name, noteId: note?.id ?? null, size: [root.width, root.height],
-    notifications:notificationReceipts,popconfirms:popconfirmReceipts,tooltips:tooltipReceipts,notices:messageReceipts,missingTexts, semanticErrors, brokenInstances: broken, unsupported, warnings,
+    badges:badgeReceipts,notifications:notificationReceipts,popconfirms:popconfirmReceipts,tooltips:tooltipReceipts,notices:messageReceipts,missingTexts, semanticErrors, brokenInstances: broken, unsupported, warnings,
     fontFallback: [...fallback], createdCount: walk(root).length};
 }

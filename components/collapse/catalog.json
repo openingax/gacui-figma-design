@@ -1,0 +1,280 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "pageId": "993:2",
+  "quantitySetId": "999:684",
+  "panels": [
+    {
+      "sourceId": "73175:226550",
+      "id": "994:2",
+      "placement": "left",
+      "borderless": false,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74086:226670",
+      "id": "994:9",
+      "placement": "left",
+      "borderless": false,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "73175:226552",
+      "id": "994:15",
+      "placement": "left",
+      "borderless": false,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74086:226676",
+      "id": "994:24",
+      "placement": "left",
+      "borderless": false,
+      "expanded": true,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226590",
+      "id": "994:34",
+      "placement": "left",
+      "borderless": true,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226594",
+      "id": "994:40",
+      "placement": "left",
+      "borderless": true,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226598",
+      "id": "994:46",
+      "placement": "left",
+      "borderless": true,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226603",
+      "id": "994:55",
+      "placement": "left",
+      "borderless": true,
+      "expanded": true,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226493",
+      "id": "994:65",
+      "placement": "right",
+      "borderless": false,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226497",
+      "id": "994:71",
+      "placement": "right",
+      "borderless": false,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226501",
+      "id": "994:77",
+      "placement": "right",
+      "borderless": false,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226506",
+      "id": "994:86",
+      "placement": "right",
+      "borderless": false,
+      "expanded": true,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226643",
+      "id": "994:96",
+      "placement": "right",
+      "borderless": true,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226647",
+      "id": "994:102",
+      "placement": "right",
+      "borderless": true,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226651",
+      "id": "994:108",
+      "placement": "right",
+      "borderless": true,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226656",
+      "id": "994:117",
+      "placement": "right",
+      "borderless": true,
+      "expanded": true,
+      "disabled": true
+    },
+    {
+      "sourceId": "74105:226902",
+      "id": "994:127",
+      "placement": "none",
+      "borderless": false,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74105:226906",
+      "id": "994:130",
+      "placement": "none",
+      "borderless": false,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "74105:226910",
+      "id": "994:133",
+      "placement": "none",
+      "borderless": false,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74105:226915",
+      "id": "994:139",
+      "placement": "none",
+      "borderless": false,
+      "expanded": true,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226696",
+      "id": "994:146",
+      "placement": "none",
+      "borderless": true,
+      "expanded": false,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226699",
+      "id": "994:149",
+      "placement": "none",
+      "borderless": true,
+      "expanded": false,
+      "disabled": true
+    },
+    {
+      "sourceId": "74387:226702",
+      "id": "994:152",
+      "placement": "none",
+      "borderless": true,
+      "expanded": true,
+      "disabled": false
+    },
+    {
+      "sourceId": "74387:226706",
+      "id": "994:158",
+      "placement": "none",
+      "borderless": true,
+      "expanded": true,
+      "disabled": true
+    }
+  ],
+  "roots": [
+    {
+      "placement": "left",
+      "borderless": false,
+      "cornerRadius": 3,
+      "clipsContent": true,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": "Gray 中性/Gray4-边框",
+      "strokesIncludedInLayout": false
+    },
+    {
+      "placement": "left",
+      "borderless": true,
+      "cornerRadius": 0,
+      "clipsContent": false,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": null,
+      "strokesIncludedInLayout": false
+    },
+    {
+      "placement": "right",
+      "borderless": false,
+      "cornerRadius": 4,
+      "clipsContent": true,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": "Gray 中性/Gray4-边框",
+      "strokesIncludedInLayout": false
+    },
+    {
+      "placement": "right",
+      "borderless": true,
+      "cornerRadius": 0,
+      "clipsContent": false,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": null,
+      "strokesIncludedInLayout": false
+    },
+    {
+      "placement": "none",
+      "borderless": false,
+      "cornerRadius": 4,
+      "clipsContent": true,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": "Gray 中性/Gray4-边框",
+      "strokesIncludedInLayout": false
+    },
+    {
+      "placement": "none",
+      "borderless": true,
+      "cornerRadius": 0,
+      "clipsContent": false,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "strokeStyleName": null,
+      "strokesIncludedInLayout": false
+    }
+  ],
+  "headerSlot": {
+    "sourceId": "83814:188048",
+    "panelFills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ],
+    "linkCornerRadius": 3,
+    "gap": 8
+  }
+}

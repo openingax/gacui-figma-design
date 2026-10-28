@@ -1,9 +1,14 @@
+import {validateStatistic} from '../components/statistic/generator.mjs';
+import {validateProgress} from '../components/progress/generator.mjs';
+import {validateList} from '../components/list/generator.mjs';
+import {validateCollapse} from '../components/collapse/generator.mjs';
 import {validateTableLoading} from '../components/table/loading.mjs';
 import {validateTimeRangeGroup,renderTimeRangeGroup,updateTimeRangeGroup} from '../components/time-range-group/generator.mjs';
 import {validateTableExtensions} from '../components/table/extensions.mjs';
 import {validateNotification} from '../components/notification/generator.mjs';
 import {validatePopconfirm} from '../components/popconfirm/generator.mjs';
 import {validateSteps} from '../components/steps/generator.mjs';
+import {validateBadge} from '../components/badge/generator.mjs';
 import {validateTooltip} from '../components/tooltip/generator.mjs';
 import {validateLoading} from '../components/loading/generator.mjs';
 import {validateMessage} from '../components/message/generator.mjs';
@@ -27,7 +32,7 @@ import {validateDialog} from '../components/dialog/generator.mjs';
 import {validatePagination} from '../components/pagination/generator.mjs';
 import {validateTag} from '../components/tag/generator.mjs';
 // 草图格式的纯函数；renderHtml显式内联validateDialog并移除模块import，Node与预览共享校验。
-export const NODE_TITLES = {timeRangeGroup:'时段组',notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
+export const NODE_TITLES = {statistic:'统计数值',progress:'进度条',list:'列表',collapse:'折叠面板',badge:'徽标',timeRangeGroup:'时段组',notification:'消息通知',popconfirm:'气泡确认',steps:'步骤条',tooltip:'文字提示',loading:'区域加载',message:'全局提示',upload:'上传（开发预览）',transfer:'穿梭框（开发预览）',cascader:'级联选择器',timePicker:'时间选择器',selectField:'选择器',inputField:'输入框',number:'数字输入',checkbox:'多选',radio: '单选',link: '链接',divider:'分割线',feedback:'反馈',timeline:'日志时间线',imageViewer:'图片查看器', descriptions:'基本信息',dialog:'确认弹窗', heading: '详情标题', search: '查询区', actions: '操作栏', tabs: '页签', table: '表格', form: '表单', note: '说明', gap: '缺口'};
 export const FIELD_KINDS = {
   search: ['input', 'select', 'date', 'date-range'],
   form: ['input', 'textarea', 'select', 'date', 'date-range', 'switch', 'checkbox', 'upload', 'time', 'number', 'radio'],
@@ -35,7 +40,7 @@ export const FIELD_KINDS = {
 export const COLUMN_KINDS = ['text', 'textTag', 'state', 'tag', 'operations'];
 export const FRAMES = ['workbench', 'drawer'];
 export const DECISIONS = ['已明确', '已确认', '按推荐', '待决策', '本轮不做'];
-export const PATCH_PROPS = ['min','max','inputWidth','addLabel','removeLabel','children','gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
+export const PATCH_PROPS = ['formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','unit','percent','stripe','split','borderless','dot','shape','offset','min','max','inputWidth','addLabel','removeLabel','children','gallery','showThumbnails','openError','closeState','previousState','nextState','selectionMode','expandHoverRows','expandedRows','expandedContent','resizableColumns','operation','collapse','showTitle','expandText','footerBtn','description','showArrow','sequence','anchor','placement','icon','closable','closeBtn','closeState','divider','fullscreen','draggable','interaction','filename','helperText','fileSize','uploadDate','buttonLabel','progress','files','source','target','tree','search','retainSource','pagination','sourceQuery','targetQuery','filterPolicy','viewportHeight','sourceTitle','targetTitle','columnWidth','range','format','rangeState','columns','display','multiple','family','limit','prepend','append','tips','theme','increase','decrease','placeholder','indeterminate','variant','label','checked','hover','width','size','state','prefix','suffix','prefixIcon','suffixIcon','orientation','dashed','text','align','length','rows', 'emptyText', 'selected', 'loading', 'error', 'value', 'disabled', 'note', 'visible', 'selection', 'selectedRows', 'disabledRows', 'disabledWhen', 'rowActions', 'rowActionRules', 'data', 'retryLabel', 'fileStates', 'active', 'message', 'title', 'status', 'confirm', 'cancel', 'items', 'open', 'feedback', 'emptyFeedback', 'options', 'kind', 'action'];
 // 已知属性名：预览、检查或组件代码会读取的键。表外的键不会生效，先只警告（#8），确认无误报后再考虑拦截。
 const TOP_KEYS = ['format','task','pages','states','questions','decisions','gaps','judgments','demo','request'];
 const REQUEST_KEYS = ['text','sources'];
@@ -199,6 +204,10 @@ export function check(sketch, checklist, {final = false} = {}) {
       if(node.type==='radio'){try{validateRadio(node);}catch(e){err(where,e.message);}}
       if(node.type==='link'){try{validateLink(node);}catch(e){err(where,e.message);}}
       if(node.type==='divider'){try{validateDivider(node);}catch(e){err(where,e.message);}}
+      if(node.type==='statistic'){try{validateStatistic(node);}catch(e){err(where,e.message);}}
+      if(node.type==='progress'){try{validateProgress(node);}catch(e){err(where,e.message);}}
+      if(node.type==='list'){try{validateList(node);if(node.items.some(p=>p.image?.hash))throw Error('List草稿图片须提供内嵌base64，以便本地预览与出稿一致');}catch(e){err(where,e.message);}}
+      if(node.type==='collapse'){try{validateCollapse(node);}catch(e){err(where,e.message);}}
       if(node.type==='timeline'){try{validateTimeline(node);}catch(e){err(where,e.message);}}
       if(node.type==='imageViewer'){try{validateImageViewer(node);}catch(e){err(where,e.message);}}
       if(node.type==='descriptions'){try{validateDescriptions(node);}catch(e){err(where,e.message);}}
@@ -207,6 +216,7 @@ export function check(sketch, checklist, {final = false} = {}) {
       if(node.type==='popconfirm'){try{validatePopconfirm(node);}catch(e){err(where,e.message);}}
       if(node.type==='steps'){try{validateSteps(node);}catch(e){err(where,e.message);}}
       if(node.type==='loading'){try{validateLoading(node);}catch(e){err(where,e.message);}}
+      if(node.type==='badge'){try{validateBadge(node);}catch(e){err(where,e.message);}}
       if(node.type==='tooltip'){try{validateTooltip(node);}catch(e){err(where,e.message);}}
       if(node.type==='dialog') {try{validateDialog(node);}catch(e){err(where,e.message);}}
       if(node.type==='table'&&node.feedback){try{validateFeedback({id:'table',kind:node.error?'error':'empty',message:node.error||node.emptyText||'暂无数据',action:node.error?(node.retryLabel||'重试'):node.feedback.action,variant:node.feedback.variant});}catch(e){err(where,e.message);}}
@@ -265,7 +275,8 @@ export function check(sketch, checklist, {final = false} = {}) {
     for (const [path, props] of Object.entries(state.patch ?? {})) {
       if (!paths.has(path)) err(where, `patch 路径 ${path} 不存在`);
       else if (!path.startsWith(`${state.page}/`)) err(where, `patch 路径 ${path} 不属于页面 ${state.page}`);
-      for (const prop of Object.keys(props)) if (!PATCH_PROPS.includes(prop)) err(where, `patch 不支持 ${prop}，可用：${PATCH_PROPS.join('、')}`);
+      const allowedProps = PATCH_PROPS.filter(prop => !['formal','trendPlacement','color','valueColor','unitColor','direction','trendColor','companion','unit'].includes(prop) || paths.get(path)?.item.type === 'statistic');
+      for (const prop of Object.keys(props)) if (!allowedProps.includes(prop)) err(where, `patch 不支持 ${prop}，可用：${allowedProps.join('、')}`);
     }
   }
 
@@ -381,6 +392,10 @@ export function resolvePage(page, patch = {}) {
     if(n.type==='radio')validateRadio(n);
     if(n.type==='link')validateLink(n);
     if(n.type==='divider')validateDivider(n);
+    if(n.type==='statistic')validateStatistic(n);
+    if(n.type==='progress')validateProgress(n);
+    if(n.type==='list'){validateList(n);if(n.items.some(p=>p.image?.hash))throw Error('List草稿图片须提供内嵌base64');}
+    if(n.type==='collapse')validateCollapse(n);
     if(n.type==='timeline')validateTimeline(n);
     if(n.type==='imageViewer')validateImageViewer(n);
     if(n.type==='descriptions')validateDescriptions(n);
@@ -389,6 +404,7 @@ export function resolvePage(page, patch = {}) {
     if(n.type==='steps')validateSteps(n);
     if(n.type==='popconfirm')validatePopconfirm(n);
     if(n.type==='notification')validateNotification(n);
+    if(n.type==='badge')validateBadge(n);
     if(n.type==='tooltip')validateTooltip(n);
     if(n.type==='dialog')validateDialog(n);
     if (n.type === 'heading' && (!n.title || !n.status?.label || !['default','primary','success','warning','danger'].includes(n.status.theme))) throw Error(`标题 ${n.id} 需要title和有效status`);

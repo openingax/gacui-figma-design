@@ -2,7 +2,7 @@
   "schema": 1,
   "platform": "gitee",
   "repository": "https://gitee.com/xieliying/gacui-figma-design.git",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "upstream": {
     "repository": "https://github.com/openingax/gacui-figma-design.git",
     "tag": "skill-v1.2.2",
@@ -16,12 +16,78 @@
     ".gitignore",
     "AGENTS.md",
     "CHANGELOG.md",
+    "components/badge/build-data.json",
+    "components/badge/catalog.json",
+    "components/badge/definition.json",
+    "components/badge/generator.mjs",
+    "components/badge/README.md",
+    "components/collapse/catalog.json",
+    "components/collapse/generator.mjs",
+    "components/collapse/import-plan.json",
+    "components/collapse/parts/25727-29301/build-data.json",
+    "components/collapse/parts/25727-29301/definition.json",
+    "components/collapse/parts/72761-226148/build-data.json",
+    "components/collapse/parts/72761-226148/definition.json",
+    "components/collapse/parts/72761-226202/build-data.json",
+    "components/collapse/parts/72761-226202/definition.json",
+    "components/collapse/parts/73175-226549/build-data.json",
+    "components/collapse/parts/73175-226549/definition.json",
+    "components/collapse/parts/74105-226901/build-data.json",
+    "components/collapse/parts/74105-226901/definition.json",
+    "components/collapse/parts/74387-226492/build-data.json",
+    "components/collapse/parts/74387-226492/definition.json",
+    "components/collapse/parts/74387-226589/build-data.json",
+    "components/collapse/parts/74387-226589/definition.json",
+    "components/collapse/parts/74387-226642/build-data.json",
+    "components/collapse/parts/74387-226642/definition.json",
+    "components/collapse/parts/74387-226695/build-data.json",
+    "components/collapse/parts/74387-226695/definition.json",
+    "components/collapse/README.md",
     "components/drawer/generator.mjs",
     "components/form/generator.mjs",
     "components/link/portable.mjs",
     "components/link/text-portable/build-data.json",
+    "components/list/catalog.json",
+    "components/list/generator.mjs",
+    "components/list/item/build-data.json",
+    "components/list/item/definition.json",
+    "components/list/README.md",
+    "components/progress/catalog.json",
+    "components/progress/generator.mjs",
+    "components/progress/import-plan.json",
+    "components/progress/parts/25739-1356/build-data.json",
+    "components/progress/parts/25739-1356/definition.json",
+    "components/progress/parts/25739-1357/build-data.json",
+    "components/progress/parts/25739-1357/definition.json",
+    "components/progress/parts/25739-1358/build-data.json",
+    "components/progress/parts/25739-1358/definition.json",
+    "components/progress/parts/25766-44148/build-data.json",
+    "components/progress/parts/25766-44148/definition.json",
+    "components/progress/parts/45354-322335/build-data.json",
+    "components/progress/parts/45354-322335/definition.json",
+    "components/progress/preview-assets.json",
+    "components/progress/README.md",
+    "components/README.md",
+    "components/statistic/catalog.json",
+    "components/statistic/generator.mjs",
+    "components/statistic/import-plan.json",
+    "components/statistic/parts/25713-23432/build-data.json",
+    "components/statistic/parts/25713-23432/definition.json",
+    "components/statistic/parts/25748-9518/build-data.json",
+    "components/statistic/parts/25748-9518/definition.json",
+    "components/statistic/parts/25748-9520/build-data.json",
+    "components/statistic/parts/25748-9520/definition.json",
+    "components/statistic/parts/91863-157229/build-data.json",
+    "components/statistic/parts/91863-157229/definition.json",
+    "components/statistic/parts/92122-157959/build-data.json",
+    "components/statistic/parts/92122-157959/definition.json",
+    "components/statistic/parts/92122-157960/build-data.json",
+    "components/statistic/parts/92122-157960/definition.json",
+    "components/statistic/preview-assets.json",
+    "components/statistic/README.md",
     "components/table/generator.mjs",
     "components/upload/form-portable/build-data.json",
+    "docs/draft-component-capabilities.md",
     "docs/figma-adapter.md",
     "docs/figma-output.md",
     "docs/form-edit-boundaries.md",
@@ -33,8 +99,10 @@
     "docs/support/issues.md",
     "docs/support/local-diagnostics.md",
     "docs/upgrade.md",
+    "docs/verified-components.md",
     "README.md",
     "scripts/distribution/build-gitee.mjs",
+    "scripts/figma/dependencies.json",
     "scripts/figma/portable-composite.mjs",
     "scripts/figma/portable-composites.json",
     "scripts/figma/portable-gaps.json",
@@ -45,9 +113,12 @@
     "scripts/figma/portable.mjs",
     "scripts/lib/figma-build.mjs",
     "scripts/verify.mjs",
+    "sketch/core.mjs",
     "sketch/figma-runtime.mjs",
     "sketch/figma.mjs",
     "sketch/form-variants.mjs",
+    "sketch/preview.css",
+    "sketch/preview.js",
     "sketch/sketch.mjs",
     "skill-release.json",
     "support/client.mjs",
@@ -92,6 +163,7 @@
     "tests/portable-figma.test.mjs",
     "tests/portable-upload-drawer.test.mjs",
     "tests/upgrade-guidance.test.mjs",
+    "tests/verified-components.test.mjs",
     "tests/workflow-diagnostics.test.mjs"
   ],
   "files": [
@@ -112,7 +184,7 @@
     },
     {
       "path": ".agents/skills/gacui-figma-design/SKILL.md",
-      "sha256": "1dec78ac72e1f1a353ebdb52ad3725c2e98fdfbb018c9e459c5206aca6b148a7",
+      "sha256": "4970f329fc871135b53ea0b0deffdf92e1a07b039e0f44a85f5b5b88e56863f0",
       "upstreamSha256": "ef25429588307ef84c3dfff40fe0a08052fc0ea7cadfeae097b8c06d976b519f"
     },
     {
@@ -137,7 +209,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fa1196e8ee0d82be7cefe3e65f9df3b2801eef2bf9e6f7eb5a06346048f1e0be",
+      "sha256": "6385c6b6185aacfb49ca9a248257f997d4817655016b8737cd2ce97be814f526",
       "upstreamSha256": "e4d023b977ec1aa28476651646325965f04adfa2fa19d5cbed2f917b12afeead"
     },
     {
@@ -289,6 +361,31 @@
       "path": "components/alert/README.md",
       "sha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac",
       "upstreamSha256": "de9eeebb982d6e6dd02cab171a1694740d912595dc59138fcc1591b0448673ac"
+    },
+    {
+      "path": "components/badge/build-data.json",
+      "sha256": "38270fa92cd105ec1b9f695349ec8423f0e756c50261c8270f6d315b2c34402d",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/badge/catalog.json",
+      "sha256": "c761dd0d00610910f2cb03b193ae5b910fda7af270789145261a31fdac7f6b28",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/badge/definition.json",
+      "sha256": "2a63dcbcbbf9204b048e7f2b724fce6409f44212f8b337b93c7cff38131f9d90",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/badge/generator.mjs",
+      "sha256": "8c88ed18e7a5d908cad7e54fb27d0cfe62ab8705946e416d291c8616cd44f763",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/badge/README.md",
+      "sha256": "87b3d8eee479ebde821c5f017301013477a1f3648f2a6974e05948046bae2b17",
+      "upstreamSha256": null
     },
     {
       "path": "components/button-loading/build-data.json",
@@ -459,6 +556,116 @@
       "path": "components/checkbox/README.md",
       "sha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff",
       "upstreamSha256": "954d5c7cb505748a81686de23c2b3b2a14bae1ad59ed623a70f333324fd691ff"
+    },
+    {
+      "path": "components/collapse/catalog.json",
+      "sha256": "36d9cdc082ebee3953b3e83040f255a7a0cae1d366bcb0aaf924e28cb2e03a4f",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/generator.mjs",
+      "sha256": "87f8a9039165364d4dc65df8375bb7a54c8356b0757ae2f49faa6f43978a9819",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/import-plan.json",
+      "sha256": "b308e0211212048dd4826ec41b61a228cbc00108db89aac5bf27e538c1e1e0cf",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/25727-29301/build-data.json",
+      "sha256": "d6f5b5e3c17f4dac976a98518d7bfe6a1eb15ebaf09967f69b11d7e335c39eb4",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/25727-29301/definition.json",
+      "sha256": "a125815f8f8aa3bccbb47d8535865cf90aefd147b4a09f4842aed3f6135047cb",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/72761-226148/build-data.json",
+      "sha256": "6fd712e99913141108a71cf28eb3e6133c096a5f0b7b530b993927d69c1338f7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/72761-226148/definition.json",
+      "sha256": "6264fb16c9b1a7fdd8775b0e5d6ae4fb3402776210649e8f257f66fb26b271ef",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/72761-226202/build-data.json",
+      "sha256": "86a6c6c444d2c086527878c117b235d0c68b82eaa741005e454edb339d1017b8",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/72761-226202/definition.json",
+      "sha256": "dc9f40f70a956ed49300ef6a242d076a0703d1bf04f9686964d2a060c6977cb8",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/73175-226549/build-data.json",
+      "sha256": "554eea159666b7d6bb9dbfa53dc51a2954f57e241c97316d313d1434048b78fc",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/73175-226549/definition.json",
+      "sha256": "27013b79b695367f9ef16ce7dbcd114b6293add196eea7e746d5abbd4f6bbadc",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74105-226901/build-data.json",
+      "sha256": "855143636a253b3a4f2dc23ec0479aecaa771d4bbd2721e8475d6fac4bd93c0e",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74105-226901/definition.json",
+      "sha256": "bf932213ac0024b85f13595490d519608a9fa47129554269512013ebdb58f004",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226492/build-data.json",
+      "sha256": "7fd1c32b9820d2453fbac73d8adcb3f113487b7ca4e27656bf9bbada8e5cafac",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226492/definition.json",
+      "sha256": "9a22c80069010e8e13b88ad01af329bcc1cfeddcf423cb4a7368d87efccf3280",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226589/build-data.json",
+      "sha256": "cbba5b51de81cc27b42b97d966a7027be936f547cc97d77e6c8634f8cf3ade3b",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226589/definition.json",
+      "sha256": "d5268b02f014d5ba2815c569ecd74dfc68c81021d305d7a9e82ce725ecb4007f",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226642/build-data.json",
+      "sha256": "f9cee0753f1bf4a55901632ac2c4b3039730eb98c6e7404c22578fc55167b110",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226642/definition.json",
+      "sha256": "d1277d26eb86472969454b68e14d6c6d6d3db170c952d0ffc5d50e1238274b29",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226695/build-data.json",
+      "sha256": "f738aa3ec27bafdd232917dce04529d978d79ffafb1dafd7998d2b9f41a71af1",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/parts/74387-226695/definition.json",
+      "sha256": "45dd04a7b14e8b8c513bf6573e7116a4a2e14c60074b6d02c9aa01d8f339c001",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/collapse/README.md",
+      "sha256": "ee09d6a8cea54774a7244e0059e77e149edba99762133d63c8a58f87454e0e6d",
+      "upstreamSha256": null
     },
     {
       "path": "components/date-cell/build-data.json",
@@ -1136,6 +1343,31 @@
       "upstreamSha256": null
     },
     {
+      "path": "components/list/catalog.json",
+      "sha256": "d5e11bf4742d8a15ed6120c11a16a9a777c731939538169c367215029ef94fcb",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/list/generator.mjs",
+      "sha256": "daa119fb7a8bc2c0fdb6c5e63dea8ebdc0f5c106992f485f16b901b2a4118926",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/list/item/build-data.json",
+      "sha256": "c7f91531077113300818e2e5b433db7eeeff2f24bde05e2cfa4688fe2309f30c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/list/item/definition.json",
+      "sha256": "694798cb7f40cb3bc0aa59b0a016c750a865c0176f1446371dd61475ceb0e3f7",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/list/README.md",
+      "sha256": "6a942e6aa17d1f14793d123f6a376cb34d548386d8d34b134b04359954f67e1a",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/loading/catalog.json",
       "sha256": "d1f1bb11e7882f99ca619b52f657c8e44fa6595f261e62edab11050e7c68af66",
       "upstreamSha256": "d1f1bb11e7882f99ca619b52f657c8e44fa6595f261e62edab11050e7c68af66"
@@ -1521,6 +1753,81 @@
       "upstreamSha256": "597663acb1f864bc74068f19ad86d11b64f49d395fb053d74842075159fd91e5"
     },
     {
+      "path": "components/progress/catalog.json",
+      "sha256": "249698d19513b59b208eff44d9cba2d5d8eff628bb3c4979ba31e43cd08c111a",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/generator.mjs",
+      "sha256": "40581f5e4486b0e04522cdaf2207f98f64246d0e0877fa8a0c6f4ecee37012e9",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/import-plan.json",
+      "sha256": "c2cd2a275d49cc3c81ea5a389c5f0efc452c97cb8bae7840ebceb14520705339",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1356/build-data.json",
+      "sha256": "0b40fa92669679c8f007ebb5899842cb27c594fd43ddd08578cbd4048c81c569",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1356/definition.json",
+      "sha256": "8718a9d3b35bcd19e59e8077ad6e33d8c51f2ce3eb3c543e4cbf87ef55967d6e",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1357/build-data.json",
+      "sha256": "8145bbb27848ab2387412f01384e732008a318d88db0da82e062143372953386",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1357/definition.json",
+      "sha256": "8bce6998ebf4403240e1ad095787ca0e08f3c426cc22f9d052996d329d6b66e0",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1358/build-data.json",
+      "sha256": "359ba69440095a9ee14d80e8b193aa8b4daea16e37532a30077655bd43807eca",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25739-1358/definition.json",
+      "sha256": "05153dc2c585e21eb5c37534e8e8d7d124d24963b615848f6e4cb12aae66f9af",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25766-44148/build-data.json",
+      "sha256": "126d1574861e286cfb3604b619c60bd5e2dc087bd9c6897223650a31e8630ea5",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/25766-44148/definition.json",
+      "sha256": "fd80ab9d69c157bb8d20d054939751f5df0080fc4c117c084c2bf31b782e9026",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/45354-322335/build-data.json",
+      "sha256": "b00ea9a89d078a6ff8129b0b0810e7456e99636a5db971e4de218d2a5631f4c1",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/parts/45354-322335/definition.json",
+      "sha256": "11457e35c52ced04cd8a0a9d0852c49748f57f6c40470c7f15d8e09249e6dbb1",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/preview-assets.json",
+      "sha256": "c50ae6d7fae2c067060b5f963cbcc1e4589d64267bb39cfc7ef0d9e469f7dc61",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/progress/README.md",
+      "sha256": "f7221acf0c1ed0f2df13f0fede36fa85b94151ccf9c33e96409f96cabd4cf89e",
+      "upstreamSha256": null
+    },
+    {
       "path": "components/radio-button/build-data.json",
       "sha256": "20d60e314d90e1484d3118ec963c8e4fb00ba04664f59849321d90c4732d2800",
       "upstreamSha256": "20d60e314d90e1484d3118ec963c8e4fb00ba04664f59849321d90c4732d2800"
@@ -1572,7 +1879,7 @@
     },
     {
       "path": "components/README.md",
-      "sha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af",
+      "sha256": "c60acbcbf0adea53f8ea84b3c6ecfb68261ca7012ce8643a4ba8a5445f4c73a0",
       "upstreamSha256": "cb93533b5932575d22fc46ac4931873865a8df7b2139297f2221a7d1110669af"
     },
     {
@@ -1729,6 +2036,91 @@
       "path": "components/select/README.md",
       "sha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb",
       "upstreamSha256": "1738b2d7bd71935eb9d6f07fa9368dc811053dccd14fcb677a97d69700f137eb"
+    },
+    {
+      "path": "components/statistic/catalog.json",
+      "sha256": "ad265ad5a91922d45bf426005b70d2adf0485e725f18136355c747991a8463e1",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/generator.mjs",
+      "sha256": "65f03d761bb07cda564aa4c4cdddcf7fabaeefd47c741c527217305bdeaeb0c3",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/import-plan.json",
+      "sha256": "855fd0f744317b4582aa3082d05b9756d03a0b40f82ba3b09ddfdfae9cda100b",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25713-23432/build-data.json",
+      "sha256": "0e287cac1b12b5b5ba1f88ecc7a054ceda8a5dfbfbc75cf03b6c1cc55f86cffe",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25713-23432/definition.json",
+      "sha256": "052a60eeb6bdfd1d6c88ff8f9619529f5260006a4eba4f60ef976812f14c1946",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25748-9518/build-data.json",
+      "sha256": "bae2eb71872b8d4c54ef2679a5f20baf5fc2e6850af73060b7a4dae70103d95c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25748-9518/definition.json",
+      "sha256": "672d2eb57e57343f814ec4b3ccf4c58d43e8d64ea390f5ff4a730a3b79c4c89c",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25748-9520/build-data.json",
+      "sha256": "9ed0e04f87e88321bff962f83818ee59c23d5794965f7286139db5e50b8ad799",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/25748-9520/definition.json",
+      "sha256": "c0fbd821b6b73555c99419de7ea56b7352e19fe3ccab6f955c97dc479ce520d2",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/91863-157229/build-data.json",
+      "sha256": "77990ccdebbefdb7d3af8f58a98b0576e5310e80c35682052eecb68fb6c6f8ed",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/91863-157229/definition.json",
+      "sha256": "8a17cf71ea623607a3edd8a94163e75fd279b6f2ad67956db00db1825aadf583",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/92122-157959/build-data.json",
+      "sha256": "df35ac0d0fede1a122073e981c2890bd48f607f51dea6d58ef4da94fff3bf751",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/92122-157959/definition.json",
+      "sha256": "c50cf188394df9b96b68b31b9223b812607a918f22d3b17d8ef53d3a28b737de",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/92122-157960/build-data.json",
+      "sha256": "0d05a48f2cfb8fdcdd4a89a7f06c8a32d1743ceb103ab7729e847eb841fc29d5",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/parts/92122-157960/definition.json",
+      "sha256": "93f4524229286618aa403f4df83313b3a970853825d2a30fc2de348caac45474",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/preview-assets.json",
+      "sha256": "943fea0cd18ad2e6461a45fa1e777fdf098b3898069fa3c6c8d5a8044278ea18",
+      "upstreamSha256": null
+    },
+    {
+      "path": "components/statistic/README.md",
+      "sha256": "34e725ba5cf88ec9e42d92c1d50f37f30168bd64950c6992e07e53bae92c1d44",
+      "upstreamSha256": null
     },
     {
       "path": "components/steps/catalog.json",
@@ -2567,7 +2959,7 @@
     },
     {
       "path": "docs/draft-component-capabilities.md",
-      "sha256": "e896a96cceff15aa53fe62f401e7b905338f468d6cfca0cef6c00b6ec3bd6e8f",
+      "sha256": "9aa500984d305eac5dbfd813d0bb6ca4a760b0c4a703d9e12011b85acdbadc26",
       "upstreamSha256": "e896a96cceff15aa53fe62f401e7b905338f468d6cfca0cef6c00b6ec3bd6e8f"
     },
     {
@@ -2597,7 +2989,7 @@
     },
     {
       "path": "docs/maintenance.md",
-      "sha256": "d3e4a591263e3dbad24756f9b1bf11a929afb5834164815a5003509168638033",
+      "sha256": "329a95c263b582e4d88b158ec95f59c6f175d81b007ed4c39ae28424ddfce85e",
       "upstreamSha256": "7819d5101cc4ae8677b2270af9d3e676346c1d8a474e7f44ad6e24e7eb387a3b"
     },
     {
@@ -2612,7 +3004,7 @@
     },
     {
       "path": "docs/portable-figma.md",
-      "sha256": "2b4ff8755a8f49a2a30247cc9c3e2779edd2dd586eb0ccdc2336e4248021449f",
+      "sha256": "792f39288f1e348edbbfa405a2785f14019cba17b0d865b2b8198f3e7c94a576",
       "upstreamSha256": null
     },
     {
@@ -2656,6 +3048,11 @@
       "upstreamSha256": null
     },
     {
+      "path": "docs/verified-components.md",
+      "sha256": "0ffc7a2f72fa03d2b48b673575de90a1afa9d290030f21e6d775076fcdedfd3f",
+      "upstreamSha256": null
+    },
+    {
       "path": "examples/draft-first/v1.json",
       "sha256": "54b18e6583eca730b412abcefdaa19c71b90be1d49c04ac1e607e5dd76689890",
       "upstreamSha256": "54b18e6583eca730b412abcefdaa19c71b90be1d49c04ac1e607e5dd76689890"
@@ -2682,7 +3079,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "b42d43ca52869684bb7ac9af94a80a26cf9a4d4ca3c93072f36fa15193c5f36f",
+      "sha256": "df23220ceba10189023ece07492d154c98099c101c23b2d3fd9749ee9104a5c0",
       "upstreamSha256": "f2d479f90ade72e54d357fce0dae31b3b89790955e94d6f9e354626524f7536d"
     },
     {
@@ -2717,7 +3114,7 @@
     },
     {
       "path": "scripts/figma/dependencies.json",
-      "sha256": "84effea460f8db9fb86707a52b792fcf32da129e7b902f8e9a97fbb4be888624",
+      "sha256": "985fd912857f0d701c10c601412c594d849076988f72c21a95897b99dd11eb8d",
       "upstreamSha256": "84effea460f8db9fb86707a52b792fcf32da129e7b902f8e9a97fbb4be888624"
     },
     {
@@ -2737,7 +3134,7 @@
     },
     {
       "path": "scripts/figma/portable-index.json",
-      "sha256": "af222a94fd9744ecac2e9eb02db720412af460b943cfcb50e8b1e4a1a1de8593",
+      "sha256": "71f443bc6f9b63b8002bed88f04db31f172523f0e5025b99d173b61ace663ea6",
       "upstreamSha256": null
     },
     {
@@ -2807,12 +3204,12 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "sha256": "2997aa04a96029f23e2fa3f024131b10d6780e0ac43ec1cdcc8895809a141f02",
+      "sha256": "9817437c9fd45527fa936275b5f9791edaa03ee12c4bee71bd6d993adb588312",
       "upstreamSha256": "ea0a50d0cb4e1c5127ae06d500f7e81d34d1808fbbf1a38158e3f20888f260a4"
     },
     {
       "path": "sketch/core.mjs",
-      "sha256": "065eea3ed26b5577fd5416590cc42c4f8144fb8600d7ac88e45d0f1c71ca0a7b",
+      "sha256": "496792522f2c7f0b458b60574c4a1657db66e9bd15bf9c8fe31abe1647b1bc57",
       "upstreamSha256": "065eea3ed26b5577fd5416590cc42c4f8144fb8600d7ac88e45d0f1c71ca0a7b"
     },
     {
@@ -2827,12 +3224,12 @@
     },
     {
       "path": "sketch/figma-runtime.mjs",
-      "sha256": "b373dd71159b0188ac37043ea00097cca1c236e8294bdd760e2becf6e00c4300",
+      "sha256": "737ebb75768d52ba18e0f05bf88a9fe67bd07be069fa5b917c765cc8acfb627f",
       "upstreamSha256": "b2a61758b03fa17a13238fd8287dcd2991af05bcdf84a0c9fe390a016a1bb8fa"
     },
     {
       "path": "sketch/figma.mjs",
-      "sha256": "9e7f264e35ddd44946e4125e80ea48b2c78407f57edf3cfed6f112ad280d7fc6",
+      "sha256": "608f930dd8a6b74921ebe3f6d94dd91f1fe1a548f620d54d14c72e5067dc3094",
       "upstreamSha256": "7de536f043886f111f7791050325f1ea5edc4cd00dd0a1f0a3322edae2bb38b8"
     },
     {
@@ -2897,17 +3294,17 @@
     },
     {
       "path": "sketch/preview.css",
-      "sha256": "3fd5cebf8a226fdc111e3d1e49c9a4183b2cd9280e6dda74161d4536e3c996f0",
+      "sha256": "7ceea79400e035530df26cb01efecdbcef75eaf140b82f3a18ddcf751efc8b99",
       "upstreamSha256": "3fd5cebf8a226fdc111e3d1e49c9a4183b2cd9280e6dda74161d4536e3c996f0"
     },
     {
       "path": "sketch/preview.js",
-      "sha256": "9139e0d8eb1dd7c931220225bc8561006a7caef39b80cea332c1715354dd8107",
+      "sha256": "e552073d8e222123afbd67733f0f9d3a889243ab4ad194784d87c0259182ad4b",
       "upstreamSha256": "9139e0d8eb1dd7c931220225bc8561006a7caef39b80cea332c1715354dd8107"
     },
     {
       "path": "sketch/sketch.mjs",
-      "sha256": "207524a940f80c92c4677f24e2ed416b7a92fc555a24a6bc01b63d32f625d2e7",
+      "sha256": "da92f542b5dc761ba6677f806948cf0ea4274cb56e720bd7010a1b09fde7e294",
       "upstreamSha256": "168949b338ebd7494295d1d75aeea65aed63d21bd081eeea306f567987d7c37f"
     },
     {
@@ -2922,7 +3319,7 @@
     },
     {
       "path": "skill-release.json",
-      "sha256": "1b2c5c39631260b6ead339c3d46c40a1e77500a3cfb94e614987559362a4129c",
+      "sha256": "cc035dcda2c7f7ecee6646d4486f8d5196fca51922d26f13b9e76287cea8f675",
       "upstreamSha256": "d27f0a3d8593c534fba79faf1ceed645d1730722e30aafaa1db2836af654762a"
     },
     {
@@ -3263,6 +3660,11 @@
     {
       "path": "tests/upgrade-guidance.test.mjs",
       "sha256": "0fe719e947a394607f5df3fac382cf3bbef6a0f61cd677cb748d395dc08afe65",
+      "upstreamSha256": null
+    },
+    {
+      "path": "tests/verified-components.test.mjs",
+      "sha256": "26825d3d12af9f3cb087dd3bb5202876b16d6771df5bc690a4b4be7b1f64dc27",
       "upstreamSha256": null
     },
     {

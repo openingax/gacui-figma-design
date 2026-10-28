@@ -1,0 +1,21 @@
+{
+  "name": "Collapse导入/collapsePanel/borderless/right",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "74387:226642",
+    "pageId": "27782:86747"
+  },
+  "displayLayout": {
+    "columns": 2,
+    "gap": 40,
+    "padding": 24
+  },
+  "support": "built-basic-audit-complete-composition-pending",
+  "formalDraftEntry": false,
+  "userAccepted": false,
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "993:2",
+    "nodeId": "994:126"
+  }
+}

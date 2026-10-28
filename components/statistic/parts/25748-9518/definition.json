@@ -1,0 +1,15 @@
+{
+  "name": "Statistic依赖/name=FullArrowDown, size=24",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "25748:9518"
+  },
+  "displayLayout": {
+    "columns": 1,
+    "gap": 40,
+    "padding": 24
+  },
+  "support": "native-built-validation-pending",
+  "formalDraftEntry": false,
+  "userAccepted": false
+}

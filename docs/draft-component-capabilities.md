@@ -26,7 +26,7 @@
 ## 未完成与保留范围
 
 - Timeline支持12种布局、5种语义颜色、loading/custom图标、空态，以及固定条目ID/数量/顺序/图标的原位文案和颜色修改。详见[Timeline说明](timeline.md)。技术验证通过，用户验收独立。
-- Menu、Badge、Collapse、List、Progress、Statistic的本任务扩展尚未执行；既有局部页面组合不等于家族覆盖。
+- Menu 扩展未完成，继续隔离。Badge、Collapse、List、Progress、Statistic 已纳入 V1.4.0，具体参数、已适配目标验证及新文件迁移限制见[组件范围](verified-components.md)。
 - Button的INSTANCE_SWAP和颜色绑定补齐未完成；不据此关闭历史已验证按钮入口。dash作为废弃类型拒绝。
 - Upload已有表单上传字段；独立upload线框属于开发预览，其Figma入口尚未完成，不作为此次可交付能力。
 - Transfer、Rate、Skeleton、Swiper、Watermark继续暂缓；开发预览或历史源码存在不等于可以出稿。
@@ -35,3 +35,5 @@
 未完成扩展不随本版本分发。维护及发布流程见[维护说明](maintenance.md)；字体替代、演示素材和用户验收边界保留。
 
 三项新增组合和明确限制见[业务组合说明](business-compositions.md)。
+
+V1.4.0：Badge/Collapse/List/Progress/Statistic 已纳入，具体入口与未完成的新文件迁移见 [组件说明](verified-components.md)。本表较早版本的“未纳入”记录由该范围说明更新。

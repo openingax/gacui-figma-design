@@ -1,0 +1,141 @@
+[
+  {
+    "key": "72761-226202",
+    "kind": "collapse/parts/72761-226202",
+    "sourceId": "72761:226202",
+    "name": "item/content",
+    "sourceType": "COMPONENT",
+    "variants": [
+      "72761:226202"
+    ],
+    "nodes": 3,
+    "vectors": 0,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:169",
+    "mappedNodes": 3
+  },
+  {
+    "key": "72761-226148",
+    "kind": "collapse/parts/72761-226148",
+    "sourceId": "72761:226148",
+    "name": ".master/item/expandIcon",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "72761:226146",
+      "72761:226165"
+    ],
+    "nodes": 7,
+    "vectors": 2,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "993:9",
+    "mappedNodes": 6
+  },
+  {
+    "key": "73175-226549",
+    "kind": "collapse/parts/73175-226549",
+    "sourceId": "73175:226549",
+    "name": "collapsePanel/border/left",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "73175:226550",
+      "74086:226670",
+      "73175:226552",
+      "74086:226676"
+    ],
+    "nodes": 31,
+    "vectors": 4,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:33",
+    "mappedNodes": 30
+  },
+  {
+    "key": "74387-226589",
+    "kind": "collapse/parts/74387-226589",
+    "sourceId": "74387:226589",
+    "name": "collapsePanel/borderless/left",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "74387:226590",
+      "74387:226594",
+      "74387:226598",
+      "74387:226603"
+    ],
+    "nodes": 31,
+    "vectors": 4,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:64",
+    "mappedNodes": 30
+  },
+  {
+    "key": "74387-226492",
+    "kind": "collapse/parts/74387-226492",
+    "sourceId": "74387:226492",
+    "name": "collapsePanel/border/right",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "74387:226493",
+      "74387:226497",
+      "74387:226501",
+      "74387:226506"
+    ],
+    "nodes": 31,
+    "vectors": 4,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:95",
+    "mappedNodes": 30
+  },
+  {
+    "key": "74387-226642",
+    "kind": "collapse/parts/74387-226642",
+    "sourceId": "74387:226642",
+    "name": "collapsePanel/borderless/right",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "74387:226643",
+      "74387:226647",
+      "74387:226651",
+      "74387:226656"
+    ],
+    "nodes": 31,
+    "vectors": 4,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:126",
+    "mappedNodes": 30
+  },
+  {
+    "key": "74105-226901",
+    "kind": "collapse/parts/74105-226901",
+    "sourceId": "74105:226901",
+    "name": "collapsePanel/border/none",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "74105:226902",
+      "74105:226906",
+      "74105:226910",
+      "74105:226915"
+    ],
+    "nodes": 19,
+    "vectors": 0,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:145",
+    "mappedNodes": 18
+  },
+  {
+    "key": "74387-226695",
+    "kind": "collapse/parts/74387-226695",
+    "sourceId": "74387:226695",
+    "name": "collapsePanel/borderless/none",
+    "sourceType": "COMPONENT_SET",
+    "variants": [
+      "74387:226696",
+      "74387:226699",
+      "74387:226702",
+      "74387:226706"
+    ],
+    "nodes": 19,
+    "vectors": 0,
+    "status": "built-basic-audit-complete-composition-pending",
+    "targetId": "994:164",
+    "mappedNodes": 18
+  }
+]

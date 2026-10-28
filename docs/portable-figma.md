@@ -38,3 +38,5 @@
 - `scripts/figma/portable-gaps.json` 登记已知暂不支持的组件家族及给用户的说明。Drawer 已由组合资产支持，不再整族登记。未登记的缺口按组件名或“N 项组件依赖”概括。新家族支持后须删除登记，`tests/portable-coverage.test.mjs` 会检查登记与索引一致。
 - 日志：部分画板暂缓时 preflight 记为 completed，`receipt.skippedBoards` 保留暂缓画板、原因和内部引用，供看板排查；不计为阻断。一个画板都出不了时记为 blocked。
 - 覆盖测试用仓库内全部已确认草稿规划，保证任何单个组件都不能让整份规划失败，并输出各家族缺口统计。
+
+V1.4.0：Badge/Collapse/List/Progress/Statistic 已纳入，具体入口与未完成的新文件迁移见 [组件说明](verified-components.md)。本表较早版本的“未纳入”记录由该范围说明更新。

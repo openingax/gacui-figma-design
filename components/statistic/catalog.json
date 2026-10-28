@@ -1,0 +1,384 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "pageId": "1050:2",
+  "setId": "1050:28348",
+  "rows": [
+    {
+      "sourceId": "91863:157228",
+      "id": "1050:3",
+      "formal": "percent",
+      "trendPlacement": "left",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157358",
+      "id": "1050:14",
+      "formal": "percent",
+      "trendPlacement": "right",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157314",
+      "id": "1050:24",
+      "formal": "percent",
+      "trendPlacement": "-",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157227",
+      "id": "1050:30",
+      "formal": "text",
+      "trendPlacement": "left",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157380",
+      "id": "1050:28123",
+      "formal": "text",
+      "trendPlacement": "right",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157292",
+      "id": "1050:28133",
+      "formal": "text",
+      "trendPlacement": "-",
+      "color": "black"
+    },
+    {
+      "sourceId": "91863:157483",
+      "id": "1050:28139",
+      "formal": "percent",
+      "trendPlacement": "left",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157491",
+      "id": "1050:28149",
+      "formal": "percent",
+      "trendPlacement": "right",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157499",
+      "id": "1050:28159",
+      "formal": "percent",
+      "trendPlacement": "-",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157505",
+      "id": "1050:28165",
+      "formal": "text",
+      "trendPlacement": "left",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157513",
+      "id": "1050:28175",
+      "formal": "text",
+      "trendPlacement": "right",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157521",
+      "id": "1050:28185",
+      "formal": "text",
+      "trendPlacement": "-",
+      "color": "blue"
+    },
+    {
+      "sourceId": "91863:157545",
+      "id": "1050:28191",
+      "formal": "percent",
+      "trendPlacement": "left",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157553",
+      "id": "1050:28201",
+      "formal": "percent",
+      "trendPlacement": "right",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157561",
+      "id": "1050:28212",
+      "formal": "percent",
+      "trendPlacement": "-",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157567",
+      "id": "1050:28218",
+      "formal": "text",
+      "trendPlacement": "left",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157575",
+      "id": "1050:28228",
+      "formal": "text",
+      "trendPlacement": "right",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157583",
+      "id": "1050:28238",
+      "formal": "text",
+      "trendPlacement": "-",
+      "color": "red"
+    },
+    {
+      "sourceId": "91863:157669",
+      "id": "1050:28244",
+      "formal": "percent",
+      "trendPlacement": "left",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157677",
+      "id": "1050:28254",
+      "formal": "percent",
+      "trendPlacement": "right",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157685",
+      "id": "1050:28264",
+      "formal": "percent",
+      "trendPlacement": "-",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157691",
+      "id": "1050:28270",
+      "formal": "text",
+      "trendPlacement": "left",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157699",
+      "id": "1050:28280",
+      "formal": "text",
+      "trendPlacement": "right",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157707",
+      "id": "1050:28290",
+      "formal": "text",
+      "trendPlacement": "-",
+      "color": "orange"
+    },
+    {
+      "sourceId": "91863:157607",
+      "id": "1050:28296",
+      "formal": "percent",
+      "trendPlacement": "left",
+      "color": "green"
+    },
+    {
+      "sourceId": "91863:157615",
+      "id": "1050:28306",
+      "formal": "percent",
+      "trendPlacement": "right",
+      "color": "green"
+    },
+    {
+      "sourceId": "91863:157623",
+      "id": "1050:28316",
+      "formal": "percent",
+      "trendPlacement": "-",
+      "color": "green"
+    },
+    {
+      "sourceId": "91863:157629",
+      "id": "1050:28322",
+      "formal": "text",
+      "trendPlacement": "left",
+      "color": "green"
+    },
+    {
+      "sourceId": "91863:157637",
+      "id": "1050:28332",
+      "formal": "text",
+      "trendPlacement": "right",
+      "color": "green"
+    },
+    {
+      "sourceId": "91863:157645",
+      "id": "1050:28342",
+      "formal": "text",
+      "trendPlacement": "-",
+      "color": "green"
+    }
+  ],
+  "colors": {
+    "black": {
+      "paints": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.09019608050584793,
+            "g": 0.12156862765550613,
+            "b": 0.14901961386203766
+          },
+          "boundVariables": {}
+        }
+      ],
+      "styleId": null
+    },
+    "blue": {
+      "paints": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.40784314274787903,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "styleId": "S:a339d6b484d69dc7ba10b17313190b0c855dee17,"
+    },
+    "red": {
+      "paints": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.24705882370471954,
+            "b": 0.24705882370471954
+          },
+          "boundVariables": {}
+        }
+      ],
+      "styleId": "S:a82ca7122668a326230c68feaaabe6457505553c,"
+    },
+    "orange": {
+      "paints": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0.4901960790157318,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "styleId": "S:b275a33794185a28dccee4de7cb4392d070df0ba,"
+    },
+    "green": {
+      "paints": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.7058823704719543,
+            "b": 0.16620886325836182
+          },
+          "boundVariables": {}
+        }
+      ],
+      "styleId": "S:53cf70334503c37eb305d0ec217135b456b28afd,"
+    }
+  },
+  "arrows": [
+    {
+      "direction": "up",
+      "color": "black",
+      "outerId": "1050:28355"
+    },
+    {
+      "direction": "down",
+      "color": "black",
+      "outerId": "1050:28359"
+    },
+    {
+      "direction": "up",
+      "color": "blue",
+      "outerId": "1052:46"
+    },
+    {
+      "direction": "up",
+      "color": "red",
+      "outerId": "1052:60"
+    },
+    {
+      "direction": "up",
+      "color": "orange",
+      "outerId": "1052:74"
+    },
+    {
+      "direction": "down",
+      "color": "green",
+      "outerId": "1052:88"
+    },
+    {
+      "direction": "up",
+      "color": "green",
+      "innerId": "1055:48",
+      "outerId": "1055:50"
+    },
+    {
+      "direction": "down",
+      "color": "blue",
+      "innerId": "1055:54",
+      "outerId": "1055:56"
+    },
+    {
+      "direction": "down",
+      "color": "red",
+      "innerId": "1055:60",
+      "outerId": "1055:62"
+    },
+    {
+      "direction": "down",
+      "color": "orange",
+      "innerId": "1055:66",
+      "outerId": "1055:68"
+    }
+  ],
+  "chartId": "1055:72",
+  "companion": {
+    "size": 48,
+    "iconSize": 24,
+    "padding": 12,
+    "gap": 16,
+    "bodyGap": 4,
+    "prefixRadius": 6,
+    "suffixRadius": 99,
+    "paints": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.9019607901573181,
+          "g": 0.95686274766922,
+          "b": 1
+        },
+        "boundVariables": {}
+      }
+    ]
+  }
+}

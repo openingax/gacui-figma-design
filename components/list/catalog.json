@@ -1,0 +1,303 @@
+{
+  "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+  "pageId": "1016:2",
+  "dividerId": "486:3",
+  "items": [
+    {
+      "sourceId": "44408:317780",
+      "id": "1016:3",
+      "size": "large",
+      "kind": "base"
+    },
+    {
+      "sourceId": "44408:317782",
+      "id": "1016:5",
+      "size": "medium",
+      "kind": "base"
+    },
+    {
+      "sourceId": "44408:317784",
+      "id": "1016:7",
+      "size": "small",
+      "kind": "base"
+    },
+    {
+      "sourceId": "44408:317792",
+      "id": "1016:9",
+      "size": "large",
+      "kind": "multiline"
+    },
+    {
+      "sourceId": "44408:317794",
+      "id": "1016:14",
+      "size": "medium",
+      "kind": "multiline"
+    },
+    {
+      "sourceId": "44408:317796",
+      "id": "1016:18",
+      "size": "small",
+      "kind": "multiline"
+    },
+    {
+      "sourceId": "44408:317804",
+      "id": "1016:22",
+      "size": "large",
+      "kind": "meta"
+    },
+    {
+      "sourceId": "44408:317806",
+      "id": "1016:28",
+      "size": "medium",
+      "kind": "meta"
+    },
+    {
+      "sourceId": "44408:317808",
+      "id": "1016:34",
+      "size": "small",
+      "kind": "meta"
+    }
+  ],
+  "lists": [
+    {
+      "sourceId": "44408:317811",
+      "id": "1017:2",
+      "size": "large",
+      "kind": "base",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317819",
+      "id": "1017:17",
+      "size": "large",
+      "kind": "base",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317827",
+      "id": "1017:32",
+      "size": "large",
+      "kind": "base",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:317855",
+      "id": "1018:29",
+      "size": "medium",
+      "kind": "base",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317863",
+      "id": "1018:44",
+      "size": "medium",
+      "kind": "base",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317871",
+      "id": "1018:59",
+      "size": "medium",
+      "kind": "base",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:317899",
+      "id": "1018:86",
+      "size": "small",
+      "kind": "base",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317907",
+      "id": "1018:101",
+      "size": "small",
+      "kind": "base",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:317915",
+      "id": "1018:116",
+      "size": "small",
+      "kind": "base",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318075",
+      "id": "1018:143",
+      "size": "large",
+      "kind": "multiline",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318083",
+      "id": "1018:172",
+      "size": "large",
+      "kind": "multiline",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318091",
+      "id": "1018:201",
+      "size": "large",
+      "kind": "multiline",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318119",
+      "id": "1018:242",
+      "size": "medium",
+      "kind": "multiline",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318127",
+      "id": "1018:271",
+      "size": "medium",
+      "kind": "multiline",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318135",
+      "id": "1018:300",
+      "size": "medium",
+      "kind": "multiline",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318163",
+      "id": "1018:341",
+      "size": "small",
+      "kind": "multiline",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318171",
+      "id": "1018:370",
+      "size": "small",
+      "kind": "multiline",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318179",
+      "id": "1018:399",
+      "size": "small",
+      "kind": "multiline",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318339",
+      "id": "1018:440",
+      "size": "large",
+      "kind": "meta",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318347",
+      "id": "1018:483",
+      "size": "large",
+      "kind": "meta",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318355",
+      "id": "1018:526",
+      "size": "large",
+      "kind": "meta",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318383",
+      "id": "1018:581",
+      "size": "medium",
+      "kind": "meta",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318391",
+      "id": "1018:624",
+      "size": "medium",
+      "kind": "meta",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318399",
+      "id": "1018:667",
+      "size": "medium",
+      "kind": "meta",
+      "stripe": false,
+      "split": true
+    },
+    {
+      "sourceId": "44408:318427",
+      "id": "1018:722",
+      "size": "small",
+      "kind": "meta",
+      "stripe": false,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318435",
+      "id": "1018:765",
+      "size": "small",
+      "kind": "meta",
+      "stripe": true,
+      "split": false
+    },
+    {
+      "sourceId": "44408:318443",
+      "id": "1018:808",
+      "size": "small",
+      "kind": "meta",
+      "stripe": false,
+      "split": true
+    }
+  ],
+  "stripeFills": [
+    {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "color": {
+        "r": 0.95686274766922,
+        "g": 0.9647058844566345,
+        "b": 0.9725490212440491
+      },
+      "boundVariables": {}
+    }
+  ],
+  "actions": {
+    "gap": 24,
+    "rowGap": 24,
+    "linkCornerRadius": 3,
+    "sourceExamples": [
+      "83814:188445",
+      "83814:188624",
+      "83814:188803"
+    ]
+  }
+}

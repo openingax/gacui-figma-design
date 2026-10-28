@@ -1,0 +1,16 @@
+{
+  "name": "Progress导入/Progress 进度条",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "45354:322335",
+    "pageId": "45334:322289"
+  },
+  "displayLayout": {
+    "columns": 4,
+    "gap": 40,
+    "padding": 24
+  },
+  "support": "native-built-verified-with-font-differences",
+  "formalDraftEntry": false,
+  "userAccepted": false
+}

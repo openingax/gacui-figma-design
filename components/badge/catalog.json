@@ -1,0 +1,27 @@
+[
+  {
+    "key": "medium|circle|false",
+    "sourceId": "672:12829",
+    "id": "985:2"
+  },
+  {
+    "key": "small|circle|true",
+    "sourceId": "708:21597",
+    "id": "985:5"
+  },
+  {
+    "key": "small|circle|false",
+    "sourceId": "46284:335316",
+    "id": "985:7"
+  },
+  {
+    "key": "medium|round|false",
+    "sourceId": "46284:335315",
+    "id": "985:9"
+  },
+  {
+    "key": "small|round|false",
+    "sourceId": "46284:335314",
+    "id": "985:11"
+  }
+]

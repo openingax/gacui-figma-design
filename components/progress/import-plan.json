@@ -1,0 +1,56 @@
+[
+  {
+    "key": "25766-44148",
+    "kind": "progress/parts/25766-44148",
+    "sourceId": "25766:44148",
+    "variants": [
+      "45354:322317",
+      "45354:322326"
+    ],
+    "nodes": 19,
+    "vectors": 2,
+    "arcs": 0,
+    "status": "built-and-native-references-verified",
+    "nativeInstances": "restored and verified; font metric differences recorded"
+  },
+  {
+    "key": "45354-322335",
+    "kind": "progress/parts/45354-322335",
+    "sourceId": "45354:322335",
+    "variants": [
+      "45354:322336",
+      "45354:322346",
+      "45354:322356",
+      "45354:322360",
+      "45354:322364",
+      "45354:322375",
+      "45354:322386",
+      "45354:322397",
+      "45354:322408",
+      "45354:322413",
+      "45354:322418",
+      "45354:322423",
+      "45354:322428",
+      "45354:322433",
+      "45354:322438",
+      "45354:322447",
+      "45354:322452",
+      "45354:322457",
+      "45354:322462",
+      "45354:322467",
+      "45354:322472",
+      "45354:322474",
+      "45354:322476",
+      "45354:322478",
+      "45354:322480",
+      "45354:322482",
+      "45354:322484",
+      "45354:322486"
+    ],
+    "nodes": 217,
+    "vectors": 39,
+    "arcs": 12,
+    "status": "built-and-native-references-verified",
+    "nativeInstances": "restored and verified; font metric differences recorded"
+  }
+]

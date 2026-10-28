@@ -3,6 +3,576 @@
   "base": "skill-v1.1.0",
   "nodes": [
     {
+      "id": "1016:14",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:18",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:2",
+      "type": "PAGE",
+      "origin": "list"
+    },
+    {
+      "id": "1016:22",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:28",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:3",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:34",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:5",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:7",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1016:9",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1017:17",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1017:2",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1017:32",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:101",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:116",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:143",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:172",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:201",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:242",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:271",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:29",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:300",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:341",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:370",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:399",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:44",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:440",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:483",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:526",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:581",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:59",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:624",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:667",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:722",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:765",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:808",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1018:86",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
+      "id": "1037:101",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:107",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:113",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:119",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:125",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:2",
+      "type": "PAGE",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:22",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28086",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28092",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28100",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28106",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28112",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28118",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28123",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28128",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28136",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28145",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28153",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28162",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28171",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28180",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28189",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:28198",
+      "type": "COMPONENT_SET",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:33",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:43",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:48",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:53",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:65",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:77",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1037:89",
+      "type": "COMPONENT",
+      "origin": "progress"
+    },
+    {
+      "id": "1050:14",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:2",
+      "type": "PAGE",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:24",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28123",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28133",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28139",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28149",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28159",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28165",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28175",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28185",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28191",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28201",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28212",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28218",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28228",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28238",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28244",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28254",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28264",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28270",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28280",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28290",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28296",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28306",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28316",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28322",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28332",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28342",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28348",
+      "type": "COMPONENT_SET",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28355",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:28359",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:3",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1050:30",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1052:46",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1052:60",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1052:74",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1052:88",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:48",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:50",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:54",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:56",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:60",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:62",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:66",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:68",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
+      "id": "1055:72",
+      "type": "COMPONENT",
+      "origin": "statistic"
+    },
+    {
       "id": "107:112",
       "type": "COMPONENT",
       "origin": "timeRangeGroup/button"
@@ -603,21 +1173,6 @@
       "type": null
     },
     {
-      "id": "43:25",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "43:5",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "43:9",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
       "id": "430:10646",
       "origin": "public-0.4.6",
       "type": null
@@ -658,6 +1213,21 @@
       "type": null
     },
     {
+      "id": "43:25",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "43:5",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "43:9",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
       "id": "440:12",
       "origin": "public-0.4.6",
       "type": null
@@ -693,6 +1263,11 @@
       "type": null
     },
     {
+      "id": "486:3",
+      "type": "COMPONENT",
+      "origin": "list"
+    },
+    {
       "id": "486:7",
       "origin": "public-0.4.6",
       "type": null
@@ -724,11 +1299,6 @@
     },
     {
       "id": "525:130",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "53:85",
       "origin": "public-0.4.6",
       "type": null
     },
@@ -863,6 +1433,11 @@
       "type": null
     },
     {
+      "id": "53:85",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
       "id": "54:11",
       "origin": "components/tag/catalog.json",
       "type": "COMPONENT"
@@ -960,31 +1535,6 @@
     {
       "id": "54:9",
       "origin": "components/tag/catalog.json",
-      "type": "COMPONENT"
-    },
-    {
-      "id": "55:112",
-      "origin": "components/pagination/catalog.json",
-      "type": "COMPONENT"
-    },
-    {
-      "id": "55:2",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "55:27",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "55:60",
-      "origin": "components/pagination/catalog.json",
-      "type": "COMPONENT"
-    },
-    {
-      "id": "55:88",
-      "origin": "components/pagination/catalog.json",
       "type": "COMPONENT"
     },
     {
@@ -1108,84 +1658,29 @@
       "type": null
     },
     {
-      "id": "56:13",
+      "id": "55:112",
+      "origin": "components/pagination/catalog.json",
+      "type": "COMPONENT"
+    },
+    {
+      "id": "55:2",
       "origin": "public-0.4.6",
       "type": null
     },
     {
-      "id": "56:17",
+      "id": "55:27",
       "origin": "public-0.4.6",
       "type": null
     },
     {
-      "id": "56:2",
-      "origin": "public-0.4.6",
-      "type": null
+      "id": "55:60",
+      "origin": "components/pagination/catalog.json",
+      "type": "COMPONENT"
     },
     {
-      "id": "56:21",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:27",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:32",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:38",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:44",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:50",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:56",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:6",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:61",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:67",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:73",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:79",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "56:9",
-      "origin": "public-0.4.6",
-      "type": null
+      "id": "55:88",
+      "origin": "components/pagination/catalog.json",
+      "type": "COMPONENT"
     },
     {
       "id": "568:10",
@@ -1574,6 +2069,86 @@
     },
     {
       "id": "568:2",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:13",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:17",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:2",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:21",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:27",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:32",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:38",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:44",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:50",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:56",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:6",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:61",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:67",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:73",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:79",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "56:9",
       "origin": "public-0.4.6",
       "type": null
     },
@@ -2443,16 +3018,6 @@
       "type": null
     },
     {
-      "id": "73:21",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "73:41",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
       "id": "731:104",
       "origin": "components/dialog/dependencies.json:main",
       "type": "COMPONENT"
@@ -2571,6 +3136,16 @@
       "id": "731:92",
       "origin": "components/dialog/dependencies.json:main",
       "type": "COMPONENT"
+    },
+    {
+      "id": "73:21",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "73:41",
+      "origin": "public-0.4.6",
+      "type": null
     },
     {
       "id": "740:10",
@@ -4358,16 +4933,6 @@
       "type": "COMPONENT"
     },
     {
-      "id": "76:101",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
-      "id": "76:76",
-      "origin": "public-0.4.6",
-      "type": null
-    },
-    {
       "id": "760:12",
       "origin": "components/loading/catalog.json",
       "type": "COMPONENT"
@@ -5253,7 +5818,12 @@
       "type": "COMPONENT"
     },
     {
-      "id": "77:76",
+      "id": "76:101",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
+      "id": "76:76",
       "origin": "public-0.4.6",
       "type": null
     },
@@ -5563,6 +6133,11 @@
       "type": "COMPONENT"
     },
     {
+      "id": "77:76",
+      "origin": "public-0.4.6",
+      "type": null
+    },
+    {
       "id": "795:17",
       "origin": "tableExtensionDependencies",
       "type": "COMPONENT"
@@ -5761,7 +6336,162 @@
       "id": "89:86",
       "origin": "public-0.4.6",
       "type": null
+    },
+    {
+      "id": "985:11",
+      "type": "COMPONENT",
+      "origin": "badge"
+    },
+    {
+      "id": "985:2",
+      "type": "COMPONENT",
+      "origin": "badge"
+    },
+    {
+      "id": "985:5",
+      "type": "COMPONENT",
+      "origin": "badge"
+    },
+    {
+      "id": "985:7",
+      "type": "COMPONENT",
+      "origin": "badge"
+    },
+    {
+      "id": "985:9",
+      "type": "COMPONENT",
+      "origin": "badge"
+    },
+    {
+      "id": "993:2",
+      "type": "PAGE",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:102",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:108",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:117",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:127",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:130",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:133",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:139",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:146",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:149",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:15",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:152",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:158",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:2",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:24",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:34",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:40",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:46",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:55",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:65",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:71",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:77",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:86",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:9",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "994:96",
+      "type": "COMPONENT",
+      "origin": "collapse"
+    },
+    {
+      "id": "999:684",
+      "type": "COMPONENT_SET",
+      "origin": "collapse"
     }
   ],
-  "fingerprint": "e0dd461337c62b179636122a338f50efaa232e48125d716176900037a9a9b95f"
+  "fingerprint": "33473b1c62e52cfdcddd391e88775ead09ad5c92b872eb9eea68452e2dd78e50"
 }

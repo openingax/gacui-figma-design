@@ -1,0 +1,16 @@
+{
+  "name": "Statistic导入/Statistic 统计数值",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "91863:157229",
+    "pageId": "91847:157166"
+  },
+  "displayLayout": {
+    "columns": 6,
+    "gap": 40,
+    "padding": 24
+  },
+  "support": "native-built-validation-pending",
+  "formalDraftEntry": false,
+  "userAccepted": false
+}

@@ -1,0 +1,79 @@
+{
+  "name": "Badge 徽标",
+  "source": {
+    "fileKey": "jNf9icrxfw8B7QkSQa9g33",
+    "nodeId": "46284:335317",
+    "pageId": "46283:335213"
+  },
+  "displayLayout": {
+    "columns": 3,
+    "gap": 40,
+    "padding": 40
+  },
+  "variants": [
+    {
+      "sourceId": "672:12829",
+      "name": "size 尺寸=medium 中, shape 形状=circle 圆形, dot 红点=false",
+      "properties": {
+        "size 尺寸": "medium 中",
+        "shape 形状": "circle 圆形",
+        "dot 红点": "false"
+      }
+    },
+    {
+      "sourceId": "708:21597",
+      "name": "size 尺寸=small 小, shape 形状=circle 圆形, dot 红点=true",
+      "properties": {
+        "size 尺寸": "small 小",
+        "shape 形状": "circle 圆形",
+        "dot 红点": "true"
+      }
+    },
+    {
+      "sourceId": "46284:335316",
+      "name": "size 尺寸=small 小, shape 形状=circle 圆形, dot 红点=false",
+      "properties": {
+        "size 尺寸": "small 小",
+        "shape 形状": "circle 圆形",
+        "dot 红点": "false"
+      }
+    },
+    {
+      "sourceId": "46284:335315",
+      "name": "size 尺寸=medium 中, shape 形状=round 矩形, dot 红点=false",
+      "properties": {
+        "size 尺寸": "medium 中",
+        "shape 形状": "round 矩形",
+        "dot 红点": "false"
+      }
+    },
+    {
+      "sourceId": "46284:335314",
+      "name": "size 尺寸=small 小, shape 形状=round 矩形, dot 红点=false",
+      "properties": {
+        "size 尺寸": "small 小",
+        "shape 形状": "round 矩形",
+        "dot 红点": "false"
+      }
+    }
+  ],
+  "support": "partial-draft-integration-font-and-host-coverage-pending",
+  "formalDraftEntry": true,
+  "userAccepted": false,
+  "limitations": [
+    "Noto Sans SC为云端临时字体，PingFang SC仍为规范字体",
+    "99+是源展示内容，不自动推断业务封顶阈值",
+    "仅支持当前五个真实变体，禁止按属性笛卡尔积补造红点形状或尺寸",
+    "附着偏移必须显式选择，不从某个业务样例推断通用位置",
+    "草稿仅按钮及链接锚点已验证，文字及独立图标等承载未接通"
+  ],
+  "target": {
+    "fileKey": "UNCONFIGURED_FIGMA_TARGET",
+    "pageId": "984:2",
+    "componentSetId": "985:13"
+  },
+  "draftAnchors": [
+    "button",
+    "link"
+  ]
+}
